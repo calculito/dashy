@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Header from "./components/Header";
+import Tabs from "./components/Tabs";
+import MainContainer from "./components/MainContainer";
+
+import "./App.css";
 
 function App() {
+  const mentors = ["Ali", "Sub", "Loic", "Anthony", "Lucy", "Mozart"];
+  const [whichContainer, setwhichContainer] = useState(0);
+  const [logIn, setlogIn] = useState(0);
+  const setWindow = (indexContainer) => {
+    setwhichContainer(indexContainer);
+  };
+  const logInCheck = () => {
+    logIn === 0 ? setlogIn(1) : setlogIn(0);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="all">
+      <Header onHeaderClick={logInCheck} />
+      <Tabs onTabsClick={setWindow} logIn={logIn} index={whichContainer} />
+      <MainContainer index={whichContainer} />
     </div>
   );
 }
