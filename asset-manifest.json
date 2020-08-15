@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/migradashy/static/css/main.86d3bba4.chunk.css",
+    "main.js": "/migradashy/static/js/main.5bf62c44.chunk.js",
+    "main.js.map": "/migradashy/static/js/main.5bf62c44.chunk.js.map",
+    "runtime-main.js": "/migradashy/static/js/runtime-main.a686015d.js",
+    "runtime-main.js.map": "/migradashy/static/js/runtime-main.a686015d.js.map",
+    "static/js/2.d795c7c0.chunk.js": "/migradashy/static/js/2.d795c7c0.chunk.js",
+    "static/js/2.d795c7c0.chunk.js.map": "/migradashy/static/js/2.d795c7c0.chunk.js.map",
+    "index.html": "/migradashy/index.html",
+    "precache-manifest.cf40481e3ec89aa0ea5f39004a317256.js": "/migradashy/precache-manifest.cf40481e3ec89aa0ea5f39004a317256.js",
+    "service-worker.js": "/migradashy/service-worker.js",
+    "static/css/main.86d3bba4.chunk.css.map": "/migradashy/static/css/main.86d3bba4.chunk.css.map",
+    "static/js/2.d795c7c0.chunk.js.LICENSE.txt": "/migradashy/static/js/2.d795c7c0.chunk.js.LICENSE.txt",
+    "static/media/Screenshot.png": "/migradashy/static/media/Screenshot.216f7c0d.png",
+    "static/media/syllabus.png": "/migradashy/static/media/syllabus.dcf38b1f.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a686015d.js",
+    "static/js/2.d795c7c0.chunk.js",
+    "static/css/main.86d3bba4.chunk.css",
+    "static/js/main.5bf62c44.chunk.js"
+  ]
+}
