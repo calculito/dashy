@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import logo from "../images/migracode-logo.png";
+import login from "../images/login.png";
 
-function Header({ onHeaderClick }) {
+function Header({ onHeaderClick, logIn }) {
   const username = ["Thiago", "Jose", "Kamel", "Ion"];
   function zweistellig(s) {
     while (s.toString().length < 2) {
@@ -31,12 +32,15 @@ function Header({ onHeaderClick }) {
 
   return (
     <div className="header">
-      <img src={logo} alt="logo" />
       <div className="greeting">
         Hello {hours < 7 ? username[1] : hours > 22 ? username[2] : username[0]}
         , it is {time} and you have no appointments in your calendar today!
       </div>
-      <button onClick={onHeaderClick}>Log in</button>
+      {logIn === 1 ? (
+        <img src={logo} alt="logo" onClick={onHeaderClick} />
+      ) : (
+        <img src={login} alt="logo" onClick={onHeaderClick} />
+      )}
     </div>
   );
 }

@@ -19,7 +19,7 @@ function App() {
 
   return (
     <div className="all">
-      <Header onHeaderClick={logInCheck} />
+      <Header onHeaderClick={logInCheck} logIn={logIn} />
       <Tabs onTabsClick={setWindow} logIn={logIn} index={whichContainer} />
       <MainContainer index={whichContainer} />
     </div>

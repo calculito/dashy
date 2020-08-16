@@ -12,8 +12,8 @@ export default function MainContainer({ index }) {
     <div className="maincontainer">
       {
         {
-          0: <Slack />,
-          1: <Syllabus />,
+          0: <Syllabus />,
+          1: <Slack />,
           2: <Homeworks />,
           3: <Recordings />,
           4: <Calendar />,

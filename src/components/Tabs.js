@@ -11,10 +11,10 @@ export default function Tabs({ onTabsClick, logIn, index }) {
         className={index === 0 ? "tabnameactive" : "tabname"}
         onClick={() => onTabsClick(0)}
       >
-        <div>SLACK</div>
+        <div>Syllabus</div>
       </div>
       <div className={index === 1 ? "tabnameactive" : "tabname"}>
-        <div onClick={() => onTabsClick(1)}>Syllabus</div>
+        <div onClick={() => onTabsClick(1)}>SLACK</div>
       </div>
       {logIn === 1 && (
         <>
