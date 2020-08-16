@@ -3,11 +3,21 @@ import logo from "../images/migracode-logo.png";
 
 function Header({ onHeaderClick }) {
   const username = ["Thiago", "Jose", "Kamel", "Ion"];
+  function zweistellig(s) {
+    while (s.toString().length < 2) {
+      s = "0" + s;
+    }
+    return s;
+  }
   const [date, setDate] = useState(new Date());
   var today = new Date();
   var time =
-    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-  var hours = today.getHours();
+    zweistellig(today.getHours()) +
+    ":" +
+    zweistellig(today.getMinutes()) +
+    ":" +
+    zweistellig(today.getSeconds());
+  var hours = zweistellig(today.getHours());
 
   useEffect(() => {
     var timerID = setInterval(() => tick(), 1000);

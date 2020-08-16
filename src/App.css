@@ -74,3 +74,12 @@ img {
   font-family: "Electrolize", sans-serif;
   font-size: 18px;
 }
+.fc-scrollgrid-sync-table {
+  height: 550px !important;
+}
+.fc-daygrid {
+  height: 580px !important;
+}
+.fc {
+  height: 650px !important;
+}
