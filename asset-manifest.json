@@ -1,29 +1,27 @@
 {
   "files": {
-    "main.css": "/dashy/static/css/main.637eaac5.chunk.css",
-    "main.js": "/dashy/static/js/main.2a932998.chunk.js",
-    "main.js.map": "/dashy/static/js/main.2a932998.chunk.js.map",
+    "main.css": "/dashy/static/css/main.c0806ea0.chunk.css",
+    "main.js": "/dashy/static/js/main.ab2d96c4.chunk.js",
+    "main.js.map": "/dashy/static/js/main.ab2d96c4.chunk.js.map",
     "runtime-main.js": "/dashy/static/js/runtime-main.3783ffb8.js",
     "runtime-main.js.map": "/dashy/static/js/runtime-main.3783ffb8.js.map",
     "static/css/2.43578b21.chunk.css": "/dashy/static/css/2.43578b21.chunk.css",
-    "static/js/2.e509a62a.chunk.js": "/dashy/static/js/2.e509a62a.chunk.js",
-    "static/js/2.e509a62a.chunk.js.map": "/dashy/static/js/2.e509a62a.chunk.js.map",
+    "static/js/2.255813d7.chunk.js": "/dashy/static/js/2.255813d7.chunk.js",
+    "static/js/2.255813d7.chunk.js.map": "/dashy/static/js/2.255813d7.chunk.js.map",
     "index.html": "/dashy/index.html",
-    "precache-manifest.6d516b80eb02c9c63c9cfbd16981723c.js": "/dashy/precache-manifest.6d516b80eb02c9c63c9cfbd16981723c.js",
+    "precache-manifest.0532352711fa3009c74c7405bc8a35ee.js": "/dashy/precache-manifest.0532352711fa3009c74c7405bc8a35ee.js",
     "service-worker.js": "/dashy/service-worker.js",
     "static/css/2.43578b21.chunk.css.map": "/dashy/static/css/2.43578b21.chunk.css.map",
-    "static/css/main.637eaac5.chunk.css.map": "/dashy/static/css/main.637eaac5.chunk.css.map",
-    "static/js/2.e509a62a.chunk.js.LICENSE.txt": "/dashy/static/js/2.e509a62a.chunk.js.LICENSE.txt",
-    "static/media/Screenshot.png": "/dashy/static/media/Screenshot.216f7c0d.png",
+    "static/css/main.c0806ea0.chunk.css.map": "/dashy/static/css/main.c0806ea0.chunk.css.map",
+    "static/js/2.255813d7.chunk.js.LICENSE.txt": "/dashy/static/js/2.255813d7.chunk.js.LICENSE.txt",
     "static/media/login.png": "/dashy/static/media/login.3a05bb07.png",
-    "static/media/migracode-logo.png": "/dashy/static/media/migracode-logo.e87ea0c3.png",
-    "static/media/syllabus.png": "/dashy/static/media/syllabus.dcf38b1f.png"
+    "static/media/migracode-logo.png": "/dashy/static/media/migracode-logo.e87ea0c3.png"
   },
   "entrypoints": [
     "static/js/runtime-main.3783ffb8.js",
     "static/css/2.43578b21.chunk.css",
-    "static/js/2.e509a62a.chunk.js",
-    "static/css/main.637eaac5.chunk.css",
-    "static/js/main.2a932998.chunk.js"
+    "static/js/2.255813d7.chunk.js",
+    "static/css/main.c0806ea0.chunk.css",
+    "static/js/main.ab2d96c4.chunk.js"
   ]
 }
