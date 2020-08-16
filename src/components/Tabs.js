@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
 export default function Tabs({ onTabsClick, logIn, index }) {
-  const [statusTab, setstatusTab] = useState("inactive");
   console.log(index);
   return (
     <div
       className="menu"
-      style={{ justifyContent: logIn === 0 ? "flex-start" : "space-around" }}
+      style={{ justifyContent: logIn === 0 ? "flex-start" : "flex-start" }} //maybe change to space-around if bigger
     >
       <div
         className={index === 0 ? "tabnameactive" : "tabname"}

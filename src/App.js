@@ -14,7 +14,9 @@ function App() {
   };
   const logInCheck = () => {
     logIn === 0 ? setlogIn(1) : setlogIn(0);
+    logIn === 1 && setwhichContainer(0);
   };
+
   return (
     <div className="all">
       <Header onHeaderClick={logInCheck} />
