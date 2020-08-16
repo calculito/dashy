@@ -1,11 +1,18 @@
 import React from "react";
-import bgimg from "../images/syllabus.png";
+import Iframe from "react-iframe";
 
 function Syllabus() {
   return (
-    <div className="book">
-      {" "}
-      <img src={bgimg} alt="chat" />
+    <div className="tabcontent">
+      <Iframe
+        url="https://migracode-barcelona.github.io/syllabus/db/week-1/lesson.html"
+        width="100%"
+        height="550px"
+        id="myId"
+        className="myClassname"
+        display="initial"
+        position="relative"
+      />
     </div>
   );
 }

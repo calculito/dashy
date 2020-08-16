@@ -32,14 +32,28 @@ function Header({ onHeaderClick, logIn }) {
 
   return (
     <div className="header">
-      <div className="greeting">
-        Hello {hours < 7 ? username[1] : hours > 22 ? username[2] : username[0]}
-        , it is {time} and you have no appointments in your calendar today!
-      </div>
+      {logIn && (
+        <div className="greeting">
+          Hello{" "}
+          {hours < 7 ? username[1] : hours > 22 ? username[2] : username[0]}, it
+          is {time} and you have no appointments in your calendar today!
+        </div>
+      )}
+
       {logIn === 1 ? (
-        <img src={logo} alt="logo" onClick={onHeaderClick} />
+        <img
+          className="greeting"
+          src={logo}
+          alt="logo"
+          onClick={onHeaderClick}
+        />
       ) : (
-        <img src={login} alt="logo" onClick={onHeaderClick} />
+        <img
+          className="greeting"
+          src={login}
+          alt="logo"
+          onClick={onHeaderClick}
+        />
       )}
     </div>
   );

@@ -74,6 +74,7 @@ img {
   padding-top: 10px;
   font-family: "Electrolize", sans-serif;
   font-size: 18px;
+  cursor: pointer;
 }
 .fc-scrollgrid-sync-table {
   height: 550px !important;
