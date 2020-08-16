@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/dashy/static/css/main.056f7521.chunk.css",
-    "main.js": "/dashy/static/js/main.82e45479.chunk.js",
-    "main.js.map": "/dashy/static/js/main.82e45479.chunk.js.map",
+    "main.css": "/dashy/static/css/main.74aece96.chunk.css",
+    "main.js": "/dashy/static/js/main.27013e17.chunk.js",
+    "main.js.map": "/dashy/static/js/main.27013e17.chunk.js.map",
     "runtime-main.js": "/dashy/static/js/runtime-main.3783ffb8.js",
     "runtime-main.js.map": "/dashy/static/js/runtime-main.3783ffb8.js.map",
-    "static/css/2.aa9c7ed0.chunk.css": "/dashy/static/css/2.aa9c7ed0.chunk.css",
-    "static/js/2.9fa68d53.chunk.js": "/dashy/static/js/2.9fa68d53.chunk.js",
-    "static/js/2.9fa68d53.chunk.js.map": "/dashy/static/js/2.9fa68d53.chunk.js.map",
+    "static/css/2.43578b21.chunk.css": "/dashy/static/css/2.43578b21.chunk.css",
+    "static/js/2.c4d77b51.chunk.js": "/dashy/static/js/2.c4d77b51.chunk.js",
+    "static/js/2.c4d77b51.chunk.js.map": "/dashy/static/js/2.c4d77b51.chunk.js.map",
     "index.html": "/dashy/index.html",
-    "precache-manifest.98c7194a61ddab65fae14f222856a05c.js": "/dashy/precache-manifest.98c7194a61ddab65fae14f222856a05c.js",
+    "precache-manifest.69db2565d32aff035d1199e9d6844392.js": "/dashy/precache-manifest.69db2565d32aff035d1199e9d6844392.js",
     "service-worker.js": "/dashy/service-worker.js",
-    "static/css/2.aa9c7ed0.chunk.css.map": "/dashy/static/css/2.aa9c7ed0.chunk.css.map",
-    "static/css/main.056f7521.chunk.css.map": "/dashy/static/css/main.056f7521.chunk.css.map",
-    "static/js/2.9fa68d53.chunk.js.LICENSE.txt": "/dashy/static/js/2.9fa68d53.chunk.js.LICENSE.txt",
+    "static/css/2.43578b21.chunk.css.map": "/dashy/static/css/2.43578b21.chunk.css.map",
+    "static/css/main.74aece96.chunk.css.map": "/dashy/static/css/main.74aece96.chunk.css.map",
+    "static/js/2.c4d77b51.chunk.js.LICENSE.txt": "/dashy/static/js/2.c4d77b51.chunk.js.LICENSE.txt",
     "static/media/Screenshot.png": "/dashy/static/media/Screenshot.216f7c0d.png",
     "static/media/syllabus.png": "/dashy/static/media/syllabus.dcf38b1f.png"
   },
   "entrypoints": [
     "static/js/runtime-main.3783ffb8.js",
-    "static/css/2.aa9c7ed0.chunk.css",
-    "static/js/2.9fa68d53.chunk.js",
-    "static/css/main.056f7521.chunk.css",
-    "static/js/main.82e45479.chunk.js"
+    "static/css/2.43578b21.chunk.css",
+    "static/js/2.c4d77b51.chunk.js",
+    "static/css/main.74aece96.chunk.css",
+    "static/js/main.27013e17.chunk.js"
   ]
 }
