@@ -1,18 +1,10 @@
 import React from "react";
-import Iframe from "react-iframe";
+import bg from "../images/Slack.png";
 
 function Slack(i) {
   return (
     <div className="tabcontent">
-      <Iframe
-        url="http://migracodebarcelona.slack.com"
-        width="100%"
-        height="450px"
-        id="myId"
-        className="myClassname"
-        display="initial"
-        position="relative"
-      />
+      <img src={bg} alt="slack" />
     </div>
   );
 }

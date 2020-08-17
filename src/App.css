@@ -85,3 +85,33 @@ img {
 .fc {
   height: 650px !important;
 }
+@media only screen and (max-width: 600px) {
+  .greeting {
+    object-fit: scale-down;
+    height: 55px;
+    width: 95px;
+    font-size: 9px;
+  }
+  .tabname {
+    font-size: 10px;
+    min-width: 20vw;
+
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    padding: 10px;
+    color: gray;
+    -webkit-box-shadow: 1px -2px 3px 3px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 1px -2px 3px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 1px -2px 3px 3px rgba(0, 0, 0, 0.3);
+  }
+  .tabnameactive {
+    font-size: 10px;
+    min-width: 20vw;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    padding: 10px;
+    -webkit-box-shadow: 2px -2px 7px 3px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 2px -2px 7px 3px rgba(0, 0, 0, 0.75);
+    box-shadow: 2px -2px 7px 3px rgba(0, 0, 0, 0.75);
+  }
+}
