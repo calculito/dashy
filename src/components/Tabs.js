@@ -34,7 +34,7 @@ export default function Tabs({ onTabsClick, logIn, index }) {
             <div onClick={() => onTabsClick(5)}>CHAT one2one</div>
           </div>
           <div className={index === 6 ? "tabnameactive" : "tabname"}>
-            <div onClick={() => onTabsClick(6)}>Personal links</div>
+            <div onClick={() => onTabsClick(6)}>Useful links</div>
           </div>
         </>
       )}

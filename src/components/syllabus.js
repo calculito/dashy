@@ -16,4 +16,4 @@ function Syllabus() {
     </div>
   );
 }
-export default Syllabus;
+export default Syllabus = React.memo(Syllabus);
