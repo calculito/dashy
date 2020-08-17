@@ -18,7 +18,7 @@ function Header({ onHeaderClick, logIn }) {
     zweistellig(today.getMinutes()) +
     ":" +
     zweistellig(today.getSeconds());
-  var hours = zweistellig(today.getHours());
+  var hours = today.getHours();
 
   useEffect(() => {
     var timerID = setInterval(() => tick(), 1000);
@@ -35,7 +35,7 @@ function Header({ onHeaderClick, logIn }) {
       {logIn && (
         <div className="greeting">
           Hello{" "}
-          {hours < 7 ? username[1] : hours > 22 ? username[2] : username[0]}, it
+          {hours < 7 ? username[1] : hours < 21 ? username[2] : username[0]}, it
           is {time} and you have no appointments in your calendar today!
         </div>
       )}

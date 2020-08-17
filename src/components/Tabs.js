@@ -7,17 +7,19 @@ export default function Tabs({ onTabsClick, logIn, index }) {
       className="menu"
       style={{ justifyContent: logIn === 0 ? "flex-start" : "flex-start" }} //maybe change to space-around if bigger
     >
-      <div
-        className={index === 0 ? "tabnameactive" : "tabname"}
-        onClick={() => onTabsClick(0)}
-      >
-        <div>Syllabus</div>
-      </div>
-      <div className={index === 1 ? "tabnameactive" : "tabname"}>
-        <div onClick={() => onTabsClick(1)}>SLACK</div>
-      </div>
       {logIn === 1 && (
         <>
+          <div
+            className={index === 0 ? "tabnameactive" : "tabname"}
+            onClick={() => onTabsClick(0)}
+          >
+            <div>Syllabus</div>
+          </div>
+
+          <div className={index === 1 ? "tabnameactive" : "tabname"}>
+            <div onClick={() => onTabsClick(1)}>SLACK</div>
+          </div>
+
           <div className={index === 2 ? "tabnameactive" : "tabname"}>
             <div onClick={() => onTabsClick(2)}>Homeworks</div>
           </div>
