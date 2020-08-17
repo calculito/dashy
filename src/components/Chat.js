@@ -5,7 +5,7 @@ function Chat(i) {
   return (
     <div className="tabcontent">
       <Iframe
-        url="http://secvidchat.herokuapp.com/"
+        url="https://secvidchat.herokuapp.com/"
         width="100%"
         height="650px"
         id="myId"
