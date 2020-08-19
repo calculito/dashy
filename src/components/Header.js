@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import logo from "../images/migracode-logo.png";
 import login from "../images/login.png";
 
-function Header({ onHeaderClick, logIn }) {
-  const username = ["Thiago", "Jose", "Kamel", "Ion"];
+function Header({ onHeaderClick, logIn, whichUserHeader }) {
+  let username = { whichUserHeader };
+  username = username.whichUserHeader;
+
   function zweistellig(s) {
     while (s.toString().length < 2) {
       s = "0" + s;
@@ -32,12 +34,13 @@ function Header({ onHeaderClick, logIn }) {
 
   return (
     <div className="header">
-      {logIn && (
+      {logIn === 1 ? (
         <div className="greeting">
-          Hello{" "}
-          {hours < 7 ? username[1] : hours < 21 ? username[2] : username[0]}, it
-          is {time} and you have no appointments in your calendar today!
+          Hello {username}, it is {time} and you have no appointments in your
+          calendar today!
         </div>
+      ) : (
+        <></>
       )}
 
       {logIn === 1 ? (

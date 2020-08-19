@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Slack from "./Slack";
 import Chat from "./Chat";
 import Syllabus from "./Syllabus";
