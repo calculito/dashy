@@ -1,20 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 
-function Links(i) {
+const Links = () => {
+  const [savedLink, setLinkSaved] = useState([]);
+  const [linkFromInput, setLinkFromInput] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleInputChange = (event) => {
+    setLinkFromInput(event.target.value);
+  };
+
+  const createLink = () => {
+    if (linkFromInput !== "") {
+      setErrorMessage("");
+      setLinkSaved(savedLink.concat(linkFromInput));
+    } else {
+      setErrorMessage("Please enter a link");
+    }
+  };
+
   return (
-    <div className="tabcontent">
-      <div className="contentLinks">
-        <input type="text" id="fname" name="fname"></input>
-        <label for="fname">Save link:</label>
-        <ul>
-          <li>https://dmitripavlutin.com/use-react-memo-wisely/</li>
-          <li>
-            https://docs.google.com/document/d/1iZcrGtYV7aoNCpZtKWRUCM2kGvmO2HfBM5btVhSG4yc/edit
-          </li>
-          <li>https://migrateam.github.io/dashy/</li>
-        </ul>
-      </div>
+    <div id="links">
+      <h3>You have {savedLink.length} links</h3>
+
+      <input
+        type="text"
+        placeholder="Save your link"
+        value={linkFromInput}
+        onChange={handleInputChange}
+      />
+
+      {errorMessage ? <a>{errorMessage}</a> : null}
+
+      <button onClick={createLink}>Save</button>
+
+      {savedLink.map((link, index) => {
+        return (
+          <div>
+            <ul>
+              <li>
+                <a href={linkFromInput} target="_blank" key={index}>
+                  {link}
+                </a>
+              </li>
+            </ul>
+          </div>
+        );
+      })}
     </div>
   );
-}
+};
 export default Links;
