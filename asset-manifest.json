@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/dashy/static/css/main.263f396e.chunk.css",
-    "main.js": "/dashy/static/js/main.7192b394.chunk.js",
-    "main.js.map": "/dashy/static/js/main.7192b394.chunk.js.map",
+    "main.js": "/dashy/static/js/main.c003edf2.chunk.js",
+    "main.js.map": "/dashy/static/js/main.c003edf2.chunk.js.map",
     "runtime-main.js": "/dashy/static/js/runtime-main.3783ffb8.js",
     "runtime-main.js.map": "/dashy/static/js/runtime-main.3783ffb8.js.map",
     "static/css/2.43578b21.chunk.css": "/dashy/static/css/2.43578b21.chunk.css",
     "static/js/2.68fc3bcc.chunk.js": "/dashy/static/js/2.68fc3bcc.chunk.js",
     "static/js/2.68fc3bcc.chunk.js.map": "/dashy/static/js/2.68fc3bcc.chunk.js.map",
     "index.html": "/dashy/index.html",
-    "precache-manifest.214735446d2ec1d74d20494806137c26.js": "/dashy/precache-manifest.214735446d2ec1d74d20494806137c26.js",
+    "precache-manifest.bf2de640e46967aff88aa9cb1348aa27.js": "/dashy/precache-manifest.bf2de640e46967aff88aa9cb1348aa27.js",
     "service-worker.js": "/dashy/service-worker.js",
     "static/css/2.43578b21.chunk.css.map": "/dashy/static/css/2.43578b21.chunk.css.map",
     "static/css/main.263f396e.chunk.css.map": "/dashy/static/css/main.263f396e.chunk.css.map",
@@ -23,6 +23,6 @@
     "static/css/2.43578b21.chunk.css",
     "static/js/2.68fc3bcc.chunk.js",
     "static/css/main.263f396e.chunk.css",
-    "static/js/main.7192b394.chunk.js"
+    "static/js/main.c003edf2.chunk.js"
   ]
 }
