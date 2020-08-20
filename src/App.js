@@ -120,7 +120,7 @@ function App() {
           </form>
         </div>
       )}
-      <div className={logIn === 0 ? "all" : "allblur"}>
+      <div className={logIn === 2 ? "allblur" : "all"}>
         <Header
           onHeaderClick={logInCheck}
           logIn={logIn}
