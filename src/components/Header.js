@@ -40,7 +40,7 @@ function Header({ onHeaderClick, logIn, whichUserHeader }) {
           calendar today!
         </div>
       ) : (
-        <></>
+        <>.</>
       )}
 
       {logIn === 1 ? (

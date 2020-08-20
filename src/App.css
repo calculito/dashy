@@ -178,6 +178,21 @@ img {
 .open-button:hover {
   opacity: 1;
 }
+.links-students {
+  background-color: rgb(127, 243, 243);
+  border-radius: 8px;
+  border-style: solid;
+  margin: 20px;
+  height: auto;
+}
+.links-mentors {
+  background-color: rgb(127, 181, 243);
+  border-radius: 8px;
+  border-style: solid;
+  margin: 20px;
+  height: auto;
+}
+
 @media only screen and (max-width: 600px) {
   .greeting {
     object-fit: scale-down;

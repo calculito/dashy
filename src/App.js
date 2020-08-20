@@ -76,7 +76,7 @@ function App() {
         whichUserHeader={whichUser}
       />
       <Tabs onTabsClick={setWindow} logIn={logIn} index={whichContainer} />
-      <MainContainer index={whichContainer} />
+      <MainContainer index={whichContainer} userName={whichUser} />
     </div>
   );
 }
