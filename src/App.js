@@ -63,7 +63,7 @@ function App() {
   };
   ///////////////////////////
   return (
-    <div className="all">
+    <>
       {logIn === 2 && (
         <div className="outPopUp">
           {" "}
@@ -120,14 +120,16 @@ function App() {
           </form>
         </div>
       )}
-      <Header
-        onHeaderClick={logInCheck}
-        logIn={logIn}
-        whichUserHeader={whichUser}
-      />
-      <Tabs onTabsClick={setWindow} logIn={logIn} index={whichContainer} />
-      <MainContainer index={whichContainer} userName={whichUser} />
-    </div>
+      <div className={logIn === 0 ? "all" : "allblur"}>
+        <Header
+          onHeaderClick={logInCheck}
+          logIn={logIn}
+          whichUserHeader={whichUser}
+        />
+        <Tabs onTabsClick={setWindow} logIn={logIn} index={whichContainer} />
+        <MainContainer index={whichContainer} userName={whichUser} />
+      </div>
+    </>
   );
 }
 
