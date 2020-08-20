@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Header from "./components/Header";
 import Tabs from "./components/Tabs";
 import MainContainer from "./components/MainContainer";
@@ -8,9 +8,11 @@ import "./App.css";
 function App() {
   const users = ["Kamel", "Thiago", "Jose", "Ion"];
   const [whichContainer, setwhichContainer] = useState(0);
-  const [whichUser, setwhichUser] = useState(null);
-  const [whichPassword, setwhichPassword] = useState(null);
+  const [passwordUserWrong, setpasswordUserWrong] = useState(0);
+  const [whichUser, setwhichUser] = useState("");
+  const [whichPassword, setwhichPassword] = useState("");
   const [logIn, setlogIn] = useState(0);
+
   const setWindow = (indexContainer) => {
     setwhichContainer(indexContainer);
   };
@@ -21,22 +23,45 @@ function App() {
   const logIn2 = () => {
     logIn === 0 ? setlogIn(2) : setlogIn(0);
     logIn === 2 && setwhichContainer(0);
+    setpasswordUserWrong(0);
   };
 
   const wrongPassword = () => {
-    alert("wrong password");
-    setwhichUser(null);
-    setwhichPassword(null);
-    setlogIn(0);
+    //alert("Forgot password?");
+    setwhichUser("");
+    setwhichPassword("");
+    setpasswordUserWrong(1);
+    setlogIn(2);
   };
   const goodPassword = () => {
-    users.includes(whichUser) && logIn === 2 ? setlogIn(1) : setlogIn(0);
+    users.includes(whichUser) && logIn === 2 ? setlogIn(1) : noUser();
     logIn === 1 && setwhichContainer(0);
+  };
+  const noUser = () => {
+    //alert("No user with this name");
+    setwhichUser("");
+    setwhichPassword("");
+    setlogIn(2);
+    setpasswordUserWrong(2);
   };
   const handleSubmit = (evt) => {
     evt.preventDefault();
     whichUser !== whichPassword ? wrongPassword() : goodPassword();
   };
+  const useFocus = () => {
+    const htmlElRef = useRef(null);
+    const setFocus = () => {
+      htmlElRef.current && htmlElRef.current.focus();
+    };
+    return [htmlElRef, setFocus];
+  };
+  const [inputRef, setInputFocus] = useFocus();
+  console.log(passwordUserWrong + " " + whichUser);
+
+  const findUser = (e) => {
+    setwhichPassword(e);
+  };
+  ///////////////////////////
   return (
     <div className="all">
       {logIn === 2 && (
@@ -46,6 +71,8 @@ function App() {
             <label>
               Username:
               <input
+                autoFocus
+                ref={inputRef}
                 type="text"
                 placeholder="Enter username"
                 value={whichUser}
@@ -59,14 +86,37 @@ function App() {
                 type="text"
                 placeholder="Enter Password"
                 value={whichPassword}
-                onChange={(e) => setwhichPassword(e.target.value)}
+                onChange={(e) => findUser(e.target.value)}
                 required
               />
             </label>
-            <input type="submit" value="Submit" className="btn" />
-            <button type="button" className="btn cancel" onClick={logIn2}>
-              Close
-            </button>
+            <input
+              type="submit"
+              value="Submit"
+              className="btn"
+              onClick={setInputFocus}
+            />
+            <div className="cancelAndForgot">
+              <input
+                type="button"
+                value="Close"
+                className=" cancel"
+                onClick={logIn2}
+              />
+              <input
+                type="button"
+                style={{ color: "red" }}
+                value={
+                  passwordUserWrong === 0
+                    ? ""
+                    : passwordUserWrong === 1
+                    ? "Forgot password?"
+                    : "No username matched"
+                }
+                className=" cancel"
+                onClick={logIn2}
+              />
+            </div>
           </form>
         </div>
       )}

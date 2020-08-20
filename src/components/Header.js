@@ -13,14 +13,12 @@ function Header({ onHeaderClick, logIn, whichUserHeader }) {
     return s;
   }
   const [date, setDate] = useState(new Date());
-  var today = new Date();
   var time =
-    zweistellig(today.getHours()) +
+    zweistellig(date.getHours()) +
     ":" +
-    zweistellig(today.getMinutes()) +
+    zweistellig(date.getMinutes()) +
     ":" +
-    zweistellig(today.getSeconds());
-  var hours = today.getHours();
+    zweistellig(date.getSeconds());
 
   useEffect(() => {
     var timerID = setInterval(() => tick(), 1000);
@@ -43,21 +41,12 @@ function Header({ onHeaderClick, logIn, whichUserHeader }) {
         <>.</>
       )}
 
-      {logIn === 1 ? (
-        <img
-          className="greeting"
-          src={logo}
-          alt="logo"
-          onClick={onHeaderClick}
-        />
-      ) : (
-        <img
-          className="greeting"
-          src={login}
-          alt="logo"
-          onClick={onHeaderClick}
-        />
-      )}
+      <img
+        className="greeting"
+        src={logIn === 1 ? logo : login}
+        alt="logo"
+        onClick={onHeaderClick}
+      />
     </div>
   );
 }

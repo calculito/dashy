@@ -8,7 +8,6 @@ import Calendar from "./Calendar";
 import Links from "./Links";
 
 export default function MainContainer({ index, userName }) {
-  console.log("main" + userName);
   return (
     <div className="maincontainer">
       {

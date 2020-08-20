@@ -93,6 +93,7 @@ img {
   align-items: center;
 }
 .outPopUp {
+  font: 400 13.3333px Arial;
   position: absolute;
   width: 300px;
   height: 200px;
@@ -100,7 +101,6 @@ img {
   top: 50%;
   left: 50%;
   margin: -100px 0 0 -150px;
-  background: red;
 }
 .open-button {
   background-color: #555;
@@ -170,9 +170,17 @@ img {
 
 /* Add a red background color to the cancel button */
 .form-container .cancel {
-  background-color: red;
+  border: none;
+  color: black;
+  background-color: white;
+  cursor: pointer;
 }
-
+.cancelAndForgot {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 /* Add some hover effects to buttons */
 .form-container .btn:hover,
 .open-button:hover {

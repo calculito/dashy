@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function Tabs({ onTabsClick, logIn, index }) {
-  console.log(index);
   return (
     <div
       className="menu"
