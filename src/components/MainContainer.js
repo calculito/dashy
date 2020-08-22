@@ -1,7 +1,7 @@
 import React from "react";
 import Slack from "./Slack";
 import Chat from "./Chat";
-//import Syllabus from "./Syllabus";
+import Syllabus from "./Syllabus";
 import Homeworks from "./Homeworks";
 import Recordings from "./Recordings";
 import Calendar from "./Calendar";
@@ -12,8 +12,8 @@ export default function MainContainer({ index, userName }) {
     <div className="maincontainer">
       {
         {
-          //1: <Syllabus />,
-          0: <Slack />,
+          0: <Syllabus />,
+          1: <Slack />,
           2: <Homeworks />,
           3: <Recordings />,
           4: <Calendar />,
