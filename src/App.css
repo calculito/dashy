@@ -38,7 +38,6 @@ body {
 button {
   margin: 10px;
   background-color: aquamarine;
-  font-family: "Electrolize", sans-serif;
   font-size: 18px;
 }
 button:hover {
@@ -57,7 +56,7 @@ button:hover {
   justify-content: space-around;
 }
 .tabname {
-  min-width: 10vw;
+  min-width: 12vw;
   border-left: solid 1px gray;
   border-top: solid 1px gray;
   border-right: solid 1px gray;
@@ -72,10 +71,9 @@ button:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  font-family: "Montserrat Subrayada", sans-serif;
 }
 .tabnameactive {
-  min-width: 10vw;
+  min-width: 12vw;
   border-left: solid 1px gray;
   border-top: solid 1px gray;
   border-right: solid 1px gray;
@@ -100,7 +98,6 @@ img {
 .greeting {
   padding-left: 10px;
   padding-top: 10px;
-  font-family: "Electrolize", sans-serif;
   font-size: 18px;
   cursor: pointer;
   justify-self: flex-end;

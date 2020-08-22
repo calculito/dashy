@@ -28,7 +28,9 @@ function Links({ userName }) {
           value={linkFromInput}
           onChange={handleInputChange}
         />
-        {errorMessage ? <a>{errorMessage}</a> : null}
+        {errorMessage ? (
+          <a href="https://migrateam.github.io/dashy/">{errorMessage}</a>
+        ) : null}
         <button onClick={createLink}>Save</button>
         {/* link examples, hardcode */}
         <h4>links saved by mentors</h4>
@@ -36,7 +38,10 @@ function Links({ userName }) {
           <div>
             <ul>
               <li>
-                <a href="#" target="_blank">
+                <a
+                  href="https://github.com/Jose-cod7/tutorials/tree/sql-tutorial/sql"
+                  target="blank"
+                >
                   https://github.com/Jose-cod7/tutorials/tree/sql-tutorial/sql
                 </a>
               </li>
@@ -50,17 +55,26 @@ function Links({ userName }) {
           <div>
             <ul>
               <li>
-                <a href="#" target="_blank">
+                <a
+                  href="https://www.postgresql.org/docs/12/datatype.html"
+                  target="blank"
+                >
                   https://www.postgresql.org/docs/12/datatype.html
                 </a>
               </li>
               <li>
-                <a href="#" target="_blank">
+                <a
+                  href="https://reactjs.org/tutorial/tutorial.html"
+                  target="blank"
+                >
                   https://reactjs.org/tutorial/tutorial.html
                 </a>
               </li>
               <li>
-                <a href="#" target="_blank">
+                <a
+                  href="https://github.com/Jose-cod7/tutorials/tree/sql-tutorial/sql"
+                  target="blank"
+                >
                   https://github.com/Jose-cod7/tutorials/tree/sql-tutorial/sql
                 </a>
               </li>
@@ -71,7 +85,7 @@ function Links({ userName }) {
               <div>
                 <ul>
                   <li>
-                    <a href={linkFromInput} target="_blank" key={index}>
+                    <a href={linkFromInput} target="blank" key={index}>
                       {link}
                     </a>
                   </li>
