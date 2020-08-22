@@ -22,7 +22,7 @@ body {
 
 .maincontainer {
   border-top: 1px solid gray;
-  overflow: scroll;
+  /*overflow: scroll;*/
   height: 100%;
 }
 button {
@@ -243,6 +243,29 @@ img {
 .icons {
   width: 32px;
   height: 32px;
+}
+.recordings {
+  padding-top: 10px;
+  padding-left: 30px;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  margin: 10px;
+}
+.recordings:hover {
+  background-color: rgb(239, 253, 249);
+}
+.recordings button {
+  text-decoration: none;
+  color: gray;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+.recordings button:hover {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
 }
 @media only screen and (max-width: 1100px) {
   .greeting {
