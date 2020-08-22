@@ -5,7 +5,7 @@ function Syllabus() {
   return (
     <div className="tabcontent">
       <Iframe
-        url="https://migracode-barcelona.github.io/syllabus/db/week-1/lesson.html"
+        url="https://migracode-barcelona.github.io/syllabus/others/lesson0.html"
         width="100%"
         height="650px"
         id="myId"

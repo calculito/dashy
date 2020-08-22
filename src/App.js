@@ -128,6 +128,20 @@ function App() {
         />
         <Tabs onTabsClick={setWindow} logIn={logIn} index={whichContainer} />
         <MainContainer index={whichContainer} userName={whichUser} />
+        <div className="iconsRefferer">
+          Icons made by{" "}
+          <a
+            href="https://www.flaticon.com/authors/smashicons"
+            title="Smashicons"
+          >
+            Smashicons
+          </a>{" "}
+          from{" "}
+          <a href="https://www.flaticon.com/" title="Flaticon">
+            {" "}
+            www.flaticon.com
+          </a>
+        </div>
       </div>
     </>
   );

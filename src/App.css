@@ -3,7 +3,7 @@ body {
   border: 0;
   display: flex;
   flex-direction: column;
-  font-family: "Montserrat Subrayada", sans-serif;
+  font-family: "Arial", sans-serif;
 }
 .all {
   width: 100%;
@@ -18,6 +18,12 @@ body {
   -o-filter: blur(5px);
   -ms-filter: blur(5px);
   filter: blur(5px);
+}
+
+.maincontainer {
+  border-top: 1px solid gray;
+  overflow: scroll;
+  height: 100%;
 }
 button {
   margin: 10px;
@@ -53,6 +59,10 @@ button:hover {
   -moz-box-shadow: 1px -2px 7px 3px rgba(0, 0, 0, 0.5);
   box-shadow: 1px -2px 7px 3px rgba(0, 0, 0, 0.5);
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-family: "Montserrat Subrayada", sans-serif;
 }
 .tabnameactive {
   min-width: 10vw;
@@ -67,11 +77,9 @@ button:hover {
   -moz-box-shadow: 2px -2px 7px 3px rgba(0, 0, 0, 0.75);
   box-shadow: 2px -2px 7px 3px rgba(0, 0, 0, 0.75);
   cursor: pointer;
-}
-.maincontainer {
-  border-top: 1px solid gray;
-  overflow: scroll;
-  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 img {
@@ -88,13 +96,16 @@ img {
   justify-self: flex-end;
 }
 .fc-scrollgrid-sync-table {
-  height: 550px !important;
+  height: 59vh !important;
 }
 .fc-daygrid {
-  height: 580px !important;
+  height: 65vh !important;
 }
 .fc {
-  height: 650px !important;
+  height: 75vh !important;
+}
+.fc-event-title {
+  font-size: 10px !important;
 }
 .contentLinks {
   display: flex;
@@ -207,6 +218,7 @@ img {
   border-style: solid;
   margin: 20px;
   height: auto;
+  font-size: 16px;
 }
 .links-mentors {
   background-color: rgb(127, 181, 243);
@@ -214,9 +226,25 @@ img {
   border-style: solid;
   margin: 20px;
   height: auto;
+  font-size: 16px;
 }
-
-@media only screen and (max-width: 600px) {
+.iconsRefferer {
+  font: Arial;
+  font-size: 10px;
+  text-decoration: none;
+  color: gray;
+}
+.iconsrefferer a {
+  font: Arial;
+  font-size: 10px;
+  text-decoration: none;
+  color: gray;
+}
+.icons {
+  width: 32px;
+  height: 32px;
+}
+@media only screen and (max-width: 1100px) {
   .greeting {
     object-fit: scale-down;
     height: 55px;
@@ -224,25 +252,53 @@ img {
     font-size: 9px;
   }
   .tabname {
-    font-size: 10px;
-    min-width: 20vw;
-
+    font-size: 1px;
+    min-width: 5vw;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
     padding: 10px;
-    color: gray;
+    color: white;
     -webkit-box-shadow: 1px -2px 3px 3px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 1px -2px 3px 3px rgba(0, 0, 0, 0.3);
     box-shadow: 1px -2px 3px 3px rgba(0, 0, 0, 0.3);
   }
   .tabnameactive {
-    font-size: 10px;
-    min-width: 20vw;
+    font-size: 1px;
+    min-width: 5vw;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
+    color: white;
     padding: 10px;
     -webkit-box-shadow: 2px -2px 7px 3px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 2px -2px 7px 3px rgba(0, 0, 0, 0.75);
     box-shadow: 2px -2px 7px 3px rgba(0, 0, 0, 0.75);
+  }
+  .icons {
+    width: 24px;
+    height: 24px;
+  }
+  .iconsRefferer {
+    font-size: 6px;
+  }
+  .iconsRefferer a {
+    font-size: 6px;
+  }
+  .links-students {
+    font-size: 12px;
+  }
+  .links-mentors {
+    font-size: 12px;
+  }
+  .fc-scrollgrid-sync-table {
+    height: 60vh !important;
+  }
+  .fc-daygrid {
+    height: 65vh !important;
+  }
+  .fc {
+    height: 75vh !important;
+  }
+  .fc-toolbar-title {
+    font-size: 14px !important;
   }
 }
