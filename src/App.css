@@ -9,10 +9,12 @@ body {
   flex-direction: column;
   font-family: "Arial", sans-serif;
   height: 100%;
+  overflow: none;
 }
 .all {
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 .allblur {
   width: 100%;
@@ -28,7 +30,7 @@ body {
 .maincontainer {
   border-top: 1px solid gray;
   /*overflow: scroll;*/
-  height: 85%;
+  height: 80%;
 }
 .tabcontent {
   height: 100%;
