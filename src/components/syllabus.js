@@ -7,7 +7,7 @@ function Syllabus() {
       <Iframe
         url="https://migracode-barcelona.github.io/syllabus/others/lesson0.html"
         width="100%"
-        height="650px"
+        height="100%"
         id="myId"
         className="myClassname"
         display="initial"
