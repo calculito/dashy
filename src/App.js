@@ -74,6 +74,7 @@ function App() {
                 autoFocus
                 ref={inputRef}
                 type="text"
+                autoComplete="on"
                 placeholder="Enter username"
                 value={whichUser}
                 onChange={(e) => setwhichUser(e.target.value)}
@@ -85,6 +86,7 @@ function App() {
               <input
                 type="text"
                 placeholder="Enter Password"
+                autoComplete="on"
                 value={whichPassword}
                 onChange={(e) => findUser(e.target.value)}
                 required

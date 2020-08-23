@@ -8,6 +8,18 @@ import SlackIcon from "../images/slacky.png";
 import LinksIcon from "../images/links.png";
 
 export default function Tabs({ onTabsClick, logIn, index }) {
+  var windowObjectReference;
+  var windowFeatures =
+    "menubar=no,location=yes,resizable=no,scrollbars=no,status=no,width=1024px,height=728px,minWidth=600,minHeight=300,frame=false,titleBarStyle='hidden'";
+
+  function openRequestedPopup() {
+    windowObjectReference = window.open(
+      "https://app.slack.com/client/TMSJ4SYVD/CMDSP2CQ2",
+      //"https://slack.com/intl/en-es/",
+      "_blank",
+      windowFeatures
+    );
+  }
   return (
     <div
       className="menu"
@@ -29,7 +41,7 @@ export default function Tabs({ onTabsClick, logIn, index }) {
           </div>
 
           <div className={index === 1 ? "tabnameactive" : "tabname"}>
-            <div onClick={() => onTabsClick(1)}>SLACK</div>
+            <div onClick={openRequestedPopup}>SLACK</div>
             <img
               className="icons"
               src={SlackIcon}
