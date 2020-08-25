@@ -18,6 +18,9 @@ function Calendar(i) {
           { title: "MEETING", date: "2020-08-17" },
           { title: "CLASS", date: "2020-08-19" },
           { title: "CLASS", date: "2020-08-22" },
+          { title: "MEETING", date: "2020-08-26" },
+          { title: "MEETING", date: "2020-08-31" },
+          { title: "MEETING", date: "2020-09-02" },
         ]}
         dateClick={handleDateClick}
       />
