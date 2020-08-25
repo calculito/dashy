@@ -3,16 +3,23 @@ import React, { useState } from "react";
 function Links({ userName }) {
   console.log("username" + userName); //name of the current user passed from app.js
 
-  const [savedLink, setLinkSaved] = useState([]);
+  const [savedGeneralLink, setGLinkSaved] = useState([
+    "https://github.com/Jose-cod7/tutorials/tree/sql-tutorial/sql",
+  ]);
+  const [savedPersonalLink, setPLinkSaved] = useState([
+    "https://github.com/Jose-cod7/tutorials/tree/sql-tutorial/sql",
+    "https://reactjs.org/tutorial/tutorial.html",
+    "https://www.postgresql.org/docs/12/datatype.html",
+  ]);
   const [linkFromInput, setLinkFromInput] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const handleInputChange = (event) => {
     setLinkFromInput(event.target.value);
   };
-  const createLink = () => {
+  const createGLink = () => {
     if (linkFromInput !== "") {
       setErrorMessage("");
-      setLinkSaved(savedLink.concat(linkFromInput));
+      setGLinkSaved(savedGeneralLink.concat(linkFromInput));
     } else {
       setErrorMessage("Please enter a link");
     }
@@ -21,75 +28,48 @@ function Links({ userName }) {
   return (
     <div className="tabcontent">
       <div id="links">
-        <h4>You have {savedLink.length} links</h4>
-        <input
-          type="text"
-          placeholder="Save your link"
-          value={linkFromInput}
-          onChange={handleInputChange}
-        />
-        {errorMessage ? (
-          <a href="https://migrateam.github.io/dashy/">{errorMessage}</a>
-        ) : null}
-        <button onClick={createLink}>Save</button>
-        {/* link examples, hardcode */}
-        <h4>links saved by mentors</h4>
+        <div className="infoWindow">
+          Hello {userName}, you have {savedGeneralLink.length} general links and{" "}
+          {savedPersonalLink.length} personal links
+        </div>
+        <div className="contLinks">
+          <input
+            className="inputLinks"
+            type="text"
+            placeholder="Save your link"
+            value={linkFromInput}
+            onChange={handleInputChange}
+          />
+          {errorMessage ? (
+            <a href="https://migrateam.github.io/dashy/">{errorMessage}</a>
+          ) : null}
+          <button onClick={createGLink}>Save</button>
+        </div>
+        <h4>General Links</h4>
         <div className="links-mentors">
-          <div>
-            <ul>
-              <li>
-                <a
-                  href="https://github.com/Jose-cod7/tutorials/tree/sql-tutorial/sql"
-                  target="blank"
-                >
-                  https://github.com/Jose-cod7/tutorials/tree/sql-tutorial/sql
-                </a>
-              </li>
-            </ul>
-          </div>
+          {savedGeneralLink.map((link, index) => {
+            return (
+              <div className="recordings" key={"divG" + index}>
+                <li key={"liG" + index}>
+                  <button href={linkFromInput} target="blank" key={index}>
+                    {link}
+                  </button>
+                </li>
+              </div>
+            );
+          })}
         </div>
 
-        <h4>links saved by students</h4>
+        <h4>Personal links</h4>
         <div className="links-students">
-          {/* link examples, hardcode */}
-          <div>
-            <ul>
-              <li>
-                <a
-                  href="https://www.postgresql.org/docs/12/datatype.html"
-                  target="blank"
-                >
-                  https://www.postgresql.org/docs/12/datatype.html
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://reactjs.org/tutorial/tutorial.html"
-                  target="blank"
-                >
-                  https://reactjs.org/tutorial/tutorial.html
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/Jose-cod7/tutorials/tree/sql-tutorial/sql"
-                  target="blank"
-                >
-                  https://github.com/Jose-cod7/tutorials/tree/sql-tutorial/sql
-                </a>
-              </li>
-            </ul>
-          </div>
-          {savedLink.map((link, index) => {
+          {savedPersonalLink.map((link, index) => {
             return (
-              <div>
-                <ul>
-                  <li>
-                    <a href={linkFromInput} target="blank" key={index}>
-                      {link}
-                    </a>
-                  </li>
-                </ul>
+              <div className="recordings" key={"divP" + index}>
+                <li key={"liP" + index}>
+                  <button href={linkFromInput} target="blank" key={index}>
+                    {link}
+                  </button>
+                </li>
               </div>
             );
           })}

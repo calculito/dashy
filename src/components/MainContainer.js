@@ -14,11 +14,11 @@ export default function MainContainer({ index, userName }) {
         {
           0: <Syllabus />,
           1: <Slack />,
-          2: <Homeworks />,
-          3: <Recordings />,
-          4: <Calendar />,
-          5: <Chat />,
-          6: <Links userName={userName} />,
+          2: <Homeworks userName={userName} />,
+          3: <Links userName={userName} />,
+          4: <Recordings userName={userName} />,
+          5: <Calendar userName={userName} />,
+          6: <Chat />,
         }[index]
       }
     </div>
