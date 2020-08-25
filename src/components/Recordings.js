@@ -12,6 +12,7 @@ function Recordings({ userName }) {
       <div className="infoWindow">
         Hello {userName}, you have {recordingLinks.length} recordings
       </div>
+      <h4>Recordings of the classes</h4>
       {recordingLinks.map((data, i) => (
         <div className="recordings" key={"d" + i}>
           <li key={"li" + i}>
