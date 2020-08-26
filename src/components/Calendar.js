@@ -5,23 +5,26 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import interaction from "@fullcalendar/interaction";
 
-function Calendar(i) {
+function Calendar({ userName }) {
   const handleDateClick = (arg) => {
     alert(arg.dateStr);
   };
+
+  const events = [
+    { title: "MEETING", date: "2020-08-26" },
+    { title: "MEETING", date: "2020-08-31" },
+    { title: "MEETING", date: "2020-09-02" },
+  ];
+
   return (
     <div className="tabcontent">
+      <div className="infoWindow">
+        Hello {userName}, you have {events.length} appointments
+      </div>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interaction]}
         initialView="dayGridMonth"
-        events={[
-          { title: "MEETING", date: "2020-08-17" },
-          { title: "CLASS", date: "2020-08-19" },
-          { title: "CLASS", date: "2020-08-22" },
-          { title: "MEETING", date: "2020-08-26" },
-          { title: "MEETING", date: "2020-08-31" },
-          { title: "MEETING", date: "2020-09-02" },
-        ]}
+        events={events}
         dateClick={handleDateClick}
       />
     </div>

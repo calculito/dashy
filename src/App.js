@@ -6,7 +6,7 @@ import MainContainer from "./components/MainContainer";
 import "./App.css";
 
 function App() {
-  const users = ["Kamel", "Thiago", "Jose", "Ion"];
+  const users = ["Kamel", "Thiago", "Jose", "Ion", "Carlos"];
   const [whichContainer, setwhichContainer] = useState(0);
   const [passwordUserWrong, setpasswordUserWrong] = useState(0);
   const [whichUser, setwhichUser] = useState("");

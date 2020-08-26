@@ -18,29 +18,25 @@ function Homeworks({ userName }) {
         and {unfinishedHomeworks.length} unfinished homeworks
       </div>
       <h4>Finished homeworks</h4>
-      <div className="links-mentors">
+      <div className="linksContainer">
         {finishedHomeworks.map((link, index) => {
           return (
             <div className="recordings" key={"divG" + index}>
-              <li key={"liG" + index}>
-                <button href={link} target="blank" key={index}>
-                  {link}
-                </button>
-              </li>
+              <button href={link} target="blank" key={index}>
+                {link}
+              </button>
             </div>
           );
         })}
       </div>
       <h4>Unfinished homeworks</h4>
-      <div className="links-students">
+      <div className="linksContainer">
         {unfinishedHomeworks.map((link, index) => {
           return (
             <div className="recordings" key={"divP" + index}>
-              <li key={"liP" + index}>
-                <button href={link} target="blank" key={index}>
-                  {link}
-                </button>
-              </li>
+              <button href={link} target="blank" key={index}>
+                {link}
+              </button>
             </div>
           );
         })}

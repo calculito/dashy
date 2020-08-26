@@ -13,15 +13,15 @@ function Recordings({ userName }) {
         Hello {userName}, you have {recordingLinks.length} recordings
       </div>
       <h4>Recordings of the classes</h4>
-      {recordingLinks.map((data, i) => (
-        <div className="recordings" key={"d" + i}>
-          <li key={"li" + i}>
+      <div className="linksContainer">
+        {recordingLinks.map((data, i) => (
+          <div className="recordings" key={"d" + i}>
             <button href={data} key={"b" + i}>
               {data}
             </button>
-          </li>
-        </div>
-      ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

@@ -46,30 +46,26 @@ function Links({ userName }) {
           <button onClick={createGLink}>Save</button>
         </div>
         <h4>General Links</h4>
-        <div className="links-mentors">
+        <div className="linksContainer">
           {savedGeneralLink.map((link, index) => {
             return (
               <div className="recordings" key={"divG" + index}>
-                <li key={"liG" + index}>
-                  <button href={linkFromInput} target="blank" key={index}>
-                    {link}
-                  </button>
-                </li>
+                <button href={linkFromInput} target="blank" key={index}>
+                  {link}
+                </button>
               </div>
             );
           })}
         </div>
 
         <h4>Personal links</h4>
-        <div className="links-students">
+        <div className="linksContainer">
           {savedPersonalLink.map((link, index) => {
             return (
               <div className="recordings" key={"divP" + index}>
-                <li key={"liP" + index}>
-                  <button href={linkFromInput} target="blank" key={index}>
-                    {link}
-                  </button>
-                </li>
+                <button href={linkFromInput} target="blank" key={index}>
+                  {link}
+                </button>
               </div>
             );
           })}
