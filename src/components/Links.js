@@ -43,7 +43,9 @@ function Links({ userName }) {
           {errorMessage ? (
             <a href="https://migrateam.github.io/dashy/">{errorMessage}</a>
           ) : null}
-          <button onClick={createGLink}>Save</button>
+          <button className="buttonHW" onClick={createGLink}>
+            Save
+          </button>
         </div>
         <h4>General Links</h4>
         <div className="linksContainer">

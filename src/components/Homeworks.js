@@ -2,14 +2,17 @@ import React, { useState } from "react";
 
 function Homeworks({ userName }) {
   const [finishedHomeworks, setfinishedHomeworks] = useState([
-    "link1",
-    "link2",
+    "https://github.com/CodeYourFuture/Databases-Homework/blob/master/week-2/mandatory/2-ecommerce-db/task.md",
+    " https://github.com/jmbriano/tutorials/tree/sql-tutorial-solutions/sql",
   ]);
   const [unfinishedHomeworks, setunfinishedHomeworks] = useState([
-    "link3",
-    "link4",
-    "link6",
+    " https://www.w3schools.com/sql/default.asp",
+    "Exercise 5 and title “homework” from https://migracode-barcelona.github.io/syllabus/db/week-1/lesson.html",
+    "https://github.com/CodeYourFuture/Databases-Homework/blob/master/week-3/mandatory/2-api/task.md",
   ]);
+  const finished = () => {
+    alert("GOOD WORK");
+  };
   return (
     <div className="tabcontent">
       {" "}
@@ -21,10 +24,12 @@ function Homeworks({ userName }) {
       <div className="linksContainer">
         {finishedHomeworks.map((link, index) => {
           return (
-            <div className="recordings" key={"divG" + index}>
-              <button href={link} target="blank" key={index}>
-                {link}
-              </button>
+            <div className="rowHW" key={"divRHW" + index}>
+              <div className="recordings" key={"divG" + index}>
+                <button href={link} target="blank" key={index}>
+                  {link}
+                </button>
+              </div>
             </div>
           );
         })}
@@ -33,9 +38,14 @@ function Homeworks({ userName }) {
       <div className="linksContainer">
         {unfinishedHomeworks.map((link, index) => {
           return (
-            <div className="recordings" key={"divP" + index}>
-              <button href={link} target="blank" key={index}>
-                {link}
+            <div className="rowHW" key={"divRHWu" + index}>
+              <div className="recordings" key={"divP" + index}>
+                <button href={link} target="blank" key={index}>
+                  {link}
+                </button>
+              </div>
+              <button className="buttonHW" onClick={finished}>
+                Finished
               </button>
             </div>
           );

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Header from "./components/Header";
 import Tabs from "./components/Tabs";
 import MainContainer from "./components/MainContainer";
@@ -6,6 +6,51 @@ import MainContainer from "./components/MainContainer";
 import "./App.css";
 
 function App() {
+  const [user, setuser] = useState(false);
+  useEffect(() => {
+    getuser1();
+  }, []);
+  function getuser1() {
+    fetch("http://localhost:3000/users")
+      .then((response) => {
+        return response.text();
+      })
+      .then((data) => {
+        setuser(data);
+      });
+  }
+  function createuser1() {
+    let name = prompt("Enter user1 name");
+    let email = prompt("Enter user1 email");
+    fetch("http://localhost:3000/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email }),
+    })
+      .then((response) => {
+        return response.text();
+      })
+      .then((data) => {
+        alert(data);
+        getuser1();
+      });
+  }
+  function deleteuser1() {
+    let id = prompt("Enter user1 id");
+    fetch(`http://localhost:3000/user/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        return response.text();
+      })
+      .then((data) => {
+        alert(data);
+        getuser1();
+      });
+  }
+  ///////////////////////////////////////////////////////////////
   const users = ["Kamel", "Thiago", "Jose", "Ion", "Carlos"];
   const [whichContainer, setwhichContainer] = useState(0);
   const [passwordUserWrong, setpasswordUserWrong] = useState(0);
@@ -150,3 +195,4 @@ function App() {
 }
 
 export default App;
+//{user ? user : "There is no user data available"}

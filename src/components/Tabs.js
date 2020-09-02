@@ -31,71 +31,54 @@ export default function Tabs({ onTabsClick, logIn, index }) {
             className={index === 0 ? "tabnameactive" : "tabname"}
             onClick={() => onTabsClick(0)}
           >
-            <div>Syllabus</div>
-            <img
-              className="icons"
-              src={SyllabusIcon}
-              alt="iconSyllabus"
-              onClick={() => onTabsClick(0)}
-            />
+            <div>Syllabus </div>
+            <img className="icons" src={SyllabusIcon} alt="iconSyllabus" />
           </div>
 
-          <div className={index === 1 ? "tabnameactive" : "tabname"}>
-            <div onClick={openRequestedPopup}>SLACK</div>
-            <img
-              className="icons"
-              src={SlackIcon}
-              alt="iconSlack"
-              onClick={() => onTabsClick(1)}
-            />
+          <div
+            className={index === 1 ? "tabnameactive" : "tabname"}
+            onClick={openRequestedPopup}
+          >
+            <div>SLACK</div>
+            <img className="icons" src={SlackIcon} alt="iconSlack" />
           </div>
 
-          <div className={index === 2 ? "tabnameactive" : "tabname"}>
-            <div onClick={() => onTabsClick(2)}>Homeworks</div>
-            <img
-              className="icons"
-              src={HomeworksIcon}
-              alt="iconHomeworks"
-              onClick={() => onTabsClick(2)}
-            />
+          <div
+            className={index === 2 ? "tabnameactive" : "tabname"}
+            onClick={() => onTabsClick(2)}
+          >
+            <div>Homeworks</div>
+            <img className="icons" src={HomeworksIcon} alt="iconHomeworks" />
           </div>
 
-          <div className={index === 3 ? "tabnameactive" : "tabname"}>
-            <div onClick={() => onTabsClick(3)}>Useful links</div>
-            <img
-              className="icons"
-              src={LinksIcon}
-              alt="iconLinks"
-              onClick={() => onTabsClick(3)}
-            />
+          <div
+            className={index === 3 ? "tabnameactive" : "tabname"}
+            onClick={() => onTabsClick(3)}
+          >
+            <div>Useful links</div>
+            <img className="icons" src={LinksIcon} alt="iconLinks" />
           </div>
 
-          <div className={index === 4 ? "tabnameactive" : "tabname"}>
-            <div onClick={() => onTabsClick(4)}>Recordings</div>
-            <img
-              className="icons"
-              src={RecordingsIcon}
-              alt="iconRecordings"
-              onClick={() => onTabsClick(4)}
-            />
+          <div
+            className={index === 4 ? "tabnameactive" : "tabname"}
+            onClick={() => onTabsClick(4)}
+          >
+            <div>Recordings</div>
+            <img className="icons" src={RecordingsIcon} alt="iconRecordings" />
           </div>
-          <div className={index === 5 ? "tabnameactive" : "tabname"}>
-            <div onClick={() => onTabsClick(5)}>Calendar</div>
-            <img
-              className="icons"
-              src={CalendarIcon}
-              alt="iconCalendar"
-              onClick={() => onTabsClick(5)}
-            />
+          <div
+            className={index === 5 ? "tabnameactive" : "tabname"}
+            onClick={() => onTabsClick(5)}
+          >
+            <div>Calendar</div>
+            <img className="icons" src={CalendarIcon} alt="iconCalendar" />
           </div>
-          <div className={index === 6 ? "tabnameactive" : "tabname"}>
-            <div onClick={() => onTabsClick(6)}>CHAT one2one</div>
-            <img
-              className="icons"
-              src={ChatIcon}
-              alt="iconChat"
-              onClick={() => onTabsClick(6)}
-            />
+          <div
+            className={index === 6 ? "tabnameactive" : "tabname"}
+            onClick={() => onTabsClick(6)}
+          >
+            <div>CHAT one2one</div>
+            <img className="icons" src={ChatIcon} alt="iconChat" />
           </div>
         </>
       )}
