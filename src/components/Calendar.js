@@ -18,9 +18,6 @@ function Calendar({ userName }) {
 
   return (
     <div className="tabcontent">
-      <div className="infoWindow">
-        Hello {userName}, you have {events.length} appointments
-      </div>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interaction]}
         initialView="dayGridMonth"

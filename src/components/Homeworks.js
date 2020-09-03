@@ -16,17 +16,18 @@ function Homeworks({ userName }) {
   return (
     <div className="tabcontent">
       {" "}
-      <div className="infoWindow">
-        Hello {userName}, you have {finishedHomeworks.length} finished homeworks
-        and {unfinishedHomeworks.length} unfinished homeworks
-      </div>
-      <h4>Finished homeworks</h4>
+      ≈<h4>Finished homeworks</h4>
       <div className="linksContainer">
         {finishedHomeworks.map((link, index) => {
           return (
             <div className="rowHW" key={"divRHW" + index}>
               <div className="recordings" key={"divG" + index}>
-                <button href={link} target="blank" key={index}>
+                <button
+                  className="linkToHomework"
+                  href={link}
+                  target="blank"
+                  key={index}
+                >
                   {link}
                 </button>
               </div>
@@ -40,7 +41,12 @@ function Homeworks({ userName }) {
           return (
             <div className="rowHW" key={"divRHWu" + index}>
               <div className="recordings" key={"divP" + index}>
-                <button href={link} target="blank" key={index}>
+                <button
+                  className="linkToHomework"
+                  href={link}
+                  target="blank"
+                  key={index}
+                >
                   {link}
                 </button>
               </div>

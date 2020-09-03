@@ -34,8 +34,7 @@ function Header({ onHeaderClick, logIn, whichUserHeader }) {
     <div className="header">
       {logIn === 1 ? (
         <div className="greeting">
-          Hello {username}, it is {time} and you have no appointments in your
-          calendar today!
+          Hello {username}, the time is {time}
         </div>
       ) : (
         <>.</>

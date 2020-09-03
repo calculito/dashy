@@ -11,7 +11,7 @@ function App() {
     getuser1();
   }, []);
   function getuser1() {
-    fetch("http://localhost:3000/users")
+    fetch("http://localhost:3001")
       .then((response) => {
         return response.text();
       })
@@ -22,7 +22,7 @@ function App() {
   function createuser1() {
     let name = prompt("Enter user1 name");
     let email = prompt("Enter user1 email");
-    fetch("http://localhost:3000/users", {
+    fetch("http://localhost:3001/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,7 +39,7 @@ function App() {
   }
   function deleteuser1() {
     let id = prompt("Enter user1 id");
-    fetch(`http://localhost:3000/user/${id}`, {
+    fetch(`http://localhost:3001/user/${id}`, {
       method: "DELETE",
     })
       .then((response) => {
@@ -188,6 +188,7 @@ function App() {
             {" "}
             www.flaticon.com
           </a>
+          {user ? user : "There is no user data available"}
         </div>
       </div>
     </>

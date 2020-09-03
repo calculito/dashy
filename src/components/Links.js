@@ -28,10 +28,6 @@ function Links({ userName }) {
   return (
     <div className="tabcontent">
       <div id="links">
-        <div className="infoWindow">
-          Hello {userName}, you have {savedGeneralLink.length} general links and{" "}
-          {savedPersonalLink.length} personal links
-        </div>
         <div className="contLinks">
           <input
             className="inputLinks"
@@ -43,7 +39,7 @@ function Links({ userName }) {
           {errorMessage ? (
             <a href="https://migrateam.github.io/dashy/">{errorMessage}</a>
           ) : null}
-          <button className="buttonHW" onClick={createGLink}>
+          <button className="buttonHWL" onClick={createGLink}>
             Save
           </button>
         </div>
@@ -51,10 +47,12 @@ function Links({ userName }) {
         <div className="linksContainer">
           {savedGeneralLink.map((link, index) => {
             return (
-              <div className="recordings" key={"divG" + index}>
-                <button href={linkFromInput} target="blank" key={index}>
-                  {link}
-                </button>
+              <div className="rowHW" key={"divRHW" + index}>
+                <div className="recordings" key={"divG" + index}>
+                  <button href={linkFromInput} target="blank" key={index}>
+                    {link}
+                  </button>
+                </div>
               </div>
             );
           })}
@@ -64,10 +62,12 @@ function Links({ userName }) {
         <div className="linksContainer">
           {savedPersonalLink.map((link, index) => {
             return (
-              <div className="recordings" key={"divP" + index}>
-                <button href={linkFromInput} target="blank" key={index}>
-                  {link}
-                </button>
+              <div className="rowHW" key={"divRHW" + index}>
+                <div className="recordings" key={"divP" + index}>
+                  <button href={linkFromInput} target="blank" key={index}>
+                    {link}
+                  </button>
+                </div>
               </div>
             );
           })}

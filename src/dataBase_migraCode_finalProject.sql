@@ -70,29 +70,33 @@ CREATE TABLE links (
 ALTER TABLE LINKS
 ADD COLUMN PersOrGen VARCHAR(120) NOT NULL ;
 
-select * from "class" c ; 
+
 
 SELECT class_name, users.name, users.user_role  FROM class
 INNER JOIN users ON class.id=users.class_id;
 
-select homework_finished.finished, user_id, name from homework_finished
-INNER JOIN users ON user_id=users.id;
+select * from "class" c ; 
+
+select name, user_password, user_role from "users" u; 
 
 select name, user_password from "users" u where user_role ='Student'; 
 
 
-select name, user_password, user_role from "users" u; 
+select name, user_role from users u 
+inner join homework_finished hf on hf.user_id = u.id 
+inner join homework_finished hf2 on hf2.homeworks_id = hf.homeworks_id; 
+
+
+
+
+
 ​
+select homework_finished.finished, user_id, name from homework_finished
+INNER JOIN users ON user_id=users.id;
 
 select name, user_role from "users" u
 inner join class c on c.id = u.class_id 
 inner join links l on c.id = l.class_id; 
-​
-
-select name, user_role from users u 
-inner join homework_finished hf on hf.user_id = u.id 
-inner join homework_finished hf2 on hf2.homeworks_id = hf.homeworks_id; 
-​
 
 select  users.name description from links l  
 inner join users u2 on  l.user_id = u2.id 

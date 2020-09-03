@@ -21,10 +21,7 @@ export default function Tabs({ onTabsClick, logIn, index }) {
     );
   }
   return (
-    <div
-      className="menu"
-      style={{ justifyContent: logIn === 0 ? "flex-start" : "flex-start" }} //maybe change to space-around if bigger
-    >
+    <div className="menu">
       {logIn === 1 && (
         <>
           <div
