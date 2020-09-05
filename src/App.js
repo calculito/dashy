@@ -6,7 +6,7 @@ import MainContainer from "./components/MainContainer";
 import "./App.css";
 
 function App() {
-  const [user, setuser] = useState(false);
+  const [user, setuser] = useState("Ion");
   useEffect(() => {
     getuser1();
   }, []);
