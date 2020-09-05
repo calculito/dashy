@@ -33,10 +33,10 @@ function App() {
         return response.text();
       })
       .then((data) => {
-        alert(data);
         getuser1();
       });
   }
+
   function deleteuser1() {
     let id = prompt("Enter user1 id");
     fetch(`http://localhost:3001/user/${id}`, {
@@ -51,7 +51,7 @@ function App() {
       });
   }
   ///////////////////////////////////////////////////////////////
-  const users = ["Kamel", "Thiago", "Jose", "Ion", "Carlos"];
+
   const [whichContainer, setwhichContainer] = useState(0);
   const [passwordUserWrong, setpasswordUserWrong] = useState(0);
   const [whichUser, setwhichUser] = useState("");
@@ -79,7 +79,7 @@ function App() {
     setlogIn(2);
   };
   const goodPassword = () => {
-    users.includes(whichUser) && logIn === 2 ? setlogIn(1) : noUser();
+    user.includes(whichUser) && logIn === 2 ? setlogIn(1) : noUser();
     logIn === 1 && setwhichContainer(0);
   };
   const noUser = () => {
@@ -101,7 +101,7 @@ function App() {
     return [htmlElRef, setFocus];
   };
   const [inputRef, setInputFocus] = useFocus();
-  console.log(passwordUserWrong + " " + whichUser);
+  //console.log(passwordUserWrong + " " + whichUser);
 
   const findUser = (e) => {
     setwhichPassword(e);
@@ -174,7 +174,11 @@ function App() {
           whichUserHeader={whichUser}
         />
         <Tabs onTabsClick={setWindow} logIn={logIn} index={whichContainer} />
-        <MainContainer index={whichContainer} userName={whichUser} />
+        <MainContainer
+          index={whichContainer}
+          userName={whichUser}
+          user={user}
+        />
         <div className="iconsRefferer">
           Icons made by{" "}
           <a
@@ -188,7 +192,6 @@ function App() {
             {" "}
             www.flaticon.com
           </a>
-          {user ? user : "There is no user data available"}
         </div>
       </div>
     </>
@@ -196,4 +199,3 @@ function App() {
 }
 
 export default App;
-//{user ? user : "There is no user data available"}

@@ -10,7 +10,7 @@ body {
   font-family: "Arial", sans-serif;
   height: 100%;
   overflow: none;
-  background-color: whitesmoke;
+  background-color: rgb(245, 245, 245);
 }
 .all {
   width: 100%;
@@ -30,7 +30,8 @@ body {
 
 .maincontainer {
   /*overflow: scroll;*/
-  border-top: 1px solid darkgray;
+
+  border-top: 2px solid rgb(216, 216, 216);
   height: 80%;
 }
 .tabcontent {
@@ -59,18 +60,18 @@ button:hover {
   justify-content: space-around;
 }
 .tabname {
-  min-width: 12%;
+  width: 12%;
   margin-left: 8px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   padding: 15px;
   color: gray;
   background-color: whitesmoke;
-  -webkit-box-shadow: 7px 1px 6px -4px rgba(0, 0, 0, 05),
+  -webkit-box-shadow: 6px -6px 8px -1px rgba(0, 0, 0, 0.1),
     -4px -4px 3px 0px rgba(255, 255, 255, 1);
-  -moz-box-shadow: 7px 1px 6px -4px rgba(0, 0, 0, 0.5),
+  -moz-box-shadow: 6px -6px 8px -1px rgba(0, 0, 0, 0.1),
     -4px -4px 3px 0px rgba(255, 255, 255, 1);
-  box-shadow: 7px 1px 6px -4px rgba(0, 0, 0, 0.5),
+  box-shadow: 6px -6px 8px -1px rgba(0, 0, 0, 0.1),
     -4px -4px 3px 0px rgba(255, 255, 255, 1);
   cursor: pointer;
   display: flex;
@@ -78,18 +79,18 @@ button:hover {
   justify-content: space-between;
 }
 .tabnameactive {
-  min-width: 12%;
+  width: 12%;
   margin-left: 8px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   padding: 15px;
 
   background-color: white;
-  -webkit-box-shadow: 7px 1px 6px -4px rgba(0, 0, 0, 0.5),
+  -webkit-box-shadow: 6px -6px 8px -1px rgba(0, 0, 0, 0.1),
     -4px -4px 3px 0px rgba(255, 255, 255, 1);
-  -moz-box-shadow: 7px 1px 6px -4px rgba(0, 0, 0, 0.5),
+  -moz-box-shadow: 6px -6px 8px -1px rgba(0, 0, 0, 0.1),
     -4px -4px 3px 0px rgba(255, 255, 255, 1);
-  box-shadow: 7px 1px 6px -4px rgba(0, 0, 0, 0.5),
+  box-shadow: 6px -6px 8px -1px rgba(0, 0, 0, 0.1),
     -4px -4px 3px 0px rgba(255, 255, 255, 1);
   cursor: pointer;
   display: flex;
@@ -211,7 +212,7 @@ img {
   opacity: 0.8;
 }
 
-/* Add a red background color to the cancel button */
+/* Add a whitesmoke background color to the cancel button */
 .form-container .cancel {
   border: none;
   color: black;
@@ -232,13 +233,12 @@ img {
 }
 
 .contLinks {
-  width: 90vw;
   padding-top: 10px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: 5px;
+  margin: 0 10px;
 }
 h4 {
   color: gray;
@@ -290,11 +290,11 @@ h4 {
 
   border-radius: 8px;
   margin: 8px;
-  -webkit-box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.2),
+  -webkit-box-shadow: 2px 2px 8px 0px rgba(100, 100, 100, 0.1),
     -4px -4px 3px 0px rgba(255, 255, 255, 1);
-  -moz-box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.2),
+  -moz-box-shadow: 2px 2px 8px 0px rgba(100, 100, 100, 0.1),
     -4px -4px 3px 0px rgba(255, 255, 255, 1);
-  box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.2),
+  box-shadow: 2px 2px 8px 0px rgba(100, 100, 100, 0.1),
     -4px -4px 3px 0px rgba(255, 255, 255, 1);
 }
 .recordings:hover {

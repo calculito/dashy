@@ -1,6 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function Links({ userName }) {
+  const [links, setlinks] = useState(false);
+  useEffect(() => {
+    getlinks();
+  }, []);
+  function getlinks() {
+    fetch("http://localhost:3001/links")
+      .then((response) => response.json())
+      .then((data) => {
+        setlinks(data);
+      });
+  }
+  console.log(links);
   console.log("username" + userName); //name of the current user passed from app.js
 
   const [savedGeneralLink, setGLinkSaved] = useState([

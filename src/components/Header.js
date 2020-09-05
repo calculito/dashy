@@ -3,8 +3,33 @@ import logo from "../images/migracode-logo.png";
 import login from "../images/login.png";
 
 function Header({ onHeaderClick, logIn, whichUserHeader }) {
-  let username = { whichUserHeader };
-  username = username.whichUserHeader;
+  const [userRole, setuserRole] = useState(false);
+
+  let username = { whichUserHeader }.whichUserHeader;
+  username === ""
+    ? (username = "Ion")
+    : (username = { whichUserHeader }.whichUserHeader);
+
+  useEffect(() => {
+    getuserRoleFromDB(username);
+    console.log("first username" + username);
+    var timerID = setInterval(() => tick(), 10000);
+    console.log(username);
+    return function cleanup() {
+      clearInterval(timerID);
+    };
+  }, [logIn]);
+
+  function getuserRoleFromDB(username) {
+    console.log("1" + whichUserHeader);
+    fetch("http://localhost:3001/userrole")
+      .then((response) => response.json())
+      .then((data) => {
+        setuserRole(
+          data[data.findIndex((element) => element.name === username)].user_role
+        );
+      });
+  }
 
   function zweistellig(s) {
     while (s.toString().length < 2) {
@@ -20,21 +45,15 @@ function Header({ onHeaderClick, logIn, whichUserHeader }) {
     ":" +
     zweistellig(date.getSeconds());
 
-  useEffect(() => {
-    var timerID = setInterval(() => tick(), 1000);
-    return function cleanup() {
-      clearInterval(timerID);
-    };
-  });
   function tick() {
     setDate(new Date());
   }
 
   return (
-    <div className="header">
+    <div className="header" key={whichUserHeader}>
       {logIn === 1 ? (
         <div className="greeting">
-          Hello {username}, the time is {time}
+          Hello {username}, the time is {time}, you are {userRole}
         </div>
       ) : (
         <>.</>

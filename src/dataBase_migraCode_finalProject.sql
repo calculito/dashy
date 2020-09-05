@@ -82,21 +82,20 @@ select name, user_password, user_role from "users" u;
 select name, user_password from "users" u where user_role ='Student'; 
 
 
-select name, user_role from users u 
+select name, user_role, hf.homeworks_id, hf.finished  from users u 
 inner join homework_finished hf on hf.user_id = u.id 
-inner join homework_finished hf2 on hf2.homeworks_id = hf.homeworks_id; 
+inner join homework_finished hf2 on hf2.homeworks_id = hf.homeworks_id where u.name='Ion'; 
 
+select * from homeworks h;
 
-
-
-
-​
-select homework_finished.finished, user_id, name from homework_finished
+select hf.finished, user_id, name from homework_finished hf
 INNER JOIN users ON user_id=users.id;
 
 select name, user_role from "users" u
 inner join class c on c.id = u.class_id 
 inner join links l on c.id = l.class_id; 
+
+select * from links;
 
 select  users.name description from links l  
 inner join users u2 on  l.user_id = u2.id 

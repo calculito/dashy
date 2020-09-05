@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-function Homeworks({ userName }) {
+function Homeworks({ userName, user }) {
+  console.log(user);
   const [finishedHomeworks, setfinishedHomeworks] = useState([
     "https://github.com/CodeYourFuture/Databases-Homework/blob/master/week-2/mandatory/2-ecommerce-db/task.md",
     " https://github.com/jmbriano/tutorials/tree/sql-tutorial-solutions/sql",
@@ -16,7 +17,7 @@ function Homeworks({ userName }) {
   return (
     <div className="tabcontent">
       {" "}
-      ≈<h4>Finished homeworks</h4>
+      <h4>Finished homeworks</h4>
       <div className="linksContainer">
         {finishedHomeworks.map((link, index) => {
           return (
