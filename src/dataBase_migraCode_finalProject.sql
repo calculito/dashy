@@ -48,10 +48,6 @@ CREATE TABLE homework_finished (
 );
 
 
-
-
-
-
 CREATE TABLE recordings (
     id       		        SERIAL PRIMARY KEY,
     class_id               INT REFERENCES CLASS(ID),
@@ -67,10 +63,20 @@ CREATE TABLE links (
     UNIQUE (ID)
 );
 
+CREATE TABLE perslinks (
+    id       		        SERIAL PRIMARY KEY,
+    user_id              INT REFERENCES USERS(ID),
+    description             VARCHAR(600),
+    UNIQUE (ID)
+);
 ALTER TABLE LINKS
 ADD COLUMN PersOrGen VARCHAR(120) NOT NULL ;
 
+ALTER TABLE recordings 
+ADD COLUMN link VARCHAR(120) NOT NULL ;
 
+ALTER TABLE links 
+DROP COLUMN user_id;
 
 SELECT class_name, users.name, users.user_role  FROM class
 INNER JOIN users ON class.id=users.class_id;
@@ -81,29 +87,26 @@ select name, user_password, user_role from "users" u;
 
 select name, user_password from "users" u where user_role ='Student'; 
 
+select * from recordings r
+inner join class c2 on c2.id = r.class_id 
+inner join users u on u.class_id = c2.id where u.name = 'Thiago';
 
-select name, user_role, hf.homeworks_id, hf.finished  from users u 
+select name, h2.link , hf.finished  from users u 
 inner join homework_finished hf on hf.user_id = u.id 
-inner join homework_finished hf2 on hf2.homeworks_id = hf.homeworks_id where u.name='Ion'; 
+inner join homeworks h2 on h2.id = hf.homeworks_id 
+where finished='yes' and u.name='Thiago'; 
 
 select * from homeworks h;
 
-select hf.finished, user_id, name from homework_finished hf
-INNER JOIN users ON user_id=users.id;
+select h.id, hf.finished, name, h.class_id, class_name, link from homework_finished hf
+INNER JOIN users ON user_id=users.id
+inner join class c2 on c2.id = users.class_id 
+inner join homeworks h on h.id = hf.homeworks_id where h.class_id = '4' order by h.id asc;
 
-select name, user_role from "users" u
-inner join class c on c.id = u.class_id 
-inner join links l on c.id = l.class_id; 
+select l.description from "class" c 
+inner join links l on c.id = l.class_id where class_id=3; 
 
 select * from links;
 
-select  users.name description from links l  
-inner join users u2 on  l.user_id = u2.id 
-inner join  class c on l.class_id = c.id;  
-​
--- Retrive finished homework, name, role, topic, date --
-select name, user_role, finished, topic_class, date from users u 
-inner join homework_finished hf on u.id = hf.user_id 
-inner join homeworks h on h.id = hf.homeworks_id inner join "class" c on h.class_id = c.id 
-inner join classes c2 on c.id = c2.class_id;  
+select description, name from perslinks p inner join users u on u.id = p.user_id where name='Michael';
 

@@ -4,29 +4,28 @@ import login from "../images/login.png";
 
 function Header({ onHeaderClick, logIn, whichUserHeader }) {
   const [userRole, setuserRole] = useState(false);
-
-  let username = { whichUserHeader }.whichUserHeader;
-  username === ""
-    ? (username = "Ion")
-    : (username = { whichUserHeader }.whichUserHeader);
+  const [userClass, setuserClass] = useState(false);
+  let username;
+  whichUserHeader === "" ? (username = "Ion") : (username = whichUserHeader);
 
   useEffect(() => {
     getuserRoleFromDB(username);
-    console.log("first username" + username);
     var timerID = setInterval(() => tick(), 10000);
-    console.log(username);
     return function cleanup() {
       clearInterval(timerID);
     };
   }, [logIn]);
 
   function getuserRoleFromDB(username) {
-    console.log("1" + whichUserHeader);
     fetch("http://localhost:3001/userrole")
       .then((response) => response.json())
       .then((data) => {
         setuserRole(
           data[data.findIndex((element) => element.name === username)].user_role
+        );
+        setuserClass(
+          data[data.findIndex((element) => element.name === username)]
+            .class_name
         );
       });
   }
@@ -53,7 +52,8 @@ function Header({ onHeaderClick, logIn, whichUserHeader }) {
     <div className="header" key={whichUserHeader}>
       {logIn === 1 ? (
         <div className="greeting">
-          Hello {username}, the time is {time}, you are {userRole}
+          Hello {username}, the time is {time}, you are {userRole} in the class{" "}
+          {userClass}
         </div>
       ) : (
         <>.</>

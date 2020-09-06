@@ -2,15 +2,22 @@ import React, { useState, useRef, useEffect } from "react";
 import Header from "./components/Header";
 import Tabs from "./components/Tabs";
 import MainContainer from "./components/MainContainer";
-
 import "./App.css";
+import { getDayClassNames } from "@fullcalendar/react";
 
 function App() {
   const [user, setuser] = useState("Ion");
+  const [whichRole, setwhichRole] = useState("");
+  const [whichClass, setwhichClass] = useState("");
+  const [whichContainer, setwhichContainer] = useState(0);
+  const [passwordUserWrong, setpasswordUserWrong] = useState(0);
+  const [whichUser, setwhichUser] = useState("");
+  const [whichPassword, setwhichPassword] = useState("");
+  const [logIn, setlogIn] = useState(0);
   useEffect(() => {
-    getuser1();
-  }, []);
-  function getuser1() {
+    getuser();
+  }, [logIn]);
+  function getuser() {
     fetch("http://localhost:3001")
       .then((response) => {
         return response.text();
@@ -19,7 +26,25 @@ function App() {
         setuser(data);
       });
   }
-  function createuser1() {
+  function getClass() {
+    fetch("http://localhost:3001")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setwhichClass(
+          data[data.findIndex((element) => element.name === whichUser)].class_id
+        );
+        setwhichRole(
+          data[data.findIndex((element) => element.name === whichUser)]
+            .user_role
+        );
+        setwhichClass(
+          data[data.findIndex((element) => element.name === whichUser)].class_id
+        );
+      });
+  }
+  function createuser() {
     let name = prompt("Enter user1 name");
     let email = prompt("Enter user1 email");
     fetch("http://localhost:3001/user", {
@@ -33,11 +58,11 @@ function App() {
         return response.text();
       })
       .then((data) => {
-        getuser1();
+        getuser();
       });
   }
 
-  function deleteuser1() {
+  function deleteuser() {
     let id = prompt("Enter user1 id");
     fetch(`http://localhost:3001/user/${id}`, {
       method: "DELETE",
@@ -47,16 +72,10 @@ function App() {
       })
       .then((data) => {
         alert(data);
-        getuser1();
+        getuser();
       });
   }
   ///////////////////////////////////////////////////////////////
-
-  const [whichContainer, setwhichContainer] = useState(0);
-  const [passwordUserWrong, setpasswordUserWrong] = useState(0);
-  const [whichUser, setwhichUser] = useState("");
-  const [whichPassword, setwhichPassword] = useState("");
-  const [logIn, setlogIn] = useState(0);
 
   const setWindow = (indexContainer) => {
     setwhichContainer(indexContainer);
@@ -64,6 +83,7 @@ function App() {
   const logInCheck = () => {
     logIn === 0 ? setlogIn(2) : setlogIn(0);
     logIn === 1 && setwhichContainer(0);
+    logIn === 1 && window.location.reload();
   };
   const logIn2 = () => {
     logIn === 0 ? setlogIn(2) : setlogIn(0);
@@ -72,7 +92,6 @@ function App() {
   };
 
   const wrongPassword = () => {
-    //alert("Forgot password?");
     setwhichUser("");
     setwhichPassword("");
     setpasswordUserWrong(1);
@@ -83,7 +102,6 @@ function App() {
     logIn === 1 && setwhichContainer(0);
   };
   const noUser = () => {
-    //alert("No user with this name");
     setwhichUser("");
     setwhichPassword("");
     setlogIn(2);
@@ -92,6 +110,7 @@ function App() {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     whichUser !== whichPassword ? wrongPassword() : goodPassword();
+    getClass();
   };
   const useFocus = () => {
     const htmlElRef = useRef(null);
@@ -101,7 +120,7 @@ function App() {
     return [htmlElRef, setFocus];
   };
   const [inputRef, setInputFocus] = useFocus();
-  //console.log(passwordUserWrong + " " + whichUser);
+  console.log("role" + whichRole);
 
   const findUser = (e) => {
     setwhichPassword(e);
@@ -160,7 +179,7 @@ function App() {
                     ? "Forgot password?"
                     : "No username matched"
                 }
-                className=" cancel"
+                className="cancel"
                 onClick={logIn2}
               />
             </div>
@@ -175,9 +194,12 @@ function App() {
         />
         <Tabs onTabsClick={setWindow} logIn={logIn} index={whichContainer} />
         <MainContainer
+          logIn={logIn}
           index={whichContainer}
           userName={whichUser}
-          user={user}
+          whichClass={whichClass}
+          whichRole={whichRole}
+          whichClass={whichClass}
         />
         <div className="iconsRefferer">
           Icons made by{" "}

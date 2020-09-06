@@ -1,28 +1,51 @@
 import React, { useState, useEffect } from "react";
 
-function Links({ userName }) {
+function Links({ userName, logIn, whichClass, whichRole }) {
+  const [linksGeneral, setlinksGeneral] = useState(false);
+  const [linksPersonal, setlinksPersonal] = useState(false);
   const [links, setlinks] = useState(false);
+  const [GLinkSaved, setGLinkSaved] = useState(false);
+  let savedGeneralLink;
+  let savedPersonalLink;
+  console.log("role links" + whichRole);
   useEffect(() => {
-    getlinks();
-  }, []);
-  function getlinks() {
-    fetch("http://localhost:3001/links")
+    getuserlinksGeneral();
+    getuserlinksPersonal();
+  }, [logIn]);
+  function getuserlinksGeneral() {
+    let endpoint = "http://localhost:3001/userlinks/".concat(whichClass);
+    fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {
-        setlinks(data);
+        const arrToDescription = data.map(function (daten) {
+          return daten.description;
+        });
+        setlinksGeneral(arrToDescription);
       });
   }
-  console.log(links);
-  console.log("username" + userName); //name of the current user passed from app.js
+  function getuserlinksPersonal() {
+    let endpoint = "http://localhost:3001/userpersonallinks/".concat(userName);
+    fetch(endpoint)
+      .then((response) => response.json())
+      .then((data) => {
+        const arrToDescription = data.map(function (daten) {
+          return daten.description;
+        });
+        setlinksPersonal(arrToDescription);
+      });
+  }
 
-  const [savedGeneralLink, setGLinkSaved] = useState([
-    "https://github.com/Jose-cod7/tutorials/tree/sql-tutorial/sql",
-  ]);
-  const [savedPersonalLink, setPLinkSaved] = useState([
-    "https://github.com/Jose-cod7/tutorials/tree/sql-tutorial/sql",
-    "https://reactjs.org/tutorial/tutorial.html",
-    "https://www.postgresql.org/docs/12/datatype.html",
-  ]);
+  {
+    linksGeneral === false
+      ? (savedGeneralLink = ["https://migrateam.github.io/dashy/"])
+      : (savedGeneralLink = linksGeneral);
+  }
+  {
+    linksPersonal === false
+      ? (savedPersonalLink = ["https://migrateam.github.io/dashy/"])
+      : (savedPersonalLink = linksPersonal);
+  }
+
   const [linkFromInput, setLinkFromInput] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const handleInputChange = (event) => {
@@ -61,9 +84,9 @@ function Links({ userName }) {
             return (
               <div className="rowHW" key={"divRHW" + index}>
                 <div className="recordings" key={"divG" + index}>
-                  <button href={linkFromInput} target="blank" key={index}>
+                  <a href={link} target="_blank" key={index}>
                     {link}
-                  </button>
+                  </a>
                 </div>
               </div>
             );
@@ -76,9 +99,9 @@ function Links({ userName }) {
             return (
               <div className="rowHW" key={"divRHW" + index}>
                 <div className="recordings" key={"divP" + index}>
-                  <button href={linkFromInput} target="blank" key={index}>
+                  <a href={link} target="_blank" key={index}>
                     {link}
-                  </button>
+                  </a>
                 </div>
               </div>
             );

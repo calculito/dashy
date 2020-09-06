@@ -7,7 +7,13 @@ import Recordings from "./Recordings";
 import Calendar from "./Calendar";
 import Links from "./Links";
 
-export default function MainContainer({ index, userName, user }) {
+export default function MainContainer({
+  index,
+  userName,
+  logIn,
+  whichClass,
+  whichRole,
+}) {
   //console.log(user);
   return (
     <div className="maincontainer">
@@ -15,10 +21,24 @@ export default function MainContainer({ index, userName, user }) {
         {
           0: <Syllabus />,
           1: <Slack />,
-          2: <Homeworks userName={userName} user={user} />,
-          3: <Links userName={userName} user={user} />,
-          4: <Recordings userName={userName} user={user} />,
-          5: <Calendar userName={userName} user={user} />,
+          2: (
+            <Homeworks
+              userName={userName}
+              logIn={logIn}
+              whichRole={whichRole}
+              whichClass={whichClass}
+            />
+          ),
+          3: (
+            <Links
+              userName={userName}
+              logIn={logIn}
+              whichClass={whichClass}
+              whichRole={whichRole}
+            />
+          ),
+          4: <Recordings userName={userName} logIn={logIn} />,
+          5: <Calendar userName={userName} logIn={logIn} />,
           6: <Chat />,
         }[index]
       }

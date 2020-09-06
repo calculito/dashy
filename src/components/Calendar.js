@@ -14,6 +14,12 @@ function Calendar({ userName }) {
     { title: "MEETING", date: "2020-08-26" },
     { title: "MEETING", date: "2020-08-31" },
     { title: "MEETING", date: "2020-09-02" },
+    { title: "Class", date: "2020-09-09" },
+    { title: "Job Fair", date: "2020-09-16" },
+    { title: "Class", date: "2020-09-16" },
+    { title: "Final presentation", date: "2020-09-30" },
+    { title: "Job Fair", date: "2020-10-01" },
+    { title: "Graduation", date: "2020-10-03" },
   ];
 
   return (
