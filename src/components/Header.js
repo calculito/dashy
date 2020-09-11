@@ -8,14 +8,6 @@ function Header({ onHeaderClick, logIn, whichUserHeader }) {
   let username;
   whichUserHeader === "" ? (username = "Ion") : (username = whichUserHeader);
 
-  useEffect(() => {
-    getuserRoleFromDB(username);
-    var timerID = setInterval(() => tick(), 10000);
-    return function cleanup() {
-      clearInterval(timerID);
-    };
-  }, [logIn]);
-
   function getuserRoleFromDB(username) {
     fetch("http://localhost:3001/userrole")
       .then((response) => response.json())
@@ -29,7 +21,13 @@ function Header({ onHeaderClick, logIn, whichUserHeader }) {
         );
       });
   }
-
+  useEffect(() => {
+    getuserRoleFromDB(username);
+    var timerID = setInterval(() => tick(), 10000);
+    return function cleanup() {
+      clearInterval(timerID);
+    };
+  }, [logIn]);
   function zweistellig(s) {
     while (s.toString().length < 2) {
       s = "0" + s;

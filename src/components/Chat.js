@@ -3,17 +3,25 @@ import Iframe from "react-iframe";
 
 function Chat(i) {
   var windowObjectReference;
-  var windowFeatures =
-    "menubar=no,location=yes,resizable=no,scrollbars=no,status=no,width=1024px,height=728px,minWidth=600,minHeight=300,frame=false,titleBarStyle='hidden'";
-
   function openRequestedPopup() {
     windowObjectReference = window.open(
       "https://secvidchat.herokuapp.com/",
-      "_blank",
-      windowFeatures
+      "_blank"
     );
   }
-  return <div className="tabcontent" onClick={openRequestedPopup}></div>;
+  return (
+    <div className="tabcontent" onClick={openRequestedPopup}>
+      <div className="contLinks">
+        <div className="infoWindow">
+          Click here. A new tab will get open. There you can choose a room
+          number and a password. After you entry the room, you will get a link,
+          which you can share with the other person. Once the other person
+          accessed the room using the link and the password you sent, you can
+          start chatting. Enjoy!
+        </div>
+      </div>
+    </div>
+  );
 }
 export default Chat;
 

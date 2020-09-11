@@ -13,6 +13,7 @@ export default function MainContainer({
   logIn,
   whichClass,
   whichRole,
+  whichUserId,
 }) {
   //console.log(user);
   return (
@@ -35,10 +36,17 @@ export default function MainContainer({
               logIn={logIn}
               whichClass={whichClass}
               whichRole={whichRole}
+              whichUserId={whichUserId}
             />
           ),
           4: <Recordings userName={userName} logIn={logIn} />,
-          5: <Calendar userName={userName} logIn={logIn} />,
+          5: (
+            <Calendar
+              userName={userName}
+              logIn={logIn}
+              whichClass={whichClass}
+            />
+          ),
           6: <Chat />,
         }[index]
       }

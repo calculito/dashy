@@ -6,8 +6,8 @@ function Syllabus() {
     <div className="tabcontent">
       <Iframe
         url="https://migracode-barcelona.github.io/syllabus/others/lesson0.html"
-        width="100%"
-        height="100%"
+        width="99%"
+        height="98%"
         id="myId"
         className="myClassname"
         display="initial"

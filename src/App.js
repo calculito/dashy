@@ -12,6 +12,7 @@ function App() {
   const [whichContainer, setwhichContainer] = useState(0);
   const [passwordUserWrong, setpasswordUserWrong] = useState(0);
   const [whichUser, setwhichUser] = useState("");
+  const [whichUserId, setwhichUserId] = useState("");
   const [whichPassword, setwhichPassword] = useState("");
   const [logIn, setlogIn] = useState(0);
   useEffect(() => {
@@ -39,8 +40,8 @@ function App() {
           data[data.findIndex((element) => element.name === whichUser)]
             .user_role
         );
-        setwhichClass(
-          data[data.findIndex((element) => element.name === whichUser)].class_id
+        setwhichUserId(
+          data[data.findIndex((element) => element.name === whichUser)].id
         );
       });
   }
@@ -120,7 +121,7 @@ function App() {
     return [htmlElRef, setFocus];
   };
   const [inputRef, setInputFocus] = useFocus();
-  console.log("role" + whichRole);
+  //console.log("role" + whichRole);
 
   const findUser = (e) => {
     setwhichPassword(e);
@@ -200,6 +201,7 @@ function App() {
           whichClass={whichClass}
           whichRole={whichRole}
           whichClass={whichClass}
+          whichUserId={whichUserId}
         />
         <div className="iconsRefferer">
           Icons made by{" "}

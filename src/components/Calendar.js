@@ -1,26 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import interaction from "@fullcalendar/interaction";
 
-function Calendar({ userName }) {
+function Calendar({ userName, logIn, whichClass }) {
+  const [appointments, setappointments] = useState([
+    { title: "MEETING", date: "2020-08-26" },
+  ]);
+
   const handleDateClick = (arg) => {
     alert(arg.dateStr);
   };
 
-  const events = [
-    { title: "MEETING", date: "2020-08-26" },
-    { title: "MEETING", date: "2020-08-31" },
-    { title: "MEETING", date: "2020-09-02" },
-    { title: "Class", date: "2020-09-09" },
-    { title: "Job Fair", date: "2020-09-16" },
-    { title: "Class", date: "2020-09-16" },
-    { title: "Final presentation", date: "2020-09-30" },
-    { title: "Job Fair", date: "2020-10-01" },
-    { title: "Graduation", date: "2020-10-03" },
-  ];
+  function getuserAppointments() {
+    let endpoint = "http://localhost:3001/usercalendar/".concat(whichClass);
+    fetch(endpoint)
+      .then((response) => response.json())
+      .then((data) => {
+        //rename keys in object for use 'date', 'start' and 'end'
+        data.forEach(function (obj) {
+          obj.date = obj.tdate;
+          delete obj.tdate;
+        });
+        console.log(data);
+        setappointments(data);
+      });
+  }
+  useEffect(() => {
+    getuserAppointments();
+  }, [whichClass]);
+  //console.log("appoint" + Object.keys(appointments[0]));
+  let events = appointments;
 
   return (
     <div className="tabcontent">
