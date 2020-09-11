@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/dashy/static/css/main.5c7e6ed6.chunk.css",
-    "main.js": "/dashy/static/js/main.f943bc6a.chunk.js",
-    "main.js.map": "/dashy/static/js/main.f943bc6a.chunk.js.map",
+    "main.css": "/dashy/static/css/main.187099f3.chunk.css",
+    "main.js": "/dashy/static/js/main.4e0bcff1.chunk.js",
+    "main.js.map": "/dashy/static/js/main.4e0bcff1.chunk.js.map",
     "runtime-main.js": "/dashy/static/js/runtime-main.3783ffb8.js",
     "runtime-main.js.map": "/dashy/static/js/runtime-main.3783ffb8.js.map",
     "static/css/2.43578b21.chunk.css": "/dashy/static/css/2.43578b21.chunk.css",
     "static/js/2.53905b19.chunk.js": "/dashy/static/js/2.53905b19.chunk.js",
     "static/js/2.53905b19.chunk.js.map": "/dashy/static/js/2.53905b19.chunk.js.map",
     "index.html": "/dashy/index.html",
-    "precache-manifest.83b0ff8700184cfd07c4b5161b72edc7.js": "/dashy/precache-manifest.83b0ff8700184cfd07c4b5161b72edc7.js",
+    "precache-manifest.92049a39905f74a7e6dd08490564c83c.js": "/dashy/precache-manifest.92049a39905f74a7e6dd08490564c83c.js",
     "service-worker.js": "/dashy/service-worker.js",
     "static/css/2.43578b21.chunk.css.map": "/dashy/static/css/2.43578b21.chunk.css.map",
-    "static/css/main.5c7e6ed6.chunk.css.map": "/dashy/static/css/main.5c7e6ed6.chunk.css.map",
+    "static/css/main.187099f3.chunk.css.map": "/dashy/static/css/main.187099f3.chunk.css.map",
     "static/js/2.53905b19.chunk.js.LICENSE.txt": "/dashy/static/js/2.53905b19.chunk.js.LICENSE.txt",
     "static/media/Slack.png": "/dashy/static/media/Slack.216f7c0d.png",
     "static/media/login.png": "/dashy/static/media/login.3a05bb07.png",
@@ -22,7 +22,7 @@
     "static/js/runtime-main.3783ffb8.js",
     "static/css/2.43578b21.chunk.css",
     "static/js/2.53905b19.chunk.js",
-    "static/css/main.5c7e6ed6.chunk.css",
-    "static/js/main.f943bc6a.chunk.js"
+    "static/css/main.187099f3.chunk.css",
+    "static/js/main.4e0bcff1.chunk.js"
   ]
 }
