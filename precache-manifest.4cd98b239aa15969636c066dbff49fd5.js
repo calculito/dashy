@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "66956522aa01ee14b8311177163232c1",
+    "revision": "7d7c9d84d91e2bb91691022848a4c3fd",
     "url": "/dashy/index.html"
   },
   {
-    "revision": "e4939098bbbeb6aaca3b",
+    "revision": "2c8e315f6a48a7e677f1",
     "url": "/dashy/static/css/2.43578b21.chunk.css"
   },
   {
-    "revision": "9d2c2f183a276cbc4e40",
-    "url": "/dashy/static/css/main.f9961a38.chunk.css"
+    "revision": "0749138d699b50c0121f",
+    "url": "/dashy/static/css/main.f6510d36.chunk.css"
   },
   {
-    "revision": "e4939098bbbeb6aaca3b",
-    "url": "/dashy/static/js/2.e82435c8.chunk.js"
+    "revision": "2c8e315f6a48a7e677f1",
+    "url": "/dashy/static/js/2.15101f9b.chunk.js"
   },
   {
     "revision": "bd80297531dafeefc287ffe4d2830fea",
-    "url": "/dashy/static/js/2.e82435c8.chunk.js.LICENSE.txt"
+    "url": "/dashy/static/js/2.15101f9b.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "9d2c2f183a276cbc4e40",
-    "url": "/dashy/static/js/main.1a9235bb.chunk.js"
+    "revision": "0749138d699b50c0121f",
+    "url": "/dashy/static/js/main.3e7879a0.chunk.js"
   },
   {
     "revision": "d2fc3fd8ad53e238c968",
