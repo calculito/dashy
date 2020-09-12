@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
+import sound from "../images/sound.png";
+import { useSpeechSynthesis } from "react-speech-kit";
+import Stars from "./Stars";
 
 function Homeworks({ userName, logIn, whichRole, whichClass }) {
+  const { speak } = useSpeechSynthesis();
   //console.log(whichRole);
   const [homeworkInsertField, sethomeworkInsertField] = useState("");
   const [homeworkDescriptionSYes, sethomeworkDescriptionSYes] = useState([
@@ -13,6 +17,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
   const [homeworkUnfinishedIdArray, sethomeworkUnfinishedIdArray] = useState(
     ""
   );
+
   const [homeworkUnfinishedId, sethomeworkUnfinishedId] = useState("");
   const [homeworkDescriptionALLR, sethomeworkDescriptionALLR] = useState([
     {
@@ -25,6 +30,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
     getuserhomeworksStudentYes();
     getuserhomeworksStudentNo();
     getuserhomeworksALL();
+
     //getuserhomeworksInstructor();
   }, [logIn]);
 
@@ -133,6 +139,11 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
   let finishedHomeworks = homeworkDescriptionSYes;
   let unfinishedHomeworks = homeworkDescriptionSNo;
   let allHomeworks = homeworkDescriptionALLR;
+  function soundloud(toread) {
+    speak({
+      text: toread,
+    });
+  }
 
   return (
     <div className="tabcontent">
@@ -194,6 +205,17 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
                     >
                       {link}
                     </a>
+
+                    <div className="infoContLinks">
+                      <span className="circle">{index + 1}</span>
+                      <Stars index={4} />
+                      <img
+                        className="linkSymbols"
+                        src={sound}
+                        alt="speaker"
+                        onClick={(e) => soundloud(link)}
+                      />
+                    </div>
                   </div>
                 </div>
               );
@@ -213,14 +235,23 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
                     >
                       {link}
                     </a>
+                    <div className="infoContLinks">
+                      <button
+                        className="buttonHW"
+                        key={index}
+                        onClick={(e) => changestatus(index)}
+                      >
+                        Finished?
+                      </button>
+                      <Stars index={3} />
+                      <img
+                        className="linkSymbols"
+                        src={sound}
+                        alt="speaker"
+                        onClick={(e) => soundloud(link)}
+                      />
+                    </div>
                   </div>
-                  <button
-                    className="buttonHW"
-                    key={index}
-                    onClick={(e) => changestatus(index)}
-                  >
-                    Finished?
-                  </button>
                 </div>
               );
             })}

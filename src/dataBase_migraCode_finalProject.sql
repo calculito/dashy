@@ -33,4 +33,48 @@ insert into users  (name, class_id, user_password, user_role) values ( 'AlexeiR'
 insert into perslinks (user_id, description) values (4, 'https://marksheet.io/html-forms.html');
 insert into links (class_id, description) values (4, 'https://marksheet.io/html-forms.html');
 DELETE FROM links WHERE id > 6;
-select description, name from perslinks p inner join users u on u.id = p.user_id where name='Ion" ORDER BY p.id desc;
+select description, name from perslinks p inner join users u on u.id = p.user_id where name='Ion' ORDER BY p.id desc;
+
+
+
+select h2.id, hf.finished, name, h2.class_id, u.user_role, link, linkhwfinished from "class" c
+INNER JOIN users u ON c.id=u.class_id
+inner JOIN homeworks h2 ON c.id = h2.class_id 
+inner JOIN homework_finished hf on hf.homeworks_id = h2.id 
+WHERE h2.class_id = 4 AND u.user_role = 'Student' order by h2.id asc;
+-- query every homework with user
+select h.id, h.link, u2."name" , u2.user_role from  "class" c2
+inner join homeworks h on c2.id = h.class_id
+inner join users u2 on c2.id = u2.class_id 
+where c2.id = 4 and u2.user_role = 'Student';
+
+select hf.homeworks_id, u.name, hf.finished , hf.linkhwfinished from   homework_finished hf
+inner join homeworks h2 on hf.homeworks_id = h2.id 
+inner join users u on u.id = hf.user_id 
+where hf.finished = 'yes' and h2.id = 4; 
+
+select h.id, h.link, u2."name" , u2.user_role, (select hf.finished from   homework_finished hf
+inner join homeworks h2 on hf.homeworks_id = h2.id 
+inner join users u on u.id = hf.user_id 
+where u.id = u2.id and h2.id = h.id ), (select hf.linkhwfinished from   homework_finished hf
+inner join homeworks h2 on hf.homeworks_id = h2.id 
+inner join users u on u.id = hf.user_id 
+where u.id = u2.id and h2.id = h.id ) from   homeworks h
+inner join "class" c2 on c2.id = h.class_id
+inner join users u2 on c2.id = u2.class_id 
+where c2.id = 4 and u2.user_role = 'Student';
+
+select name, h2.link, (select hf.finished from   homework_finished hf
+inner join homeworks h on hf.homeworks_id = h2.id 
+inner join users u2 on u.id = hf.user_id 
+where finished = 'yes' and u.id = u2.id and h2.id = h.id)  from homeworks h2
+inner join "class" c2 on c2.id = h2.class_id
+inner join users u on c2.id = u.class_id where u.name='Ion';
+
+select * from (select name, h2.link, (select hf.finished from   homework_finished hf
+inner join homeworks h on hf.homeworks_id = h2.id 
+inner join users u2 on u.id = hf.user_id 
+where finished = 'yes' and u.id = u2.id and h2.id = h.id)  from homeworks h2
+inner join "class" c2 on c2.id = h2.class_id
+inner join users u on c2.id = u.class_id where u.name='Thiago'
+) foo where foo.finished IS DISTINCT from 'yes';
