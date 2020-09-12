@@ -73,8 +73,13 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
 
   return (
     <div className="tabcontent">
+      <div className="infoWindow">
+        <span>
+          You have {linksGeneral.length} general links and{" "}
+          {linksPersonal.length} personal links
+        </span>
+      </div>
       <div id="links">
-        <h4>General Links</h4>
         <div
           className={
             whichRole === "Instructor" ? "contLinks" : "contLinkshidden"
@@ -83,13 +88,14 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
           <input
             className="inputLinks"
             type="text"
-            placeholder="Save a general link"
+            placeholder="General links"
             value={linksInsertFieldG}
             onChange={(e) => setlinksInsertFieldG(e.target.value)}
+            required
           />
 
           <button className="buttonHWL" onClick={insertGeneralLink}>
-            Insert a general link
+            ⇚ Insert a general link
           </button>
         </div>
 
@@ -98,7 +104,12 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
             return (
               <div className="rowHW" key={"divRHW" + index}>
                 <div className="recordings" key={"divG" + index}>
-                  <a href={link} target="_blank" key={index}>
+                  <a
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    key={index}
+                  >
                     {link}
                   </a>
                 </div>
@@ -107,17 +118,17 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
           })}
         </div>
 
-        <h4>Personal links</h4>
         <div className="contLinks">
           <input
             className="inputLinks"
             type="text"
-            placeholder="Save your personal link"
+            placeholder="Personal links"
             value={linksInsertFieldP}
             onChange={(e) => setlinksInsertFieldP(e.target.value)}
+            required
           />
           <button className="buttonHWL" onClick={insertPersonalLink}>
-            Insert a link
+            ⇚ Insert a personal link
           </button>
         </div>
         <div className="linksContainer">
@@ -125,7 +136,12 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
             return (
               <div className="rowHW" key={"divRHW" + index}>
                 <div className="recordings" key={"divP" + index}>
-                  <a href={link} target="_blank" key={index}>
+                  <a
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    key={index}
+                  >
                     {link}
                   </a>
                 </div>

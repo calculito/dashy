@@ -5,7 +5,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import interaction from "@fullcalendar/interaction";
 
-function Calendar({ userName, logIn, whichClass }) {
+function Calendar({ whichClass }) {
   const [appointments, setappointments] = useState([
     { title: "MEETING", date: "2020-08-26" },
   ]);
@@ -24,7 +24,6 @@ function Calendar({ userName, logIn, whichClass }) {
           obj.date = obj.tdate;
           delete obj.tdate;
         });
-        console.log(data);
         setappointments(data);
       });
   }
@@ -36,6 +35,9 @@ function Calendar({ userName, logIn, whichClass }) {
 
   return (
     <div className="tabcontent">
+      <div className="infoWindow">
+        You have {events.length} appointments in your calendar
+      </div>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interaction]}
         initialView="dayGridMonth"

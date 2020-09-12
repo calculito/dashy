@@ -3,7 +3,6 @@ import Header from "./components/Header";
 import Tabs from "./components/Tabs";
 import MainContainer from "./components/MainContainer";
 import "./App.css";
-import { getDayClassNames } from "@fullcalendar/react";
 
 function App() {
   const [user, setuser] = useState("Ion");
@@ -45,37 +44,7 @@ function App() {
         );
       });
   }
-  function createuser() {
-    let name = prompt("Enter user1 name");
-    let email = prompt("Enter user1 email");
-    fetch("http://localhost:3001/user", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, email }),
-    })
-      .then((response) => {
-        return response.text();
-      })
-      .then((data) => {
-        getuser();
-      });
-  }
 
-  function deleteuser() {
-    let id = prompt("Enter user1 id");
-    fetch(`http://localhost:3001/user/${id}`, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        return response.text();
-      })
-      .then((data) => {
-        alert(data);
-        getuser();
-      });
-  }
   ///////////////////////////////////////////////////////////////
 
   const setWindow = (indexContainer) => {
@@ -200,7 +169,6 @@ function App() {
           userName={whichUser}
           whichClass={whichClass}
           whichRole={whichRole}
-          whichClass={whichClass}
           whichUserId={whichUserId}
         />
         <div className="iconsRefferer">
@@ -208,11 +176,18 @@ function App() {
           <a
             href="https://www.flaticon.com/authors/smashicons"
             title="Smashicons"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Smashicons
           </a>{" "}
           from{" "}
-          <a href="https://www.flaticon.com/" title="Flaticon">
+          <a
+            href="https://www.flaticon.com/"
+            title="Flaticon"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {" "}
             www.flaticon.com
           </a>

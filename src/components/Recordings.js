@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 
 function Recordings({ userName, logIn }) {
-  const [recordingsTitle, setrecordingsTitle] = useState(false);
+  const [recordingsTitle, setrecordingsTitle] = useState([
+    "Recording of the class from 01.08.2020",
+  ]);
   const [recordingsLink, setrecordingsLink] = useState(false);
   useEffect(() => {
     getuserRecordingsFromDB(userName);
-  }, [logIn]);
+  }, [userName, logIn]);
 
   function getuserRecordingsFromDB(userName) {
     let endpoint = "http://localhost:3001/userrecordings/".concat(userName);
@@ -22,21 +24,24 @@ function Recordings({ userName, logIn }) {
         setrecordingsLink(arrToLink);
       });
   }
-  let recordingLinks;
-  {
-    recordingsTitle === false
-      ? (recordingLinks = ["Recording of the class from 01.08.2020"])
-      : (recordingLinks = recordingsTitle);
-  }
+  let recordingLinks = recordingsTitle;
 
   return (
     <div className="tabcontent">
-      <h4>Recordings of the classes</h4>
+      <div className="infoWindow">
+        You have {recordingsLink.length} recordings of your classes
+      </div>
+
       <div className="linksContainer">
         {recordingLinks.map((data, i) => (
           <div className="rowHW" key={"divRHW" + i}>
             <div className="recordings" key={"d" + i}>
-              <a target="_blank" href={recordingsLink[i]} key={"b" + i}>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={recordingsLink[i]}
+                key={"b" + i}
+              >
                 {data}
               </a>
             </div>

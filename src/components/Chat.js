@@ -1,18 +1,17 @@
 import React from "react";
-import Iframe from "react-iframe";
 
 function Chat(i) {
-  var windowObjectReference;
   function openRequestedPopup() {
-    windowObjectReference = window.open(
+    window.open(
       "https://secvidchat.herokuapp.com/",
-      "_blank"
+      "_blank",
+      "noopener, noreferrer"
     );
   }
   return (
     <div className="tabcontent" onClick={openRequestedPopup}>
       <div className="contLinks">
-        <div className="infoWindow">
+        <div className="infoWindowChat">
           Click here. A new tab will get open. There you can choose a room
           number and a password. After you entry the room, you will get a link,
           which you can share with the other person. Once the other person

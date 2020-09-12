@@ -9,9 +9,10 @@ import LinksIcon from "../images/links.png";
 
 export default function Tabs({ onTabsClick, logIn, index }) {
   function openRequestedPopup() {
-    var windowObjectReference = window.open(
+    window.open(
       "https://app.slack.com/client/TMSJ4SYVD/CMDSP2CQ2",
-      "_blank"
+      "_blank",
+      "noopener, noreferrer"
     );
   }
   return (

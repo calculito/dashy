@@ -5,8 +5,8 @@ import login from "../images/login.png";
 function Header({ onHeaderClick, logIn, whichUserHeader }) {
   const [userRole, setuserRole] = useState(false);
   const [userClass, setuserClass] = useState(false);
-  let username;
-  whichUserHeader === "" ? (username = "Ion") : (username = whichUserHeader);
+  let username = "Ion";
+  whichUserHeader && (username = whichUserHeader);
 
   function getuserRoleFromDB(username) {
     fetch("http://localhost:3001/userrole")
