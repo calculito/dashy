@@ -78,3 +78,20 @@ where finished = 'yes' and u.id = u2.id and h2.id = h.id)  from homeworks h2
 inner join "class" c2 on c2.id = h2.class_id
 inner join users u on c2.id = u.class_id where u.name='Thiago'
 ) foo where foo.finished IS DISTINCT from 'yes';
+
+select name, h2.link , hf.finished, linkhwfinished  from users u 
+inner join homework_finished hf on hf.user_id = u.id 
+inner join homeworks h2 on h2.id = hf.homeworks_id 
+where finished='yes' and  u.name='Ion';
+
+DELETE FROM links
+WHERE description = 'https://www.design-seeds.com/in-nature/heavens/color-set-6/';
+
+select description, name, p.id from perslinks p inner join users u on u.id = p.user_id where name='Ion' ORDER BY p.id DESC;
+
+ALTER TABLE links
+ADD COLUMN stars INT4;
+
+select description, name, p.id, stars from perslinks p inner join users u on u.id = p.user_id where name='Ion' ORDER BY p.id DESC;
+
+UPDATE perslinks SET stars = 4 WHERE id=6;

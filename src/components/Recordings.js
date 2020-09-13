@@ -37,6 +37,7 @@ function Recordings({ userName, logIn }) {
           <div className="rowHW" key={"divRHW" + i}>
             <div className="recordings" key={"d" + i}>
               <a
+                className="recordinglinks"
                 target="_blank"
                 rel="noopener noreferrer"
                 href={recordingsLink[i]}

@@ -3,20 +3,22 @@ import logo from "../images/migracode-logo.png";
 import login from "../images/login.png";
 import { useSpeechSynthesis } from "react-speech-kit";
 
-function Header({ onHeaderClick, logIn, whichUserHeader }) {
-  const [userRole, setuserRole] = useState(false);
+function Header({ onHeaderClick, logIn, whichUserHeader, whichRole }) {
+  let [userRole, setuserRole] = useState(false);
   const [userClass, setuserClass] = useState(false);
   let username = "Ion";
   whichUserHeader && (username = whichUserHeader);
+  userRole = "Student";
+  whichRole && (userRole = whichRole);
   const ref = React.useRef();
   const { speak } = useSpeechSynthesis();
   function getuserRoleFromDB(username) {
     fetch("http://localhost:3001/userrole")
       .then((response) => response.json())
       .then((data) => {
-        setuserRole(
-          data[data.findIndex((element) => element.name === username)].user_role
-        );
+        //setuserRole(
+        //  data[data.findIndex((element) => element.name === username)].user_role
+        //);
         setuserClass(
           data[data.findIndex((element) => element.name === username)]
             .class_name
@@ -24,8 +26,13 @@ function Header({ onHeaderClick, logIn, whichUserHeader }) {
       });
   }
   useEffect(() => {
-    console.log({ username });
     getuserRoleFromDB(username);
+    var timerID = setInterval(() => tick(), 10000);
+    return function cleanup() {
+      clearInterval(timerID);
+    };
+  }, [logIn]);
+  useEffect(() => {
     {
       logIn === 1 &&
         speak({
@@ -40,10 +47,6 @@ function Header({ onHeaderClick, logIn, whichUserHeader }) {
             userClass,
         });
     }
-    var timerID = setInterval(() => tick(), 10000);
-    return function cleanup() {
-      clearInterval(timerID);
-    };
   }, [logIn, userRole]);
   function zweistellig(s) {
     while (s.toString().length < 2) {

@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useSpeechSynthesis } from "react-speech-kit";
+import Stars from "./Stars";
+import sound from "../images/sound.png";
+import starblack from "../images/starblack.png";
+import stargold from "../images/stargold.png";
+import { render } from "@testing-library/react";
 
 function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
+  const { speak } = useSpeechSynthesis();
   const [linksInsertFieldG, setlinksInsertFieldG] = useState("");
   const [linksInsertFieldP, setlinksInsertFieldP] = useState("");
   const [linksGeneral, setlinksGeneral] = useState([
@@ -9,20 +16,25 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
   const [linksPersonal, setlinksPersonal] = useState([
     "https://migrateam.github.io/dashy/",
   ]);
-
+  const [linksPersonalId, setlinksPersonalId] = useState([1]);
+  const [linksGeneralId, setlinksGeneralId] = useState([1]);
+  const [linkToDelete, setlinkToDelete] = useState(1);
+  const [starsPersonalLinks, setstarsPersonalLinks] = useState([1]);
+  const [starsGeneralLinks, setstarsGeneralLinks] = useState([1]);
   let savedGeneralLink = linksGeneral;
   let savedPersonalLink = linksPersonal;
   //console.log("role links" + whichUserId);
   useEffect(() => {
     getuserlinksGeneral();
     getuserlinksPersonal();
-  }, [logIn]);
+    setlinkToDelete("");
+  }, [logIn, linkToDelete]);
   useEffect(() => {
     getuserlinksPersonal();
-  }, [linksInsertFieldP]);
+  }, [linksInsertFieldP, linkToDelete]);
   useEffect(() => {
     getuserlinksGeneral();
-  }, [linksInsertFieldG]);
+  }, [linksInsertFieldG, linkToDelete]);
   /////////    GET GENERAL LINKS     ///////////
   function getuserlinksGeneral() {
     let endpoint = "http://localhost:3001/userlinks/".concat(whichClass);
@@ -33,6 +45,14 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
           return daten.description;
         });
         setlinksGeneral(arrToDescription);
+        const arrToLinkId = data.map(function (daten) {
+          return daten.id;
+        });
+        setlinksGeneralId(arrToLinkId);
+        const arrToStars = data.map(function (daten) {
+          return daten.stars;
+        });
+        setstarsGeneralLinks(arrToStars);
       });
   }
   /////////    GET PERSONAL LINKS     ///////////
@@ -45,8 +65,17 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
           return daten.description;
         });
         setlinksPersonal(arrToDescription);
+        const arrToLinkId = data.map(function (daten) {
+          return daten.id;
+        });
+        setlinksPersonalId(arrToLinkId);
+        const arrToStars = data.map(function (daten) {
+          return daten.stars;
+        });
+        setstarsPersonalLinks(arrToStars);
       });
   }
+
   /////////    POST PERSONAL LINKS     ///////////
   function insertPersonalLink() {
     const data = { link: linksInsertFieldP };
@@ -62,13 +91,51 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
   function insertGeneralLink() {
     const data = { link: linksInsertFieldG };
     let endpoint = "http://localhost:3001/postgenerallink/".concat(whichClass);
-    console.log(endpoint);
+    //console.log(endpoint);
     fetch(endpoint, {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
     });
     setlinksInsertFieldG("");
+  }
+  /////////    DELETE GENERAL LINKS     ///////////
+  function deleteGeneralLink(linktodelete) {
+    setlinkToDelete(linktodelete);
+    const data = { link: linktodelete };
+    //navigator.clipboard.writeText(linktodelete);
+    fetch("http://localhost:3001/deletegenlink/", {
+      method: "DELETE",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+  /////////    DELETE PERSONAL LINKS     ///////////
+  function deletePersonalLink(linktodelete) {
+    setlinkToDelete(linktodelete);
+    let data = { link: linktodelete };
+    //navigator.clipboard.writeText(linktodelete);
+    fetch("http://localhost:3001/deletepersonallink/", {
+      method: "DELETE",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+  ///////////////    CHANGE STARS PERSONAL LINKS       /////////////
+  function changestars(e, id) {
+    setlinkToDelete(e);
+    let data = { link: e };
+    fetch("http://localhost:3001/personallinkstars/".concat(id), {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+  ///////////  SOUND READ LOUD  /////////////
+  function soundloud(toread) {
+    speak({
+      text: toread,
+    });
   }
 
   return (
@@ -105,6 +172,7 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
               <div className="rowHW" key={"divRHW" + index}>
                 <div className="recordings" key={"divG" + index}>
                   <a
+                    className="recordinglinks"
                     href={link}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -112,6 +180,26 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
                   >
                     {link}
                   </a>
+                  <div className="infoContLinks">
+                    {whichRole === "Instructor" && (
+                      <span
+                        className="circle"
+                        onClick={(e) =>
+                          deleteGeneralLink(linksGeneralId[index])
+                        }
+                      >
+                        DEL
+                      </span>
+                    )}
+                    <span className="circle">{index + 1}</span>
+                    <Stars index={starsGeneralLinks[index]} />
+                    <img
+                      className="linkSymbols"
+                      src={sound}
+                      alt="speaker"
+                      onClick={(e) => soundloud(link)}
+                    />
+                  </div>
                 </div>
               </div>
             );
@@ -137,6 +225,7 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
               <div className="rowHW" key={"divRHW" + index}>
                 <div className="recordings" key={"divP" + index}>
                   <a
+                    className="recordinglinks"
                     href={link}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -144,6 +233,65 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
                   >
                     {link}
                   </a>
+                  <div className="infoContLinks">
+                    <span
+                      className="circle"
+                      onClick={(e) =>
+                        deletePersonalLink(linksPersonalId[index])
+                      }
+                    >
+                      DEL
+                    </span>
+                    <span className="circle">{index + 1}</span>
+                    <div>
+                      <img
+                        className="linkSymbols"
+                        src={
+                          starsPersonalLinks[index] > 0 ? stargold : starblack
+                        }
+                        alt="star"
+                        onClick={(e) => changestars(1, linksPersonalId[index])}
+                      />
+                      <img
+                        className="linkSymbols"
+                        src={
+                          starsPersonalLinks[index] > 1 ? stargold : starblack
+                        }
+                        alt="star"
+                        onClick={(e) => changestars(2, linksPersonalId[index])}
+                      />
+                      <img
+                        className="linkSymbols"
+                        src={
+                          starsPersonalLinks[index] > 2 ? stargold : starblack
+                        }
+                        alt="star"
+                        onClick={(e) => changestars(3, linksPersonalId[index])}
+                      />
+                      <img
+                        className="linkSymbols"
+                        src={
+                          starsPersonalLinks[index] > 3 ? stargold : starblack
+                        }
+                        alt="star"
+                        onClick={(e) => changestars(4, linksPersonalId[index])}
+                      />
+                      <img
+                        className="linkSymbols"
+                        src={
+                          starsPersonalLinks[index] > 4 ? stargold : starblack
+                        }
+                        alt="star"
+                        onClick={(e) => changestars(5, linksPersonalId[index])}
+                      />
+                    </div>
+                    <img
+                      className="linkSymbols"
+                      src={sound}
+                      alt="speaker"
+                      onClick={(e) => soundloud(link)}
+                    />
+                  </div>
                 </div>
               </div>
             );

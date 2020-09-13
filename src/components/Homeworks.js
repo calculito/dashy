@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import sound from "../images/sound.png";
 import { useSpeechSynthesis } from "react-speech-kit";
-import Stars from "./Stars";
+import Hammers from "./Hammers";
 
 function Homeworks({ userName, logIn, whichRole, whichClass }) {
   const { speak } = useSpeechSynthesis();
@@ -14,6 +14,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
     "homework unfinished",
   ]);
   const [linkToMyHomework, setlinkToMyHomework] = useState("");
+  const [linkToMyHomeworkCircle, setlinkToMyHomeworkCircle] = useState("");
   const [homeworkUnfinishedIdArray, sethomeworkUnfinishedIdArray] = useState(
     ""
   );
@@ -50,6 +51,10 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
           return daten.link;
         });
         sethomeworkDescriptionSYes(arrToDescription);
+        const arrToLinkToMyHomeworkCircle = data.map(function (daten) {
+          return daten.linkhwfinished;
+        });
+        setlinkToMyHomeworkCircle(arrToLinkToMyHomeworkCircle);
       });
   }
   ///////////////    GET UNFINISHED HOMEWORKS FOR STUDENTS     /////////////
@@ -144,7 +149,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
       text: toread,
     });
   }
-
+  //console.log(finishedHomeworks);
   return (
     <div className="tabcontent">
       <div className="infoWindow">
@@ -197,7 +202,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
                 <div className="rowHW" key={"divRHW" + index}>
                   <div className="recordings" key={"divG" + index}>
                     <a
-                      className="linkToHomework"
+                      className="recordinglinks"
                       href={link}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -207,8 +212,15 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
                     </a>
 
                     <div className="infoContLinks">
-                      <span className="circle">{index + 1}</span>
-                      <Stars index={4} />
+                      <a
+                        className="circle"
+                        href={linkToMyHomeworkCircle[index]}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {index + 1}
+                      </a>
+                      <Hammers index={4} />
                       <img
                         className="linkSymbols"
                         src={sound}
@@ -227,7 +239,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
                 <div className="rowHW" key={"divRHWu" + index}>
                   <div className="recordings" key={"divP" + index}>
                     <a
-                      className="linkToHomework"
+                      className="recordinglinks"
                       href={link}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -243,7 +255,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
                       >
                         Finished?
                       </button>
-                      <Stars index={3} />
+                      <Hammers index={3} />
                       <img
                         className="linkSymbols"
                         src={sound}
@@ -267,29 +279,30 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
                     <a
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="linkToHomework"
+                      className="recordinglinks"
                       href={alldata.link}
                       key={index}
                     >
                       {alldata.link}
                     </a>
-                  </div>
-                  <div className="rowHWPosAbs" key={"divRHWStatus" + index}>
-                    {alldata.data.map((data, index) => (
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        key={"butRHWStatus" + data.name + index}
-                        href={data.linktohw}
-                        className="buttonHWNamesA"
-                        style={{
-                          backgroundColor:
-                            data.finished === "yes" ? "green" : "red",
-                        }}
-                      >
-                        {data.name}
-                      </a>
-                    ))}
+                    <div className="rowHWPosAbs" key={"divRHWStatus" + index}>
+                      <Hammers index={index + 2} />
+                      {alldata.data.map((data, index) => (
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          key={"butRHWStatus" + data.name + index}
+                          href={data.linktohw}
+                          className="buttonHWNamesA"
+                          style={{
+                            backgroundColor:
+                              data.finished === "yes" ? "green" : "red",
+                          }}
+                        >
+                          {data.name}
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 </div>
               );

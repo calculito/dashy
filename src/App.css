@@ -15,7 +15,7 @@ html,
   --font-white: white;
   --font-whitesmoke: #cbe3ee;
 }
-:root {
+.root {
   --background-page-color: #ecede3;
   --background-infow-color: #d5d5ca;
   --shade-infow-color: rgba(213, 213, 202, 0.85);
@@ -24,6 +24,19 @@ html,
   --background-tabn-color: #b0afa5;
   --font-infow-color: darkslategray;
   --font-tabnI-color: #352f31;
+  --font-light-color: darkgrey;
+  --font-white: white;
+  --font-whitesmoke: whitesmoke;
+}
+:root {
+  --background-page-color: #eeeeee;
+  --background-infow-color: #d4d4d4;
+  --shade-infow-color: rgba(218, 218, 218, 0.85);
+  --shade-light-color: rgba(255, 255, 255, 1);
+  --shade-dark-color: rgba(0, 0, 0, 0.3);
+  --background-tabn-color: #afafaf;
+  --font-infow-color: rgb(75, 75, 75);
+  --font-tabnI-color: #353535;
   --font-light-color: darkgrey;
   --font-white: white;
   --font-whitesmoke: whitesmoke;
@@ -231,7 +244,7 @@ label {
 .form-container .btn {
   border-radius: 10px;
   background-color: var(--font-tabnI-color);
-  color: var(--font-light-color);
+  color: var(--font-white);
   padding: 16px 20px;
   border: none;
   cursor: pointer;
@@ -295,6 +308,9 @@ h4 {
   font-size: 10px;
   text-decoration: none;
   color: var(--font-infow-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .iconsrefferer a {
   font: Arial;
@@ -303,8 +319,8 @@ h4 {
   color: var(--font-light-color);
 }
 .icons {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
 }
 .linksContainer {
   background-color: var(--background-page-color);
@@ -323,12 +339,21 @@ h4 {
   padding: 1px 5px 1px 5px;
   margin: 0px 10px 0px 0px;
   border-radius: 30px/30px;
+  color: var(--font-infow-color);
   border: 2px solid var(--shade-dark-color);
+  opacity: 0.6;
+}
+.circle:hover {
+  opacity: 0.9;
 }
 .linkSymbols {
   padding: 0px 10px 0px 0px;
   width: 20px;
   height: 20px;
+  opacity: 0.8;
+}
+.linkSymbols:hover {
+  opacity: 1;
 }
 .recordings {
   display: flex;
@@ -354,7 +379,7 @@ h4 {
   cursor: pointer;
   color: var(--font-whitesmoke);
 }
-.recordings a {
+.recordinglinks {
   text-decoration: none;
   color: var(--font-infow-color);
   font-size: 16px;
@@ -398,9 +423,6 @@ h4 {
   margin-top: 5px;
 }
 .rowHWPosAbs {
-  width: 90vw;
-  left: 40px;
-  position: absolute;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -447,6 +469,21 @@ h4 {
     -2px -2px 1px 0px var(--shade-light-color);
   cursor: pointer;
 }
+.buttonHWNamesA:hover {
+  font-size: 12px;
+  padding: 1px 3px 1px 3px;
+  margin: 1px 3px 1px 3px;
+  border: 0px;
+  border-radius: 4px;
+  color: var(--shade-light-color);
+  -webkit-box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
+    -2px -2px 1px 0px var(--shade-light-color);
+  -moz-box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
+    -2px -2px 1px 0px var(--shade-light-color);
+  box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
+    -2px -2px 1px 0px var(--shade-light-color);
+  cursor: pointer;
+}
 .buttonHWL {
   border: 0px;
   margin: 0px;
@@ -470,7 +507,7 @@ h4 {
   box-shadow: 1px 2px 3px 0px var(--shade-light-color),
     -2px -2px 1px 0px var(--shade-dark-color);
 }
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1030px) {
   .greeting {
     object-fit: scale-down;
     height: 55px;
@@ -543,10 +580,20 @@ h4 {
   .infoWindowChat {
     font-size: 12px;
   }
-  .linkToHomework {
+  .recordinglinks {
     width: 90%;
   }
   .buttonHWL {
     font-size: 12px;
+  }
+  .linkSymbols {
+    padding: 0px 6px 0px 0px;
+    width: 16px;
+    height: 16px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .infoContLinks {
+    display: none;
   }
 }

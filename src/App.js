@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Header from "./components/Header";
 import Tabs from "./components/Tabs";
+import Footer from "./components/Footer";
 import MainContainer from "./components/MainContainer";
 import "./App.css";
 
@@ -161,6 +162,7 @@ function App() {
           onHeaderClick={logInCheck}
           logIn={logIn}
           whichUserHeader={whichUser}
+          whichRole={whichRole}
         />
         <Tabs onTabsClick={setWindow} logIn={logIn} index={whichContainer} />
         <MainContainer
@@ -171,27 +173,7 @@ function App() {
           whichRole={whichRole}
           whichUserId={whichUserId}
         />
-        <div className="iconsRefferer">
-          Icons made by{" "}
-          <a
-            href="https://www.flaticon.com/authors/smashicons"
-            title="Smashicons"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Smashicons
-          </a>{" "}
-          from{" "}
-          <a
-            href="https://www.flaticon.com/"
-            title="Flaticon"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {" "}
-            www.flaticon.com
-          </a>
-        </div>
+        <Footer />
       </div>
     </>
   );
