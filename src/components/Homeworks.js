@@ -272,6 +272,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
                             hwOptional[index] === "yes" && "green",
                           color: "white",
                           fontSize: "12px",
+                          cursor: "default",
                         }}
                       >
                         OPT
@@ -319,6 +320,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
                             hwOptionalUn[index] === "yes" && "green",
                           color: "white",
                           fontSize: "12px",
+                          cursor: "default",
                         }}
                       >
                         OPT
