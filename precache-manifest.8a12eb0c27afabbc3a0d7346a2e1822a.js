@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "94879fbb6b5284be841176d6c146618d",
+    "revision": "81c8074a962abc683bd55fe07989228a",
     "url": "/dashy/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/dashy/static/css/2.43578b21.chunk.css"
   },
   {
-    "revision": "29fc5b22451d72778d6c",
-    "url": "/dashy/static/css/main.e07bf880.chunk.css"
+    "revision": "4fd9353f8282165dd430",
+    "url": "/dashy/static/css/main.3d5df708.chunk.css"
   },
   {
     "revision": "59b871a6bb63ac2420e1",
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/dashy/static/js/2.306ece3b.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "29fc5b22451d72778d6c",
-    "url": "/dashy/static/js/main.c0eda28c.chunk.js"
+    "revision": "4fd9353f8282165dd430",
+    "url": "/dashy/static/js/main.b604653f.chunk.js"
   },
   {
     "revision": "d2fc3fd8ad53e238c968",
