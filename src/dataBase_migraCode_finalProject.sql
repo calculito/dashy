@@ -71,12 +71,12 @@ where finished = 'yes' and u.id = u2.id and h2.id = h.id)  from homeworks h2
 inner join "class" c2 on c2.id = h2.class_id
 inner join users u on c2.id = u.class_id where u.name='Ion';
 
-select * from (select name, h2.link, (select hf.finished from   homework_finished hf
+select * from (select name, h2.id, h2.optional, h2.link, (select hf.finished from   homework_finished hf
 inner join homeworks h on hf.homeworks_id = h2.id 
 inner join users u2 on u.id = hf.user_id 
 where finished = 'yes' and u.id = u2.id and h2.id = h.id)  from homeworks h2
 inner join "class" c2 on c2.id = h2.class_id
-inner join users u on c2.id = u.class_id where u.name='Thiago'
+inner join users u on c2.id = u.class_id where u.name='Ion'
 ) foo where foo.finished IS DISTINCT from 'yes';
 
 select name, h2.link , hf.finished, linkhwfinished  from users u 
@@ -87,11 +87,20 @@ where finished='yes' and  u.name='Ion';
 DELETE FROM links
 WHERE description = 'https://www.design-seeds.com/in-nature/heavens/color-set-6/';
 
+DELETE FROM homeworks WHERE id > '5';
+DELETE FROM homework_finished WHERE id > '5';
 select description, name, p.id from perslinks p inner join users u on u.id = p.user_id where name='Ion' ORDER BY p.id DESC;
 
-ALTER TABLE links
-ADD COLUMN stars INT4;
+ALTER TABLE links ADD COLUMN stars INT4;
+
+ALTER TABLE homeworks ADD COLUMN optional VARCHAR;
 
 select description, name, p.id, stars from perslinks p inner join users u on u.id = p.user_id where name='Ion' ORDER BY p.id DESC;
 
 UPDATE perslinks SET stars = 4 WHERE id=6;
+
+insert into homework_finished (homeworks_id, user_id, finished, linkhwfinished ) values (4, 1, 'yes', 'homework no 34');
+
+
+
+UPDATE homeworks SET optional = 'no' WHERE id=5;

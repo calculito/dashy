@@ -45,6 +45,16 @@ function Recordings({ userName, logIn }) {
               >
                 {data}
               </a>
+              <span
+                className="circle"
+                style={{
+                  backgroundColor: "gray",
+                  color: "white",
+                  fontSize: "12px",
+                }}
+              >
+                KEYWORD
+              </span>
             </div>
           </div>
         ))}

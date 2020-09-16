@@ -34,7 +34,7 @@ function Header({ onHeaderClick, logIn, whichUserHeader, whichRole }) {
   }, [logIn]);
   useEffect(() => {
     {
-      logIn === 1 &&
+      logIn === 4 &&
         speak({
           text:
             "Hello" +

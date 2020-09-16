@@ -8,6 +8,7 @@ import { render } from "@testing-library/react";
 
 function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
   const { speak } = useSpeechSynthesis();
+  const [switcher, setswitcher] = useState("");
   const [linksInsertFieldG, setlinksInsertFieldG] = useState("");
   const [linksInsertFieldP, setlinksInsertFieldP] = useState("");
   const [linksGeneral, setlinksGeneral] = useState([
@@ -28,7 +29,8 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
     getuserlinksGeneral();
     getuserlinksPersonal();
     setlinkToDelete("");
-  }, [logIn, linkToDelete]);
+    setswitcher("");
+  }, [logIn, linkToDelete, switcher]);
   useEffect(() => {
     getuserlinksPersonal();
   }, [linksInsertFieldP, linkToDelete]);
@@ -122,10 +124,21 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
     });
   }
   ///////////////    CHANGE STARS PERSONAL LINKS       /////////////
-  function changestars(e, id) {
+  function changestarspers(e, id) {
     setlinkToDelete(e);
     let data = { link: e };
     fetch("http://localhost:3001/personallinkstars/".concat(id), {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+    });
+    setswitcher("1");
+  }
+  ///////////////    CHANGE STARS GENERAL LINKS       /////////////
+  function changestars(e, id) {
+    setlinkToDelete(e);
+    let data = { link: e };
+    fetch("http://localhost:3001/generallinkstars/".concat(id), {
       method: "PUT",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
@@ -147,11 +160,7 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
         </span>
       </div>
       <div id="links">
-        <div
-          className={
-            whichRole === "Instructor" ? "contLinks" : "contLinkshidden"
-          }
-        >
+        <div className="contLinks">
           <input
             className="inputLinks"
             type="text"
@@ -160,10 +169,11 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
             onChange={(e) => setlinksInsertFieldG(e.target.value)}
             required
           />
-
-          <button className="buttonHWL" onClick={insertGeneralLink}>
-            ⇚ Insert a general link
-          </button>
+          {whichRole === "Instructor" && (
+            <button className="buttonHWL" onClick={insertGeneralLink}>
+              ⇚ Insert a general link
+            </button>
+          )}
         </div>
 
         <div className="linksContainer">
@@ -192,7 +202,48 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
                       </span>
                     )}
                     <span className="circle">{index + 1}</span>
-                    <Stars index={starsGeneralLinks[index]} />
+                    <div>
+                      <img
+                        className="linkSymbols"
+                        src={
+                          starsGeneralLinks[index] > 0 ? stargold : starblack
+                        }
+                        alt="star"
+                        onClick={(e) => changestars(1, linksGeneralId[index])}
+                      />
+                      <img
+                        className="linkSymbols"
+                        src={
+                          starsGeneralLinks[index] > 1 ? stargold : starblack
+                        }
+                        alt="star"
+                        onClick={(e) => changestars(2, linksGeneralId[index])}
+                      />
+                      <img
+                        className="linkSymbols"
+                        src={
+                          starsGeneralLinks[index] > 2 ? stargold : starblack
+                        }
+                        alt="star"
+                        onClick={(e) => changestars(3, linksGeneralId[index])}
+                      />
+                      <img
+                        className="linkSymbols"
+                        src={
+                          starsGeneralLinks[index] > 3 ? stargold : starblack
+                        }
+                        alt="star"
+                        onClick={(e) => changestars(4, linksGeneralId[index])}
+                      />
+                      <img
+                        className="linkSymbols"
+                        src={
+                          starsGeneralLinks[index] > 4 ? stargold : starblack
+                        }
+                        alt="star"
+                        onClick={(e) => changestars(5, linksGeneralId[index])}
+                      />
+                    </div>
                     <img
                       className="linkSymbols"
                       src={sound}
@@ -242,7 +293,7 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
                     >
                       DEL
                     </span>
-                    <span className="circle">{index + 1}</span>
+
                     <div>
                       <img
                         className="linkSymbols"
@@ -250,7 +301,9 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
                           starsPersonalLinks[index] > 0 ? stargold : starblack
                         }
                         alt="star"
-                        onClick={(e) => changestars(1, linksPersonalId[index])}
+                        onClick={(e) =>
+                          changestarspers(1, linksPersonalId[index])
+                        }
                       />
                       <img
                         className="linkSymbols"
@@ -258,7 +311,9 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
                           starsPersonalLinks[index] > 1 ? stargold : starblack
                         }
                         alt="star"
-                        onClick={(e) => changestars(2, linksPersonalId[index])}
+                        onClick={(e) =>
+                          changestarspers(2, linksPersonalId[index])
+                        }
                       />
                       <img
                         className="linkSymbols"
@@ -266,7 +321,9 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
                           starsPersonalLinks[index] > 2 ? stargold : starblack
                         }
                         alt="star"
-                        onClick={(e) => changestars(3, linksPersonalId[index])}
+                        onClick={(e) =>
+                          changestarspers(3, linksPersonalId[index])
+                        }
                       />
                       <img
                         className="linkSymbols"
@@ -274,7 +331,9 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
                           starsPersonalLinks[index] > 3 ? stargold : starblack
                         }
                         alt="star"
-                        onClick={(e) => changestars(4, linksPersonalId[index])}
+                        onClick={(e) =>
+                          changestarspers(4, linksPersonalId[index])
+                        }
                       />
                       <img
                         className="linkSymbols"
@@ -282,7 +341,9 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
                           starsPersonalLinks[index] > 4 ? stargold : starblack
                         }
                         alt="star"
-                        onClick={(e) => changestars(5, linksPersonalId[index])}
+                        onClick={(e) =>
+                          changestarspers(5, linksPersonalId[index])
+                        }
                       />
                     </div>
                     <img

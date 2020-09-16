@@ -28,6 +28,7 @@ export default function MainContainer({
               logIn={logIn}
               whichRole={whichRole}
               whichClass={whichClass}
+              whichUserId={whichUserId}
             />
           ),
           3: (

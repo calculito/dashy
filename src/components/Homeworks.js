@@ -3,9 +3,11 @@ import sound from "../images/sound.png";
 import { useSpeechSynthesis } from "react-speech-kit";
 import Hammers from "./Hammers";
 
-function Homeworks({ userName, logIn, whichRole, whichClass }) {
+function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
   const { speak } = useSpeechSynthesis();
-  //console.log(whichRole);
+  const [switcher, setswitcher] = useState("");
+  const [hwOptional, sethwOptional] = useState("");
+  const [hwOptionalUn, sethwOptionalUn] = useState("");
   const [homeworkInsertField, sethomeworkInsertField] = useState("");
   const [homeworkDescriptionSYes, sethomeworkDescriptionSYes] = useState([
     "homework finished",
@@ -18,7 +20,6 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
   const [homeworkUnfinishedIdArray, sethomeworkUnfinishedIdArray] = useState(
     ""
   );
-
   const [homeworkUnfinishedId, sethomeworkUnfinishedId] = useState("");
   const [homeworkDescriptionALLR, sethomeworkDescriptionALLR] = useState([
     {
@@ -31,14 +32,16 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
     getuserhomeworksStudentYes();
     getuserhomeworksStudentNo();
     getuserhomeworksALL();
+    setswitcher("");
+  }, [logIn, switcher]);
 
-    //getuserhomeworksInstructor();
-  }, [logIn]);
+  useEffect(() => {
+    getuserhomeworksALL();
+  }, [switcher]);
 
   useEffect(() => {
     getuserhomeworksStudentNo();
     getuserhomeworksStudentYes();
-    //getuserhomeworksInstructor();
   }, [openInputWindow]);
 
   ///////////////    GET FINISHED HOMEWORKS FOR STUDENTS     /////////////
@@ -55,6 +58,10 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
           return daten.linkhwfinished;
         });
         setlinkToMyHomeworkCircle(arrToLinkToMyHomeworkCircle);
+        const arrToOptional = data.map(function (daten) {
+          return daten.optional;
+        });
+        sethwOptional(arrToOptional);
       });
   }
   ///////////////    GET UNFINISHED HOMEWORKS FOR STUDENTS     /////////////
@@ -71,6 +78,10 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
           return daten.id;
         });
         sethomeworkUnfinishedIdArray(arrToId);
+        const arrToOptionalUn = data.map(function (daten) {
+          return daten.optional;
+        });
+        sethwOptionalUn(arrToOptionalUn);
       });
   }
   ///////////////    GET HOMEWORKS FOR INSTRUCTORS       /////////////
@@ -89,7 +100,12 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
           }; // the element in data property
           if (!found) {
             //acc.push(...value);
-            acc.push({ link: d.link, data: [value] }); // not found, so need to add data property
+            acc.push({
+              link: d.link,
+              data: [value],
+              optional: d.optional,
+              id: d.id,
+            }); // not found, so need to add data property
           } else {
             //acc.push({ name: d.name, data: [{ value: d.value }, { count: d.count }] });
             found.data.push(value); // if found, that means data property exists, so just push new element to found.data.
@@ -103,11 +119,31 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
   ///////////////    CHANGE STATUS TO FINISHED        /////////////
   function changestatus(e) {
     setopenInputWindow(e);
+    const data = { userId: whichUserId };
     let homeworkId = homeworkUnfinishedIdArray[e];
     sethomeworkUnfinishedId(homeworkId);
     fetch("http://localhost:3001/homeworkfinished/".concat(homeworkId), {
-      method: "PUT",
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
     });
+  }
+  ///////////////    CHANGE STATUS TO OPTIONAL       /////////////
+  function changeOptional(index) {
+    let hwId = homeworkDescriptionALLR[index].id;
+    let hwOpt = homeworkDescriptionALLR[index].optional;
+    //console.log(hwId, hwOpt);
+    {
+      hwOpt === "yes" ? (hwOpt = "no") : (hwOpt = "yes");
+    }
+    console.log(hwId, hwOpt);
+    const data = { optional: hwOpt };
+    fetch("http://localhost:3001/homeworkoptional/".concat(hwId), {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+    });
+    setswitcher("1");
   }
   ////////////////  SAVE LINK TO HOMEWORK FROM FORM  //////////////
   const saveLinkToHomework = (evt) => {
@@ -117,7 +153,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
   };
   const inputLinkToMyHomework = (evt) => {
     let homeworkId2 = homeworkUnfinishedId;
-    const data = { link: linkToMyHomework };
+    const data = { link: linkToMyHomework, userId: whichUserId };
     let endlink = "http://localhost:3001/homeworkfinishedlink/".concat(
       homeworkId2
     );
@@ -126,19 +162,20 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
     });
-    setlinkToMyHomework("");
+    setswitcher("1");
   };
   /////////    POST HOMEWORK AS INSTRUCTOR    ///////////
   function insertHomework() {
     const data = { link: homeworkInsertField };
     let endpoint = "http://localhost:3001/posthomework/".concat(whichClass);
-    console.log(endpoint);
+    //console.log(endpoint);
     fetch(endpoint, {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
     });
-    sethomeworkInsertField("");
+    setswitcher("1");
+    setopenInputWindow(false);
   }
   ////////////////  PREPARE ARRAYS FOR GETTING DATA FROM DATABASE  //////////////
   let finishedHomeworks = homeworkDescriptionSYes;
@@ -213,13 +250,33 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
 
                     <div className="infoContLinks">
                       <a
+                        //{...(linkToMyHomeworkCircle[index] === "" &&
+                        //   (onClick = (e) => saveLinkToHomework(index)))}
                         className="circle"
-                        href={linkToMyHomeworkCircle[index]}
+                        href={
+                          linkToMyHomeworkCircle[index] !== ""
+                            ? linkToMyHomeworkCircle[index]
+                            : ""
+                        }
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        {index + 1}
+                        {linkToMyHomeworkCircle[index] !== ""
+                          ? index + 1
+                          : "no link"}
                       </a>
+                      <span
+                        className="circle"
+                        style={{
+                          backgroundColor:
+                            hwOptional[index] === "yes" && "green",
+                          color: "white",
+                          fontSize: "12px",
+                        }}
+                      >
+                        OPT
+                      </span>
+
                       <Hammers index={4} />
                       <img
                         className="linkSymbols"
@@ -255,6 +312,18 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
                       >
                         Finished?
                       </button>
+                      <span
+                        className="circle"
+                        style={{
+                          backgroundColor:
+                            hwOptionalUn[index] === "yes" && "green",
+                          color: "white",
+                          fontSize: "12px",
+                        }}
+                      >
+                        OPT
+                      </span>
+
                       <Hammers index={3} />
                       <img
                         className="linkSymbols"
@@ -286,6 +355,18 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
                       {alldata.link}
                     </a>
                     <div className="rowHWPosAbs" key={"divRHWStatus" + index}>
+                      <span
+                        className="circle"
+                        onClick={(e) => changeOptional(index)}
+                        style={{
+                          backgroundColor:
+                            alldata.optional === "yes" && "green",
+                          color: "white",
+                          fontSize: "12px",
+                        }}
+                      >
+                        OPT
+                      </span>
                       <Hammers index={index + 2} />
                       {alldata.data.map((data, index) => (
                         <a
@@ -314,17 +395,3 @@ function Homeworks({ userName, logIn, whichRole, whichClass }) {
   );
 }
 export default Homeworks;
-
-//{link.data.map((data, index) => {
-//  return (
-//    <button
-//      className="buttonHW1"
-//      style={{
-//        backgroundColor:
-//          data.finished == "no" ? "red" : "green",
-//      }}
-//    >
-//      {data.name}
-//    </button>
-//  );
-//})}
