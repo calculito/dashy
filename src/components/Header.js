@@ -18,8 +18,8 @@ function Header({
   const ref = React.useRef();
   /////////////////   USEEFFECTS   ///////////////
   useEffect(() => {
-    console.log(logIn);
-    logIn === 1 && getuserRoleFromDB(whichUserHeader);
+    //console.log(logIn);
+    logIn === 1 && getclassNameFromDB();
     logIn === 1 && getInfoTochangeCLass();
     var timerID = setInterval(() => tick(), 1000);
     return function cleanup() {
@@ -28,10 +28,13 @@ function Header({
   }, [logIn, whichClass]);
 
   /////////////////   GET USER CLASS NAME   ///////////////
-  function getuserRoleFromDB(whichUserHeader) {
+
+  function getclassNameFromDB() {
     fetch("http://localhost:3001/userclassname")
       .then((response) => response.json())
       .then((data) => {
+        // console.log(data);
+        // console.log(whichUserId);
         setuserClassName(
           data[data.findIndex((element) => element.name === whichUserHeader)]
             .class_name
@@ -89,9 +92,6 @@ function Header({
     <div className="header" key={whichUserHeader}>
       {logIn === 1 ? (
         <div className="greeting">
-          <button className="buttonHW" key="1">
-            {time}
-          </button>
           <button className="buttonHW" key="2">
             {whichUserHeader}
           </button>
@@ -125,7 +125,7 @@ function Header({
       />
       {openInputWindow !== false && (
         <div className="outPopUpVariabel">
-          <form className="form-container">
+          <div className="form-container">
             <div className="linksContainer">
               {allClass.map((data, i) => (
                 <div
@@ -138,14 +138,14 @@ function Header({
                     key={"d" + i}
                     onClick={(e) => changeClass(i)}
                   >
-                    <a className="recordinglinks" key={i}>
+                    <button className="recordinglinks" key={i}>
                       {data}
-                    </a>
+                    </button>
                   </div>
                 </div>
               ))}
             </div>
-          </form>
+          </div>
         </div>
       )}
     </div>

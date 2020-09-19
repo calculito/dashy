@@ -475,7 +475,6 @@ h4 {
   margin-top: 5px;
 }
 .buttonHW {
-  position: relative;
   font-size: 12px;
   color: var(--font-infow-color);
   border: 0px;
@@ -555,11 +554,16 @@ h4 {
     -2px -2px 1px 0px var(--shade-dark-color);
 }
 @media only screen and (max-width: 1030px) {
+  .hammercontainer {
+    display: none;
+  }
+  .rowHWPosAbs {
+    display: none;
+  }
   .greeting {
     object-fit: scale-down;
-    height: 55px;
-    width: 95px;
     font-size: 9px;
+    display: flex;
   }
   .tabname {
     font-size: 1px;
@@ -623,6 +627,7 @@ h4 {
   .buttonHW {
     font-size: 12px;
     left: 75vw;
+    margin: 4px;
   }
   .infoWindowChat {
     font-size: 12px;

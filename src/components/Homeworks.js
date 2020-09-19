@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import sound from "../images/sound.png";
 import { useSpeechSynthesis } from "react-speech-kit";
-import Hammers from "./Hammers";
 import hammerwhite from "../images/hammerwhite.png";
 import hammercolor from "../images/hammercolor.png";
 
@@ -20,6 +19,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
   ]);
   const [linkToMyHomework, setlinkToMyHomework] = useState("");
   const [homeworkFinishedId, sethomeworkFinishedId] = useState("");
+  const [thishomeworkFinishedId, setthishomeworkFinishedId] = useState("");
   const [linkToMyHomeworkCircle, setlinkToMyHomeworkCircle] = useState("");
   const [homeworkUnfinishedIdArray, sethomeworkUnfinishedIdArray] = useState(
     ""
@@ -32,6 +32,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
     },
   ]); //reduced array
   const [openInputWindow, setopenInputWindow] = useState(false);
+  const [openInputWindowAfter, setopenInputWindowAfter] = useState(false);
   useEffect(() => {
     getuserhomeworksStudentYes();
     getuserhomeworksStudentNo();
@@ -104,30 +105,27 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
       .then((data) => {
         const homeworkDescriptionALLR = data.reduce((acc, d) => {
           const found = acc.find((a) => a.link === d.link);
-          //const value = { name: d.name, val: d.value };
           const value = {
             name: d.name,
             finished: d.finished,
             linktohw: d.linkhwfinished,
-          }; // the element in data property
+            hammer: d.hammer,
+          };
           if (!found) {
-            //acc.push(...value);
             acc.push({
               link: d.link,
               data: [value],
               optional: d.optional,
               id: d.id,
-            }); // not found, so need to add data property
+            });
           } else {
-            //acc.push({ name: d.name, data: [{ value: d.value }, { count: d.count }] });
-            found.data.push(value); // if found, that means data property exists, so just push new element to found.data.
+            found.data.push(value);
           }
           return acc;
         }, []);
         sethomeworkDescriptionALLR(homeworkDescriptionALLR);
       });
   }
-
   ///////////////    CHANGE STATUS TO FINISHED        /////////////
   function changestatus(e) {
     const data = { userId: whichUserId };
@@ -142,19 +140,34 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
   }
   ///////////////    INSERT LINK TO HOMEWORK IF (NO LINK)       /////////////
   function changestatusafter(e) {
-    sethomeworkUnfinishedId(homeworkFinishedId[e]);
-    setopenInputWindow(e);
+    setthishomeworkFinishedId(homeworkFinishedId[e]);
+    setopenInputWindowAfter(e);
+    // setswitcher("1");
+  }
+  function saveLinkToHomeworkAfter(evt) {
+    evt.preventDefault();
+    const data = { link: linkToMyHomework, userId: whichUserId };
+    let endlink = "http://localhost:3001/homeworkfinishedlinkafter/".concat(
+      thishomeworkFinishedId
+    );
+    linkToMyHomework !== "" &&
+      fetch(endlink, {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      });
+    setthishomeworkFinishedId("");
+    setlinkToMyHomework("");
+    setopenInputWindowAfter(false);
     setswitcher("1");
   }
   ///////////////    CHANGE STATUS TO OPTIONAL       /////////////
   function changeOptional(index) {
     let hwId = homeworkDescriptionALLR[index].id;
     let hwOpt = homeworkDescriptionALLR[index].optional;
-    //console.log(hwId, hwOpt);
     {
       hwOpt === "yes" ? (hwOpt = "no") : (hwOpt = "yes");
     }
-    console.log(hwId, hwOpt);
     const data = { optional: hwOpt };
     fetch("http://localhost:3001/homeworkoptional/".concat(hwId), {
       method: "PUT",
@@ -188,7 +201,6 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
   function insertHomework() {
     const data = { link: homeworkInsertField };
     let endpoint = "http://localhost:3001/posthomework/".concat(whichClass);
-    //console.log(endpoint);
     fetch(endpoint, {
       method: "POST",
       body: JSON.stringify(data),
@@ -261,6 +273,23 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
           </form>
         </div>
       )}
+      {openInputWindowAfter !== false && (
+        <div className="outPopUp">
+          <form className="form-container" onSubmit={saveLinkToHomeworkAfter}>
+            <label>
+              Link to your homework:
+              <input
+                autoFocus
+                type="text"
+                placeholder="Enter link to your homework"
+                value={linkToMyHomework}
+                onChange={(e) => setlinkToMyHomework(e.target.value)}
+              />
+            </label>
+            <input type="submit" value="Submit" className="btn" />
+          </form>
+        </div>
+      )}
       {whichRole === "Student" ? (
         <div className="tabcontent">
           <div className="linksContainer">
@@ -279,7 +308,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
                     </a>
 
                     <div className="infoContLinks">
-                      <div>
+                      <div className="hammercontainer">
                         <img
                           className="linkSymbols"
                           src={hammer[index] > 0 ? hammercolor : hammerwhite}
@@ -441,7 +470,33 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
                       >
                         OPT
                       </span>
-                      <Hammers index={index + 2} />
+                      <div className="hammercontainer">
+                        <img
+                          className="linkSymbols"
+                          src={hammer[index] > 0 ? hammercolor : hammerwhite}
+                          alt="hammer"
+                        />
+                        <img
+                          className="linkSymbols"
+                          src={hammer[index] > 1 ? hammercolor : hammerwhite}
+                          alt="hammer"
+                        />
+                        <img
+                          className="linkSymbols"
+                          src={hammer[index] > 2 ? hammercolor : hammerwhite}
+                          alt="hammer"
+                        />
+                        <img
+                          className="linkSymbols"
+                          src={hammer[index] > 3 ? hammercolor : hammerwhite}
+                          alt="hammer"
+                        />
+                        <img
+                          className="linkSymbols"
+                          src={hammer[index] > 4 ? hammercolor : hammerwhite}
+                          alt="hammer"
+                        />
+                      </div>
                       {alldata.data.map((data, index) => (
                         <a
                           target="_blank"
@@ -454,7 +509,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
                               data.finished === "yes" ? "green" : "red",
                           }}
                         >
-                          {data.name}
+                          {data.name}({data.hammer})
                         </a>
                       ))}
                     </div>

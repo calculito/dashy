@@ -90,7 +90,9 @@ DELETE FROM links
 WHERE description = 'https://www.design-seeds.com/in-nature/heavens/color-set-6/';
 
 DELETE FROM homeworks WHERE id > '5';
+
 DELETE FROM homework_finished WHERE id > '5';
+
 select description, name, p.id from perslinks p inner join users u on u.id = p.user_id where name='Ion' ORDER BY p.id DESC;
 
 ALTER TABLE recordings ADD COLUMN keyword VARCHAR;
@@ -107,4 +109,7 @@ insert into homework_finished (homeworks_id, user_id, finished, linkhwfinished )
 
 
 
+
 UPDATE homeworks SET optional = 'no' WHERE id=5;
+
+SELECT class_name  FROM class INNER JOIN users ON class.id=users.class_id where users.id = 3;

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, onClick } from "react";
+import React, { useState, useRef } from "react";
 import Header from "./components/Header";
 import Tabs from "./components/Tabs";
 import Footer from "./components/Footer";
@@ -102,7 +102,7 @@ function App() {
     setwhichContainer(indexContainer);
   };
 
-  console.log(logIn, whichUser, whichClass, whichUserId, whichRole);
+  //console.log(logIn, whichUser, whichClass, whichUserId, whichRole);
   return (
     <>
       {logIn === 2 && (

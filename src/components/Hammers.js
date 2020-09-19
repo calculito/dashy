@@ -8,7 +8,7 @@ function Hammers(index) {
     alert("Do you want to change the hammers?");
   }
   return (
-    <div>
+    <div className="hammercontainer">
       <img
         className="linkSymbols"
         src={nummer > 0 ? hammercolor : hammerwhite}

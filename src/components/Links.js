@@ -3,7 +3,6 @@ import { useSpeechSynthesis } from "react-speech-kit";
 import sound from "../images/sound.png";
 import starblack from "../images/starblack.png";
 import stargold from "../images/stargold.png";
-import { render } from "@testing-library/react";
 
 function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
   const { speak } = useSpeechSynthesis();
