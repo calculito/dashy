@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import logo from "../images/migracode-logo.png";
 import login from "../images/login.png";
-import { useSpeechSynthesis } from "react-speech-kit";
 
 function Header({
   onHeaderClick,
@@ -12,20 +11,16 @@ function Header({
   whichClass,
   onClick,
 }) {
-  let [userRole, setuserRole] = useState(false);
-  const [userClass, setuserClass] = useState(false);
+  const [userClassName, setuserClassName] = useState(false);
   let [allClass, setallClass] = useState([{ id: 3, class_name: "mar-2020-1" }]);
   let [allClassId, setallClassId] = useState([{ id: 3 }]);
   const [openInputWindow, setopenInputWindow] = useState(false);
   const ref = React.useRef();
-  let username = "Ion";
-  whichUserHeader && (username = whichUserHeader);
-  userRole = "Student";
-  whichRole && (userRole = whichRole);
   /////////////////   USEEFFECTS   ///////////////
   useEffect(() => {
-    getuserRoleFromDB(username);
-    getInfoTochangeCLass();
+    console.log(logIn);
+    logIn === 1 && getuserRoleFromDB(whichUserHeader);
+    logIn === 1 && getInfoTochangeCLass();
     var timerID = setInterval(() => tick(), 1000);
     return function cleanup() {
       clearInterval(timerID);
@@ -33,12 +28,12 @@ function Header({
   }, [logIn, whichClass]);
 
   /////////////////   GET USER CLASS NAME   ///////////////
-  function getuserRoleFromDB(username) {
-    fetch("http://localhost:3001/userrole")
+  function getuserRoleFromDB(whichUserHeader) {
+    fetch("http://localhost:3001/userclassname")
       .then((response) => response.json())
       .then((data) => {
-        setuserClass(
-          data[data.findIndex((element) => element.name === username)]
+        setuserClassName(
+          data[data.findIndex((element) => element.name === whichUserHeader)]
             .class_name
         );
       });
@@ -98,10 +93,10 @@ function Header({
             {time}
           </button>
           <button className="buttonHW" key="2">
-            {username}
+            {whichUserHeader}
           </button>
           <button className="buttonHW" key="3">
-            {userRole}
+            {whichRole}
           </button>
           {whichRole === "Instructor" ? (
             <button
@@ -109,12 +104,12 @@ function Header({
               key="4"
               onClick={(e) => setopenInputWindow("1")}
             >
-              {userClass}
+              {userClassName}
               <span className="tooltiptext">Change your class</span>
             </button>
           ) : (
             <button className="buttonHW" key="4">
-              {userClass}
+              {userClassName}
             </button>
           )}
         </div>

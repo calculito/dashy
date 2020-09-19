@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useSpeechSynthesis } from "react-speech-kit";
-import Stars from "./Stars";
 import sound from "../images/sound.png";
 import starblack from "../images/starblack.png";
 import stargold from "../images/stargold.png";

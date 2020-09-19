@@ -6,33 +6,33 @@ import MainContainer from "./components/MainContainer";
 import "./App.css";
 
 function App() {
+  const [logIn, setlogIn] = useState(0);
   const [user, setuser] = useState("");
   const [whichClass, setwhichClass] = useState("");
   const [whichUser, setwhichUser] = useState("");
   const [whichUserId, setwhichUserId] = useState("");
   const [whichRole, setwhichRole] = useState("");
-  const [logIn, setlogIn] = useState(0);
   const [whichContainer, setwhichContainer] = useState(0);
   const [whichPassword, setwhichPassword] = useState("");
   const [passwordUserWrong, setpasswordUserWrong] = useState(0);
 
-  ///////////////////////////////////////////////////////////////
-
+  /////////////////////  NO USEEFFECT ANYMORE NEEDED //////////////////////
   const logInCheck = () => {
     logIn === 0 ? setlogIn(2) : setlogIn(0);
     logIn === 1 && setwhichContainer(0);
     logIn === 1 && window.location.reload();
+    getuser();
   };
+  ////////////////  CANCEL BUTTON IN FORM ///////////////
   const logIn2 = () => {
     logIn === 0 ? setlogIn(2) : setlogIn(0);
     logIn === 2 && setwhichContainer(0);
     setpasswordUserWrong(0);
   };
-
+  ////////////////  INIT BY FORM ///////////////
   const handleSubmit = (evt) => {
     evt.preventDefault();
     whichUser !== whichPassword ? wrongPassword() : goodPassword();
-    getuser();
   };
   /////////////////// GET USER TO CHECK IF IN DB ////////////////////
   function getuser() {
@@ -57,6 +57,7 @@ function App() {
     user.includes(whichUser) && logIn === 1 && setwhichContainer(0);
     user.includes(whichUser) && getClass();
   };
+  ////////////////  NO USER FOUND IN DB  ///////////////
   const noUser = () => {
     setwhichUser("");
     setwhichPassword("");
@@ -101,7 +102,7 @@ function App() {
     setwhichContainer(indexContainer);
   };
 
-  //console.log(logIn, whichUser, whichClass, whichUserId, whichRole);
+  console.log(logIn, whichUser, whichClass, whichUserId, whichRole);
   return (
     <>
       {logIn === 2 && (
