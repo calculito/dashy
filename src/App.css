@@ -2,10 +2,10 @@ html,
 #root {
   height: 100%;
 }
-.root {
+:root {
   --background-page-color: #cbe3ee;
   --background-infow-color: #96c4d8;
-  --shade-infow-color: rgba(213, 213, 202, 0.85);
+  --shade-infow-color: #548ba1;
   --shade-light-color: rgba(255, 255, 255, 1);
   --shade-dark-color: rgba(33, 71, 83, 0.3);
   --background-tabn-color: #e0eef7;
@@ -28,18 +28,18 @@ html,
   --font-white: white;
   --font-whitesmoke: whitesmoke;
 }
-:root {
-  --background-page-color: #d9ddf0;
-  --background-infow-color: #b6bed3;
-  --shade-infow-color: rgba(169, 180, 218, 0.85);
-  --shade-light-color: rgba(255, 255, 255, 1);
-  --shade-dark-color: rgba(0, 0, 0, 0.3);
-  --background-tabn-color: #8197ac;
-  --font-infow-color: rgb(38, 54, 71);
-  --font-tabnI-color: #162633;
-  --font-light-color: rgb(108, 132, 148);
-  --font-white: white;
-  --font-whitesmoke: rgb(156, 183, 201);
+.root {
+  --background-page-color: #f7f9fb;
+  --background-infow-color: #527ccc;
+  --shade-infow-color: rgba(rgba(171, 196, 207, 0.85));
+  --shade-light-color: #5085a5;
+  --shade-dark-color: #8fc1e3;
+  --background-tabn-color: #d6dee0;
+  --font-infow-color: #070707;
+  --font-tabnI-color: #4b76b8;
+  --font-light-color: #000000;
+  --font-white: #abb8cf;
+  --font-whitesmoke: rgb(255, 255, 255);
 }
 .root {
   --background-page-color: #161616;
@@ -150,6 +150,22 @@ button:hover {
   flex-direction: row;
   justify-content: space-between;
 }
+.buttonHW:hover .tooltiptext {
+  visibility: visible;
+}
+.buttonHW .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 105%;
+}
 
 img {
   object-fit: cover;
@@ -201,6 +217,15 @@ img {
   -ms-filter: blur(0px) !important;
   filter: blur(0px) !important;
 }
+.outPopUpVariabel {
+  font: 400 13.3333px Arial;
+  position: fixed;
+  width: auto;
+  height: auto;
+  z-index: 15;
+  top: 5vw;
+  left: 21vw;
+}
 .open-button {
   background-color: var(--shade-infow-color);
   color: var(--font-white);
@@ -235,11 +260,13 @@ img {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: var(--font-white);
 }
 
 /* Full-width input fields */
 .form-container input[type="text"],
 .form-container input[type="password"] {
+  color: var(--font-white);
   width: 90%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -448,6 +475,7 @@ h4 {
   margin-top: 5px;
 }
 .buttonHW {
+  position: relative;
   font-size: 12px;
   color: var(--font-infow-color);
   border: 0px;

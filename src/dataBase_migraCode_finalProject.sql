@@ -53,7 +53,7 @@ inner join homeworks h2 on hf.homeworks_id = h2.id
 inner join users u on u.id = hf.user_id 
 where hf.finished = 'yes' and h2.id = 4; 
 
-select h.id, h.link, u2."name" , u2.user_role, (select hf.finished from   homework_finished hf
+select h.id,  h.link, u2."name" , u2.user_role, (select hf.finished from   homework_finished hf
 inner join homeworks h2 on hf.homeworks_id = h2.id 
 inner join users u on u.id = hf.user_id 
 where u.id = u2.id and h2.id = h.id ), (select hf.linkhwfinished from   homework_finished hf
@@ -64,7 +64,9 @@ inner join "class" c2 on c2.id = h.class_id
 inner join users u2 on c2.id = u2.class_id 
 where c2.id = 4 and u2.user_role = 'Student';
 
-select name, h2.link, (select hf.finished from   homework_finished hf
+select avg(hammer)  from homework_finished hf where homeworks_id =2;
+
+select name, h2.link(select hf.finished  from   homework_finished hf
 inner join homeworks h on hf.homeworks_id = h2.id 
 inner join users u2 on u.id = hf.user_id 
 where finished = 'yes' and u.id = u2.id and h2.id = h.id)  from homeworks h2
@@ -91,13 +93,15 @@ DELETE FROM homeworks WHERE id > '5';
 DELETE FROM homework_finished WHERE id > '5';
 select description, name, p.id from perslinks p inner join users u on u.id = p.user_id where name='Ion' ORDER BY p.id DESC;
 
-ALTER TABLE links ADD COLUMN stars INT4;
+ALTER TABLE recordings ADD COLUMN keyword VARCHAR;
 
-ALTER TABLE homeworks ADD COLUMN optional VARCHAR;
+ALTER TABLE homework_finished ADD COLUMN hammer INT4;
 
 select description, name, p.id, stars from perslinks p inner join users u on u.id = p.user_id where name='Ion' ORDER BY p.id DESC;
 
 UPDATE perslinks SET stars = 4 WHERE id=6;
+
+select * from class order by class_name asc;
 
 insert into homework_finished (homeworks_id, user_id, finished, linkhwfinished ) values (4, 1, 'yes', 'homework no 34');
 

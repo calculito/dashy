@@ -30,7 +30,7 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
     getuserlinksPersonal();
     setlinkToDelete("");
     setswitcher("");
-  }, [logIn, linkToDelete, switcher]);
+  }, [logIn, linkToDelete, switcher, whichClass]);
   useEffect(() => {
     getuserlinksPersonal();
   }, [linksInsertFieldP, linkToDelete]);

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 
-function Recordings({ userName, logIn }) {
+function Recordings({ userName, logIn, whichClass }) {
   const [recordingsTitle, setrecordingsTitle] = useState([
     "Recording of the class from 01.08.2020",
   ]);
   const [recordingsLink, setrecordingsLink] = useState(false);
   useEffect(() => {
     getuserRecordingsFromDB(userName);
-  }, [userName, logIn]);
+  }, [userName, logIn, whichClass]);
 
   function getuserRecordingsFromDB(userName) {
     let endpoint = "http://localhost:3001/userrecordings/".concat(userName);

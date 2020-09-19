@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import sound from "../images/sound.png";
 import { useSpeechSynthesis } from "react-speech-kit";
 import Hammers from "./Hammers";
+import hammerwhite from "../images/hammerwhite.png";
+import hammercolor from "../images/hammercolor.png";
 
 function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
   const { speak } = useSpeechSynthesis();
   const [switcher, setswitcher] = useState("");
+  const [hammer, sethammer] = useState([1]);
   const [hwOptional, sethwOptional] = useState("");
   const [hwOptionalUn, sethwOptionalUn] = useState("");
   const [homeworkInsertField, sethomeworkInsertField] = useState("");
@@ -16,6 +19,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
     "homework unfinished",
   ]);
   const [linkToMyHomework, setlinkToMyHomework] = useState("");
+  const [homeworkFinishedId, sethomeworkFinishedId] = useState("");
   const [linkToMyHomeworkCircle, setlinkToMyHomeworkCircle] = useState("");
   const [homeworkUnfinishedIdArray, sethomeworkUnfinishedIdArray] = useState(
     ""
@@ -33,7 +37,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
     getuserhomeworksStudentNo();
     getuserhomeworksALL();
     setswitcher("");
-  }, [logIn, switcher]);
+  }, [logIn, switcher, whichClass]);
 
   useEffect(() => {
     getuserhomeworksALL();
@@ -62,6 +66,14 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
           return daten.optional;
         });
         sethwOptional(arrToOptional);
+        const arrTohomeworkFInishedId = data.map(function (daten) {
+          return daten.id;
+        });
+        sethomeworkFinishedId(arrTohomeworkFInishedId);
+        const arrToHammer = data.map(function (daten) {
+          return daten.hammer;
+        });
+        sethammer(arrToHammer);
       });
   }
   ///////////////    GET UNFINISHED HOMEWORKS FOR STUDENTS     /////////////
@@ -118,7 +130,6 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
 
   ///////////////    CHANGE STATUS TO FINISHED        /////////////
   function changestatus(e) {
-    setopenInputWindow(e);
     const data = { userId: whichUserId };
     let homeworkId = homeworkUnfinishedIdArray[e];
     sethomeworkUnfinishedId(homeworkId);
@@ -127,6 +138,13 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
     });
+    setopenInputWindow(e);
+  }
+  ///////////////    INSERT LINK TO HOMEWORK IF (NO LINK)       /////////////
+  function changestatusafter(e) {
+    sethomeworkUnfinishedId(homeworkFinishedId[e]);
+    setopenInputWindow(e);
+    setswitcher("1");
   }
   ///////////////    CHANGE STATUS TO OPTIONAL       /////////////
   function changeOptional(index) {
@@ -146,24 +164,26 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
     setswitcher("1");
   }
   ////////////////  SAVE LINK TO HOMEWORK FROM FORM  //////////////
-  const saveLinkToHomework = (evt) => {
+  function saveLinkToHomework(evt) {
     evt.preventDefault();
-    inputLinkToMyHomework(evt);
-    setopenInputWindow(false);
-  };
-  const inputLinkToMyHomework = (evt) => {
+
     let homeworkId2 = homeworkUnfinishedId;
     const data = { link: linkToMyHomework, userId: whichUserId };
     let endlink = "http://localhost:3001/homeworkfinishedlink/".concat(
       homeworkId2
     );
-    fetch(endlink, {
-      method: "PUT",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
-    });
+    linkToMyHomework !== "" &&
+      fetch(endlink, {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      });
+    sethomeworkUnfinishedId("");
+    setlinkToMyHomework("");
+    console.log(data, homeworkId2);
+    setopenInputWindow(false);
     setswitcher("1");
-  };
+  }
   /////////    POST HOMEWORK AS INSTRUCTOR    ///////////
   function insertHomework() {
     const data = { link: homeworkInsertField };
@@ -177,6 +197,16 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
     setswitcher("1");
     setopenInputWindow(false);
   }
+  ///////////////    CHANGE HAMMER HOMEWORK FINISHED FOR STUDENTS      /////////////
+  function changehammer(e, id) {
+    let data = { numberHammer: e };
+    fetch("http://localhost:3001/hammerstudents/".concat(id), {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+    });
+    setswitcher("1");
+  }
   ////////////////  PREPARE ARRAYS FOR GETTING DATA FROM DATABASE  //////////////
   let finishedHomeworks = homeworkDescriptionSYes;
   let unfinishedHomeworks = homeworkDescriptionSNo;
@@ -186,7 +216,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
       text: toread,
     });
   }
-  //console.log(finishedHomeworks);
+
   return (
     <div className="tabcontent">
       <div className="infoWindow">
@@ -249,22 +279,66 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
                     </a>
 
                     <div className="infoContLinks">
-                      <a
-                        //{...(linkToMyHomeworkCircle[index] === "" &&
-                        //   (onClick = (e) => saveLinkToHomework(index)))}
-                        className="circle"
-                        href={
-                          linkToMyHomeworkCircle[index] !== ""
-                            ? linkToMyHomeworkCircle[index]
-                            : ""
-                        }
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {linkToMyHomeworkCircle[index] !== ""
-                          ? index + 1
-                          : "no link"}
-                      </a>
+                      <div>
+                        <img
+                          className="linkSymbols"
+                          src={hammer[index] > 0 ? hammercolor : hammerwhite}
+                          alt="hammer"
+                          onClick={(e) =>
+                            changehammer(1, homeworkFinishedId[index])
+                          }
+                        />
+                        <img
+                          className="linkSymbols"
+                          src={hammer[index] > 1 ? hammercolor : hammerwhite}
+                          alt="hammer"
+                          onClick={(e) =>
+                            changehammer(2, homeworkFinishedId[index])
+                          }
+                        />
+                        <img
+                          className="linkSymbols"
+                          src={hammer[index] > 2 ? hammercolor : hammerwhite}
+                          alt="hammer"
+                          onClick={(e) =>
+                            changehammer(3, homeworkFinishedId[index])
+                          }
+                        />
+                        <img
+                          className="linkSymbols"
+                          src={hammer[index] > 3 ? hammercolor : hammerwhite}
+                          alt="hammer"
+                          onClick={(e) =>
+                            changehammer(4, homeworkFinishedId[index])
+                          }
+                        />
+                        <img
+                          className="linkSymbols"
+                          src={hammer[index] > 4 ? hammercolor : hammerwhite}
+                          alt="hammer"
+                          onClick={(e) =>
+                            changehammer(5, homeworkFinishedId[index])
+                          }
+                        />
+                      </div>
+                      {linkToMyHomeworkCircle[index] === null ? (
+                        <button
+                          onClick={(e) => changestatusafter(index)}
+                          className="circle"
+                          href=""
+                        >
+                          no link
+                        </button>
+                      ) : (
+                        <a
+                          className="circle"
+                          href={linkToMyHomeworkCircle[index]}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          link ok
+                        </a>
+                      )}
                       <span
                         className="circle"
                         style={{
@@ -278,7 +352,6 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
                         OPT
                       </span>
 
-                      <Hammers index={4} />
                       <img
                         className="linkSymbols"
                         src={sound}
@@ -326,7 +399,6 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
                         OPT
                       </span>
 
-                      <Hammers index={3} />
                       <img
                         className="linkSymbols"
                         src={sound}

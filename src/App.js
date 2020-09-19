@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, onClick } from "react";
 import Header from "./components/Header";
 import Tabs from "./components/Tabs";
 import Footer from "./components/Footer";
@@ -6,18 +6,35 @@ import MainContainer from "./components/MainContainer";
 import "./App.css";
 
 function App() {
-  const [user, setuser] = useState("Ion");
-  const [whichRole, setwhichRole] = useState("");
+  const [user, setuser] = useState("");
   const [whichClass, setwhichClass] = useState("");
-  const [whichContainer, setwhichContainer] = useState(0);
-  const [passwordUserWrong, setpasswordUserWrong] = useState(0);
   const [whichUser, setwhichUser] = useState("");
   const [whichUserId, setwhichUserId] = useState("");
-  const [whichPassword, setwhichPassword] = useState("");
+  const [whichRole, setwhichRole] = useState("");
   const [logIn, setlogIn] = useState(0);
-  useEffect(() => {
+  const [whichContainer, setwhichContainer] = useState(0);
+  const [whichPassword, setwhichPassword] = useState("");
+  const [passwordUserWrong, setpasswordUserWrong] = useState(0);
+
+  ///////////////////////////////////////////////////////////////
+
+  const logInCheck = () => {
+    logIn === 0 ? setlogIn(2) : setlogIn(0);
+    logIn === 1 && setwhichContainer(0);
+    logIn === 1 && window.location.reload();
+  };
+  const logIn2 = () => {
+    logIn === 0 ? setlogIn(2) : setlogIn(0);
+    logIn === 2 && setwhichContainer(0);
+    setpasswordUserWrong(0);
+  };
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    whichUser !== whichPassword ? wrongPassword() : goodPassword();
     getuser();
-  }, [logIn]);
+  };
+  /////////////////// GET USER TO CHECK IF IN DB ////////////////////
   function getuser() {
     fetch("http://localhost:3001")
       .then((response) => {
@@ -27,6 +44,26 @@ function App() {
         setuser(data);
       });
   }
+  //////////////// WRONG PASSWORD HANDLE ///////////////
+  const wrongPassword = () => {
+    setwhichUser("");
+    setwhichPassword("");
+    setpasswordUserWrong(1);
+    setlogIn(2);
+  };
+  ////////////////  GOOD PASSWORD ///////////////
+  const goodPassword = () => {
+    user.includes(whichUser) && logIn === 2 ? setlogIn(1) : noUser();
+    user.includes(whichUser) && logIn === 1 && setwhichContainer(0);
+    user.includes(whichUser) && getClass();
+  };
+  const noUser = () => {
+    setwhichUser("");
+    setwhichPassword("");
+    setlogIn(2);
+    setpasswordUserWrong(2);
+  };
+  /////////////////// GET DATA FROM DB WHERE USER ////////////////////
   function getClass() {
     fetch("http://localhost:3001")
       .then((response) => {
@@ -45,44 +82,7 @@ function App() {
         );
       });
   }
-
-  ///////////////////////////////////////////////////////////////
-
-  const setWindow = (indexContainer) => {
-    setwhichContainer(indexContainer);
-  };
-  const logInCheck = () => {
-    logIn === 0 ? setlogIn(2) : setlogIn(0);
-    logIn === 1 && setwhichContainer(0);
-    logIn === 1 && window.location.reload();
-  };
-  const logIn2 = () => {
-    logIn === 0 ? setlogIn(2) : setlogIn(0);
-    logIn === 2 && setwhichContainer(0);
-    setpasswordUserWrong(0);
-  };
-
-  const wrongPassword = () => {
-    setwhichUser("");
-    setwhichPassword("");
-    setpasswordUserWrong(1);
-    setlogIn(2);
-  };
-  const goodPassword = () => {
-    user.includes(whichUser) && logIn === 2 ? setlogIn(1) : noUser();
-    logIn === 1 && setwhichContainer(0);
-  };
-  const noUser = () => {
-    setwhichUser("");
-    setwhichPassword("");
-    setlogIn(2);
-    setpasswordUserWrong(2);
-  };
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-    whichUser !== whichPassword ? wrongPassword() : goodPassword();
-    getClass();
-  };
+  ////////////// SET FOCUS ON FORM /////////////
   const useFocus = () => {
     const htmlElRef = useRef(null);
     const setFocus = () => {
@@ -91,12 +91,17 @@ function App() {
     return [htmlElRef, setFocus];
   };
   const [inputRef, setInputFocus] = useFocus();
-  //console.log("role" + whichRole);
 
-  const findUser = (e) => {
-    setwhichPassword(e);
+  /////////////  CHANGING THE CLASS IF INSTRUCTOR CHANGES   /////////
+  function newClass(classIdNew) {
+    setwhichClass(classIdNew);
+  }
+  //////////// SET WINDOW /////////////
+  const setWindow = (indexContainer) => {
+    setwhichContainer(indexContainer);
   };
-  ///////////////////////////
+
+  //console.log(logIn, whichUser, whichClass, whichUserId, whichRole);
   return (
     <>
       {logIn === 2 && (
@@ -123,7 +128,7 @@ function App() {
                 placeholder="Enter Password"
                 autoComplete="on"
                 value={whichPassword}
-                onChange={(e) => findUser(e.target.value)}
+                onChange={(e) => setwhichPassword(e.target.value)}
                 required
               />
             </label>
@@ -163,6 +168,9 @@ function App() {
           logIn={logIn}
           whichUserHeader={whichUser}
           whichRole={whichRole}
+          whichUserId={whichUserId}
+          whichClass={whichClass}
+          onClick={newClass}
         />
         <Tabs onTabsClick={setWindow} logIn={logIn} index={whichContainer} />
         <MainContainer

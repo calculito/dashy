@@ -40,7 +40,13 @@ export default function MainContainer({
               whichUserId={whichUserId}
             />
           ),
-          4: <Recordings userName={userName} logIn={logIn} />,
+          4: (
+            <Recordings
+              userName={userName}
+              logIn={logIn}
+              whichClass={whichClass}
+            />
+          ),
           5: (
             <Calendar
               userName={userName}

@@ -18,7 +18,7 @@ function Footer() {
     colorSet === "blue" &&
       document.documentElement.style.setProperty(
         "--shade-infow-color",
-        "rgba(213, 213, 202, 0.85)"
+        "#548ba1"
       );
     colorSet === "blue" &&
       document.documentElement.style.setProperty(
