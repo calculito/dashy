@@ -65,12 +65,12 @@ function Footer() {
     colorSet === "coffee" &&
       document.documentElement.style.setProperty(
         "--background-page-color",
-        "#ecede3"
+        "#d5d5ca"
       );
     colorSet === "coffee" &&
       document.documentElement.style.setProperty(
         "--background-infow-color",
-        "#d5d5ca"
+        "#b0afa5"
       );
     colorSet === "coffee" &&
       document.documentElement.style.setProperty(
@@ -90,7 +90,7 @@ function Footer() {
     colorSet === "coffee" &&
       document.documentElement.style.setProperty(
         "--background-tabn-color",
-        "#b0afa5"
+        "#ecede3"
       );
     colorSet === "coffee" &&
       document.documentElement.style.setProperty(
@@ -105,14 +105,14 @@ function Footer() {
     colorSet === "coffee" &&
       document.documentElement.style.setProperty(
         "--font-light-color",
-        "darkgrey"
+        "#ecede3"
       );
     colorSet === "coffee" &&
-      document.documentElement.style.setProperty("--font-white", "white");
+      document.documentElement.style.setProperty("--font-white", "#ecede3");
     colorSet === "coffee" &&
       document.documentElement.style.setProperty(
         "--font-whitesmoke",
-        "whitesmoke"
+        "#d5d5ca"
       );
     colorSet === "coffee" &&
       document.documentElement.style.setProperty(
@@ -140,12 +140,12 @@ function Footer() {
     colorSet === "gray" &&
       document.documentElement.style.setProperty(
         "--shade-light-color",
-        "rgb(0, 0, 0)"
+        "rgba(255, 255, 255, 0.3)"
       );
     colorSet === "gray" &&
       document.documentElement.style.setProperty(
         "--shade-dark-color",
-        "rgba(255, 255, 255, 0.3)"
+        "rgb(0, 0, 0)"
       );
     colorSet === "gray" &&
       document.documentElement.style.setProperty(

@@ -57,6 +57,7 @@ html,
   --filter: invert(1);
 }
 body {
+  padding: 0;
   margin: 0;
   border: 0;
   display: flex;
@@ -82,15 +83,19 @@ body {
 }
 
 .maincontainer {
-  height: 80%;
+  height: 85%;
   overflow: auto;
+  background-color: var(--background-infow-color);
 }
 .tabcontent {
+  background-color: var(--background-infow-color);
+}
+.tabcontent95 {
   height: 95%;
   background-color: var(--background-page-color);
 }
 button {
-  margin: 10px;
+  margin: 5px;
   background-color: var(--background-page-color);
   font-size: 18px;
 }
@@ -116,15 +121,9 @@ button:hover {
   margin-left: 8px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  padding: 15px 15px 10px 15px;
+  padding: 10px 10px 10px 10px;
   color: var(--font-tabnI-color);
   background-color: var(--background-tabn-color);
-  -webkit-box-shadow: 6px -6px 8px -1px rgba(0, 0, 0, 0.1),
-    -4px -4px 3px 0px rgba(255, 255, 255, 1);
-  -moz-box-shadow: 6px -6px 8px -1px rgba(0, 0, 0, 0.1),
-    -4px -4px 3px 0px rgba(255, 255, 255, 1);
-  box-shadow: 6px -6px 8px -1px rgba(0, 0, 0, 0.1),
-    -4px -4px 3px 0px rgba(255, 255, 255, 1);
   cursor: pointer;
   display: flex;
   flex-direction: row;
@@ -135,16 +134,10 @@ button:hover {
   margin-left: 8px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  padding: 15px;
+  padding: 10px 10px 10px 10px;
   color: var(--font-infow-color);
   font-weight: bold;
   background-color: var(--background-infow-color);
-  -webkit-box-shadow: 6px -6px 8px -1px rgba(0, 0, 0, 0.1),
-    -4px -4px 3px 0px rgba(255, 255, 255, 1);
-  -moz-box-shadow: 6px -6px 8px -1px rgba(0, 0, 0, 0.1),
-    -4px -4px 3px 0px rgba(255, 255, 255, 1);
-  box-shadow: 6px -6px 8px -1px rgba(0, 0, 0, 0.1),
-    -4px -4px 3px 0px rgba(255, 255, 255, 1);
   cursor: pointer;
   display: flex;
   flex-direction: row;
@@ -163,8 +156,8 @@ button:hover {
   border-radius: 6px;
   position: absolute;
   z-index: 1;
-  top: -5px;
-  left: 105%;
+  top: 5px;
+  left: 190px;
 }
 
 img {
@@ -173,16 +166,18 @@ img {
   max-height: 100%;
 }
 .greeting {
-  padding-left: 10px;
-  padding-top: 10px;
-  font-size: 18px;
-  justify-self: flex-end;
   color: var(--font-light-color);
   -webkit-filter: var(--webkit-filter);
   filter: var(--filter);
 }
+.fc-daygrid-event-dot {
+  border: 4px solid var(--shade-light-color);
+}
 .fc-toolbar {
   padding-top: 20px !important;
+}
+.fc-toolbar-title {
+  color: var(--font-light-color) !important;
 }
 .fc-scrollgrid-sync-table {
   height: 59vh !important;
@@ -190,11 +185,19 @@ img {
 .fc-daygrid {
   height: 65vh !important;
 }
+.fc-daygrid-day-number {
+  color: var(--font-light-color);
+}
 .fc {
   height: 75vh !important;
 }
 .fc-event-title {
   font-size: 10px !important;
+  color: var(--shade-light-color);
+}
+.fc-event-time {
+  font-size: 10px !important;
+  color: var(--shade-light-color);
 }
 .contentLinks {
   display: flex;
@@ -223,8 +226,12 @@ img {
   width: auto;
   height: auto;
   z-index: 15;
-  top: 5vw;
-  left: 21vw;
+  top: 25px;
+  left: 120px;
+  border: 2px solid var(--background-page-color);
+  border-radius: 4px;
+  padding: 5px;
+  background-color: var(--background-page-color);
 }
 .open-button {
   background-color: var(--shade-infow-color);
@@ -334,20 +341,21 @@ h4 {
   border-bottom: 2px solid rgb(201, 201, 201);
 }
 .inputLinks {
-  background-color: var(--background-page-color);
+  background-color: var(--background-infow-color);
   display: block;
   color: var(--font-infow-color);
   border: none;
-  border-radius: 8px;
+  border-top-left-radius: 8px;
   padding-left: 20px;
   width: 60%;
   height: 35px;
-  -webkit-box-shadow: inset 4px 4px 6px -2px rgba(130, 121, 130, 0.29);
-  -moz-box-shadow: inset 4px 4px 6px -2px rgba(130, 121, 130, 0.29);
-  box-shadow: inset 4px 4px 6px -2px rgba(130, 121, 130, 0.29);
+  -webkit-box-shadow: inset 4px 4px 0px -2px var(--font-infow-color);
+  -moz-box-shadow: inset 4px 4px 0px -2px var(--font-infow-color);
+  box-shadow: inset 4px 4px 0px -2px var(--font-infow-color);
 }
 
 .iconsRefferer {
+  background-color: var(--background-infow-color);
   font: Arial;
   font-size: 10px;
   text-decoration: none;
@@ -355,6 +363,10 @@ h4 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
 }
 .iconsrefferer a {
   font: Arial;
@@ -367,7 +379,6 @@ h4 {
   height: 24px;
 }
 .linksContainer {
-  background-color: var(--background-page-color);
   border-radius: 2px;
   margin: 0px 20px 20px 20px;
   max-height: 100%;
@@ -393,8 +404,8 @@ h4 {
 }
 .linkSymbols {
   padding: 0px 10px 0px 0px;
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   opacity: 0.8;
   cursor: pointer;
 }
@@ -407,29 +418,18 @@ h4 {
   justify-content: space-between;
   align-items: center;
   min-width: 100%;
-  /*padding-top: 8px;*/
-  padding-left: 8px;
+  padding: 5px 0px 5px 0px;
   background-color: var(--font-whitesmoke);
-  padding: 5px;
-  /*border-radius: 8px;*/
-  /*margin: 8px;*/
-  -webkit-box-shadow: 2px 2px 8px 0px var(--shade-dark-color),
-    -4px -4px 3px 0px var(--shade-light-color);
-  -moz-box-shadow: 2px 2px 8px 0px var(--shade-dark-color),
-    -4px -4px 3px 0px var(--shade-light-color);
-  box-shadow: 2px 2px 8px 0px var(--shade-dark-color),
-    -4px -4px 3px 0px var(--shade-light-color);
 }
 .recordings:hover {
   background-color: var(--font-white);
-
   color: var(--font-whitesmoke);
 }
 .recordinglinks {
   text-decoration: none;
   color: var(--font-infow-color);
   font-size: 16px;
-  margin: 10px;
+  margin: 5px;
   cursor: pointer;
   border: none;
 }
@@ -466,7 +466,9 @@ h4 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 5px;
+  margin-top: 2px;
+  min-width: 100%;
+  background-color: var(--background-page-color);
 }
 .rowHWPosAbs {
   display: flex;
@@ -534,9 +536,6 @@ h4 {
   border: 0px;
   margin: 0px;
   color: var(--font-light-color);
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  background-color: var(--shade-light-color);
   -webkit-box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
     -2px -2px 1px 0px var(--shade-light-color);
   -moz-box-shadow: 1px 2px 3px 0px var(--shade-dark-color),

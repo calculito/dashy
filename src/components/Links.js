@@ -85,6 +85,7 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
       headers: { "Content-Type": "application/json" },
     });
     setlinksInsertFieldP("");
+    setswitcher("1");
   }
 
   /////////    POST GENERAL LINKS     ///////////
@@ -98,6 +99,7 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
       headers: { "Content-Type": "application/json" },
     });
     setlinksInsertFieldG("");
+    setswitcher("1");
   }
   /////////    DELETE GENERAL LINKS     ///////////
   function deleteGeneralLink(linktodelete) {
@@ -159,19 +161,26 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
       </div>
       <div id="links">
         <div className="contLinks">
-          <input
-            className="inputLinks"
-            type="text"
-            placeholder="General links"
-            value={linksInsertFieldG}
-            onChange={(e) => setlinksInsertFieldG(e.target.value)}
-            required
-          />
-          {whichRole === "Instructor" && (
-            <button className="buttonHWL" onClick={insertGeneralLink}>
-              ⇚ Insert a general link
-            </button>
-          )}
+          <form className="cancelAndForgot">
+            <input
+              className="inputLinks"
+              type="text"
+              placeholder="General links"
+              value={linksInsertFieldG}
+              onChange={(e) => setlinksInsertFieldG(e.target.value)}
+              required
+            />
+            {whichRole === "Instructor" && (
+              <button
+                className="buttonHW"
+                onClick={
+                  linksInsertFieldG !== "" ? insertGeneralLink : undefined
+                }
+              >
+                ⇚ Insert a general link
+              </button>
+            )}
+          </form>
         </div>
 
         <div className="linksContainer">
@@ -256,17 +265,24 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
         </div>
 
         <div className="contLinks">
-          <input
-            className="inputLinks"
-            type="text"
-            placeholder="Personal links"
-            value={linksInsertFieldP}
-            onChange={(e) => setlinksInsertFieldP(e.target.value)}
-            required
-          />
-          <button className="buttonHWL" onClick={insertPersonalLink}>
-            ⇚ Insert a personal link
-          </button>
+          <form className="cancelAndForgot">
+            <input
+              className="inputLinks"
+              type="text"
+              placeholder="Personal links"
+              value={linksInsertFieldP}
+              onChange={(e) => setlinksInsertFieldP(e.target.value)}
+              required
+            />
+            <button
+              className="buttonHW"
+              onClick={
+                linksInsertFieldP !== "" ? insertPersonalLink : undefined
+              }
+            >
+              ⇚ Insert a personal link
+            </button>
+          </form>
         </div>
         <div className="linksContainer">
           {savedPersonalLink.map((link, index) => {

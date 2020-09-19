@@ -1,7 +1,7 @@
 import React from "react";
 import Slack from "./Slack";
 import Chat from "./Chat";
-import Syllabus from "./Syllabus";
+import Book from "./Book";
 import Homeworks from "./Homeworks";
 import Recordings from "./Recordings";
 import Calendar from "./Calendar";
@@ -17,10 +17,13 @@ export default function MainContainer({
 }) {
   //console.log(user);
   return (
-    <div className="maincontainer">
+    <div
+      className="maincontainer"
+      style={{ height: logIn === 0 ? "90%" : undefined }}
+    >
       {
         {
-          0: <Syllabus />,
+          0: <Book />,
           1: <Slack />,
           2: (
             <Homeworks

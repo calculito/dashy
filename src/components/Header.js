@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import logo from "../images/migracode-logo.png";
 import login from "../images/login.png";
-
 function Header({
   onHeaderClick,
   logIn,
@@ -87,7 +86,6 @@ function Header({
     });
     setopenInputWindow(false);
   }
-
   return (
     <div className="header" key={whichUserHeader}>
       {logIn === 1 ? (
@@ -125,27 +123,24 @@ function Header({
       />
       {openInputWindow !== false && (
         <div className="outPopUpVariabel">
-          <div className="form-container">
-            <div className="linksContainer">
-              {allClass.map((data, i) => (
-                <div
-                  className="rowHW"
-                  key={"divRHW" + i}
-                  onClick={() => onClick((whichClass = allClassId[i]))}
-                >
-                  <div
-                    className="recordings"
-                    key={"d" + i}
-                    onClick={(e) => changeClass(i)}
-                  >
-                    <button className="recordinglinks" key={i}>
-                      {data}
-                    </button>
-                  </div>
-                </div>
-              ))}
+          {allClass.map((data, i) => (
+            <div
+              className="buttonHW"
+              key={"divRHW" + i}
+              onClick={() => onClick((whichClass = allClassId[i]))}
+            >
+              <div
+                style={{ marginTop: "3px" }}
+                className="buttonHW"
+                key={"d" + i}
+                onClick={(e) => changeClass(i)}
+              >
+                <button className="recordinglinks" key={i}>
+                  {data}
+                </button>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       )}
     </div>

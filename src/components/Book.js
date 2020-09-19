@@ -1,9 +1,9 @@
 import React from "react";
 import Iframe from "react-iframe";
 
-function Syllabus() {
+function Book() {
   return (
-    <div className="tabcontent">
+    <div className="tabcontent95">
       <Iframe
         url="https://migracode-barcelona.github.io/syllabus/others/lesson0.html"
         width="99%"
@@ -16,4 +16,4 @@ function Syllabus() {
     </div>
   );
 }
-export default Syllabus;
+export default Book;

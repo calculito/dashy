@@ -102,7 +102,7 @@ function App() {
     setwhichContainer(indexContainer);
   };
 
-  //console.log(logIn, whichUser, whichClass, whichUserId, whichRole);
+  console.log(logIn, whichUser, whichClass, whichUserId, whichRole);
   return (
     <>
       {logIn === 2 && (

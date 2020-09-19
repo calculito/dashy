@@ -41,10 +41,6 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
   }, [logIn, switcher, whichClass]);
 
   useEffect(() => {
-    getuserhomeworksALL();
-  }, [switcher]);
-
-  useEffect(() => {
     getuserhomeworksStudentNo();
     getuserhomeworksStudentYes();
   }, [openInputWindow]);
@@ -207,7 +203,6 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
       headers: { "Content-Type": "application/json" },
     });
     setswitcher("1");
-    setopenInputWindow(false);
   }
   ///////////////    CHANGE HAMMER HOMEWORK FINISHED FOR STUDENTS      /////////////
   function changehammer(e, id) {
@@ -243,18 +238,23 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
       <div
         className={whichRole === "Instructor" ? "contLinks" : "contLinkshidden"}
       >
-        <input
-          className="inputLinks"
-          type="text"
-          placeholder="New homework"
-          value={homeworkInsertField}
-          onChange={(e) => sethomeworkInsertField(e.target.value)}
-          required
-        />
+        <div className="cancelAndForgot">
+          <input
+            className="inputLinks"
+            type="text"
+            placeholder="Homeworks"
+            value={homeworkInsertField}
+            onChange={(e) => sethomeworkInsertField(e.target.value)}
+            required
+          />
 
-        <button className="buttonHWL" onClick={insertHomework}>
-          ⇚ Insert a homework
-        </button>
+          <button
+            className="buttonHW"
+            onClick={homeworkInsertField !== "" ? insertHomework : undefined}
+          >
+            ⇚ Insert a homework
+          </button>
+        </div>
       </div>
       {openInputWindow !== false && (
         <div className="outPopUp">
