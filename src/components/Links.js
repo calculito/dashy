@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSpeechSynthesis } from "react-speech-kit";
 import sound from "../images/sound.png";
 import starblack from "../images/starblack.png";
@@ -35,6 +35,15 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
   useEffect(() => {
     getuserlinksGeneral();
   }, [linksInsertFieldG, linkToDelete]);
+  ////////////// SET FOCUS ON BUTTON /////////////
+  const useFocus = () => {
+    const htmlElRef = useRef(null);
+    const setFocus = () => {
+      htmlElRef.current && htmlElRef.current.focus();
+    };
+    return [htmlElRef, setFocus];
+  };
+  const [inputRef, setInputFocus] = useFocus();
   /////////    GET GENERAL LINKS     ///////////
   function getuserlinksGeneral() {
     let endpoint = "http://localhost:3001/userlinks/".concat(whichClass);
@@ -188,15 +197,22 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
             return (
               <div className="rowHW" key={"divRHW" + index}>
                 <div className="recordings" key={"divG" + index}>
-                  <a
-                    className="recordinglinks"
-                    href={link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    key={index}
-                  >
-                    {link}
-                  </a>
+                  <div style={{ paddingLeft: "5px" }}>
+                    <img
+                      src={"https://www.google.com/s2/favicons?domain=".concat(
+                        link
+                      )}
+                    ></img>
+                    <a
+                      className="recordinglinks"
+                      href={link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      key={index}
+                    >
+                      {link}
+                    </a>
+                  </div>
                   <div className="infoContLinks">
                     {whichRole === "Instructor" && (
                       <span
@@ -275,6 +291,7 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
               required
             />
             <button
+              ref={inputRef}
               className="buttonHW"
               onClick={
                 linksInsertFieldP !== "" ? insertPersonalLink : undefined
@@ -289,15 +306,22 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
             return (
               <div className="rowHW" key={"divRHW" + index}>
                 <div className="recordings" key={"divP" + index}>
-                  <a
-                    className="recordinglinks"
-                    href={link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    key={index}
-                  >
-                    {link}
-                  </a>
+                  <div style={{ paddingLeft: "5px" }}>
+                    <img
+                      src={"https://www.google.com/s2/favicons?domain=".concat(
+                        link
+                      )}
+                    ></img>
+                    <a
+                      className="recordinglinks"
+                      href={link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      key={index}
+                    >
+                      {link}
+                    </a>
+                  </div>
                   <div className="infoContLinks">
                     <span
                       className="circle"

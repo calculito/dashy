@@ -202,6 +202,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
     });
+    sethomeworkInsertField("");
     setswitcher("1");
   }
   ///////////////    CHANGE HAMMER HOMEWORK FINISHED FOR STUDENTS      /////////////
@@ -238,7 +239,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
       <div
         className={whichRole === "Instructor" ? "contLinks" : "contLinkshidden"}
       >
-        <div className="cancelAndForgot">
+        <form className="cancelAndForgot">
           <input
             className="inputLinks"
             type="text"
@@ -254,7 +255,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
           >
             ⇚ Insert a homework
           </button>
-        </div>
+        </form>
       </div>
       {openInputWindow !== false && (
         <div className="outPopUp">
@@ -458,18 +459,6 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
                       {alldata.link}
                     </a>
                     <div className="rowHWPosAbs" key={"divRHWStatus" + index}>
-                      <span
-                        className="circle"
-                        onClick={(e) => changeOptional(index)}
-                        style={{
-                          backgroundColor:
-                            alldata.optional === "yes" && "green",
-                          color: "white",
-                          fontSize: "12px",
-                        }}
-                      >
-                        OPT
-                      </span>
                       <div className="hammercontainer">
                         <img
                           className="linkSymbols"
@@ -512,6 +501,18 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
                           {data.name}({data.hammer})
                         </a>
                       ))}
+                      <span
+                        className="circle"
+                        onClick={(e) => changeOptional(index)}
+                        style={{
+                          backgroundColor:
+                            alldata.optional === "yes" && "green",
+                          color: "white",
+                          fontSize: "12px",
+                        }}
+                      >
+                        OPT
+                      </span>
                     </div>
                   </div>
                 </div>

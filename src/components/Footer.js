@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
-
+import { useSpeechSynthesis } from "react-speech-kit";
+import sound from "../images/sound.png";
 function Footer() {
+  const { speak } = useSpeechSynthesis();
+  const [openInputWindow, setopenInputWindow] = useState(false);
+  const [textToRead, settextToRead] = useState("");
   const [colorSet, setcolorSet] = useState("white");
   useEffect(() => {
     console.log(colorSet);
@@ -182,9 +186,34 @@ function Footer() {
     colorSet === "gray" &&
       document.documentElement.style.setProperty("--filter", "invert(1)");
   }, [colorSet]);
-
+  ///////////  SOUND READ LOUD  /////////////
+  function soundloud() {
+    speak({
+      text: textToRead,
+    });
+    setopenInputWindow(false);
+    settextToRead("");
+  }
   return (
     <div className="iconsRefferer">
+      {openInputWindow !== false && (
+        <div className="outPopUpText">
+          <form className="form-container" onSubmit={soundloud}>
+            <label>
+              Insert your text:
+              <textarea
+                className="bigWindowForText"
+                autoFocus
+                type="text"
+                placeholder="xyz..."
+                value={textToRead}
+                onChange={(e) => settextToRead(e.target.value)}
+              />
+            </label>
+            <input type="submit" value="Submit" className="buttonHW" />
+          </form>
+        </div>
+      )}
       <div>
         Icons made by{" "}
         <a
@@ -206,7 +235,7 @@ function Footer() {
           www.flaticon.com
         </a>
       </div>
-      <div>
+      <div className="infoContLinks">
         <button className="buttonHW" onClick={(e) => setcolorSet("blue")}>
           blau
         </button>
@@ -216,6 +245,12 @@ function Footer() {
         <button className="buttonHW" onClick={(e) => setcolorSet("gray")}>
           gray
         </button>
+        <img
+          className="linkSymbols"
+          src={sound}
+          alt="speaker"
+          onClick={(e) => setopenInputWindow(1)}
+        />
       </div>
     </div>
   );
