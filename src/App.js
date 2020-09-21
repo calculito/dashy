@@ -36,7 +36,7 @@ function App() {
   };
   /////////////////// GET USER TO CHECK IF IN DB ////////////////////
   function getuser() {
-    fetch("http://localhost:3001")
+    fetch("https://dashybackend.herokuapp.com/")
       .then((response) => {
         return response.text();
       })
@@ -66,7 +66,7 @@ function App() {
   };
   /////////////////// GET DATA FROM DB WHERE USER ////////////////////
   function getClass() {
-    fetch("http://localhost:3001")
+    fetch("https://dashybackend.herokuapp.com/")
       .then((response) => {
         return response.json();
       })
