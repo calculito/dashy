@@ -8,6 +8,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
   const { speak } = useSpeechSynthesis();
   const [switcher, setswitcher] = useState("");
   const [hammer, sethammer] = useState([1]);
+  const [homeworkHammerInst, sethomeworkHammerInst] = useState([1]);
   const [hwOptional, sethwOptional] = useState("");
   const [hwOptionalUn, sethwOptionalUn] = useState("");
   const [homeworkInsertField, sethomeworkInsertField] = useState("");
@@ -121,6 +122,13 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
         }, []);
         sethomeworkDescriptionALLR(homeworkDescriptionALLR);
       });
+    ///////// fetch hammer //////////
+    let endpointhammer = "http://localhost:3001/userhomeworksALLHammer";
+    fetch(endpointhammer)
+      .then((response) => response.json())
+      .then((data) => {
+        sethomeworkHammerInst(data);
+      });
   }
   ///////////////    CHANGE STATUS TO FINISHED        /////////////
   function changestatus(e) {
@@ -224,7 +232,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
       text: toread,
     });
   }
-
+  console.log(homeworkHammerInst);
   return (
     <div className="tabcontent">
       <div className="infoWindow">
