@@ -77,7 +77,7 @@ function Header({
 
   //////////////////  CHANGE CLASS ///////////////////
   function changeClass(i) {
-    // whichClass = allClassId[i];
+    whichClass = allClassId[i];
     let data = { classId: allClassId[i] };
     fetch(
       "https://dashybackend.herokuapp.com/switchclass/".concat(whichUserId),
@@ -89,6 +89,7 @@ function Header({
     );
     setopenInputWindow(false);
   }
+  console.log(whichClass);
   return (
     <div className="header" key={whichUserHeader}>
       {logIn === 1 ? (
