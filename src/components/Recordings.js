@@ -10,7 +10,9 @@ function Recordings({ userName, logIn, whichClass }) {
   }, [userName, logIn, whichClass]);
 
   function getuserRecordingsFromDB(userName) {
-    let endpoint = "http://localhost:3001/userrecordings/".concat(userName);
+    let endpoint = "https://dashybackend.herokuapp.com/userrecordings/".concat(
+      userName
+    );
     fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {

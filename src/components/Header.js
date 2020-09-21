@@ -29,7 +29,7 @@ function Header({
   /////////////////   GET USER CLASS NAME   ///////////////
 
   function getclassNameFromDB() {
-    fetch("http://localhost:3001/userclassname")
+    fetch("https://dashybackend.herokuapp.com/userclassname")
       .then((response) => response.json())
       .then((data) => {
         // console.log(data);
@@ -60,7 +60,7 @@ function Header({
   }
   //////////////////  GET ALL CLASS  ///////////////////
   function getInfoTochangeCLass() {
-    let endpoint = "http://localhost:3001/class/";
+    let endpoint = "https://dashybackend.herokuapp.com/class/";
     fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {
@@ -79,11 +79,14 @@ function Header({
   function changeClass(i) {
     whichClass = allClassId[i];
     let data = { classId: allClassId[i] };
-    fetch("http://localhost:3001/switchclass/".concat(whichUserId), {
-      method: "PUT",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
-    });
+    fetch(
+      "https://dashybackend.herokuapp.com/switchclass/".concat(whichUserId),
+      {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     setopenInputWindow(false);
   }
   return (

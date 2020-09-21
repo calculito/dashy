@@ -46,7 +46,7 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
   const [inputRef, setInputFocus] = useFocus();
   /////////    GET GENERAL LINKS     ///////////
   function getuserlinksGeneral() {
-    let endpoint = "http://localhost:3001/userlinks/".concat(whichClass);
+    let endpoint = "https://dashybackend.herokuapp.com/userlinks/".concat(whichClass);
     fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {
@@ -66,7 +66,7 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
   }
   /////////    GET PERSONAL LINKS     ///////////
   function getuserlinksPersonal() {
-    let endpoint = "http://localhost:3001/userpersonallinks/".concat(userName);
+    let endpoint = "https://dashybackend.herokuapp.com/userpersonallinks/".concat(userName);
     fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {
@@ -88,7 +88,7 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
   /////////    POST PERSONAL LINKS     ///////////
   function insertPersonalLink() {
     const data = { link: linksInsertFieldP };
-    fetch("http://localhost:3001/postpersonallink/".concat(whichUserId), {
+    fetch("https://dashybackend.herokuapp.com/postpersonallink/".concat(whichUserId), {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
@@ -100,7 +100,7 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
   /////////    POST GENERAL LINKS     ///////////
   function insertGeneralLink() {
     const data = { link: linksInsertFieldG };
-    let endpoint = "http://localhost:3001/postgenerallink/".concat(whichClass);
+    let endpoint = "https://dashybackend.herokuapp.com/postgenerallink/".concat(whichClass);
     //console.log(endpoint);
     fetch(endpoint, {
       method: "POST",
@@ -115,7 +115,7 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
     setlinkToDelete(linktodelete);
     const data = { link: linktodelete };
     //navigator.clipboard.writeText(linktodelete);
-    fetch("http://localhost:3001/deletegenlink/", {
+    fetch("https://dashybackend.herokuapp.com/deletegenlink/", {
       method: "DELETE",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
@@ -126,7 +126,7 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
     setlinkToDelete(linktodelete);
     let data = { link: linktodelete };
     //navigator.clipboard.writeText(linktodelete);
-    fetch("http://localhost:3001/deletepersonallink/", {
+    fetch("https://dashybackend.herokuapp.com/deletepersonallink/", {
       method: "DELETE",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
@@ -136,7 +136,7 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
   function changestarspers(e, id) {
     setlinkToDelete(e);
     let data = { link: e };
-    fetch("http://localhost:3001/personallinkstars/".concat(id), {
+    fetch("https://dashybackend.herokuapp.com/personallinkstars/".concat(id), {
       method: "PUT",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
@@ -147,7 +147,7 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
   function changestars(e, id) {
     setlinkToDelete(e);
     let data = { link: e };
-    fetch("http://localhost:3001/generallinkstars/".concat(id), {
+    fetch("https://dashybackend.herokuapp.com/generallinkstars/".concat(id), {
       method: "PUT",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },

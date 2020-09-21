@@ -15,7 +15,9 @@ function Calendar({ whichClass }) {
   };
 
   function getuserAppointments() {
-    let endpoint = "http://localhost:3001/usercalendar/".concat(whichClass);
+    let endpoint = "https://dashybackend.herokuapp.com/usercalendar/".concat(
+      whichClass
+    );
     fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {

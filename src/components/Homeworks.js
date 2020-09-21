@@ -48,7 +48,9 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
 
   ///////////////    GET FINISHED HOMEWORKS FOR STUDENTS     /////////////
   function getuserhomeworksStudentYes() {
-    let endpoint = "http://localhost:3001/userhomeworksSYES/".concat(userName);
+    let endpoint = "https://dashybackend.herokuapp.com/userhomeworksSYES/".concat(
+      userName
+    );
     fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {
@@ -76,7 +78,9 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
   }
   ///////////////    GET UNFINISHED HOMEWORKS FOR STUDENTS     /////////////
   function getuserhomeworksStudentNo() {
-    let endpoint = "http://localhost:3001/userhomeworksSNO/".concat(userName);
+    let endpoint = "https://dashybackend.herokuapp.com/userhomeworksSNO/".concat(
+      userName
+    );
     fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {
@@ -96,7 +100,9 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
   }
   ///////////////    GET HOMEWORKS FOR INSTRUCTORS       /////////////
   function getuserhomeworksALL() {
-    let endpoint = "http://localhost:3001/userhomeworksALL/".concat(whichClass);
+    let endpoint = "https://dashybackend.herokuapp.com/userhomeworksALL/".concat(
+      whichClass
+    );
     fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {
@@ -123,7 +129,8 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
         sethomeworkDescriptionALLR(homeworkDescriptionALLR);
       });
     ///////// fetch hammer //////////
-    let endpointhammer = "http://localhost:3001/userhomeworksALLHammer";
+    let endpointhammer =
+      "https://dashybackend.herokuapp.com/userhomeworksALLHammer";
     fetch(endpointhammer)
       .then((response) => response.json())
       .then((data) => {
@@ -135,11 +142,14 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
     const data = { userId: whichUserId };
     let homeworkId = homeworkUnfinishedIdArray[e];
     sethomeworkUnfinishedId(homeworkId);
-    fetch("http://localhost:3001/homeworkfinished/".concat(homeworkId), {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
-    });
+    fetch(
+      "https://dashybackend.herokuapp.com/homeworkfinished/".concat(homeworkId),
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     setopenInputWindow(e);
   }
   ///////////////    INSERT LINK TO HOMEWORK IF (NO LINK)       /////////////
@@ -151,7 +161,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
   function saveLinkToHomeworkAfter(evt) {
     evt.preventDefault();
     const data = { link: linkToMyHomework, userId: whichUserId };
-    let endlink = "http://localhost:3001/homeworkfinishedlinkafter/".concat(
+    let endlink = "https://dashybackend.herokuapp.com/homeworkfinishedlinkafter/".concat(
       thishomeworkFinishedId
     );
     linkToMyHomework !== "" &&
@@ -173,7 +183,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
       hwOpt === "yes" ? (hwOpt = "no") : (hwOpt = "yes");
     }
     const data = { optional: hwOpt };
-    fetch("http://localhost:3001/homeworkoptional/".concat(hwId), {
+    fetch("https://dashybackend.herokuapp.com/homeworkoptional/".concat(hwId), {
       method: "PUT",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
@@ -186,7 +196,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
 
     let homeworkId2 = homeworkUnfinishedId;
     const data = { link: linkToMyHomework, userId: whichUserId };
-    let endlink = "http://localhost:3001/homeworkfinishedlink/".concat(
+    let endlink = "https://dashybackend.herokuapp.com/homeworkfinishedlink/".concat(
       homeworkId2
     );
     linkToMyHomework !== "" &&
@@ -204,7 +214,9 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
   /////////    POST HOMEWORK AS INSTRUCTOR    ///////////
   function insertHomework() {
     const data = { link: homeworkInsertField };
-    let endpoint = "http://localhost:3001/posthomework/".concat(whichClass);
+    let endpoint = "https://dashybackend.herokuapp.com/posthomework/".concat(
+      whichClass
+    );
     fetch(endpoint, {
       method: "POST",
       body: JSON.stringify(data),
@@ -216,7 +228,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
   ///////////////    CHANGE HAMMER HOMEWORK FINISHED FOR STUDENTS      /////////////
   function changehammer(e, id) {
     let data = { numberHammer: e };
-    fetch("http://localhost:3001/hammerstudents/".concat(id), {
+    fetch("https://dashybackend.herokuapp.com/hammerstudents/".concat(id), {
       method: "PUT",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
