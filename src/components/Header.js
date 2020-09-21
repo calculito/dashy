@@ -77,7 +77,7 @@ function Header({
 
   //////////////////  CHANGE CLASS ///////////////////
   function changeClass(i) {
-    whichClass = allClassId[i];
+    // whichClass = allClassId[i];
     let data = { classId: allClassId[i] };
     fetch(
       "https://dashybackend.herokuapp.com/switchclass/".concat(whichUserId),
