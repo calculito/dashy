@@ -17,23 +17,32 @@ function Header({
   const ref = React.useRef();
   /////////////////   USEEFFECTS   ///////////////
   useEffect(() => {
-    //console.log(logIn);
-    logIn === 1 && getclassNameFromDB();
     logIn === 1 && getInfoTochangeCLass();
-    var timerID = setInterval(() => tick(), 1000);
-    return function cleanup() {
-      clearInterval(timerID);
-    };
-  }, [logIn, whichClass]);
+    logIn === 1 && getclassNameFromDB();
+    console.log("trigger");
+    console.log(whichClass, userClassName);
+    //var timerID = setInterval(() => tick(), 1000);
+    //return function cleanup() {
+    //   clearInterval(timerID);
+    //  };
+  }, [logIn, userClassName, openInputWindow]);
 
+  useEffect(() => {
+    logIn === 1 && getclassNameFromDB();
+    console.log("trigger2");
+    console.log(whichClass, userClassName);
+    //var timerID = setInterval(() => tick(), 1000);
+    //return function cleanup() {
+    //   clearInterval(timerID);
+    //  };
+  }, [allClassId]);
   /////////////////   GET USER CLASS NAME   ///////////////
 
-  function getclassNameFromDB() {
-    fetch("https://dashybackend.herokuapp.com/userclassname")
+  async function getclassNameFromDB() {
+    await fetch("https://dashybackend.herokuapp.com/userclassname")
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
-        // console.log(whichUserId);
+        console.log(data);
         setuserClassName(
           data[data.findIndex((element) => element.name === whichUserHeader)]
             .class_name
@@ -55,13 +64,13 @@ function Header({
     ":" +
     zweistellig(date.getSeconds());
 
-  function tick() {
-    setDate(new Date());
-  }
+  //function tick() {
+  //   setDate(new Date());
+  // }
   //////////////////  GET ALL CLASS  ///////////////////
-  function getInfoTochangeCLass() {
+  async function getInfoTochangeCLass() {
     let endpoint = "https://dashybackend.herokuapp.com/class/";
-    fetch(endpoint)
+    await fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {
         const arrToClass = data.map(function (daten) {
@@ -77,7 +86,7 @@ function Header({
 
   //////////////////  CHANGE CLASS ///////////////////
   function changeClass(i) {
-    whichClass = allClassId[i];
+    //whichClass = allClassId[i];
     let data = { classId: allClassId[i] };
     fetch(
       "https://dashybackend.herokuapp.com/switchclass/".concat(whichUserId),
@@ -89,7 +98,7 @@ function Header({
     );
     setopenInputWindow(false);
   }
-  console.log(whichClass);
+
   return (
     <div className="header" key={whichUserHeader}>
       {logIn === 1 ? (
@@ -104,7 +113,7 @@ function Header({
             <button
               className="buttonHW"
               key="4"
-              onClick={(e) => setopenInputWindow("1")}
+              onClick={() => setopenInputWindow("1")}
             >
               {userClassName}
               <span className="tooltiptext">Change your class</span>

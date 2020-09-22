@@ -83,6 +83,7 @@ function App() {
         );
       });
   }
+
   ////////////// SET FOCUS ON FORM /////////////
   const useFocus = () => {
     const htmlElRef = useRef(null);
@@ -103,6 +104,7 @@ function App() {
   };
 
   console.log(logIn, whichUser, whichClass, whichUserId, whichRole);
+
   return (
     <>
       {logIn === 2 && (

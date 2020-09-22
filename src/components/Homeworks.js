@@ -244,7 +244,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
       text: toread,
     });
   }
-  console.log(homeworkHammerInst);
+  //console.log(homeworkHammerInst);
   return (
     <div className="tabcontent">
       <div className="infoWindow">
