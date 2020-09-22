@@ -9,11 +9,11 @@ function Recordings({ userName, logIn, whichClass }) {
     getuserRecordingsFromDB(userName);
   }, [userName, logIn, whichClass]);
 
-  function getuserRecordingsFromDB(userName) {
+  async function getuserRecordingsFromDB(userName) {
     let endpoint = "https://dashybackend.herokuapp.com/userrecordings/".concat(
       userName
     );
-    fetch(endpoint)
+    await fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {
         const arrToDescription = data.map(function (daten) {

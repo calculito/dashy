@@ -5,8 +5,8 @@ import starblack from "../images/starblack.png";
 import stargold from "../images/stargold.png";
 
 function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
+  let [switcher, setswitcher] = useState("0");
   const { speak } = useSpeechSynthesis();
-  const [switcher, setswitcher] = useState("");
   const [linksInsertFieldG, setlinksInsertFieldG] = useState("");
   const [linksInsertFieldP, setlinksInsertFieldP] = useState("");
   const [linksGeneral, setlinksGeneral] = useState([
@@ -26,15 +26,16 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
   useEffect(() => {
     getuserlinksGeneral();
     getuserlinksPersonal();
-    setlinkToDelete("");
-    setswitcher("");
-  }, [logIn, linkToDelete, switcher, whichClass]);
-  useEffect(() => {
-    getuserlinksPersonal();
-  }, [linksInsertFieldP, linkToDelete]);
-  useEffect(() => {
-    getuserlinksGeneral();
-  }, [linksInsertFieldG, linkToDelete]);
+    setswitcher(0);
+  }, [
+    logIn,
+    linkToDelete,
+    // switcher,
+    whichClass,
+    // linksInsertFieldP,
+    //linksInsertFieldG,
+  ]);
+
   ////////////// SET FOCUS ON BUTTON /////////////
   const useFocus = () => {
     const htmlElRef = useRef(null);
@@ -45,9 +46,11 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
   };
   const [inputRef, setInputFocus] = useFocus();
   /////////    GET GENERAL LINKS     ///////////
-  function getuserlinksGeneral() {
-    let endpoint = "https://dashybackend.herokuapp.com/userlinks/".concat(whichClass);
-    fetch(endpoint)
+  async function getuserlinksGeneral() {
+    let endpoint = "https://dashybackend.herokuapp.com/userlinks/".concat(
+      whichClass
+    );
+    await fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {
         const arrToDescription = data.map(function (daten) {
@@ -65,9 +68,11 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
       });
   }
   /////////    GET PERSONAL LINKS     ///////////
-  function getuserlinksPersonal() {
-    let endpoint = "https://dashybackend.herokuapp.com/userpersonallinks/".concat(userName);
-    fetch(endpoint)
+  async function getuserlinksPersonal() {
+    let endpoint = "https://dashybackend.herokuapp.com/userpersonallinks/".concat(
+      userName
+    );
+    await fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {
         const arrToDescription = data.map(function (daten) {
@@ -86,72 +91,87 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
   }
 
   /////////    POST PERSONAL LINKS     ///////////
-  function insertPersonalLink() {
+  async function insertPersonalLink() {
     const data = { link: linksInsertFieldP };
-    fetch("https://dashybackend.herokuapp.com/postpersonallink/".concat(whichUserId), {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
-    });
+    await fetch(
+      "https://dashybackend.herokuapp.com/postpersonallink/".concat(
+        whichUserId
+      ),
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     setlinksInsertFieldP("");
-    setswitcher("1");
   }
 
   /////////    POST GENERAL LINKS     ///////////
-  function insertGeneralLink() {
+  async function insertGeneralLink() {
     const data = { link: linksInsertFieldG };
-    let endpoint = "https://dashybackend.herokuapp.com/postgenerallink/".concat(whichClass);
-    //console.log(endpoint);
-    fetch(endpoint, {
+    let endpoint = "https://dashybackend.herokuapp.com/postgenerallink/".concat(
+      whichClass
+    );
+    await fetch(endpoint, {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
     });
     setlinksInsertFieldG("");
-    setswitcher("1");
   }
   /////////    DELETE GENERAL LINKS     ///////////
-  function deleteGeneralLink(linktodelete) {
+  async function deleteGeneralLink(linktodelete) {
     setlinkToDelete(linktodelete);
     const data = { link: linktodelete };
     //navigator.clipboard.writeText(linktodelete);
-    fetch("https://dashybackend.herokuapp.com/deletegenlink/", {
+    await fetch("https://dashybackend.herokuapp.com/deletegenlink/", {
       method: "DELETE",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
     });
+    setlinkToDelete("");
   }
   /////////    DELETE PERSONAL LINKS     ///////////
-  function deletePersonalLink(linktodelete) {
+  async function deletePersonalLink(linktodelete) {
     setlinkToDelete(linktodelete);
     let data = { link: linktodelete };
     //navigator.clipboard.writeText(linktodelete);
-    fetch("https://dashybackend.herokuapp.com/deletepersonallink/", {
+    await fetch("https://dashybackend.herokuapp.com/deletepersonallink/", {
       method: "DELETE",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
     });
+    setlinkToDelete("");
   }
   ///////////////    CHANGE STARS PERSONAL LINKS       /////////////
-  function changestarspers(e, id) {
+  async function changestarspers(e, id) {
     setlinkToDelete(e);
     let data = { link: e };
-    fetch("https://dashybackend.herokuapp.com/personallinkstars/".concat(id), {
-      method: "PUT",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
-    });
-    setswitcher("1");
+    await fetch(
+      "https://dashybackend.herokuapp.com/personallinkstars/".concat(id),
+      {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    setswitcher(1);
+    setlinkToDelete("");
   }
   ///////////////    CHANGE STARS GENERAL LINKS       /////////////
-  function changestars(e, id) {
+  async function changestars(e, id) {
     setlinkToDelete(e);
     let data = { link: e };
-    fetch("https://dashybackend.herokuapp.com/generallinkstars/".concat(id), {
-      method: "PUT",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
-    });
+    await fetch(
+      "https://dashybackend.herokuapp.com/generallinkstars/".concat(id),
+      {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    setswitcher(1);
+    setlinkToDelete("");
   }
   ///////////  SOUND READ LOUD  /////////////
   function soundloud(toread) {
@@ -217,9 +237,7 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
                     {whichRole === "Instructor" && (
                       <span
                         className="circle"
-                        onClick={(e) =>
-                          deleteGeneralLink(linksGeneralId[index])
-                        }
+                        onClick={() => deleteGeneralLink(linksGeneralId[index])}
                       >
                         DEL
                       </span>
@@ -291,7 +309,6 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
               required
             />
             <button
-              ref={inputRef}
               className="buttonHW"
               onClick={
                 linksInsertFieldP !== "" ? insertPersonalLink : undefined

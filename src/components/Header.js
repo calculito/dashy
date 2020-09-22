@@ -19,8 +19,6 @@ function Header({
   useEffect(() => {
     logIn === 1 && getInfoTochangeCLass();
     logIn === 1 && getclassNameFromDB();
-    console.log("trigger");
-    console.log(whichClass, userClassName);
     //var timerID = setInterval(() => tick(), 1000);
     //return function cleanup() {
     //   clearInterval(timerID);
@@ -29,12 +27,6 @@ function Header({
 
   useEffect(() => {
     logIn === 1 && getclassNameFromDB();
-    console.log("trigger2");
-    console.log(whichClass, userClassName);
-    //var timerID = setInterval(() => tick(), 1000);
-    //return function cleanup() {
-    //   clearInterval(timerID);
-    //  };
   }, [allClassId]);
   /////////////////   GET USER CLASS NAME   ///////////////
 
@@ -42,7 +34,6 @@ function Header({
     await fetch("https://dashybackend.herokuapp.com/userclassname")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setuserClassName(
           data[data.findIndex((element) => element.name === whichUserHeader)]
             .class_name

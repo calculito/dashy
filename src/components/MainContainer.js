@@ -15,7 +15,6 @@ export default function MainContainer({
   whichRole,
   whichUserId,
 }) {
-  //console.log(user);
   return (
     <div
       className="maincontainer"
