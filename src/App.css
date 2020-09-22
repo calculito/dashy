@@ -520,21 +520,6 @@ h4 {
   margin: 1px 3px 1px 3px;
   border: 0px;
   border-radius: 4px;
-  color: var(--font-white);
-  -webkit-box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
-    -2px -2px 1px 0px var(--shade-light-color);
-  -moz-box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
-    -2px -2px 1px 0px var(--shade-light-color);
-  box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
-    -2px -2px 1px 0px var(--shade-light-color);
-  cursor: pointer;
-}
-.buttonHWNamesA:hover {
-  font-size: 12px;
-  padding: 1px 3px 1px 3px;
-  margin: 1px 3px 1px 3px;
-  border: 0px;
-  border-radius: 4px;
   color: var(--shade-light-color);
   -webkit-box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
     -2px -2px 1px 0px var(--shade-light-color);
@@ -543,6 +528,22 @@ h4 {
   box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
     -2px -2px 1px 0px var(--shade-light-color);
   cursor: pointer;
+  opacity: 0.8;
+}
+.buttonHWNamesA:hover {
+  font-size: 12px;
+  padding: 1px 3px 1px 3px;
+  margin: 1px 3px 1px 3px;
+  border: 0px;
+  border-radius: 4px;
+  -webkit-box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
+    -2px -2px 1px 0px var(--shade-light-color);
+  -moz-box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
+    -2px -2px 1px 0px var(--shade-light-color);
+  box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
+    -2px -2px 1px 0px var(--shade-light-color);
+  cursor: pointer;
+  opacity: 1;
 }
 .buttonHWL {
   border: 0px;

@@ -32,8 +32,8 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
     linkToDelete,
     // switcher,
     whichClass,
-    // linksInsertFieldP,
-    //linksInsertFieldG,
+    linksInsertFieldP,
+    linksInsertFieldG,
   ]);
 
   ////////////// SET FOCUS ON BUTTON /////////////
@@ -91,7 +91,8 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
   }
 
   /////////    POST PERSONAL LINKS     ///////////
-  async function insertPersonalLink() {
+  async function insertPersonalLink(evt) {
+    evt.preventDefault();
     const data = { link: linksInsertFieldP };
     await fetch(
       "https://dashybackend.herokuapp.com/postpersonallink/".concat(
@@ -107,7 +108,8 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
   }
 
   /////////    POST GENERAL LINKS     ///////////
-  async function insertGeneralLink() {
+  async function insertGeneralLink(evt) {
+    evt.preventDefault();
     const data = { link: linksInsertFieldG };
     let endpoint = "https://dashybackend.herokuapp.com/postgenerallink/".concat(
       whichClass

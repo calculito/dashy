@@ -47,11 +47,11 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
   }, [openInputWindow]);
 
   ///////////////    GET FINISHED HOMEWORKS FOR STUDENTS     /////////////
-  function getuserhomeworksStudentYes() {
+  async function getuserhomeworksStudentYes() {
     let endpoint = "https://dashybackend.herokuapp.com/userhomeworksSYES/".concat(
       userName
     );
-    fetch(endpoint)
+    await fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {
         const arrToDescription = data.map(function (daten) {
@@ -77,11 +77,11 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
       });
   }
   ///////////////    GET UNFINISHED HOMEWORKS FOR STUDENTS     /////////////
-  function getuserhomeworksStudentNo() {
+  async function getuserhomeworksStudentNo() {
     let endpoint = "https://dashybackend.herokuapp.com/userhomeworksSNO/".concat(
       userName
     );
-    fetch(endpoint)
+    await fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {
         const arrToDescription = data.map(function (daten) {
@@ -99,11 +99,11 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
       });
   }
   ///////////////    GET HOMEWORKS FOR INSTRUCTORS       /////////////
-  function getuserhomeworksALL() {
+  async function getuserhomeworksALL() {
     let endpoint = "https://dashybackend.herokuapp.com/userhomeworksALL/".concat(
       whichClass
     );
-    fetch(endpoint)
+    await fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {
         const homeworkDescriptionALLR = data.reduce((acc, d) => {
@@ -131,18 +131,18 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
     ///////// fetch hammer //////////
     let endpointhammer =
       "https://dashybackend.herokuapp.com/userhomeworksALLHammer";
-    fetch(endpointhammer)
+    await fetch(endpointhammer)
       .then((response) => response.json())
       .then((data) => {
         sethomeworkHammerInst(data);
       });
   }
   ///////////////    CHANGE STATUS TO FINISHED        /////////////
-  function changestatus(e) {
+  async function changestatus(e) {
     const data = { userId: whichUserId };
     let homeworkId = homeworkUnfinishedIdArray[e];
     sethomeworkUnfinishedId(homeworkId);
-    fetch(
+    await fetch(
       "https://dashybackend.herokuapp.com/homeworkfinished/".concat(homeworkId),
       {
         method: "POST",
@@ -158,40 +158,43 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
     setopenInputWindowAfter(e);
     // setswitcher("1");
   }
-  function saveLinkToHomeworkAfter(evt) {
+  async function saveLinkToHomeworkAfter(evt) {
     evt.preventDefault();
     const data = { link: linkToMyHomework, userId: whichUserId };
     let endlink = "https://dashybackend.herokuapp.com/homeworkfinishedlinkafter/".concat(
       thishomeworkFinishedId
     );
     linkToMyHomework !== "" &&
-      fetch(endlink, {
+      (await fetch(endlink, {
         method: "PUT",
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" },
-      });
+      }));
     setthishomeworkFinishedId("");
     setlinkToMyHomework("");
     setopenInputWindowAfter(false);
     setswitcher("1");
   }
   ///////////////    CHANGE STATUS TO OPTIONAL       /////////////
-  function changeOptional(index) {
+  async function changeOptional(index) {
     let hwId = homeworkDescriptionALLR[index].id;
     let hwOpt = homeworkDescriptionALLR[index].optional;
     {
       hwOpt === "yes" ? (hwOpt = "no") : (hwOpt = "yes");
     }
     const data = { optional: hwOpt };
-    fetch("https://dashybackend.herokuapp.com/homeworkoptional/".concat(hwId), {
-      method: "PUT",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
-    });
+    await fetch(
+      "https://dashybackend.herokuapp.com/homeworkoptional/".concat(hwId),
+      {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     setswitcher("1");
   }
   ////////////////  SAVE LINK TO HOMEWORK FROM FORM  //////////////
-  function saveLinkToHomework(evt) {
+  async function saveLinkToHomework(evt) {
     evt.preventDefault();
 
     let homeworkId2 = homeworkUnfinishedId;
@@ -200,11 +203,11 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
       homeworkId2
     );
     linkToMyHomework !== "" &&
-      fetch(endlink, {
+      (await fetch(endlink, {
         method: "PUT",
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" },
-      });
+      }));
     sethomeworkUnfinishedId("");
     setlinkToMyHomework("");
     console.log(data, homeworkId2);
@@ -212,12 +215,12 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
     setswitcher("1");
   }
   /////////    POST HOMEWORK AS INSTRUCTOR    ///////////
-  function insertHomework() {
+  async function insertHomework() {
     const data = { link: homeworkInsertField };
     let endpoint = "https://dashybackend.herokuapp.com/posthomework/".concat(
       whichClass
     );
-    fetch(endpoint, {
+    await fetch(endpoint, {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
@@ -226,13 +229,16 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
     setswitcher("1");
   }
   ///////////////    CHANGE HAMMER HOMEWORK FINISHED FOR STUDENTS      /////////////
-  function changehammer(e, id) {
+  async function changehammer(e, id) {
     let data = { numberHammer: e };
-    fetch("https://dashybackend.herokuapp.com/hammerstudents/".concat(id), {
-      method: "PUT",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
-    });
+    await fetch(
+      "https://dashybackend.herokuapp.com/hammerstudents/".concat(id),
+      {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     setswitcher("1");
   }
   ////////////////  PREPARE ARRAYS FOR GETTING DATA FROM DATABASE  //////////////
@@ -515,7 +521,7 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
                           className="buttonHWNamesA"
                           style={{
                             backgroundColor:
-                              data.finished === "yes" ? "green" : "red",
+                              data.finished === "yes" ? "darkorange" : "red",
                           }}
                         >
                           {data.name}({data.hammer})
