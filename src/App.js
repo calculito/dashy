@@ -35,8 +35,8 @@ function App() {
     whichUser !== whichPassword ? wrongPassword() : goodPassword();
   };
   /////////////////// GET USER TO CHECK IF IN DB ////////////////////
-  function getuser() {
-    fetch("https://dashybackend.herokuapp.com/")
+  async function getuser() {
+    await fetch("https://dashybackend.herokuapp.com/")
       .then((response) => {
         return response.text();
       })
@@ -65,8 +65,8 @@ function App() {
     setpasswordUserWrong(2);
   };
   /////////////////// GET DATA FROM DB WHERE USER ////////////////////
-  function getClass() {
-    fetch("https://dashybackend.herokuapp.com/")
+  async function getClass() {
+    await fetch("https://dashybackend.herokuapp.com/")
       .then((response) => {
         return response.json();
       })
