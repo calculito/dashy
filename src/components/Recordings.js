@@ -8,27 +8,23 @@ export default function Recordings({ userName, logIn, whichClass }) {
   const [recordingsLink, setrecordingsLink] = useState(false);
   const [recordingsKeyword, setrecordingsKeyword] = useState(false);
   useEffect(() => {
-    console.log("trigger getdb");
     logIn === 1 && getuserRecordingsFromDB();
   }, [userName, logIn, whichClass, switcher]);
 
   useEffect(() => {
-    console.log("trigger getit");
     logIn === 1 && getit();
-    setswitcher(0);
+    setswitcher("");
   }, [whichClass]);
 
   async function getit() {
     setswitcher(1);
   }
   async function getuserRecordingsFromDB() {
-    console.log(whichClass);
     await fetch(
       "https://dashybackend.herokuapp.com/userrecordings/".concat(userName)
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         const arrToDescription = data.map(function (daten) {
           return daten.title;
         });
@@ -42,6 +38,7 @@ export default function Recordings({ userName, logIn, whichClass }) {
         });
         setrecordingsKeyword(arrToKeyword);
       });
+    setswitcher("1");
   }
 
   return (

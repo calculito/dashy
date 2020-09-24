@@ -330,6 +330,12 @@ label {
   flex-direction: row;
   justify-content: space-between;
 }
+.divRowLeft {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
 /* Add some hover effects to buttons */
 .form-container .btn:hover,
 .open-button:hover {

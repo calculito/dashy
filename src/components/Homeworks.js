@@ -15,7 +15,9 @@ export default function Homeworks({
   const { speak } = useSpeechSynthesis();
   const [switcher, setswitcher] = useState("");
   const [hammer, sethammer] = useState([1]);
-  const [homeworkHammerInst, sethomeworkHammerInst] = useState([1]);
+  const [homeworkHammerInst, sethomeworkHammerInst] = useState([
+    { id: 1, avg: "3" },
+  ]);
   const [hwOptional, sethwOptional] = useState("");
   const [hwOptionalUn, sethwOptionalUn] = useState("");
   const [homeworkInsertField, sethomeworkInsertField] = useState("");
@@ -130,11 +132,13 @@ export default function Homeworks({
             });
           } else {
             found.data.push(value);
+            // found.data.push(d.id);
           }
           return acc;
         }, []);
         sethomeworkDescriptionALLR(homeworkDescriptionALLR);
       });
+
     ///////// fetch hammer //////////
     let endpointhammer =
       "https://dashybackend.herokuapp.com/userhomeworksALLHammer";
@@ -144,6 +148,16 @@ export default function Homeworks({
         sethomeworkHammerInst(data);
       });
   }
+
+  const HammerShowInstructor = (props) => {
+    let id = props.id;
+    var hammernr = homeworkHammerInst.map((data) => {
+      if (data.id === id) {
+        return data.avg;
+      }
+    });
+    return <div className="hammercontainer">{hammernr}</div>;
+  };
   ///////////////    CHANGE STATUS TO FINISHED        /////////////
   async function changestatus(e) {
     const data = { userId: whichUserId };
@@ -217,7 +231,6 @@ export default function Homeworks({
       }));
     sethomeworkUnfinishedId("");
     setlinkToMyHomework("");
-    console.log(data, homeworkId2);
     setopenInputWindow(false);
     setswitcher("1");
   }
@@ -486,15 +499,18 @@ export default function Homeworks({
               return (
                 <div className="rowHW" key={"divRHW" + index}>
                   <div className="recordings" key={"divG" + index}>
-                    <a
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="recordinglinks"
-                      href={alldata.link}
-                      key={index}
-                    >
-                      {alldata.link}
-                    </a>
+                    <div className="divRowLeft">
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="recordinglinks"
+                        href={alldata.link}
+                        key={index}
+                      >
+                        {alldata.link}
+                      </a>
+                      (<HammerShowInstructor id={alldata.id} />)
+                    </div>
                     <div className="rowHWPosAbs" key={"divRHWStatus" + index}>
                       {alldata.data.map((data, index) => (
                         <a

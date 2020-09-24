@@ -4,6 +4,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import interaction from "@fullcalendar/interaction";
+import esLocale from "@fullcalendar/core/locales/es";
 
 export default function Calendar({ whichClass }) {
   const [appointments, setappointments] = useState([
@@ -21,6 +22,7 @@ export default function Calendar({ whichClass }) {
     fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         //rename keys in object for use 'date', 'start' and 'end'
         data.forEach(function (obj) {
           obj.date = obj.tdate;
@@ -45,6 +47,7 @@ export default function Calendar({ whichClass }) {
         initialView="dayGridMonth"
         events={events}
         dateClick={handleDateClick}
+        locale={esLocale}
       />
     </div>
   );
