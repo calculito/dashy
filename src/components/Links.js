@@ -196,230 +196,235 @@ export default function Links({
           {linksPersonal.length} personal links
         </span>
       </div>
-      <div id="links">
-        <div className="contLinks">
-          <form className="cancelAndForgot">
-            <input
-              className="inputLinks"
-              type="text"
-              placeholder="General links"
-              value={linksInsertFieldG}
-              onChange={(e) => setlinksInsertFieldG(e.target.value)}
-              required
-            />
-            {whichRole !== "Student" && (
+      <div id="links" className="twoColumns">
+        <div className="halfContainer">
+          <div className="contLinks">
+            <form className="cancelAndForgot">
+              <input
+                className="inputLinks"
+                type="text"
+                placeholder="General links"
+                value={linksInsertFieldG}
+                onChange={(e) => setlinksInsertFieldG(e.target.value)}
+                required
+              />
+              {whichRole !== "Student" && (
+                <button
+                  className="buttonHW"
+                  onClick={
+                    linksInsertFieldG !== "" ? insertGeneralLink : undefined
+                  }
+                >
+                  ⇚ Insert a general link
+                </button>
+              )}
+            </form>
+          </div>
+
+          <div className="linksContainer">
+            {savedGeneralLink.map((link, index) => {
+              return (
+                <div className="rowHW" key={"divRHW" + index}>
+                  <div className="recordings" key={"divG" + index}>
+                    <div style={{ paddingLeft: "5px" }}>
+                      <img
+                        src={"https://www.google.com/s2/favicons?domain=".concat(
+                          link
+                        )}
+                      ></img>
+                      <a
+                        className="recordinglinks"
+                        href={link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        key={index}
+                      >
+                        {`${link.substring(0, 50)}...`}
+                      </a>
+                    </div>
+                    <div className="infoContLinks">
+                      {whichRole === "Instructor" && (
+                        <span
+                          className="circle"
+                          onClick={() =>
+                            deleteGeneralLink(linksGeneralId[index])
+                          }
+                        >
+                          DEL
+                        </span>
+                      )}
+                      <span className="circle">{index + 1}</span>
+                      <div>
+                        <img
+                          className="starSymbols"
+                          src={
+                            starsGeneralLinks[index] > 0 ? stargold : starblack
+                          }
+                          alt="star"
+                          onClick={(e) => changestars(1, linksGeneralId[index])}
+                        />
+                        <img
+                          className="starSymbols"
+                          src={
+                            starsGeneralLinks[index] > 1 ? stargold : starblack
+                          }
+                          alt="star"
+                          onClick={(e) => changestars(2, linksGeneralId[index])}
+                        />
+                        <img
+                          className="starSymbols"
+                          src={
+                            starsGeneralLinks[index] > 2 ? stargold : starblack
+                          }
+                          alt="star"
+                          onClick={(e) => changestars(3, linksGeneralId[index])}
+                        />
+                        <img
+                          className="starSymbols"
+                          src={
+                            starsGeneralLinks[index] > 3 ? stargold : starblack
+                          }
+                          alt="star"
+                          onClick={(e) => changestars(4, linksGeneralId[index])}
+                        />
+                        <img
+                          className="starSymbols"
+                          src={
+                            starsGeneralLinks[index] > 4 ? stargold : starblack
+                          }
+                          alt="star"
+                          onClick={(e) => changestars(5, linksGeneralId[index])}
+                        />
+                      </div>
+                      <img
+                        className="linkSymbols"
+                        src={sound}
+                        alt="speaker"
+                        onClick={(e) => soundloud(link)}
+                      />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div className="halfContainer">
+          <div className="contLinks">
+            <form className="cancelAndForgot">
+              <input
+                className="inputLinks"
+                type="text"
+                placeholder="Personal links"
+                value={linksInsertFieldP}
+                onChange={(e) => setlinksInsertFieldP(e.target.value)}
+                required
+              />
               <button
                 className="buttonHW"
                 onClick={
-                  linksInsertFieldG !== "" ? insertGeneralLink : undefined
+                  linksInsertFieldP !== "" ? insertPersonalLink : undefined
                 }
               >
-                ⇚ Insert a general link
+                ⇚ Insert a personal link
               </button>
-            )}
-          </form>
-        </div>
-
-        <div className="linksContainer">
-          {savedGeneralLink.map((link, index) => {
-            return (
-              <div className="rowHW" key={"divRHW" + index}>
-                <div className="recordings" key={"divG" + index}>
-                  <div style={{ paddingLeft: "5px" }}>
-                    <img
-                      src={"https://www.google.com/s2/favicons?domain=".concat(
-                        link
-                      )}
-                    ></img>
-                    <a
-                      className="recordinglinks"
-                      href={link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      key={index}
-                    >
-                      {link}
-                    </a>
-                  </div>
-                  <div className="infoContLinks">
-                    {whichRole === "Instructor" && (
+            </form>
+          </div>
+          <div className="linksContainer">
+            {savedPersonalLink.map((link, index) => {
+              return (
+                <div className="rowHW" key={"divRHW" + index}>
+                  <div className="recordings" key={"divP" + index}>
+                    <div style={{ paddingLeft: "5px" }}>
+                      <img
+                        src={"https://www.google.com/s2/favicons?domain=".concat(
+                          link
+                        )}
+                      ></img>
+                      <a
+                        className="recordinglinks"
+                        href={link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        key={index}
+                      >
+                        {`${link.substring(0, 50)}...`}
+                      </a>
+                    </div>
+                    <div className="infoContLinks">
                       <span
                         className="circle"
-                        onClick={() => deleteGeneralLink(linksGeneralId[index])}
+                        onClick={(e) =>
+                          deletePersonalLink(linksPersonalId[index])
+                        }
                       >
                         DEL
                       </span>
-                    )}
-                    <span className="circle">{index + 1}</span>
-                    <div>
+
+                      <div>
+                        <img
+                          className="starSymbols"
+                          src={
+                            starsPersonalLinks[index] > 0 ? stargold : starblack
+                          }
+                          alt="star"
+                          onClick={(e) =>
+                            changestarspers(1, linksPersonalId[index])
+                          }
+                        />
+                        <img
+                          className="starSymbols"
+                          src={
+                            starsPersonalLinks[index] > 1 ? stargold : starblack
+                          }
+                          alt="star"
+                          onClick={(e) =>
+                            changestarspers(2, linksPersonalId[index])
+                          }
+                        />
+                        <img
+                          className="starSymbols"
+                          src={
+                            starsPersonalLinks[index] > 2 ? stargold : starblack
+                          }
+                          alt="star"
+                          onClick={(e) =>
+                            changestarspers(3, linksPersonalId[index])
+                          }
+                        />
+                        <img
+                          className="starSymbols"
+                          src={
+                            starsPersonalLinks[index] > 3 ? stargold : starblack
+                          }
+                          alt="star"
+                          onClick={(e) =>
+                            changestarspers(4, linksPersonalId[index])
+                          }
+                        />
+                        <img
+                          className="starSymbols"
+                          src={
+                            starsPersonalLinks[index] > 4 ? stargold : starblack
+                          }
+                          alt="star"
+                          onClick={(e) =>
+                            changestarspers(5, linksPersonalId[index])
+                          }
+                        />
+                      </div>
                       <img
                         className="linkSymbols"
-                        src={
-                          starsGeneralLinks[index] > 0 ? stargold : starblack
-                        }
-                        alt="star"
-                        onClick={(e) => changestars(1, linksGeneralId[index])}
-                      />
-                      <img
-                        className="linkSymbols"
-                        src={
-                          starsGeneralLinks[index] > 1 ? stargold : starblack
-                        }
-                        alt="star"
-                        onClick={(e) => changestars(2, linksGeneralId[index])}
-                      />
-                      <img
-                        className="linkSymbols"
-                        src={
-                          starsGeneralLinks[index] > 2 ? stargold : starblack
-                        }
-                        alt="star"
-                        onClick={(e) => changestars(3, linksGeneralId[index])}
-                      />
-                      <img
-                        className="linkSymbols"
-                        src={
-                          starsGeneralLinks[index] > 3 ? stargold : starblack
-                        }
-                        alt="star"
-                        onClick={(e) => changestars(4, linksGeneralId[index])}
-                      />
-                      <img
-                        className="linkSymbols"
-                        src={
-                          starsGeneralLinks[index] > 4 ? stargold : starblack
-                        }
-                        alt="star"
-                        onClick={(e) => changestars(5, linksGeneralId[index])}
+                        src={sound}
+                        alt="speaker"
+                        onClick={(e) => soundloud(link)}
                       />
                     </div>
-                    <img
-                      className="linkSymbols"
-                      src={sound}
-                      alt="speaker"
-                      onClick={(e) => soundloud(link)}
-                    />
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
-
-        <div className="contLinks">
-          <form className="cancelAndForgot">
-            <input
-              className="inputLinks"
-              type="text"
-              placeholder="Personal links"
-              value={linksInsertFieldP}
-              onChange={(e) => setlinksInsertFieldP(e.target.value)}
-              required
-            />
-            <button
-              className="buttonHW"
-              onClick={
-                linksInsertFieldP !== "" ? insertPersonalLink : undefined
-              }
-            >
-              ⇚ Insert a personal link
-            </button>
-          </form>
-        </div>
-        <div className="linksContainer">
-          {savedPersonalLink.map((link, index) => {
-            return (
-              <div className="rowHW" key={"divRHW" + index}>
-                <div className="recordings" key={"divP" + index}>
-                  <div style={{ paddingLeft: "5px" }}>
-                    <img
-                      src={"https://www.google.com/s2/favicons?domain=".concat(
-                        link
-                      )}
-                    ></img>
-                    <a
-                      className="recordinglinks"
-                      href={link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      key={index}
-                    >
-                      {link}
-                    </a>
-                  </div>
-                  <div className="infoContLinks">
-                    <span
-                      className="circle"
-                      onClick={(e) =>
-                        deletePersonalLink(linksPersonalId[index])
-                      }
-                    >
-                      DEL
-                    </span>
-
-                    <div>
-                      <img
-                        className="linkSymbols"
-                        src={
-                          starsPersonalLinks[index] > 0 ? stargold : starblack
-                        }
-                        alt="star"
-                        onClick={(e) =>
-                          changestarspers(1, linksPersonalId[index])
-                        }
-                      />
-                      <img
-                        className="linkSymbols"
-                        src={
-                          starsPersonalLinks[index] > 1 ? stargold : starblack
-                        }
-                        alt="star"
-                        onClick={(e) =>
-                          changestarspers(2, linksPersonalId[index])
-                        }
-                      />
-                      <img
-                        className="linkSymbols"
-                        src={
-                          starsPersonalLinks[index] > 2 ? stargold : starblack
-                        }
-                        alt="star"
-                        onClick={(e) =>
-                          changestarspers(3, linksPersonalId[index])
-                        }
-                      />
-                      <img
-                        className="linkSymbols"
-                        src={
-                          starsPersonalLinks[index] > 3 ? stargold : starblack
-                        }
-                        alt="star"
-                        onClick={(e) =>
-                          changestarspers(4, linksPersonalId[index])
-                        }
-                      />
-                      <img
-                        className="linkSymbols"
-                        src={
-                          starsPersonalLinks[index] > 4 ? stargold : starblack
-                        }
-                        alt="star"
-                        onClick={(e) =>
-                          changestarspers(5, linksPersonalId[index])
-                        }
-                      />
-                    </div>
-                    <img
-                      className="linkSymbols"
-                      src={sound}
-                      alt="speaker"
-                      onClick={(e) => soundloud(link)}
-                    />
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

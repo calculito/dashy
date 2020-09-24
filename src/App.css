@@ -368,9 +368,9 @@ label {
 h4 {
   text-align: center;
   color: var(--font-infow-color);
+  margin-top: 10px;
   padding-left: 40px;
   margin: 20px 20px 0px 20px; /*top right bottom left*/
-  border-bottom: 2px solid rgb(201, 201, 201);
 }
 .inputLinks {
   background-color: var(--background-infow-color);
@@ -383,7 +383,12 @@ h4 {
   height: 35px;
   font-size: 16px;
 }
-
+.twoColumns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+}
 .iconsRefferer {
   background-color: var(--background-infow-color);
   font: Arial;
@@ -410,7 +415,14 @@ h4 {
 }
 .linksContainer {
   border-radius: 2px;
-  margin: 0px 20px 20px 20px;
+  margin: 0px 10px 10px 10px;
+  max-height: 100%;
+  font-size: 16px;
+}
+.halfContainer {
+  width: 100%;
+  border-radius: 2px;
+  margin: 0px 10px 20px 10px;
   max-height: 100%;
   font-size: 16px;
 }
@@ -433,8 +445,15 @@ h4 {
   opacity: 0.9;
   cursor: pointer;
 }
+.starSymbols {
+  padding: 0px 2px 0px 0px;
+  width: 12px;
+  height: 12px;
+  opacity: 0.8;
+  cursor: pointer;
+}
 .linkSymbols {
-  padding: 0px 10px 0px 0px;
+  padding: 0px 2px 0px 0px;
   width: 16px;
   height: 16px;
   opacity: 0.8;
@@ -588,6 +607,12 @@ h4 {
   .hammercontainer {
     display: none;
   }
+  .twoColumns {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
   .rowHWPosAbs {
     display: none;
   }
@@ -597,14 +622,14 @@ h4 {
     display: flex;
   }
   .tabname {
-    font-size: 1px;
+    font-size: 12px;
     min-width: 5vw;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
     padding: 10px;
   }
   .tabnameactive {
-    font-size: 1px;
+    font-size: 12px;
     min-width: 5vw;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
@@ -632,7 +657,7 @@ h4 {
   .linksContainer {
     font-size: 12px;
     border-radius: 8px;
-    margin: 0px 10px 10px 10px;
+    margin: 0px 5px 5px 5px;
   }
   .recordings {
     min-width: 90vw;
@@ -677,5 +702,26 @@ h4 {
 @media only screen and (max-width: 600px) {
   .infoContLinks {
     display: none;
+  }
+  .halfContainer {
+    width: 94%;
+    border-radius: 2px;
+    margin: 0px 10px 20px 10px;
+    max-height: 100%;
+    font-size: 16px;
+  }
+  .tabname {
+    font-size: 1px;
+    min-width: 5vw;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    padding: 10px;
+  }
+  .tabnameactive {
+    font-size: 1px;
+    min-width: 5vw;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    padding: 10px;
   }
 }

@@ -115,7 +115,7 @@ export default function Homeworks({
     await fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {
-        const homeworkDescriptionALLR = data.reduce((acc, d) => {
+        const homeworkDescriptionALLReq = data.reduce((acc, d) => {
           const found = acc.find((a) => a.link === d.link);
           const value = {
             name: d.name,
@@ -136,7 +136,7 @@ export default function Homeworks({
           }
           return acc;
         }, []);
-        sethomeworkDescriptionALLR(homeworkDescriptionALLR);
+        sethomeworkDescriptionALLR(homeworkDescriptionALLReq);
       });
 
     ///////// fetch hammer //////////
@@ -343,8 +343,9 @@ export default function Homeworks({
         </div>
       )}
       {whichRole === "Student" ? (
-        <div className="tabcontent">
-          <div className="linksContainer">
+        <div className="twoColumns">
+          <div className="halfContainer">
+            <h4>Finished homeworks</h4>
             {finishedHomeworks.map((link, index) => {
               return (
                 <div className="rowHW" key={"divRHW" + index}>
@@ -454,7 +455,8 @@ export default function Homeworks({
               );
             })}
           </div>
-          <div className="linksContainer">
+          <div className="halfContainer">
+            <h4>Unfinished homeworks</h4>
             {unfinishedHomeworks.map((link, index) => {
               return (
                 <div className="rowHW" key={"divRHWu" + index}>
