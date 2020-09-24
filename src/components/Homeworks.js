@@ -235,7 +235,8 @@ export default function Homeworks({
     setswitcher("1");
   }
   /////////    POST HOMEWORK AS INSTRUCTOR    ///////////
-  async function insertHomework() {
+  async function insertHomework(evt) {
+    evt.preventDefault();
     const data = { link: homeworkInsertField };
     let endpoint = "https://dashybackend.herokuapp.com/posthomework/".concat(
       whichClass
@@ -410,14 +411,23 @@ export default function Homeworks({
                           no link
                         </button>
                       ) : (
-                        <a
-                          className="circle"
-                          href={linkToMyHomeworkCircle[index]}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          link ok
-                        </a>
+                        <>
+                          <a
+                            className="circle"
+                            href={linkToMyHomeworkCircle[index]}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            link ok
+                          </a>
+                          <button
+                            onClick={(e) => changestatusafter(index)}
+                            className="circle"
+                            href=""
+                          >
+                            change link
+                          </button>
+                        </>
                       )}
                       <span
                         className="circle"

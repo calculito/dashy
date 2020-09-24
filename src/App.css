@@ -220,6 +220,18 @@ img {
   -ms-filter: blur(0px) !important;
   filter: blur(0px) !important;
 }
+.outPopUpCalendar {
+  font: 400 13.3333px Arial;
+  background-color: var(--background-page-color);
+  position: fixed;
+  width: fit-content;
+  height: fit-content;
+  z-index: 15;
+  top: 40%;
+  left: 50%;
+  margin: -100px 0 0 -150px;
+  padding: 40px;
+}
 .outPopUpText {
   font: 400 13.3333px Arial;
   position: fixed;
@@ -415,6 +427,7 @@ h4 {
   color: var(--font-infow-color);
   border: 2px solid var(--shade-dark-color);
   opacity: 0.6;
+  font-size: 14px;
 }
 .circle:hover {
   opacity: 0.9;
