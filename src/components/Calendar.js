@@ -5,7 +5,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import interaction from "@fullcalendar/interaction";
 
-function Calendar({ whichClass }) {
+export default function Calendar({ whichClass }) {
   const [appointments, setappointments] = useState([
     { title: "MEETING", date: "2020-08-26" },
   ]);
@@ -49,4 +49,3 @@ function Calendar({ whichClass }) {
     </div>
   );
 }
-export default Calendar;

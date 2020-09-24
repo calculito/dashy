@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSpeechSynthesis } from "react-speech-kit";
 import sound from "../images/sound.png";
-function Footer() {
+
+export default function Footer() {
   const { speak } = useSpeechSynthesis();
   const [openInputWindow, setopenInputWindow] = useState(false);
   const [textToRead, settextToRead] = useState("");
@@ -235,7 +236,14 @@ function Footer() {
           www.flaticon.com
         </a>
       </div>
+      <div>made with love and sweat by Jose + Thiago + Ion 2020</div>
       <div className="infoContLinks">
+        <img
+          className="linkSymbols"
+          src={sound}
+          alt="speaker"
+          onClick={(e) => setopenInputWindow(1)}
+        />
         <button className="buttonHW" onClick={(e) => setcolorSet("blue")}>
           blau
         </button>
@@ -245,14 +253,7 @@ function Footer() {
         <button className="buttonHW" onClick={(e) => setcolorSet("gray")}>
           gray
         </button>
-        <img
-          className="linkSymbols"
-          src={sound}
-          alt="speaker"
-          onClick={(e) => setopenInputWindow(1)}
-        />
       </div>
     </div>
   );
 }
-export default Footer;

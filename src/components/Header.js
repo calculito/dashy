@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import logo from "../images/migracode-logo.png";
 import login from "../images/login.png";
-function Header({
+
+export default function Header({
   onHeaderClick,
   logIn,
   whichUserHeader,
@@ -19,11 +20,11 @@ function Header({
   useEffect(() => {
     logIn === 1 && getInfoTochangeCLass();
     logIn === 1 && getclassNameFromDB();
-    //var timerID = setInterval(() => tick(), 1000);
-    //return function cleanup() {
+    // var timerID = setInterval(() => tick(), 1000);
+    // return function cleanup() {
     //   clearInterval(timerID);
-    //  };
-  }, [logIn, userClassName, openInputWindow]);
+    // };
+  }, [logIn, userClassName, whichClass, openInputWindow]);
 
   useEffect(() => {
     logIn === 1 && getclassNameFromDB();
@@ -55,9 +56,10 @@ function Header({
     ":" +
     zweistellig(date.getSeconds());
 
-  //function tick() {
-  //   setDate(new Date());
+  // function tick() {
+  //  setDate(new Date());
   // }
+
   //////////////////  GET ALL CLASS  ///////////////////
   async function getInfoTochangeCLass() {
     let endpoint = "https://dashybackend.herokuapp.com/class/";
@@ -76,10 +78,10 @@ function Header({
   }
 
   //////////////////  CHANGE CLASS ///////////////////
-  function changeClass(i) {
+  async function changeClass(i) {
     //whichClass = allClassId[i];
     let data = { classId: allClassId[i] };
-    fetch(
+    await fetch(
       "https://dashybackend.herokuapp.com/switchclass/".concat(whichUserId),
       {
         method: "PUT",
@@ -100,7 +102,7 @@ function Header({
           <button className="buttonHW" key="3">
             {whichRole}
           </button>
-          {whichRole === "Instructor" ? (
+          {whichRole !== "Student" ? (
             <button
               className="buttonHW"
               key="4"
@@ -129,13 +131,12 @@ function Header({
         <div className="outPopUpVariabel">
           {allClass.map((data, i) => (
             <div
-              className="buttonHW"
+              className="recordings"
               key={"divRHW" + i}
               onClick={() => onClick((whichClass = allClassId[i]))}
             >
               <div
                 style={{ marginTop: "3px" }}
-                className="buttonHW"
                 key={"d" + i}
                 onClick={(e) => changeClass(i)}
               >
@@ -150,4 +151,3 @@ function Header({
     </div>
   );
 }
-export default Header;

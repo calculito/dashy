@@ -1,6 +1,6 @@
 import React from "react";
 
-function Chat(i) {
+export default function Chat(i) {
   function openRequestedPopup() {
     window.open(
       "https://secvidchat.herokuapp.com/",
@@ -22,14 +22,3 @@ function Chat(i) {
     </div>
   );
 }
-export default Chat;
-
-//<Iframe
-//url="https://secvidchat.herokuapp.com/"
-//width="100%"
-//height="650px"
-//id="myId"
-//className="myClassname"
-//display="initial"
-//position="relative"
-///>

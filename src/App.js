@@ -1,11 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, Suspense, Fragment } from "react";
 import Header from "./components/Header";
 import Tabs from "./components/Tabs";
 import Footer from "./components/Footer";
 import MainContainer from "./components/MainContainer";
 import "./App.css";
 
-function App() {
+export default function App() {
   const [logIn, setlogIn] = useState(0);
   const [user, setuser] = useState("");
   const [whichClass, setwhichClass] = useState("");
@@ -106,88 +106,95 @@ function App() {
   console.log(logIn, whichUser, whichClass, whichUserId, whichRole);
 
   return (
-    <>
-      {logIn === 2 && (
-        <div className="outPopUp">
-          {" "}
-          <form className="form-container" onSubmit={handleSubmit}>
-            <label>
-              Username:
-              <input
-                autoFocus
-                ref={inputRef}
-                type="text"
-                autoComplete="on"
-                placeholder="Enter username"
-                value={whichUser}
-                onChange={(e) => setwhichUser(e.target.value)}
-                required
-              />
-            </label>
-            <label>
-              Password:
-              <input
-                type="text"
-                placeholder="Enter Password"
-                autoComplete="on"
-                value={whichPassword}
-                onChange={(e) => setwhichPassword(e.target.value)}
-                required
-              />
-            </label>
-            <input
-              type="submit"
-              value="Submit"
-              className="btn"
-              onClick={setInputFocus}
-            />
-            <div className="cancelAndForgot">
-              <input
-                type="button"
-                value="Close"
-                className=" cancel"
-                onClick={logIn2}
-              />
-              <input
-                type="button"
-                style={{ color: "red" }}
-                value={
-                  passwordUserWrong === 0
-                    ? ""
-                    : passwordUserWrong === 1
-                    ? "Forgot password?"
-                    : "No username matched"
-                }
-                className="cancel"
-                onClick={logIn2}
-              />
+    <Fragment>
+      <Suspense fallback={<div>Loading...</div>}>
+        <>
+          {logIn === 2 && (
+            <div className="outPopUp">
+              {" "}
+              <form className="form-container" onSubmit={handleSubmit}>
+                <label>
+                  Username:
+                  <input
+                    autoFocus
+                    ref={inputRef}
+                    type="text"
+                    autoComplete="on"
+                    placeholder="Enter username"
+                    value={whichUser}
+                    onChange={(e) => setwhichUser(e.target.value)}
+                    required
+                  />
+                </label>
+                <label>
+                  Password:
+                  <input
+                    type="text"
+                    placeholder="Enter Password"
+                    autoComplete="on"
+                    value={whichPassword}
+                    onChange={(e) => setwhichPassword(e.target.value)}
+                    required
+                  />
+                </label>
+                <input
+                  type="submit"
+                  value="Submit"
+                  className="btn"
+                  onClick={setInputFocus}
+                />
+                <div className="cancelAndForgot">
+                  <input
+                    type="button"
+                    value="Close"
+                    className=" cancel"
+                    onClick={logIn2}
+                  />
+                  <input
+                    type="button"
+                    style={{ color: "red" }}
+                    value={
+                      passwordUserWrong === 0
+                        ? ""
+                        : passwordUserWrong === 1
+                        ? "Forgot password?"
+                        : "No username matched"
+                    }
+                    className="cancel"
+                    onClick={logIn2}
+                  />
+                </div>
+              </form>
             </div>
-          </form>
-        </div>
-      )}
-      <div className={logIn === 2 ? "allblur" : "all"}>
-        <Header
-          onHeaderClick={logInCheck}
-          logIn={logIn}
-          whichUserHeader={whichUser}
-          whichRole={whichRole}
-          whichUserId={whichUserId}
-          whichClass={whichClass}
-          onClick={newClass}
-        />
-        <Tabs onTabsClick={setWindow} logIn={logIn} index={whichContainer} />
-        <MainContainer
-          logIn={logIn}
-          index={whichContainer}
-          userName={whichUser}
-          whichClass={whichClass}
-          whichRole={whichRole}
-          whichUserId={whichUserId}
-        />
-        <Footer />
-      </div>
-    </>
+          )}
+          <div className={logIn === 2 ? "allblur" : "all"}>
+            <Header
+              onHeaderClick={logInCheck}
+              logIn={logIn}
+              whichUserHeader={whichUser}
+              whichRole={whichRole}
+              whichUserId={whichUserId}
+              whichClass={whichClass}
+              onClick={newClass}
+            />
+            <Tabs
+              onTabsClick={setWindow}
+              logIn={logIn}
+              index={whichContainer}
+              whichRole={whichRole}
+            />
+            <MainContainer
+              logIn={logIn}
+              index={whichContainer}
+              userName={whichUser}
+              whichClass={whichClass}
+              whichRole={whichRole}
+              whichUserId={whichUserId}
+            />
+            <Footer />
+          </div>
+        </>
+      </Suspense>
+    </Fragment>
   );
 }
-
-export default App;

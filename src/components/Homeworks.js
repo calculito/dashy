@@ -3,8 +3,15 @@ import sound from "../images/sound.png";
 import { useSpeechSynthesis } from "react-speech-kit";
 import hammerwhite from "../images/hammerwhite.png";
 import hammercolor from "../images/hammercolor.png";
+import { render } from "@testing-library/react";
 
-function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
+export default function Homeworks({
+  userName,
+  logIn,
+  whichRole,
+  whichClass,
+  whichUserId,
+}) {
   const { speak } = useSpeechSynthesis();
   const [switcher, setswitcher] = useState("");
   const [hammer, sethammer] = useState([1]);
@@ -250,20 +257,24 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
       text: toread,
     });
   }
-  //console.log(homeworkHammerInst);
+
   return (
     <div className="tabcontent">
       <div className="infoWindow">
-        {whichRole === "Instructor"
+        {whichRole !== "Student"
           ? "Your class has " + homeworkDescriptionALLR.length + " homeworks"
           : "You have " +
             homeworkDescriptionSYes.length +
             " finished homeworks and " +
             homeworkDescriptionSNo.length +
-            " unfinished homeworks"}
+            " unfinished homeworks and you achieved " +
+            homeworkDescriptionSYes.length * 5 +
+            " points from " +
+            (homeworkDescriptionSYes.length + homeworkDescriptionSNo.length) *
+              5}
       </div>
       <div
-        className={whichRole === "Instructor" ? "contLinks" : "contLinkshidden"}
+        className={whichRole !== "Student" ? "contLinks" : "contLinkshidden"}
       >
         <form className="cancelAndForgot">
           <input
@@ -485,33 +496,6 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
                       {alldata.link}
                     </a>
                     <div className="rowHWPosAbs" key={"divRHWStatus" + index}>
-                      <div className="hammercontainer">
-                        <img
-                          className="linkSymbols"
-                          src={hammer[index] > 0 ? hammercolor : hammerwhite}
-                          alt="hammer"
-                        />
-                        <img
-                          className="linkSymbols"
-                          src={hammer[index] > 1 ? hammercolor : hammerwhite}
-                          alt="hammer"
-                        />
-                        <img
-                          className="linkSymbols"
-                          src={hammer[index] > 2 ? hammercolor : hammerwhite}
-                          alt="hammer"
-                        />
-                        <img
-                          className="linkSymbols"
-                          src={hammer[index] > 3 ? hammercolor : hammerwhite}
-                          alt="hammer"
-                        />
-                        <img
-                          className="linkSymbols"
-                          src={hammer[index] > 4 ? hammercolor : hammerwhite}
-                          alt="hammer"
-                        />
-                      </div>
                       {alldata.data.map((data, index) => (
                         <a
                           target="_blank"
@@ -550,4 +534,3 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
     </div>
   );
 }
-export default Homeworks;

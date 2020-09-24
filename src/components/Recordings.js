@@ -1,21 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense, Fragment } from "react";
 
-function Recordings({ userName, logIn, whichClass }) {
+export default function Recordings({ userName, logIn, whichClass }) {
+  const [switcher, setswitcher] = useState("0");
   const [recordingsTitle, setrecordingsTitle] = useState([
     "Recording of the class from 01.08.2020",
   ]);
   const [recordingsLink, setrecordingsLink] = useState(false);
+  const [recordingsKeyword, setrecordingsKeyword] = useState(false);
   useEffect(() => {
-    getuserRecordingsFromDB(userName);
-  }, [userName, logIn, whichClass]);
+    console.log("trigger getdb");
+    logIn === 1 && getuserRecordingsFromDB();
+  }, [userName, logIn, whichClass, switcher]);
 
-  async function getuserRecordingsFromDB(userName) {
-    let endpoint = "https://dashybackend.herokuapp.com/userrecordings/".concat(
-      userName
-    );
-    await fetch(endpoint)
+  useEffect(() => {
+    console.log("trigger getit");
+    logIn === 1 && getit();
+    setswitcher(0);
+  }, [whichClass]);
+
+  async function getit() {
+    setswitcher(1);
+  }
+  async function getuserRecordingsFromDB() {
+    console.log(whichClass);
+    await fetch(
+      "https://dashybackend.herokuapp.com/userrecordings/".concat(userName)
+    )
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         const arrToDescription = data.map(function (daten) {
           return daten.title;
         });
@@ -24,44 +37,50 @@ function Recordings({ userName, logIn, whichClass }) {
           return daten.link;
         });
         setrecordingsLink(arrToLink);
+        const arrToKeyword = data.map(function (daten) {
+          return daten.keyword;
+        });
+        setrecordingsKeyword(arrToKeyword);
       });
   }
-  let recordingLinks = recordingsTitle;
 
   return (
-    <div className="tabcontent">
-      <div className="infoWindow">
-        You have {recordingsLink.length} recordings of your classes
-      </div>
-
-      <div className="linksContainer">
-        {recordingLinks.map((data, i) => (
-          <div className="rowHW" key={"divRHW" + i}>
-            <div className="recordings" key={"d" + i}>
-              <a
-                className="recordinglinks"
-                target="_blank"
-                rel="noopener noreferrer"
-                href={recordingsLink[i]}
-                key={"b" + i}
-              >
-                {data}
-              </a>
-              <span
-                className="circle"
-                style={{
-                  backgroundColor: "gray",
-                  color: "white",
-                  fontSize: "12px",
-                }}
-              >
-                KEYWORD
-              </span>
-            </div>
+    <Fragment>
+      <Suspense fallback={<div>Loading...</div>}>
+        <div className="tabcontent">
+          <div className="infoWindow">
+            You have {recordingsTitle.length} recordings of your classes
           </div>
-        ))}
-      </div>
-    </div>
+
+          <div className="linksContainer">
+            {recordingsTitle.map((data, i) => (
+              <div className="rowHW" key={"divRHW" + i}>
+                <div className="recordings" key={"d" + i}>
+                  <a
+                    className="recordinglinks"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={recordingsLink[i]}
+                    key={"b" + i}
+                  >
+                    {data}
+                  </a>
+                  <span
+                    className="circle"
+                    style={{
+                      backgroundColor: "gray",
+                      color: "white",
+                      fontSize: "12px",
+                    }}
+                  >
+                    {recordingsKeyword[i]}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Suspense>
+    </Fragment>
   );
 }
-export default Recordings;

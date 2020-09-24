@@ -6,8 +6,9 @@ import HomeworksIcon from "../images/homeworks.png";
 import ChatIcon from "../images/chat.png";
 import SlackIcon from "../images/slacky.png";
 import LinksIcon from "../images/links.png";
+import AdminIcon from "../images/admin.png";
 
-export default function Tabs({ onTabsClick, logIn, index }) {
+export default function Tabs({ onTabsClick, logIn, index, whichRole }) {
   function openRequestedPopup() {
     window.open(
       "https://app.slack.com/client/TMSJ4SYVD/CMDSP2CQ2",
@@ -72,6 +73,15 @@ export default function Tabs({ onTabsClick, logIn, index }) {
             <div>CHAT one2one</div>
             <img className="icons" src={ChatIcon} alt="iconChat" />
           </div>
+          {whichRole === "Admin" && (
+            <div
+              className={index === 7 ? "tabnameactive" : "tabname"}
+              onClick={() => onTabsClick(7)}
+            >
+              <div>ADMIN</div>
+              <img className="icons" src={AdminIcon} alt="iconAdmin" />
+            </div>
+          )}
         </>
       )}
     </div>

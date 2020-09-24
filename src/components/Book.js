@@ -1,7 +1,7 @@
 import React from "react";
 import Iframe from "react-iframe";
 
-function Book() {
+export default function Book() {
   return (
     <div className="tabcontent95">
       <Iframe
@@ -16,4 +16,3 @@ function Book() {
     </div>
   );
 }
-export default Book;

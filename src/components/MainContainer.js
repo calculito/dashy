@@ -6,6 +6,7 @@ import Homeworks from "./Homeworks";
 import Recordings from "./Recordings";
 import Calendar from "./Calendar";
 import Links from "./Links";
+import Admin from "./Admin";
 
 export default function MainContainer({
   index,
@@ -57,6 +58,7 @@ export default function MainContainer({
             />
           ),
           6: <Chat />,
+          7: <Admin />,
         }[index]
       }
     </div>

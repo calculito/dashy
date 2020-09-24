@@ -4,7 +4,13 @@ import sound from "../images/sound.png";
 import starblack from "../images/starblack.png";
 import stargold from "../images/stargold.png";
 
-function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
+export default function Links({
+  userName,
+  logIn,
+  whichClass,
+  whichRole,
+  whichUserId,
+}) {
   let [switcher, setswitcher] = useState("0");
   const { speak } = useSpeechSynthesis();
   const [linksInsertFieldG, setlinksInsertFieldG] = useState("");
@@ -201,7 +207,7 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
               onChange={(e) => setlinksInsertFieldG(e.target.value)}
               required
             />
-            {whichRole === "Instructor" && (
+            {whichRole !== "Student" && (
               <button
                 className="buttonHW"
                 onClick={
@@ -419,4 +425,3 @@ function Links({ userName, logIn, whichClass, whichRole, whichUserId }) {
     </div>
   );
 }
-export default Links;
