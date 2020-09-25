@@ -15,9 +15,12 @@ export default function Homeworks({
   const { speak } = useSpeechSynthesis();
   const [switcher, setswitcher] = useState("");
   const [hammer, sethammer] = useState([1]);
+  const [studHwValidation, setstudHwValidation] = useState("");
   const [homeworkHammerInst, sethomeworkHammerInst] = useState([
     { id: 1, avg: "3" },
   ]);
+  const [homeworkToCheckId, sethomeworkToCheckId] = useState("");
+  const [homeworkToCheckUserId, sethomeworkToCheckUserId] = useState("");
   const [hwOptional, sethwOptional] = useState("");
   const [hwOptionalUn, sethwOptionalUn] = useState("");
   const [homeworkInsertField, sethomeworkInsertField] = useState("");
@@ -41,6 +44,8 @@ export default function Homeworks({
       data: [{ name: "Ion", finished: "yes", linkhwfinished: "test" }],
     },
   ]); //reduced array
+
+  const [openCheckWindow, setopenCheckWindow] = useState(false);
   const [openInputWindow, setopenInputWindow] = useState(false);
   const [openInputWindowAfter, setopenInputWindowAfter] = useState(false);
   useEffect(() => {
@@ -83,6 +88,10 @@ export default function Homeworks({
           return daten.hammer;
         });
         sethammer(arrToHammer);
+        const arrToValidation = data.map(function (daten) {
+          return daten.validation;
+        });
+        setstudHwValidation(arrToValidation);
       });
   }
   ///////////////    GET UNFINISHED HOMEWORKS FOR STUDENTS     /////////////
@@ -122,6 +131,9 @@ export default function Homeworks({
             finished: d.finished,
             linktohw: d.linkhwfinished,
             hammer: d.hammer,
+            validation: d.validation,
+            uid: d.uid,
+            hwfinid: d.hfid,
           };
           if (!found) {
             acc.push({
@@ -271,6 +283,46 @@ export default function Homeworks({
       text: toread,
     });
   }
+  function openRequestedLink(link, hwid) {
+    sethomeworkToCheckId(hwid);
+    setopenCheckWindow(true);
+    window.open(link, "_blank", "noopener, noreferrer");
+  }
+  function homeworkOk(evt) {
+    evt.preventDefault();
+    let answer = "yes";
+    homeworkEvaluation(answer);
+    sethomeworkToCheckId("");
+    setopenCheckWindow(false);
+  }
+  function homeworkNotOk(evt) {
+    evt.preventDefault();
+    let answer = "no";
+    homeworkEvaluation(answer);
+    sethomeworkToCheckId("");
+    setopenCheckWindow(false);
+  }
+  function cancel(evt) {
+    evt.preventDefault();
+    sethomeworkToCheckId("");
+    setopenCheckWindow(false);
+  }
+  async function homeworkEvaluation(answer) {
+    let data = {
+      answer: answer,
+    };
+    await fetch(
+      "https://dashybackend.herokuapp.com/homeworkevaluation/".concat(
+        homeworkToCheckId
+      ),
+      {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    setswitcher("1");
+  }
 
   return (
     <div className="tabcontent">
@@ -403,6 +455,22 @@ export default function Homeworks({
                           }
                         />
                       </div>
+                      <button
+                        onClick={(e) =>
+                          homeworkEvaluation(homeworkFinishedId[index])
+                        }
+                        style={{
+                          backgroundColor:
+                            studHwValidation[index] === "yes"
+                              ? "green"
+                              : studHwValidation[index] === "no"
+                              ? "red"
+                              : "white",
+                        }}
+                        className="circle"
+                      >
+                        V
+                      </button>
                       {linkToMyHomeworkCircle[index] === null ? (
                         <button
                           onClick={(e) => changestatusafter(index)}
@@ -421,6 +489,7 @@ export default function Homeworks({
                           >
                             link ok
                           </a>
+
                           <button
                             onClick={(e) => changestatusafter(index)}
                             className="circle"
@@ -507,6 +576,30 @@ export default function Homeworks({
       ) : (
         <div className="tabcontent">
           <div className="linksContainer">
+            {openCheckWindow !== false ? (
+              <div className="outPopUpHomeworkCheck">
+                <form className="HomeworkCheck">
+                  <div>
+                    Please check the homework in the separate window and click
+                    on the corresponding button below!
+                  </div>
+                  <div className="buttonsContainer">
+                    <button className="buttonHW" onClick={(e) => homeworkOk(e)}>
+                      Homework OK
+                    </button>
+                    <button
+                      className="buttonHW"
+                      onClick={(e) => homeworkNotOk(e)}
+                    >
+                      Homework not OK
+                    </button>
+                    <button className="buttonHW" onClick={(e) => cancel(e)}>
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              </div>
+            ) : undefined}
             {allHomeworks.map((alldata, index) => {
               return (
                 <div className="rowHW" key={"divRHW" + index}>
@@ -525,19 +618,25 @@ export default function Homeworks({
                     </div>
                     <div className="rowHWPosAbs" key={"divRHWStatus" + index}>
                       {alldata.data.map((data, index) => (
-                        <a
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        <button
+                          onClick={(e) =>
+                            openRequestedLink(data.linktohw, data.hwfinid)
+                          }
                           key={"butRHWStatus" + data.name + index}
-                          href={data.linktohw}
                           className="buttonHWNamesA"
                           style={{
                             backgroundColor:
-                              data.finished === "yes" ? "darkorange" : "red",
+                              data.finished === "yes"
+                                ? data.validation === "yes"
+                                  ? "green"
+                                  : data.validation === "no"
+                                  ? "red"
+                                  : "darkorange"
+                                : "white",
                           }}
                         >
                           {data.name}({data.hammer})
-                        </a>
+                        </button>
                       ))}
                       <span
                         className="circle"

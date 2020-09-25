@@ -221,6 +221,7 @@ img {
   filter: blur(0px) !important;
 }
 .outPopUpCalendar {
+  border: 1px solid var(--shade-infow-color);
   font: 400 13.3333px Arial;
   background-color: var(--background-page-color);
   position: fixed;
@@ -231,6 +232,32 @@ img {
   left: 50%;
   margin: -100px 0 0 -150px;
   padding: 40px;
+  border-radius: 15px;
+}
+.outPopUpHomeworkCheck {
+  border: 1px solid var(--shade-infow-color);
+  font: 400 13.3333px Arial;
+  background-color: var(--background-page-color);
+  position: fixed;
+  width: fit-content;
+  height: fit-content;
+  z-index: 15;
+  top: 20%;
+  left: 40%;
+  margin: -100px 0 0 -150px;
+  padding: 20px;
+  border-radius: 15px;
+}
+.HomeworkCheck {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.buttonsContainer {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 .outPopUpText {
   font: 400 13.3333px Arial;
@@ -558,7 +585,7 @@ h4 {
   margin: 1px 3px 1px 3px;
   border: 0px;
   border-radius: 4px;
-  color: var(--shade-light-color);
+  color: black;
   -webkit-box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
     -2px -2px 1px 0px var(--shade-light-color);
   -moz-box-shadow: 1px 2px 3px 0px var(--shade-dark-color),

@@ -48,6 +48,7 @@ export default function MainContainer({
               userName={userName}
               logIn={logIn}
               whichClass={whichClass}
+              whichRole={whichRole}
             />
           ),
           5: (
