@@ -66,7 +66,7 @@ export default function App() {
   };
   /////////////////// GET DATA FROM DB WHERE USER ////////////////////
   async function getClass() {
-    await fetch("https://dashybackend.herokuapp.com/")
+    await fetch("https://dashybackend.herokuapp.com/alld")
       .then((response) => {
         return response.json();
       })
