@@ -15,10 +15,11 @@ export default function Homeworks({
   const { speak } = useSpeechSynthesis();
   const [switcher, setswitcher] = useState("");
   const [hammer, sethammer] = useState([1]);
-  const [studHwValidation, setstudHwValidation] = useState("");
+  const [studHwValidation, setstudHwValidation] = useState(["yes"]);
   const [homeworkHammerInst, sethomeworkHammerInst] = useState([
     { id: 1, avg: "3" },
   ]);
+  const [numberOfYes, setnumberOfYes] = useState("");
   const [homeworkToCheckId, sethomeworkToCheckId] = useState("");
   const [homeworkToCheckUserId, sethomeworkToCheckUserId] = useState("");
   const [hwOptional, sethwOptional] = useState("");
@@ -100,6 +101,13 @@ export default function Homeworks({
         });
         setstudHwValidation(arrToValidation);
       });
+    let numberOfYes = 0;
+    const arrToPointsValidation = studHwValidation.map(function (daten) {
+      if (daten === "yes") {
+        numberOfYes++;
+      }
+      setnumberOfYes(numberOfYes);
+    });
   }
   ///////////////    GET UNFINISHED HOMEWORKS FOR STUDENTS     /////////////
   async function getuserhomeworksStudentNo() {
@@ -355,10 +363,10 @@ export default function Homeworks({
             " finished homeworks and " +
             homeworkDescriptionSNo.length +
             " unfinished homeworks and you achieved " +
-            homeworkDescriptionSYes.length * 5 +
-            " points from " +
+            (homeworkDescriptionSYes.length * 5 + numberOfYes * 3) +
+            " points from max." +
             (homeworkDescriptionSYes.length + homeworkDescriptionSNo.length) *
-              5}
+              8}
       </div>
       <div
         className={whichRole !== "Student" ? "contLinks" : "contLinkshidden"}
