@@ -33,15 +33,21 @@ export default function Links({
     getuserlinksGeneral();
     getuserlinksPersonal();
     setswitcher(0);
+    var timerID = setInterval(() => tick(), 1000);
+    return function cleanup() {
+      clearInterval(timerID);
+    };
   }, [
     logIn,
     linkToDelete,
-    // switcher,
+    switcher,
     whichClass,
     linksInsertFieldP,
     linksInsertFieldG,
   ]);
-
+  function tick() {
+    setswitcher(1);
+  }
   ////////////// SET FOCUS ON BUTTON /////////////
   const useFocus = () => {
     const htmlElRef = useRef(null);

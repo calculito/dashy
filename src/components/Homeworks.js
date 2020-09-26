@@ -44,7 +44,7 @@ export default function Homeworks({
       data: [{ name: "Ion", finished: "yes", linkhwfinished: "test" }],
     },
   ]); //reduced array
-
+  const [Date, setDate] = useState(false);
   const [openCheckWindow, setopenCheckWindow] = useState(false);
   const [openInputWindow, setopenInputWindow] = useState(false);
   const [openInputWindowAfter, setopenInputWindowAfter] = useState(false);
@@ -53,6 +53,10 @@ export default function Homeworks({
     getuserhomeworksStudentNo();
     getuserhomeworksALL();
     setswitcher("");
+    var timerID = setInterval(() => tick(), 1000);
+    return function cleanup() {
+      clearInterval(timerID);
+    };
   }, [logIn, switcher, whichClass]);
 
   useEffect(() => {
@@ -60,6 +64,9 @@ export default function Homeworks({
     getuserhomeworksStudentYes();
   }, [openInputWindow]);
 
+  function tick() {
+    setswitcher(1);
+  }
   ///////////////    GET FINISHED HOMEWORKS FOR STUDENTS     /////////////
   async function getuserhomeworksStudentYes() {
     let endpoint = "https://dashybackend.herokuapp.com/userhomeworksSYES/".concat(
@@ -323,6 +330,20 @@ export default function Homeworks({
     );
     setswitcher("1");
   }
+  async function homeworkEvaluationReset(hwId) {
+    let data = {
+      answer: "NULL",
+    };
+    await fetch(
+      "https://dashybackend.herokuapp.com/homeworkevaluation/".concat(hwId),
+      {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    setswitcher("1");
+  }
 
   return (
     <div className="tabcontent">
@@ -457,7 +478,9 @@ export default function Homeworks({
                       </div>
                       <button
                         onClick={(e) =>
-                          homeworkEvaluation(homeworkFinishedId[index])
+                          studHwValidation[index] === "no"
+                            ? homeworkEvaluationReset(homeworkFinishedId[index])
+                            : undefined
                         }
                         style={{
                           backgroundColor:
