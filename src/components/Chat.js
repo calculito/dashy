@@ -10,13 +10,21 @@ export default function Chat(i) {
   }
   return (
     <div className="tabcontent" onClick={openRequestedPopup}>
-      <div className="contLinks">
+      <div className="contLinks" style={{ justifyContent: "center" }}>
         <div className="infoWindowChat">
-          Click here. A new tab will get open. There you can choose a room
-          number and a password. After you entry the room, you will get a link,
-          which you can share with the other person. Once the other person
-          accessed the room using the link and the password you sent, you can
-          start chatting. Enjoy!
+          <ul>
+            <li>Click here to open a new tab. </li>
+            <li>Choose a room number and a password. </li>
+            <li>
+              Entry the chatroom and share the link you got with the other
+              person.{" "}
+            </li>
+            <li>
+              Once the other person accessed the room using the link and the
+              password you sent, you can start chatting.{" "}
+            </li>
+            <li>Enjoy!</li>
+          </ul>
         </div>
       </div>
     </div>

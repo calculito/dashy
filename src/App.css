@@ -205,6 +205,20 @@ img {
   justify-content: center;
   align-items: center;
 }
+.logoTools {
+  width: 20vw;
+  height: 18vw;
+  border-radius: 15px;
+  margin: 15px 10px 0px 10px;
+  border: 2px solid white;
+  cursor: pointer;
+}
+.contLogoTools {
+  margin: 15px 10px 0px 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 .outPopUp {
   font: 400 13.3333px Arial;
   position: absolute;
@@ -530,9 +544,9 @@ h4 {
 }
 .infoWindowChat {
   margin: 50px;
-  width: 80%;
+  cursor: pointer;
   padding: 5px;
-  text-align: center;
+
   font-size: 18px;
   background-color: var(--font-white);
   color: var(--font-infow-color);

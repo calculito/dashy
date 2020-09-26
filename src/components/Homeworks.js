@@ -364,7 +364,7 @@ export default function Homeworks({
             homeworkDescriptionSNo.length +
             " unfinished homeworks and you achieved " +
             (homeworkDescriptionSYes.length * 5 + numberOfYes * 3) +
-            " points from max." +
+            " points from max. " +
             (homeworkDescriptionSYes.length + homeworkDescriptionSNo.length) *
               8}
       </div>

@@ -9,13 +9,6 @@ import LinksIcon from "../images/links.png";
 import AdminIcon from "../images/admin.png";
 
 export default function Tabs({ onTabsClick, logIn, index, whichRole }) {
-  function openRequestedPopup() {
-    window.open(
-      "https://app.slack.com/client/TMSJ4SYVD/CMDSP2CQ2",
-      "_blank",
-      "noopener, noreferrer"
-    );
-  }
   return (
     <div className="menu">
       {logIn === 1 && (
@@ -30,9 +23,9 @@ export default function Tabs({ onTabsClick, logIn, index, whichRole }) {
 
           <div
             className={index === 1 ? "tabnameactive" : "tabname"}
-            onClick={openRequestedPopup}
+            onClick={() => onTabsClick(1)}
           >
-            <div>SLACK</div>
+            <div>TOOLS</div>
             <img className="icons" src={SlackIcon} alt="iconSlack" />
           </div>
 
