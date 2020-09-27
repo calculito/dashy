@@ -25,7 +25,7 @@ export default function Tabs({ onTabsClick, logIn, index, whichRole }) {
             className={index === 1 ? "tabnameactive" : "tabname"}
             onClick={() => onTabsClick(1)}
           >
-            <div>TOOLS</div>
+            <div>Tools</div>
             <img className="icons" src={SlackIcon} alt="iconSlack" />
           </div>
 
@@ -41,7 +41,7 @@ export default function Tabs({ onTabsClick, logIn, index, whichRole }) {
             className={index === 3 ? "tabnameactive" : "tabname"}
             onClick={() => onTabsClick(3)}
           >
-            <div>Useful links</div>
+            <div>Links</div>
             <img className="icons" src={LinksIcon} alt="iconLinks" />
           </div>
 
@@ -63,7 +63,7 @@ export default function Tabs({ onTabsClick, logIn, index, whichRole }) {
             className={index === 6 ? "tabnameactive" : "tabname"}
             onClick={() => onTabsClick(6)}
           >
-            <div>CHAT one2one</div>
+            <div>one2one</div>
             <img className="icons" src={ChatIcon} alt="iconChat" />
           </div>
           {whichRole === "Admin" && (

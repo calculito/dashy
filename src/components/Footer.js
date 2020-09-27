@@ -196,63 +196,83 @@ export default function Footer() {
     settextToRead("");
   }
   return (
-    <div className="iconsRefferer">
-      {openInputWindow !== false && (
-        <div className="outPopUpText">
-          <form className="form-container" onSubmit={soundloud}>
-            <label>
-              Insert your text:
-              <textarea
-                className="bigWindowForText"
-                autoFocus
-                type="text"
-                placeholder="xyz..."
-                value={textToRead}
-                onChange={(e) => settextToRead(e.target.value)}
-              />
-            </label>
-            <input type="submit" value="Submit" className="buttonHW" />
-          </form>
+    <div className="header" style={{ height: "30px" }}>
+      <div className="iconsRefferer">
+        {openInputWindow !== false && (
+          <div className="outPopUpText">
+            <form className="form-container" onSubmit={soundloud}>
+              <label>
+                Insert your text:
+                <textarea
+                  className="bigWindowForText"
+                  autoFocus
+                  type="text"
+                  placeholder="xyz..."
+                  value={textToRead}
+                  onChange={(e) => settextToRead(e.target.value)}
+                />
+              </label>
+              <input type="submit" value="Submit" className="buttonHW" />
+            </form>
+          </div>
+        )}
+        <div>
+          Icons made by{" "}
+          <a
+            href="https://www.flaticon.com/authors/smashicons"
+            title="Smashicons"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Smashicons
+          </a>{" "}
+          from{" "}
+          <a
+            href="https://www.flaticon.com/"
+            title="Flaticon"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {" "}
+            www.flaticon.com
+          </a>
         </div>
-      )}
-      <div>
-        Icons made by{" "}
-        <a
-          href="https://www.flaticon.com/authors/smashicons"
-          title="Smashicons"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Smashicons
-        </a>{" "}
-        from{" "}
-        <a
-          href="https://www.flaticon.com/"
-          title="Flaticon"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {" "}
-          www.flaticon.com
-        </a>
-      </div>
-      <div>made with love and sweat by Jose + Thiago + Ion 2020</div>
-      <div className="infoContLinks">
-        <img
-          className="linkSymbols"
-          src={sound}
-          alt="speaker"
-          onClick={(e) => setopenInputWindow(1)}
-        />
-        <button className="buttonHW" onClick={(e) => setcolorSet("blue")}>
-          blau
-        </button>
-        <button className="buttonHW" onClick={(e) => setcolorSet("coffee")}>
-          coffee
-        </button>
-        <button className="buttonHW" onClick={(e) => setcolorSet("gray")}>
-          gray
-        </button>
+        <div>made with love and sweat by Jose + Thiago + Ion 2020</div>
+        <div className="infoContLinks">
+          <button
+            className="buttonHW"
+            style={{ height: "22px" }}
+            onClick={(e) => setcolorSet("blue")}
+          >
+            <img
+              className="linkSymbols"
+              src={sound}
+              alt="speaker"
+              onClick={(e) => setopenInputWindow(1)}
+            />
+          </button>
+          <button
+            className="buttonHW"
+            style={{ height: "22px" }}
+            onClick={(e) => setcolorSet("blue")}
+          >
+            blau
+          </button>
+          <button
+            className="buttonHW"
+            style={{ height: "22px" }}
+            onClick={(e) => setcolorSet("coffee")}
+          >
+            coffee
+          </button>
+          <button
+            className="buttonHW"
+            style={{ height: "22px" }}
+            onClick={(e) => setcolorSet("gray")}
+          >
+            gray
+          </button>
+        </div>
       </div>
     </div>
   );

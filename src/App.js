@@ -8,6 +8,7 @@ import "./App.css";
 export default function App() {
   const [logIn, setlogIn] = useState(0);
   const [user, setuser] = useState("");
+  const [blur, setblur] = useState(0);
   const [whichClass, setwhichClass] = useState("");
   const [whichUser, setwhichUser] = useState("");
   const [whichUserId, setwhichUserId] = useState("");
@@ -19,6 +20,7 @@ export default function App() {
   /////////////////////  NO USEEFFECT ANYMORE NEEDED //////////////////////
   const logInCheck = () => {
     logIn === 0 ? setlogIn(2) : setlogIn(0);
+    logIn === 2 ? setblur(1) : setblur(0);
     logIn === 1 && setwhichContainer(0);
     logIn === 1 && window.location.reload();
     getuser();
@@ -50,6 +52,7 @@ export default function App() {
     setwhichPassword("");
     setpasswordUserWrong(1);
     setlogIn(2);
+    setblur(1);
   };
   ////////////////  GOOD PASSWORD ///////////////
   const goodPassword = () => {
@@ -63,6 +66,7 @@ export default function App() {
     setwhichPassword("");
     setlogIn(2);
     setpasswordUserWrong(2);
+    setblur(1);
   };
   /////////////////// GET DATA FROM DB WHERE USER ////////////////////
   async function getClass() {
@@ -102,8 +106,23 @@ export default function App() {
   const setWindow = (indexContainer) => {
     setwhichContainer(indexContainer);
   };
-
-  console.log(logIn, whichUser, whichClass, whichUserId, whichRole);
+  //////////// CHECK BLUR /////////////
+  const checkBlur = () => {
+    blur === 0 ? setblur(1) : setblur(0);
+  };
+  console.log(
+    blur +
+      ".." +
+      logIn +
+      ".." +
+      whichUser +
+      ".." +
+      whichClass +
+      ".." +
+      whichUserId +
+      ".." +
+      whichRole
+  );
 
   return (
     <Fragment>
@@ -167,7 +186,7 @@ export default function App() {
               </form>
             </div>
           )}
-          <div className={logIn === 2 ? "allblur" : "all"}>
+          <div className={blur === 1 || logIn === 2 ? "allblur" : "all"}>
             <Header
               onHeaderClick={logInCheck}
               logIn={logIn}
@@ -190,6 +209,7 @@ export default function App() {
               whichClass={whichClass}
               whichRole={whichRole}
               whichUserId={whichUserId}
+              blur={checkBlur}
             />
             <Footer />
           </div>

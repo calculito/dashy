@@ -1,5 +1,4 @@
 import React from "react";
-import bg from "../images/Slack.png";
 import slacklogo from "../images/slacklogo.png";
 import trellologo from "../images/trellologo.png";
 import githublogo from "../images/githublogo.jpg";

@@ -15,11 +15,12 @@ export default function MainContainer({
   whichClass,
   whichRole,
   whichUserId,
+  blur,
 }) {
   return (
     <div
       className="maincontainer"
-      style={{ height: logIn === 0 ? "90%" : undefined }}
+      style={{ height: logIn === 0 ? "calc(100% - 102px)" : undefined }}
     >
       {
         {
@@ -32,6 +33,7 @@ export default function MainContainer({
               whichRole={whichRole}
               whichClass={whichClass}
               whichUserId={whichUserId}
+              blur={blur}
             />
           ),
           3: (

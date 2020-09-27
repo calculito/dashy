@@ -48,15 +48,7 @@ export default function Links({
   function tick() {
     setswitcher(1);
   }
-  ////////////// SET FOCUS ON BUTTON /////////////
-  const useFocus = () => {
-    const htmlElRef = useRef(null);
-    const setFocus = () => {
-      htmlElRef.current && htmlElRef.current.focus();
-    };
-    return [htmlElRef, setFocus];
-  };
-  const [inputRef, setInputFocus] = useFocus();
+
   /////////    GET GENERAL LINKS     ///////////
   async function getuserlinksGeneral() {
     let endpoint = "https://dashybackend.herokuapp.com/userlinks/".concat(
@@ -237,6 +229,7 @@ export default function Links({
                         src={"https://www.google.com/s2/favicons?domain=".concat(
                           link
                         )}
+                        alt="icon"
                       ></img>
                       <a
                         className="recordinglinks"
@@ -245,7 +238,7 @@ export default function Links({
                         rel="noopener noreferrer"
                         key={index}
                       >
-                        {`${link.substring(0, 50)}...`}
+                        {`${link.substring(0, 40)}...`}
                       </a>
                     </div>
                     <div className="infoContLinks">
@@ -346,6 +339,7 @@ export default function Links({
                         src={"https://www.google.com/s2/favicons?domain=".concat(
                           link
                         )}
+                        alt="icon"
                       ></img>
                       <a
                         className="recordinglinks"
@@ -354,7 +348,7 @@ export default function Links({
                         rel="noopener noreferrer"
                         key={index}
                       >
-                        {`${link.substring(0, 50)}...`}
+                        {`${link.substring(0, 40)}...`}
                       </a>
                     </div>
                     <div className="infoContLinks">

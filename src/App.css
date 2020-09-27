@@ -68,6 +68,51 @@ body {
   background-color: var(--background-page-color);
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='10px' width='10px'><text x='13' y='23' fill='white' font-size='50'>MIGRACODE</text></svg>");
 }
+.loaddiv {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: white;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+.loaddivTop {
+  font-size: 45px;
+  display: flex;
+  width: 100%;
+  height: 50vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: white;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 100;
+}
+
+.loaddivBottom {
+  font-size: 45px;
+  display: flex;
+  width: 100%;
+  height: 50vh;
+  position: fixed;
+  top: 50vh;
+  left: 0;
+  background-color: white;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 100;
+  transition-property: opacity;
+  transition-duration: 1s;
+  transition-delay: 1s;
+}
 .all {
   width: 100%;
   height: 100%;
@@ -83,7 +128,7 @@ body {
 }
 
 .maincontainer {
-  height: 85%;
+  height: calc(100% - 145px);
   overflow: auto;
   background-color: var(--background-infow-color);
 }
@@ -128,6 +173,7 @@ button:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  font-size: 1em;
 }
 .tabnameactive {
   width: 12%;
@@ -169,6 +215,7 @@ img {
   color: var(--font-light-color);
   -webkit-filter: var(--webkit-filter);
   filter: var(--filter);
+  cursor: pointer;
 }
 .fc-daygrid-event-dot {
   border: 4px solid var(--shade-light-color);
@@ -212,6 +259,49 @@ img {
   margin: 15px 10px 0px 10px;
   border: 2px solid white;
   cursor: pointer;
+}
+.logoTools:hover {
+  animation: shake 0.5s;
+  animation-iteration-count: infinite;
+}
+.greeting img:hover {
+  animation: shake 1.8s;
+  animation-iteration-count: infinite;
+}
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
 }
 .contLogoTools {
   margin: 15px 10px 0px 10px;
@@ -416,13 +506,28 @@ h4 {
 .inputLinks {
   background-color: var(--background-infow-color);
   display: block;
-  color: var(--font-infow-color);
+  color: var(--font-tabnI-color);
   border: none;
   border-top-left-radius: 8px;
   padding-left: 20px;
   width: 60%;
   height: 35px;
   font-size: 16px;
+}
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--font-tabnI-color);
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: var(--font-tabnI-color);
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: var(--font-tabnI-color);
 }
 .twoColumns {
   display: flex;
@@ -439,10 +544,11 @@ h4 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 40px;
+  height: 30px;
 }
 .iconsrefferer a {
   font: Arial;
@@ -645,6 +751,9 @@ h4 {
     -2px -2px 1px 0px var(--shade-dark-color);
 }
 @media only screen and (max-width: 1030px) {
+  .halfContainer {
+    width: 98%;
+  }
   .hammercontainer {
     display: none;
   }
@@ -667,14 +776,14 @@ h4 {
     min-width: 5vw;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
-    padding: 10px;
+    padding: 4px;
   }
   .tabnameactive {
     font-size: 12px;
     min-width: 5vw;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
-    padding: 10px;
+    padding: 4px;
   }
   .menu {
     width: 100%;
@@ -701,7 +810,7 @@ h4 {
     margin: 0px 5px 5px 5px;
   }
   .recordings {
-    min-width: 90vw;
+    min-width: 95vw;
     padding-top: 5px;
     padding-left: 5px;
     border-radius: 8px;
@@ -756,13 +865,13 @@ h4 {
     min-width: 5vw;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
-    padding: 10px;
+    padding: 4px;
   }
   .tabnameactive {
     font-size: 1px;
     min-width: 5vw;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
-    padding: 10px;
+    padding: 4px;
   }
 }

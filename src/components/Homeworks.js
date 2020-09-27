@@ -3,7 +3,6 @@ import sound from "../images/sound.png";
 import { useSpeechSynthesis } from "react-speech-kit";
 import hammerwhite from "../images/hammerwhite.png";
 import hammercolor from "../images/hammercolor.png";
-import { render } from "@testing-library/react";
 
 export default function Homeworks({
   userName,
@@ -11,17 +10,17 @@ export default function Homeworks({
   whichRole,
   whichClass,
   whichUserId,
+  blur,
 }) {
   const { speak } = useSpeechSynthesis();
   const [switcher, setswitcher] = useState("");
   const [hammer, sethammer] = useState([1]);
-  const [studHwValidation, setstudHwValidation] = useState(["yes"]);
+  const [studHwValidation, setstudHwValidation] = useState(["no"]);
   const [homeworkHammerInst, sethomeworkHammerInst] = useState([
     { id: 1, avg: "3" },
   ]);
   const [numberOfYes, setnumberOfYes] = useState("");
   const [homeworkToCheckId, sethomeworkToCheckId] = useState("");
-  const [homeworkToCheckUserId, sethomeworkToCheckUserId] = useState("");
   const [hwOptional, sethwOptional] = useState("");
   const [hwOptionalUn, sethwOptionalUn] = useState("");
   const [homeworkInsertField, sethomeworkInsertField] = useState("");
@@ -54,10 +53,10 @@ export default function Homeworks({
     getuserhomeworksStudentNo();
     getuserhomeworksALL();
     setswitcher("");
-    var timerID = setInterval(() => tick(), 1000);
-    return function cleanup() {
-      clearInterval(timerID);
-    };
+    // var timerID = setInterval(() => tick(), 1000);
+    // return function cleanup() {
+    //    clearInterval(timerID);
+    // };
   }, [logIn, switcher, whichClass]);
 
   useEffect(() => {
@@ -199,6 +198,7 @@ export default function Homeworks({
       }
     );
     setopenInputWindow(e);
+    blur = 1;
   }
   ///////////////    INSERT LINK TO HOMEWORK IF (NO LINK)       /////////////
   function changestatusafter(e) {
@@ -299,9 +299,12 @@ export default function Homeworks({
     });
   }
   function openRequestedLink(link, hwid) {
+    console.log(link);
     sethomeworkToCheckId(hwid);
     setopenCheckWindow(true);
-    window.open(link, "_blank", "noopener, noreferrer");
+    link !== null
+      ? window.open(link, "_blank", "noopener, noreferrer")
+      : alert("No link available");
   }
   function homeworkOk(evt) {
     evt.preventDefault();

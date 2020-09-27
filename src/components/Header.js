@@ -15,6 +15,7 @@ export default function Header({
   let [allClass, setallClass] = useState([{ id: 3, class_name: "mar-2020-1" }]);
   let [allClassId, setallClassId] = useState([{ id: 3 }]);
   const [openInputWindow, setopenInputWindow] = useState(false);
+  var [counterName, setcounterName] = useState(0);
   const ref = React.useRef();
   /////////////////   USEEFFECTS   ///////////////
   useEffect(() => {
@@ -91,12 +92,39 @@ export default function Header({
     );
     setopenInputWindow(false);
   }
-
+  //////////////////  CHANGE COUNTER :)  ///////////////////
+  function changeCounter() {
+    setcounterName(counterName++);
+  }
+  console.log(counterName);
   return (
     <div className="header" key={whichUserHeader}>
+      <div
+        className="loaddiv"
+        style={{
+          display: counterName < 5 ? "none" : "flex",
+        }}
+      >
+        <div
+          className="loaddivTop"
+          style={{
+            height: counterName < 5 ? "0" : undefined,
+          }}
+        >
+          THE
+        </div>
+        <div
+          className="loaddivBottom"
+          style={{
+            height: counterName < 5 ? "10px" : undefined,
+          }}
+        >
+          END
+        </div>
+      </div>
       {logIn === 1 ? (
         <div className="greeting">
-          <button className="buttonHW" key="2">
+          <button className="buttonHW" key="2" onClick={() => changeCounter()}>
             {whichUserHeader}
           </button>
           <button className="buttonHW" key="3">
