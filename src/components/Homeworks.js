@@ -53,10 +53,10 @@ export default function Homeworks({
     getuserhomeworksStudentNo();
     getuserhomeworksALL();
     setswitcher("");
-    // var timerID = setInterval(() => tick(), 1000);
-    // return function cleanup() {
-    //    clearInterval(timerID);
-    // };
+    var timerID = setInterval(() => tick(), 1000);
+    return function cleanup() {
+      clearInterval(timerID);
+    };
   }, [logIn, switcher, whichClass]);
 
   useEffect(() => {
