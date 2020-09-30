@@ -53,10 +53,10 @@ export default function Homeworks({
     getuserhomeworksStudentNo();
     getuserhomeworksALL();
     setswitcher("");
-    var timerID = setInterval(() => tick(), 1000);
-    return function cleanup() {
-      clearInterval(timerID);
-    };
+    //var timerID = setInterval(() => tick(), 1000);
+    //return function cleanup() {
+    //   clearInterval(timerID);
+    // };
   }, [logIn, switcher, whichClass]);
 
   useEffect(() => {
@@ -64,9 +64,9 @@ export default function Homeworks({
     getuserhomeworksStudentYes();
   }, [openInputWindow]);
 
-  function tick() {
-    setswitcher(1);
-  }
+  //  function tick() {
+  //   setswitcher(1);
+  // }
   ///////////////    GET FINISHED HOMEWORKS FOR STUDENTS     /////////////
   async function getuserhomeworksStudentYes() {
     let endpoint = "https://dashybackend.herokuapp.com/userhomeworksSYES/".concat(

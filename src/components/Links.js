@@ -33,10 +33,10 @@ export default function Links({
     getuserlinksGeneral();
     getuserlinksPersonal();
     setswitcher(0);
-    var timerID = setInterval(() => tick(), 1000);
-    return function cleanup() {
-      clearInterval(timerID);
-    };
+    //  var timerID = setInterval(() => tick(), 1000);
+    //   return function cleanup() {
+    //     clearInterval(timerID);
+    //   };
   }, [
     logIn,
     linkToDelete,
@@ -45,9 +45,9 @@ export default function Links({
     linksInsertFieldP,
     linksInsertFieldG,
   ]);
-  function tick() {
-    setswitcher(1);
-  }
+  // function tick() {
+  //   setswitcher(1);
+  // }
 
   /////////    GET GENERAL LINKS     ///////////
   async function getuserlinksGeneral() {
