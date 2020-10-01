@@ -11,7 +11,7 @@ export default function Admin({ logIn }) {
 
   useEffect(() => {
     getClass();
-  }, [logIn, switcher, getit]);
+  }, [logIn, switcher]);
 
   useEffect(() => {
     getit();
@@ -29,14 +29,14 @@ export default function Admin({ logIn }) {
       })
       .then((data) => {
         const allClassData = data.reduce((acc, d) => {
-          const found = acc.find((a) => a.class_id === d.class_id);
+          const found = acc.find((a) => a.class_name === d.class_name);
           const value = {
             name: d.name,
             role: d.user_role,
           };
           if (!found) {
             acc.push({
-              class_id: d.class_id,
+              class_name: d.class_name,
               data: [value],
             });
           } else {
@@ -46,7 +46,7 @@ export default function Admin({ logIn }) {
           return acc;
         }, []);
         setdataAll(allClassData);
-        console.log(dataAll);
+        //console.log(dataAll);
         setswitcher(1);
       });
   }
@@ -55,33 +55,22 @@ export default function Admin({ logIn }) {
     <div className="menu">
       {dataAll.map((firstdata, index) => {
         return (
-          <div>
-            <ul key={index}>
-              {firstdata.class_id}
-              <li key={index}>
-                {firstdata.data.map((data, index) => (
-                  <div className="HomeworkCheck">
-                    <button
-                      key={"butRHWStatus" + data.user_name + index}
-                      className="buttonHWNamesA"
-                      style={{
-                        backgroundColor:
-                          data.user_role === "Student"
-                            ? data.user_role === "Instructor"
-                              ? "green"
-                              : data.user_role === "Admin"
-                              ? "red"
-                              : "darkorange"
-                            : "white",
-                      }}
-                    >
-                      {data.name}
-                      {data.role}
-                    </button>
-                  </div>
-                ))}
-              </li>
-            </ul>
+          <div key={index}>
+            <table id="customers" key={firstdata.class_name}>
+              <thead>
+                <tr>
+                  <th key={index}>{firstdata.class_name}</th>
+                </tr>
+              </thead>
+              {firstdata.data.map((data, index) => (
+                <tbody key={index}>
+                  <tr key={index}>
+                    <td key={data.name}>{data.name}</td>
+                    <td key={data.role}>{data.role}</td>
+                  </tr>
+                </tbody>
+              ))}
+            </table>
           </div>
         );
       })}
