@@ -20,6 +20,7 @@ export default function App() {
   /////////////////////  NO USEEFFECT ANYMORE NEEDED //////////////////////
   const logInCheck = () => {
     logIn === 0 ? setlogIn(2) : setlogIn(0);
+    logIn === 2 && getuser();
     logIn === 2 ? setblur(1) : setblur(0);
     logIn === 1 && setwhichContainer(0);
     logIn === 1 && window.location.reload();
