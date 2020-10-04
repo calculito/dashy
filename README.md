@@ -35,7 +35,7 @@ Components and user stories
 Database:
 
 Changelog:
-2020-10-03
+2020-10-03 transfer to calculito
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
