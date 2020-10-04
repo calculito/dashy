@@ -68,51 +68,7 @@ body {
   background-color: var(--background-page-color);
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='10px' width='10px'><text x='13' y='23' fill='white' font-size='50'>MIGRACODE</text></svg>");
 }
-.loaddiv {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: white;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 100;
-}
-.loaddivTop {
-  font-size: 45px;
-  display: flex;
-  width: 100%;
-  height: 50vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: white;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-end;
-  z-index: 100;
-}
 
-.loaddivBottom {
-  font-size: 45px;
-  display: flex;
-  width: 100%;
-  height: 50vh;
-  position: fixed;
-  top: 50vh;
-  left: 0;
-  background-color: white;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  z-index: 100;
-  transition-property: opacity;
-  transition-duration: 1s;
-  transition-delay: 1s;
-}
 .all {
   width: 100%;
   height: 100%;
@@ -265,7 +221,7 @@ img {
   height: 75vh !important;
 }
 .fc-event-title {
-  font-size: 10px !important;
+  font-size: 14px !important;
   color: var(--shade-light-color);
 }
 .fc-event-time {
@@ -279,12 +235,13 @@ img {
   align-items: center;
 }
 .logoTools {
+  height: 16vw;
   width: 16vw;
-  height: 14vw;
   border-radius: 15px;
   margin: 15px 10px 0px 10px;
   border: 2px solid white;
   cursor: pointer;
+  object-fit: cover;
 }
 .logoBooks {
   width: 12vw;
@@ -295,6 +252,10 @@ img {
   cursor: pointer;
   object-fit: contain;
   padding: 5px;
+}
+.logoBooks:hover {
+  animation: shake 1.3s;
+  animation-iteration-count: infinite;
 }
 .logoTools:hover {
   animation: shake 0.5s;
@@ -787,6 +748,27 @@ h4 {
     -2px -2px 1px 0px var(--shade-dark-color);
 }
 @media only screen and (max-width: 1030px) {
+  .logoBooks {
+    width: 14vw;
+    height: 18vw;
+    border-radius: 12px;
+    margin: 20px 15px 0px 15px;
+    background-color: aliceblue;
+    cursor: pointer;
+    object-fit: contain;
+    padding: 5px;
+  }
+  .logoTools {
+    height: 18vw;
+    width: 18vw;
+    border-radius: 15px;
+    margin: 20px 20px 0px 20px;
+    border: 2px solid white;
+    object-fit: cover;
+  }
+  .fc-event-title {
+    font-size: 12px !important;
+  }
   .halfContainer {
     width: 98%;
   }
@@ -886,6 +868,26 @@ h4 {
   }
 }
 @media only screen and (max-width: 600px) {
+  .logoBooks {
+    width: 16vw;
+    height: 20vw;
+    border-radius: 8px;
+    margin: 15px 10px 0px 10px;
+    background-color: aliceblue;
+    object-fit: contain;
+    padding: 5px;
+  }
+  .logoTools {
+    height: 28vw;
+    width: 28vw;
+    border-radius: 10px;
+    margin: 20px 20px 0px 20px;
+    border: 1px solid white;
+    object-fit: cover;
+  }
+  .fc-event-title {
+    font-size: 10px !important;
+  }
   .infoContLinks {
     display: none;
   }

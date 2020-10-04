@@ -15,7 +15,6 @@ export default function Header({
   let [allClass, setallClass] = useState([{ id: 3, class_name: "mar-2020-1" }]);
   let [allClassId, setallClassId] = useState([{ id: 3 }]);
   const [openInputWindow, setopenInputWindow] = useState(false);
-  var [counterName, setcounterName] = useState(0);
   const ref = React.useRef();
   /////////////////   USEEFFECTS   ///////////////
   useEffect(() => {
@@ -42,24 +41,6 @@ export default function Header({
         );
       });
   }
-  //////////////////  GET THE TIME  ///////////////////
-  function zweistellig(s) {
-    while (s.toString().length < 2) {
-      s = "0" + s;
-    }
-    return s;
-  }
-  const [date, setDate] = useState(new Date());
-  var time =
-    zweistellig(date.getHours()) +
-    ":" +
-    zweistellig(date.getMinutes()) +
-    ":" +
-    zweistellig(date.getSeconds());
-
-  // function tick() {
-  //  setDate(new Date());
-  // }
 
   //////////////////  GET ALL CLASS  ///////////////////
   async function getInfoTochangeCLass() {
@@ -92,39 +73,12 @@ export default function Header({
     );
     setopenInputWindow(false);
   }
-  //////////////////  CHANGE COUNTER :)  ///////////////////
-  function changeCounter() {
-    setcounterName(counterName++);
-  }
 
   return (
     <div className="header" key={whichUserHeader}>
-      <div
-        className="loaddiv"
-        style={{
-          display: counterName < 5 ? "none" : "flex",
-        }}
-      >
-        <div
-          className="loaddivTop"
-          style={{
-            height: counterName < 5 ? "0" : undefined,
-          }}
-        >
-          THE
-        </div>
-        <div
-          className="loaddivBottom"
-          style={{
-            height: counterName < 5 ? "10px" : undefined,
-          }}
-        >
-          END
-        </div>
-      </div>
       {logIn === 1 ? (
         <div className="greeting">
-          <button className="buttonHW" key="2" onClick={() => changeCounter()}>
+          <button className="buttonHW" key="2">
             {whichUserHeader}
           </button>
           <button className="buttonHW" key="3">
