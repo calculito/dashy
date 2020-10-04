@@ -96,7 +96,7 @@ export default function Header({
   function changeCounter() {
     setcounterName(counterName++);
   }
-  console.log(counterName);
+
   return (
     <div className="header" key={whichUserHeader}>
       <div

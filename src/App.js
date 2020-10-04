@@ -1,4 +1,4 @@
-import React, { useState, useRef, Suspense, Fragment } from "react";
+import React, { useState, useRef, Suspense, Fragment, useEffect } from "react";
 import Header from "./components/Header";
 import Tabs from "./components/Tabs";
 import Footer from "./components/Footer";
@@ -17,10 +17,13 @@ export default function App() {
   const [whichPassword, setwhichPassword] = useState("");
   const [passwordUserWrong, setpasswordUserWrong] = useState(0);
 
+  useEffect(() => {
+    logIn === 0 && getuser();
+  }, []);
   /////////////////////  NO USEEFFECT ANYMORE NEEDED //////////////////////
   const logInCheck = () => {
     logIn === 0 ? setlogIn(2) : setlogIn(0);
-    logIn === 2 && getuser();
+
     logIn === 2 ? setblur(1) : setblur(0);
     logIn === 1 && setwhichContainer(0);
     logIn === 1 && window.location.reload();
