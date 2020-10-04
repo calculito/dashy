@@ -1,3 +1,42 @@
+Title:
+DASHY - one tool which collects and combines the needed different tools for the online classes
+
+Description:
+The purpose of the ‘DASHY’ is to collect most of the needed tools for the online classes such as SLACK, SYLLABUS, Calendar tool, Homework and recordings overview. The combination of all that tools in one app should ease the self management of the students to create a convenient and easy-to-use work environment. The system is based on a relational database which is managing the login and the access to the different modules, depending of the user status (persona).
+
+Functionalities:
+Users of the system should be able to retrieve needed information from the database. Homeworks, recordings, calendar appointments and even personal links to needed websites will get stored in the database. The system will support three types of user privileges, STUDENTS, INSTRUCTORS and ADMIN. STUDENTS will have access to STUDENTS functions, and the INSTRUCTORS will have access to both STUDENTS and INSTRUCTORS management functions. The ADMIN is the ADMIN. He has access to any function of the programm.
+There are 3 kinds of users(persona): students, instructors and admin(s).
+The app will have 7 different areas(tabs), 1 logIn button and 1 admin logIn button (LOGO:).
+2 of the tabs, ChatONE2ONE and SYLLABUS are accessible without logIn.
+Depending of the user rights, after logIn more tabs will get shown.
+
+The STUDENT should be able to do the following functions:
+Use the SLACK TAB for communication within Migracode Channel
+Use the SYLLABUS TAB for getting the lessons material (read-only)
+Use the HOMEWORK TAB to get the information about the homeworks (read-only)
+Use the RECORDINGS TAB to view the recordings of the classes (read-only)
+Use the CALENDAR TAB to view appointments (read-only)
+Use the ChatONE2ONE Tool to initiate or to answer communication
+Use the PERSONAL LINKS to collect useful links
+
+The INSTRUCTOR should be able to do the following functions:
+Use the SLACK TAB for communication within Migracode Channel
+Use the SYLLABUS TAB for getting the lessons material (read-only)
+Use the HOMEWORK TAB to write the information about the homeworks
+Use the RECORDINGS TAB to link the recordings of the classes
+Use the CALENDAR TAB to enter/write appointments
+Use the ChatONE2ONE Tool to initiate or to answer communication
+Use the PERSONAL LINKS to collect useful links
+
+User Interface:
+SITEMAP
+Components and user stories
+Database:
+
+Changelog:
+2020-10-03
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

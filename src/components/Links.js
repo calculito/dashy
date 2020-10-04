@@ -98,7 +98,7 @@ export default function Links({
   async function insertPersonalLink(evt) {
     evt.preventDefault();
     const data = { link: linksInsertFieldP };
-    await fetch(
+    const response = await fetch(
       "https://dashybackend.herokuapp.com/postpersonallink/".concat(
         whichUserId
       ),
@@ -108,6 +108,7 @@ export default function Links({
         headers: { "Content-Type": "application/json" },
       }
     );
+    console.log(response.data);
     setlinksInsertFieldP("");
   }
 
@@ -262,6 +263,7 @@ export default function Links({
                           alt="star"
                           onClick={(e) => changestars(1, linksGeneralId[index])}
                         />
+
                         <img
                           className="starSymbols"
                           src={
