@@ -279,12 +279,22 @@ img {
   align-items: center;
 }
 .logoTools {
-  width: 20vw;
-  height: 18vw;
+  width: 16vw;
+  height: 14vw;
   border-radius: 15px;
   margin: 15px 10px 0px 10px;
   border: 2px solid white;
   cursor: pointer;
+}
+.logoBooks {
+  width: 12vw;
+  height: 16vw;
+  border-radius: 15px;
+  margin: 15px 10px 0px 10px;
+  background-color: aliceblue;
+  cursor: pointer;
+  object-fit: contain;
+  padding: 5px;
 }
 .logoTools:hover {
   animation: shake 0.5s;

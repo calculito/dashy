@@ -4,7 +4,7 @@ import trellologo from "../images/trellologo.png";
 import githublogo from "../images/githublogo.jpg";
 import herokulogo from "../images/herokulogo.png";
 
-export default function Slack() {
+export default function Tools() {
   function openRequestedPopup(link) {
     window.open(link, "_blank", "noopener, noreferrer");
   }

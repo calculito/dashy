@@ -1,5 +1,5 @@
 import React from "react";
-import Slack from "./Slack";
+import Tools from "./Tools";
 import Chat from "./Chat";
 import Book from "./Book";
 import Homeworks from "./Homeworks";
@@ -25,7 +25,7 @@ export default function MainContainer({
       {
         {
           0: <Book />,
-          1: <Slack />,
+          1: <Tools />,
           2: (
             <Homeworks
               userName={userName}
