@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import logo from "../images/migracode-logo.png";
 import login from "../images/login.png";
-
+import { useQuery, useMutation, queryCache } from "react-query";
+import API from "../Api.js";
 export default function Header({
   onHeaderClick,
   logIn,
@@ -29,6 +30,7 @@ export default function Header({
   useEffect(() => {
     logIn === 1 && getclassNameFromDB();
   }, [allClassId]);
+
   /////////////////   GET USER CLASS NAME   ///////////////
 
   async function getclassNameFromDB() {
@@ -41,6 +43,11 @@ export default function Header({
         );
       });
   }
+  //////////////  GET ALL CLASS  AXIOS /////////////
+  const { isLoading, error, data, isFetching, refetch } = useQuery(
+    "getClass",
+    () => API.get(`class/`)
+  );
 
   //////////////////  GET ALL CLASS  ///////////////////
   async function getInfoTochangeCLass() {

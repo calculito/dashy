@@ -13,89 +13,97 @@ export default function Book() {
   }
   return (
     <div className="tabcontent">
-      <div className="contLogoTools">
-        <img
-          className="logoBooks"
-          src={bookhtml}
-          alt="slack"
-          onClick={(e) =>
-            openRequestedPopup(
-              "https://migracode-barcelona.github.io/syllabus/html-css/"
-            )
-          }
-        />
-        <img
-          className="logoBooks"
-          src={bookjavascript1}
-          alt="js1"
-          onClick={(e) =>
-            openRequestedPopup(
-              "https://migracode-barcelona.github.io/syllabus/js-core/"
-            )
-          }
-        />
-        <img
-          className="logoBooks"
-          src={bookjavascript2}
-          alt="js2"
-          onClick={(e) =>
-            openRequestedPopup(
-              "https://migracode-barcelona.github.io/syllabus/js-core-2/"
-            )
-          }
-        />
-        <img
-          className="logoBooks"
-          src={bookjavascript3}
-          alt="js3"
-          onClick={(e) =>
-            openRequestedPopup(
-              "https://migracode-barcelona.github.io/syllabus/js-core-3/"
-            )
-          }
-        />
+      <div className="contLogoBooks">
+        <div>
+          <img
+            className="logoBooks"
+            src={bookhtml}
+            alt="slack"
+            onClick={(e) =>
+              openRequestedPopup(
+                "https://migracode-barcelona.github.io/syllabus/html-css/"
+              )
+            }
+          />
+          <img
+            className="logoBooks"
+            src={bookjavascript1}
+            alt="js1"
+            onClick={(e) =>
+              openRequestedPopup(
+                "https://migracode-barcelona.github.io/syllabus/js-core/"
+              )
+            }
+          />
+        </div>
+        <div>
+          <img
+            className="logoBooks"
+            src={bookjavascript2}
+            alt="js2"
+            onClick={(e) =>
+              openRequestedPopup(
+                "https://migracode-barcelona.github.io/syllabus/js-core-2/"
+              )
+            }
+          />
+          <img
+            className="logoBooks"
+            src={bookjavascript3}
+            alt="js3"
+            onClick={(e) =>
+              openRequestedPopup(
+                "https://migracode-barcelona.github.io/syllabus/js-core-3/"
+              )
+            }
+          />
+        </div>
       </div>
-      <div className="contLogoTools">
-        <img
-          className="logoBooks"
-          src={bookreact}
-          alt="bookreact"
-          onClick={(e) =>
-            openRequestedPopup(
-              "https://migracode-barcelona.github.io/syllabus/react/"
-            )
-          }
-        />
-        <img
-          className="logoBooks"
-          src={booknode}
-          alt="node"
-          onClick={(e) =>
-            openRequestedPopup(
-              "https://migracode-barcelona.github.io/syllabus/node/"
-            )
-          }
-        />
-        <img
-          className="logoBooks"
-          src={bookall}
-          alt="bookall"
-          onClick={(e) =>
-            openRequestedPopup(
-              "https://migracode-barcelona.github.io/syllabus/"
-            )
-          }
-        />
-        <img
-          className="logoBooks"
-          src={addbook}
-          alt="add book"
-          onClick={(e) =>
-            openRequestedPopup(
-              "https://migracode-barcelona.github.io/syllabus/"
-            )
-          }
-        />
+      <div className="contLogoBooks">
+        <div>
+          <img
+            className="logoBooks"
+            src={bookreact}
+            alt="bookreact"
+            onClick={(e) =>
+              openRequestedPopup(
+                "https://migracode-barcelona.github.io/syllabus/react/"
+              )
+            }
+          />
+          <img
+            className="logoBooks"
+            src={booknode}
+            alt="node"
+            onClick={(e) =>
+              openRequestedPopup(
+                "https://migracode-barcelona.github.io/syllabus/node/"
+              )
+            }
+          />
+        </div>
+        <div>
+          <img
+            className="logoBooks"
+            src={bookall}
+            alt="bookall"
+            onClick={(e) =>
+              openRequestedPopup(
+                "https://migracode-barcelona.github.io/syllabus/"
+              )
+            }
+          />
+          <img
+            className="logoBooks"
+            src={addbook}
+            alt="add book"
+            onClick={(e) =>
+              openRequestedPopup(
+                "https://migracode-barcelona.github.io/syllabus/"
+              )
+            }
+          />
+        </div>
       </div>
     </div>
   );

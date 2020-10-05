@@ -25,6 +25,7 @@ export default function Admin({ logIn }) {
   async function getit() {
     await setswitcher(1);
   }
+
   /////////////////// GET DATA FROM DB WHERE USER ////////////////////
   async function getClass() {
     await fetch("https://dashybackend.herokuapp.com/alld")

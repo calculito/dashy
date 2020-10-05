@@ -2,7 +2,7 @@ html,
 #root {
   height: 100%;
 }
-:root {
+.root {
   --background-page-color: #cbe3ee;
   --background-infow-color: #96c4d8;
   --shade-infow-color: #548ba1;
@@ -15,7 +15,7 @@ html,
   --font-white: white;
   --font-whitesmoke: #cbe3ee;
 }
-.root {
+:root {
   --background-page-color: #ecede3;
   --background-infow-color: #d5d5ca;
   --shade-infow-color: rgba(213, 213, 202, 0.85);
@@ -301,6 +301,12 @@ img {
   }
 }
 .contLogoTools {
+  margin: 15px 10px 0px 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.contLogoBooks {
   margin: 15px 10px 0px 10px;
   display: flex;
   flex-direction: row;
@@ -868,11 +874,18 @@ h4 {
   }
 }
 @media only screen and (max-width: 600px) {
-  .logoBooks {
-    width: 16vw;
-    height: 20vw;
-    border-radius: 8px;
+  .contLogoBooks {
     margin: 15px 10px 0px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .logoBooks {
+    width: 26vw;
+    height: 30vw;
+    border-radius: 8px;
+    margin: 25px 15px 0px 15px;
     background-color: aliceblue;
     object-fit: contain;
     padding: 5px;
