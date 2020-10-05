@@ -5,11 +5,10 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import interaction from "@fullcalendar/interaction";
 import esLocale from "@fullcalendar/core/locales/es";
+import { useQuery, useMutation, queryCache } from "react-query";
+import API from "../Api.js";
 
 export default function Calendar({ whichClass, whichRole }) {
-  const [appointments, setappointments] = useState([
-    { title: "MEETING", date: "2020-08-26" },
-  ]);
   const [openInputWindow, setopenInputWindow] = useState(false);
   const [titleNewAppointment, settitleNewAppointment] = useState("");
   const [dateNewAppointment, setdateNewAppointment] = useState("");
@@ -17,6 +16,22 @@ export default function Calendar({ whichClass, whichRole }) {
   const handleDateClick = (arg) => {
     whichRole === "Admin" && setopenInputWindow(1);
   };
+  /////////    GET ALL APOINTMENTS  AXIOS  ///////////
+
+  const { isLoading, error, data } = useQuery("getuserAppointments", () =>
+    API.get(`usercalendar/${whichClass}`)
+  );
+
+  console.log(whichClass, data, isLoading);
+
+  //////////////  PREPARE DATA FOR WORK WITH IT ////////////////
+  const dataprep =
+    !isLoading &&
+    data.data.forEach(function (obj) {
+      obj.date = obj.tdate;
+      //delete obj.tdate;
+    });
+  const events = !isLoading && data.data;
   /////////    POST NEW APOINTMENT   ///////////
   async function insertAppointment(evt) {
     setdateNewAppointment(dateNewAppointment.concat(":00Z"));
@@ -34,32 +49,12 @@ export default function Calendar({ whichClass, whichRole }) {
     setdateNewAppointment("");
     setopenInputWindow(false);
   }
-  /////////    GET ALL APOINTMENTS    ///////////
-  async function getuserAppointments() {
-    let endpoint = "https://dashybackend.herokuapp.com/usercalendar/".concat(
-      whichClass
-    );
-    await fetch(endpoint)
-      .then((response) => response.json())
-      .then((data) => {
-        //rename keys in object for use 'date', 'start' and 'end'
-        data.forEach(function (obj) {
-          obj.date = obj.tdate;
-          delete obj.tdate;
-        });
-        setappointments(data);
-      });
-  }
+
   function cancelInsert() {
     settitleNewAppointment("");
     setdateNewAppointment("");
     setopenInputWindow(false);
   }
-  useEffect(() => {
-    getuserAppointments();
-  }, [whichClass, openInputWindow]);
-  //console.log("appoint" + Object.keys(appointments[0]));
-  let events = appointments;
 
   return (
     <div className="tabcontent">
@@ -94,9 +89,13 @@ export default function Calendar({ whichClass, whichRole }) {
           </form>
         </div>
       ) : undefined}
-      <div className="infoWindow">
-        You have {events.length} appointments in your calendar
-      </div>
+      {isLoading ? (
+        <div>C'mon database, wake up ...</div>
+      ) : (
+        <div className="infoWindow">
+          You have {events.length} appointments in your calendar
+        </div>
+      )}
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interaction]}
         initialView="dayGridMonth"

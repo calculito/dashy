@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Suspense, Fragment } from "react";
 import { useQuery, useMutation, queryCache } from "react-query";
 import API from "../Api.js";
-export default function Recordings({ userName, logIn, whichClass, whichRole }) {
+export default function Recordings({ userName, whichClass, whichRole }) {
   const [newRecordingsLink, setnewRecordingsLink] = useState("");
   const [newRecordingsDescription, setnewRecordingsDescription] = useState("");
   const [newRecordingsKeyword, setnewRecordingsKeyword] = useState("");
@@ -20,6 +20,11 @@ export default function Recordings({ userName, logIn, whichClass, whichRole }) {
     mutateRecordings();
   }
 
+  useEffect(() => {
+    refetch();
+  }, [whichClass]);
+
+  console.log(data, whichClass);
   const [mutateRecordings] = useMutation(
     () =>
       API.post(`/postrecording/${whichClass}`, {
@@ -36,11 +41,7 @@ export default function Recordings({ userName, logIn, whichClass, whichRole }) {
       },
     }
   );
-  useEffect(() => {
-    refetch();
-    console.log(refetch, whichClass);
-    console.log(data);
-  }, [logIn, whichClass]);
+
   return (
     <div className="tabcontent">
       {isLoading ? (

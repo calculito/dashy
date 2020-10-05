@@ -13,23 +13,16 @@ export default function Header({
   onClick,
 }) {
   const [userClassName, setuserClassName] = useState(false);
-  let [allClass, setallClass] = useState([{ id: 3, class_name: "mar-2020-1" }]);
-  let [allClassId, setallClassId] = useState([{ id: 3 }]);
   const [openInputWindow, setopenInputWindow] = useState(false);
   const ref = React.useRef();
   /////////////////   USEEFFECTS   ///////////////
   useEffect(() => {
-    logIn === 1 && getInfoTochangeCLass();
     logIn === 1 && getclassNameFromDB();
     // var timerID = setInterval(() => tick(), 1000);
     // return function cleanup() {
     //   clearInterval(timerID);
     // };
   }, [logIn, userClassName, whichClass, openInputWindow]);
-
-  useEffect(() => {
-    logIn === 1 && getclassNameFromDB();
-  }, [allClassId]);
 
   /////////////////   GET USER CLASS NAME   ///////////////
 
@@ -48,28 +41,11 @@ export default function Header({
     "getClass",
     () => API.get(`class/`)
   );
-
-  //////////////////  GET ALL CLASS  ///////////////////
-  async function getInfoTochangeCLass() {
-    let endpoint = "https://dashybackend.herokuapp.com/class/";
-    await fetch(endpoint)
-      .then((response) => response.json())
-      .then((data) => {
-        const arrToClass = data.map(function (daten) {
-          return daten.class_name;
-        });
-        setallClass(arrToClass);
-        const arrToClassId = data.map(function (daten) {
-          return daten.id;
-        });
-        setallClassId(arrToClassId);
-      });
-  }
+  const classes = !isLoading && data.data;
 
   //////////////////  CHANGE CLASS ///////////////////
   async function changeClass(i) {
-    //whichClass = allClassId[i];
-    let data = { classId: allClassId[i] };
+    let data = { classId: classes[i].id };
     await fetch(
       "https://dashybackend.herokuapp.com/switchclass/".concat(whichUserId),
       {
@@ -116,27 +92,30 @@ export default function Header({
         alt="logo"
         onClick={onHeaderClick}
       />
-      {openInputWindow !== false && (
-        <div className="outPopUpVariabel">
-          {allClass.map((data, i) => (
-            <div
-              className="recordings"
-              key={"divRHW" + i}
-              onClick={() => onClick((whichClass = allClassId[i]))}
-            >
+      {openInputWindow !== false &&
+        (isLoading ? (
+          <div>C'mon database, wake up ...</div>
+        ) : (
+          <div className="outPopUpVariabel">
+            {classes.map((data, i) => (
               <div
-                style={{ marginTop: "3px" }}
-                key={"d" + i}
-                onClick={(e) => changeClass(i)}
+                className="recordings"
+                key={"divRHW" + i}
+                onClick={() => onClick((whichClass = classes[i].id))}
               >
-                <button className="recordinglinks" key={i}>
-                  {data}
-                </button>
+                <div
+                  style={{ marginTop: "3px" }}
+                  key={"d" + i}
+                  onClick={(e) => changeClass(i)}
+                >
+                  <button className="recordinglinks" key={i}>
+                    {data.class_name}
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        ))}
     </div>
   );
 }

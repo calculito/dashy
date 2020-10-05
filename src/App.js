@@ -3,6 +3,8 @@ import Header from "./components/Header";
 import Tabs from "./components/Tabs";
 import Footer from "./components/Footer";
 import MainContainer from "./components/MainContainer";
+import { useQuery, useMutation, queryCache } from "react-query";
+import API from "./Api.js";
 import "./App.css";
 
 export default function App() {
@@ -17,9 +19,6 @@ export default function App() {
   const [whichPassword, setwhichPassword] = useState("");
   const [passwordUserWrong, setpasswordUserWrong] = useState(0);
 
-  useEffect(() => {
-    logIn === 0 && getuser();
-  }, []);
   /////////////////////  NO USEEFFECT ANYMORE NEEDED //////////////////////
   const logInCheck = () => {
     logIn === 0 ? setlogIn(2) : setlogIn(0);
@@ -27,7 +26,8 @@ export default function App() {
     logIn === 2 ? setblur(1) : setblur(0);
     logIn === 1 && setwhichContainer(0);
     logIn === 1 && window.location.reload();
-    getuser();
+    //getuser();
+    getuser2();
   };
   ////////////////  CANCEL BUTTON IN FORM ///////////////
   const logIn2 = () => {
@@ -40,16 +40,16 @@ export default function App() {
     evt.preventDefault();
     whichUser !== whichPassword ? wrongPassword() : goodPassword();
   };
-  /////////////////// GET USER TO CHECK IF IN DB ////////////////////
-  async function getuser() {
-    await fetch("https://dashybackend.herokuapp.com/")
-      .then((response) => {
-        return response.text();
-      })
-      .then((data) => {
-        setuser(data);
-      });
+  //////////////  GET USER TO CHECK IF IN DB AXIOS /////////////
+  const { isLoading, error, data, isFetching, refetch } = useQuery(
+    "fetchData",
+    () => API.get()
+  );
+
+  function getuser2() {
+    !isLoading && setuser(JSON.stringify({ data }));
   }
+
   //////////////// WRONG PASSWORD HANDLE ///////////////
   const wrongPassword = () => {
     setwhichUser("");
@@ -189,34 +189,38 @@ export default function App() {
                 </div>
               </form>
             </div>
+          )}{" "}
+          {isLoading ? (
+            <div>C'mon database, wake up ...</div>
+          ) : (
+            <div className={blur === 1 || logIn === 2 ? "allblur" : "all"}>
+              <Header
+                onHeaderClick={logInCheck}
+                logIn={logIn}
+                whichUserHeader={whichUser}
+                whichRole={whichRole}
+                whichUserId={whichUserId}
+                whichClass={whichClass}
+                onClick={newClass}
+              />
+              <Tabs
+                onTabsClick={setWindow}
+                logIn={logIn}
+                index={whichContainer}
+                whichRole={whichRole}
+              />
+              <MainContainer
+                logIn={logIn}
+                index={whichContainer}
+                userName={whichUser}
+                whichClass={whichClass}
+                whichRole={whichRole}
+                whichUserId={whichUserId}
+                blur={checkBlur}
+              />
+              <Footer />
+            </div>
           )}
-          <div className={blur === 1 || logIn === 2 ? "allblur" : "all"}>
-            <Header
-              onHeaderClick={logInCheck}
-              logIn={logIn}
-              whichUserHeader={whichUser}
-              whichRole={whichRole}
-              whichUserId={whichUserId}
-              whichClass={whichClass}
-              onClick={newClass}
-            />
-            <Tabs
-              onTabsClick={setWindow}
-              logIn={logIn}
-              index={whichContainer}
-              whichRole={whichRole}
-            />
-            <MainContainer
-              logIn={logIn}
-              index={whichContainer}
-              userName={whichUser}
-              whichClass={whichClass}
-              whichRole={whichRole}
-              whichUserId={whichUserId}
-              blur={checkBlur}
-            />
-            <Footer />
-          </div>
         </>
       </Suspense>
     </Fragment>
