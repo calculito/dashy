@@ -36,6 +36,21 @@ Database:
 
 Changelog:
 2020-10-03 transfer to calculito
+2020-10-07 tabs clean, books clean
+
+ToDo
+ADMIN: rerender the page after adding, create password in database
+Calendar: add appointment time correcting
+Chat: background white, maybe inframe, click on MUTE
+Footer: display in mobile version (buttons right), css variable as array
+Header: clean
+Homeworks: clean code, useQuery
+Links: clean code, useQuery
+Recordings: rerender after change Class
+Tabs: clean
+Tools: clean
+CSS: clean code
+////////////////////////////////////////////////////////////////////////////////////////////////
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
