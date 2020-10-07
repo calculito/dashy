@@ -166,7 +166,7 @@ export default function App() {
                   className="btn"
                   onClick={setInputFocus}
                 />
-                <div className="cancelAndForgot">
+                <div className="cancelAndForgotLogIn">
                   <input
                     type="button"
                     value="Close"

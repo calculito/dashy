@@ -88,33 +88,35 @@ export default function Recordings({ userName, whichClass, whichRole }) {
         </form>
       ) : undefined}
       <div className="linksContainer">
-        {isLoading
-          ? undefined
-          : data.data.map((data, i) => (
-              <div className="rowHW" key={"divRHW" + i}>
-                <div className="recordings" key={"d" + i}>
-                  <a
-                    className="recordinglinks"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={data.link}
-                    key={"b" + i}
-                  >
-                    {data.title}
-                  </a>
-                  <span
-                    className="circle"
-                    style={{
-                      backgroundColor: "gray",
-                      color: "white",
-                      fontSize: "12px",
-                    }}
-                  >
-                    {data.keyword}
-                  </span>
+        <div className="halfContainer">
+          {isLoading
+            ? undefined
+            : data.data.map((data, i) => (
+                <div className="rowHW" key={"divRHW" + i}>
+                  <div className="recordings" key={"d" + i}>
+                    <a
+                      className="recordinglinks"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={data.link}
+                      key={"b" + i}
+                    >
+                      {data.title}
+                    </a>
+                    <span
+                      className="circle"
+                      style={{
+                        backgroundColor: "gray",
+                        color: "white",
+                        fontSize: "12px",
+                      }}
+                    >
+                      {data.keyword}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+        </div>
       </div>
     </div>
   );
