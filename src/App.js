@@ -1,4 +1,4 @@
-import React, { useState, useRef, Suspense, Fragment, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Header from "./components/Header";
 import Tabs from "./components/Tabs";
 import Footer from "./components/Footer";
@@ -6,6 +6,7 @@ import MainContainer from "./components/MainContainer";
 import { useQuery, useMutation, queryCache } from "react-query";
 import API from "./Api.js";
 import "./App.css";
+import Graffiti from "./images/graffiti.svg";
 
 export default function App() {
   const [logIn, setlogIn] = useState(0);
@@ -129,100 +130,99 @@ export default function App() {
   );
 
   return (
-    <Fragment>
-      <Suspense fallback={<div>Loading...</div>}>
-        <>
-          {logIn === 2 && (
-            <div className="outPopUp">
-              {" "}
-              <form className="form-container" onSubmit={handleSubmit}>
-                <label>
-                  Username:
-                  <input
-                    autoFocus
-                    ref={inputRef}
-                    type="text"
-                    autoComplete="on"
-                    placeholder="Enter username"
-                    value={whichUser}
-                    onChange={(e) => setwhichUser(e.target.value)}
-                    required
-                  />
-                </label>
-                <label>
-                  Password:
-                  <input
-                    type="text"
-                    placeholder="Enter Password"
-                    autoComplete="on"
-                    value={whichPassword}
-                    onChange={(e) => setwhichPassword(e.target.value)}
-                    required
-                  />
-                </label>
-                <input
-                  type="submit"
-                  value="Submit"
-                  className="btn"
-                  onClick={setInputFocus}
-                />
-                <div className="cancelAndForgotLogIn">
-                  <input
-                    type="button"
-                    value="Close"
-                    className=" cancel"
-                    onClick={logIn2}
-                  />
-                  <input
-                    type="button"
-                    style={{ color: "red" }}
-                    value={
-                      passwordUserWrong === 0
-                        ? ""
-                        : passwordUserWrong === 1
-                        ? "Forgot password?"
-                        : "No username matched"
-                    }
-                    className="cancel"
-                    onClick={logIn2}
-                  />
-                </div>
-              </form>
+    <>
+      {logIn === 2 && (
+        <div className="outPopUp">
+          {" "}
+          <form className="form-container" onSubmit={handleSubmit}>
+            <label>
+              Username:
+              <input
+                autoFocus
+                ref={inputRef}
+                type="text"
+                autoComplete="on"
+                placeholder="Enter username"
+                value={whichUser}
+                onChange={(e) => setwhichUser(e.target.value)}
+                required
+              />
+            </label>
+            <label>
+              Password:
+              <input
+                type="text"
+                placeholder="Enter Password"
+                autoComplete="on"
+                value={whichPassword}
+                onChange={(e) => setwhichPassword(e.target.value)}
+                required
+              />
+            </label>
+            <input
+              type="submit"
+              value="Submit"
+              className="btn"
+              onClick={setInputFocus}
+            />
+            <div className="cancelAndForgotLogIn">
+              <input
+                type="button"
+                value="Close"
+                className=" cancel"
+                onClick={logIn2}
+              />
+              <input
+                type="button"
+                style={{ color: "red" }}
+                value={
+                  passwordUserWrong === 0
+                    ? ""
+                    : passwordUserWrong === 1
+                    ? "Forgot password?"
+                    : "No username matched"
+                }
+                className="cancel"
+                onClick={logIn2}
+              />
             </div>
-          )}{" "}
-          {isLoading ? (
-            <div>C'mon database, wake up ...</div>
-          ) : (
-            <div className={blur === 1 || logIn === 2 ? "allblur" : "all"}>
-              <Header
-                onHeaderClick={logInCheck}
-                logIn={logIn}
-                whichUserHeader={whichUser}
-                whichRole={whichRole}
-                whichUserId={whichUserId}
-                whichClass={whichClass}
-                onClick={newClass}
-              />
-              <Tabs
-                onTabsClick={setWindow}
-                logIn={logIn}
-                index={whichContainer}
-                whichRole={whichRole}
-              />
-              <MainContainer
-                logIn={logIn}
-                index={whichContainer}
-                userName={whichUser}
-                whichClass={whichClass}
-                whichRole={whichRole}
-                whichUserId={whichUserId}
-                blur={checkBlur}
-              />
-              <Footer />
-            </div>
-          )}
-        </>
-      </Suspense>
-    </Fragment>
+          </form>
+        </div>
+      )}{" "}
+      {isLoading ? (
+        <div>
+          C'mon database, wake up ...{" "}
+          <img className="bgimg" src={Graffiti} alt="graffiti" />
+        </div>
+      ) : (
+        <div className={blur === 1 || logIn === 2 ? "allblur" : "all"}>
+          <Header
+            onHeaderClick={logInCheck}
+            logIn={logIn}
+            whichUserHeader={whichUser}
+            whichRole={whichRole}
+            whichUserId={whichUserId}
+            whichClass={whichClass}
+            onClick={newClass}
+          />
+          <Tabs
+            onTabsClick={setWindow}
+            logIn={logIn}
+            index={whichContainer}
+            whichRole={whichRole}
+          />
+          <MainContainer
+            logIn={logIn}
+            index={whichContainer}
+            userName={whichUser}
+            whichClass={whichClass}
+            whichRole={whichRole}
+            whichUserId={whichUserId}
+            blur={checkBlur}
+          />
+          <Footer />
+        </div>
+      )}
+    </>
   );
 }
