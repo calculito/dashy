@@ -90,6 +90,7 @@ body {
 }
 .tabcontent {
   background-color: var(--background-infow-color);
+  text-align: center;
 }
 .tabcontent95 {
   height: 95%;
@@ -119,7 +120,7 @@ button:hover {
 }
 .tabname {
   width: 16%;
-  border-left: 2px solid var(--background-infow-color);
+  border-left: 2px solid var(--background-page-color);
   border-top-left-radius: 2px;
   border-top-right-radius: 30px;
   padding: 10px 10px 10px 5px;
@@ -312,9 +313,9 @@ img {
 }
 .contLogoBooks {
   margin: 15px 10px 0px 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+
+  width: 100%;
+  float: left;
 }
 .outPopUp {
   font: 400 13.3333px Arial;
@@ -437,7 +438,7 @@ img {
 /* Full-width input fields */
 .form-container input[type="text"],
 .form-container input[type="password"] {
-  color: var(--font-white);
+  color: var(--font-tabnI-color);
   width: 90%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -783,11 +784,14 @@ h4 {
     -2px -2px 1px 0px var(--shade-dark-color);
 }
 @media only screen and (max-width: 1030px) {
+  .clearfix {
+    overflow: auto;
+  }
   .logoBooks {
     width: 14vw;
     height: 18vw;
     border-radius: 12px;
-    margin: 20px 15px 0px 15px;
+    margin: 3vw 3vw 0px 3vw;
     background-color: aliceblue;
     cursor: pointer;
     object-fit: contain;
@@ -902,18 +906,11 @@ h4 {
   }
 }
 @media only screen and (max-width: 600px) {
-  .contLogoBooks {
-    margin: 15px 10px 0px 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
   .logoBooks {
-    width: 26vw;
+    width: 23vw;
     height: 30vw;
     border-radius: 8px;
-    margin: 25px 15px 0px 15px;
+    margin: 2vw 2vw 0px 2vw;
     background-color: aliceblue;
     object-fit: contain;
     padding: 5px;

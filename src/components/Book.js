@@ -11,99 +11,41 @@ export default function Book() {
   function openRequestedPopup(link) {
     window.open(link, "_blank", "noopener, noreferrer");
   }
+  const booklinks = [
+    "https://migracode-barcelona.github.io/syllabus/html-css/",
+    "https://migracode-barcelona.github.io/syllabus/js-core/",
+    "https://migracode-barcelona.github.io/syllabus/js-core-2/",
+    "https://migracode-barcelona.github.io/syllabus/js-core-3/",
+    "https://migracode-barcelona.github.io/syllabus/react/",
+    "https://migracode-barcelona.github.io/syllabus/node/",
+    "https://migracode-barcelona.github.io/syllabus/",
+    "https://migracode-barcelona.github.io/syllabus/",
+  ];
+  const bookcovers = {
+    0: bookhtml,
+    1: bookjavascript1,
+    2: bookjavascript2,
+    3: bookjavascript3,
+    4: bookreact,
+    5: booknode,
+    6: bookall,
+    7: addbook,
+  };
   return (
-    <div className="tabcontent">
+    <div
+      className="tabcontent"
+      style={{ display: "flex", justifyContent: "center" }}
+    >
       <div className="contLogoBooks">
-        <div>
+        {booklinks.map((data, i) => (
           <img
+            key={bookcovers[i]}
             className="logoBooks"
-            src={bookhtml}
-            alt="slack"
-            onClick={(e) =>
-              openRequestedPopup(
-                "https://migracode-barcelona.github.io/syllabus/html-css/"
-              )
-            }
+            src={bookcovers[i]}
+            alt={bookcovers[i]}
+            onClick={(e) => openRequestedPopup({ data })}
           />
-          <img
-            className="logoBooks"
-            src={bookjavascript1}
-            alt="js1"
-            onClick={(e) =>
-              openRequestedPopup(
-                "https://migracode-barcelona.github.io/syllabus/js-core/"
-              )
-            }
-          />
-        </div>
-        <div>
-          <img
-            className="logoBooks"
-            src={bookjavascript2}
-            alt="js2"
-            onClick={(e) =>
-              openRequestedPopup(
-                "https://migracode-barcelona.github.io/syllabus/js-core-2/"
-              )
-            }
-          />
-          <img
-            className="logoBooks"
-            src={bookjavascript3}
-            alt="js3"
-            onClick={(e) =>
-              openRequestedPopup(
-                "https://migracode-barcelona.github.io/syllabus/js-core-3/"
-              )
-            }
-          />
-        </div>
-      </div>
-      <div className="contLogoBooks">
-        <div>
-          <img
-            className="logoBooks"
-            src={bookreact}
-            alt="bookreact"
-            onClick={(e) =>
-              openRequestedPopup(
-                "https://migracode-barcelona.github.io/syllabus/react/"
-              )
-            }
-          />
-          <img
-            className="logoBooks"
-            src={booknode}
-            alt="node"
-            onClick={(e) =>
-              openRequestedPopup(
-                "https://migracode-barcelona.github.io/syllabus/node/"
-              )
-            }
-          />
-        </div>
-        <div>
-          <img
-            className="logoBooks"
-            src={bookall}
-            alt="bookall"
-            onClick={(e) =>
-              openRequestedPopup(
-                "https://migracode-barcelona.github.io/syllabus/"
-              )
-            }
-          />
-          <img
-            className="logoBooks"
-            src={addbook}
-            alt="add book"
-            onClick={(e) =>
-              openRequestedPopup(
-                "https://migracode-barcelona.github.io/syllabus/"
-              )
-            }
-          />
-        </div>
+        ))}
       </div>
     </div>
   );

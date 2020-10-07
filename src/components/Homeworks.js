@@ -441,7 +441,7 @@ export default function Homeworks({
                       rel="noopener noreferrer"
                       key={index}
                     >
-                      {link}
+                      {`${link.substring(0, 30)}...`}
                     </a>
 
                     <div className="infoContLinks">
@@ -571,7 +571,7 @@ export default function Homeworks({
                       rel="noopener noreferrer"
                       key={index}
                     >
-                      {link}
+                      {`${link.substring(0, 30)}...`}
                     </a>
                     <div className="infoContLinks">
                       <button
