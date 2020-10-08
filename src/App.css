@@ -120,9 +120,8 @@ button:hover {
 }
 .tabname {
   width: 16%;
-  border-left: 2px solid var(--background-page-color);
-  border-top-left-radius: 2px;
-  border-top-right-radius: 30px;
+  border-left: 1px solid var(--background-page-color);
+  opacity: 0.8;
   padding: 10px 10px 10px 5px;
   color: var(--font-tabnI-color);
   background-color: var(--background-tabn-color);
@@ -132,15 +131,18 @@ button:hover {
   justify-content: space-between;
   align-items: center;
   font-size: 1em;
+  transform: skew(0deg);
 }
 .tabnameactive {
   width: 16%;
   align-items: center;
-  border-top-left-radius: 2px;
-  border-top-right-radius: 30px;
+  transform: skew(0deg);
   padding: 10px 10px 10px 5px;
   color: var(--font-infow-color);
+  border-left: 1px solid var(--background-page-color);
   background-color: var(--background-infow-color);
+  border-top-right-radius: 15px;
+
   cursor: pointer;
   display: flex;
   flex-direction: row;
@@ -607,9 +609,9 @@ h4 {
   font-size: 14px;
 }
 .circleIcons {
-  padding: 4px;
+  padding: 6px;
   margin: 0px;
-  border-radius: 10px/10px;
+  border-radius: 10px/12px;
   color: var(--font-infow-color);
   background-color: white;
   border: 1px solid var(--shade-dark-color);
@@ -648,7 +650,7 @@ h4 {
   align-items: center;
   min-width: 96%;
   padding: 5px 0px 5px 0px;
-  background-color: var(--font-whitesmoke);
+  background-color: var(--background-tabn-color);
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
 }
