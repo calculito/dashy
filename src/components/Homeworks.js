@@ -371,27 +371,7 @@ export default function Homeworks({
             (homeworkDescriptionSYes.length + homeworkDescriptionSNo.length) *
               8}
       </div>
-      <div
-        className={whichRole !== "Student" ? "contLinks" : "contLinkshidden"}
-      >
-        <form className="cancelAndForgot">
-          <input
-            className="inputLinks"
-            type="text"
-            placeholder="Homeworks"
-            value={homeworkInsertField}
-            onChange={(e) => sethomeworkInsertField(e.target.value)}
-            required
-          />
 
-          <button
-            className="buttonHW"
-            onClick={homeworkInsertField !== "" ? insertHomework : undefined}
-          >
-            ⇚ Insert a homework
-          </button>
-        </form>
-      </div>
       {openInputWindow !== false && (
         <div className="outPopUp">
           <form className="form-container" onSubmit={saveLinkToHomework}>
@@ -608,87 +588,131 @@ export default function Homeworks({
           </div>
         </div>
       ) : (
-        <div className="tabcontent">
-          <div className="linksContainer">
-            {openCheckWindow !== false ? (
-              <div className="outPopUpHomeworkCheck">
-                <form className="HomeworkCheck">
-                  <div>
-                    Please check the homework in the separate window and click
-                    on the corresponding button below!
-                  </div>
-                  <div className="buttonsContainer">
-                    <button className="buttonHW" onClick={(e) => homeworkOk(e)}>
-                      Homework OK
-                    </button>
-                    <button
-                      className="buttonHW"
-                      onClick={(e) => homeworkNotOk(e)}
-                    >
-                      Homework not OK
-                    </button>
-                    <button className="buttonHW" onClick={(e) => cancel(e)}>
-                      Cancel
-                    </button>
-                  </div>
-                </form>
-              </div>
-            ) : undefined}
-            {allHomeworks.map((alldata, index) => {
-              return (
-                <div className="rowHW" key={"divRHW" + index}>
-                  <div className="recordings" key={"divG" + index}>
-                    <div className="divRowLeft">
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="recordinglinks"
-                        href={alldata.link}
-                        key={index}
-                      >
-                        {alldata.link}
-                      </a>
-                      (<HammerShowInstructor id={alldata.id} />)
+        <div className="halfContainer">
+          <div
+            className={
+              whichRole !== "Student" ? "contLinks" : "contLinkshidden"
+            }
+          >
+            <form className="cancelAndForgot">
+              <input
+                className="inputLinks"
+                type="text"
+                placeholder="Homeworks"
+                value={homeworkInsertField}
+                onChange={(e) => sethomeworkInsertField(e.target.value)}
+                required
+              />
+
+              <button
+                className="buttonHW"
+                onClick={
+                  homeworkInsertField !== "" ? insertHomework : undefined
+                }
+              >
+                ⇚ Insert a homework
+              </button>
+            </form>
+          </div>
+          <div className="tabcontent">
+            <div className="linksContainer">
+              {openCheckWindow !== false ? (
+                <div className="outPopUpHomeworkCheck">
+                  <form className="HomeworkCheck">
+                    <div>
+                      Please check the homework in the separate window and click
+                      on the corresponding button below!
                     </div>
-                    <div className="rowHWPosAbs" key={"divRHWStatus" + index}>
-                      {alldata.data.map((data, index) => (
-                        <button
-                          onClick={(e) =>
-                            openRequestedLink(data.linktohw, data.hwfinid)
-                          }
-                          key={"butRHWStatus" + data.name + index}
-                          className="buttonHWNamesA"
+                    <div className="buttonsContainer">
+                      <button
+                        className="buttonHW"
+                        onClick={(e) => homeworkOk(e)}
+                      >
+                        Homework OK
+                      </button>
+                      <button
+                        className="buttonHW"
+                        onClick={(e) => homeworkNotOk(e)}
+                      >
+                        Homework not OK
+                      </button>
+                      <button className="buttonHW" onClick={(e) => cancel(e)}>
+                        Cancel
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              ) : undefined}
+              {allHomeworks.map((alldata, index) => {
+                return (
+                  <div className="rowHW" key={"divRHW" + index}>
+                    <div className="recordings" key={"divG" + index}>
+                      <div className="divRowLeft">
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="recordinglinks"
+                          href={alldata.link}
+                          key={index}
+                        >
+                          {alldata.link}
+                        </a>
+                        <div className="circle">
+                          <HammerShowInstructor id={alldata.id} />
+                        </div>
+                      </div>
+                      <div className="rowHWPosAbs" key={"divRHWStatus" + index}>
+                        {alldata.data.map((data, index) => (
+                          <button
+                            onClick={(e) =>
+                              openRequestedLink(data.linktohw, data.hwfinid)
+                            }
+                            key={"butRHWStatus" + data.name + index}
+                            className="buttonHWNamesA"
+                            style={{
+                              backgroundColor:
+                                data.finished === "yes"
+                                  ? data.validation === "yes"
+                                    ? "green"
+                                    : data.validation === "no"
+                                    ? "red"
+                                    : "darkorange"
+                                  : "white",
+                            }}
+                          >
+                            {data.name}
+                            {data.hammer > 0 ? (
+                              <div
+                                className="circle"
+                                style={{
+                                  margin: "0",
+                                  backgroundColor:
+                                    "var(--background-page-color)",
+                                }}
+                              >
+                                {data.hammer}
+                              </div>
+                            ) : undefined}
+                          </button>
+                        ))}
+                        <span
+                          className="circle"
+                          onClick={(e) => changeOptional(index)}
                           style={{
                             backgroundColor:
-                              data.finished === "yes"
-                                ? data.validation === "yes"
-                                  ? "green"
-                                  : data.validation === "no"
-                                  ? "red"
-                                  : "darkorange"
-                                : "white",
+                              alldata.optional === "yes" && "green",
+                            color: "white",
+                            fontSize: "12px",
                           }}
                         >
-                          {data.name}({data.hammer})
-                        </button>
-                      ))}
-                      <span
-                        className="circle"
-                        onClick={(e) => changeOptional(index)}
-                        style={{
-                          backgroundColor:
-                            alldata.optional === "yes" && "green",
-                          color: "white",
-                          fontSize: "12px",
-                        }}
-                      >
-                        OPT
-                      </span>
+                          OPT
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
       )}

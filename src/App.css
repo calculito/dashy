@@ -86,7 +86,7 @@ body {
   object-fit: cover;
 }
 .maincontainer {
-  height: calc(100% - 145px);
+  height: calc(100% - 150px);
   overflow: auto;
   background-color: var(--background-infow-color);
 }
@@ -124,7 +124,7 @@ button:hover {
   width: 16%;
   border-left: 1px solid var(--background-page-color);
   opacity: 0.8;
-  padding: 10px 10px 10px 5px;
+  padding: 5px 5px 5px 5px;
   color: var(--font-tabnI-color);
   background-color: var(--background-tabn-color);
   cursor: pointer;
@@ -139,7 +139,7 @@ button:hover {
   width: 16%;
   align-items: center;
   transform: skew(0deg);
-  padding: 10px 10px 10px 5px;
+  padding: 5px 5px 5px 5px;
   color: var(--font-infow-color);
   border-left: 1px solid var(--background-page-color);
   background-color: var(--background-infow-color);
@@ -317,8 +317,7 @@ img {
 }
 .contLogoBooks {
   margin: 15px 10px 0px 10px;
-
-  width: 100%;
+  width: 96%;
   float: left;
 }
 .outPopUp {
@@ -512,7 +511,7 @@ label {
   justify-content: flex-start;
   align-items: center;
   margin: 0px 0px 0px 0px;
-  width: 96%;
+  width: 100%;
 }
 .contLinkshidden {
   display: none;
@@ -537,7 +536,7 @@ h4 {
 }
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: var(--font-tabnI-color);
+  color: var(--background-page-color);
   opacity: 1; /* Firefox */
 }
 
@@ -588,9 +587,9 @@ h4 {
   font-size: 16px;
 }
 .halfContainer {
-  width: 100%;
+  width: 96%;
   border-radius: 2px;
-  margin: 0px 10px 20px 10px;
+  margin: 20px 10px 20px 20px;
   max-height: 100%;
   font-size: 16px;
 }
@@ -601,6 +600,8 @@ h4 {
   align-items: center;
 }
 .circle {
+  align-items: center;
+  display: flex;
   padding: 1px 5px 1px 5px;
   margin: 0px 10px 0px 0px;
   border-radius: 30px/30px;
@@ -608,7 +609,7 @@ h4 {
   background-color: var(--background-infow-color);
   border: 1px solid var(--shade-dark-color);
   opacity: 0.6;
-  font-size: 14px;
+  font-size: 12px;
 }
 .circleIcons {
   padding: 6px;
@@ -650,7 +651,7 @@ h4 {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  min-width: 96%;
+  min-width: 100%;
   padding: 5px 0px 5px 0px;
   background-color: var(--background-tabn-color);
   border-top-right-radius: 15px;
@@ -737,6 +738,10 @@ h4 {
   cursor: pointer;
 }
 .buttonHWNamesA {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   font-size: 12px;
   padding: 1px 3px 1px 3px;
   margin: 1px 3px 1px 3px;
@@ -812,9 +817,7 @@ h4 {
   .fc-event-title {
     font-size: 12px !important;
   }
-  .halfContainer {
-    width: 98%;
-  }
+
   .hammercontainer {
     display: none;
   }
@@ -869,13 +872,7 @@ h4 {
     border-radius: 8px;
     margin: 0px 0px 0px 0px;
   }
-  .recordings {
-    min-width: 95vw;
-    padding-top: 5px;
-    padding-left: 5px;
-    border-radius: 8px;
-    margin: 5px;
-  }
+
   .fc-scrollgrid-sync-table {
     height: 60vh !important;
   }
@@ -910,6 +907,9 @@ h4 {
   }
 }
 @media only screen and (max-width: 600px) {
+  .invisibleMobile {
+    display: none;
+  }
   .logoBooks {
     width: 23vw;
     height: 30vw;
@@ -930,9 +930,7 @@ h4 {
   .fc-event-title {
     font-size: 10px !important;
   }
-  .infoContLinks {
-    display: none;
-  }
+
   .halfContainer {
     width: 94%;
     border-radius: 2px;

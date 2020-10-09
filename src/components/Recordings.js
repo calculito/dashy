@@ -22,9 +22,8 @@ export default function Recordings({ userName, whichClass, whichRole }) {
 
   useEffect(() => {
     refetch();
-  }, [whichClass]);
+  });
 
-  console.log(data, whichClass);
   const [mutateRecordings] = useMutation(
     () =>
       API.post(`/postrecording/${whichClass}`, {
@@ -52,43 +51,45 @@ export default function Recordings({ userName, whichClass, whichRole }) {
           {error && <div>Something went wrong ...</div>}
         </div>
       )}
-      {whichRole === "Admin" ? (
-        <form className="cancelAndForgot">
-          <input
-            className="inputLinks"
-            type="text"
-            placeholder="New recording link"
-            value={newRecordingsLink}
-            onChange={(e) => setnewRecordingsLink(e.target.value)}
-            required
-          />
-          <input
-            className="inputLinks"
-            type="text"
-            placeholder="Title"
-            value={newRecordingsDescription}
-            onChange={(e) => setnewRecordingsDescription(e.target.value)}
-            required
-          />
-          <input
-            className="inputLinks"
-            type="text"
-            placeholder="Keyword"
-            style={{ width: "20%" }}
-            value={newRecordingsKeyword}
-            onChange={(e) => setnewRecordingsKeyword(e.target.value)}
-            required
-          />
-          <button
-            className="buttonHW"
-            onClick={newRecordingsLink !== "" ? insertnewRecording : undefined}
-          >
-            ⇚ Insert a new recording
-          </button>
-        </form>
-      ) : undefined}
-      <div className="linksContainer">
-        <div className="halfContainer">
+      <div className="halfContainer">
+        {whichRole === "Admin" ? (
+          <form className="cancelAndForgot">
+            <input
+              className="inputLinks"
+              type="text"
+              placeholder="New recording link"
+              value={newRecordingsLink}
+              onChange={(e) => setnewRecordingsLink(e.target.value)}
+              required
+            />
+            <input
+              className="inputLinks"
+              type="text"
+              placeholder="Title"
+              value={newRecordingsDescription}
+              onChange={(e) => setnewRecordingsDescription(e.target.value)}
+              required
+            />
+            <input
+              className="inputLinks"
+              type="text"
+              placeholder="Keyword"
+              style={{ width: "20%" }}
+              value={newRecordingsKeyword}
+              onChange={(e) => setnewRecordingsKeyword(e.target.value)}
+              required
+            />
+            <button
+              className="buttonHW"
+              onClick={
+                newRecordingsLink !== "" ? insertnewRecording : undefined
+              }
+            >
+              ⇚ Insert a new recording
+            </button>
+          </form>
+        ) : undefined}
+        <div className="linksContainer">
           {isLoading
             ? undefined
             : data.data.map((data, i) => (

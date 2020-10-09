@@ -99,7 +99,7 @@ export default function Header({
           <div className="outPopUpVariabel">
             {classes.map((data, i) => (
               <div
-                className="recordings"
+                className="recordingslinks"
                 key={"divRHW" + i}
                 onClick={() => onClick((whichClass = classes[i].id))}
               >

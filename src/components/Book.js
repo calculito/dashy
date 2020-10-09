@@ -32,10 +32,7 @@ export default function Book() {
     7: addbook,
   };
   return (
-    <div
-      className="tabcontent"
-      style={{ display: "flex", justifyContent: "center" }}
-    >
+    <div className="tabcontent">
       <div className="contLogoBooks">
         {booklinks.map((data, i) => (
           <img

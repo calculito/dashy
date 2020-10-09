@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery, useMutation, queryCache } from "react-query";
 import API from "../Api.js";
 
@@ -8,6 +8,9 @@ export default function Admin({ logIn }) {
   let [openInputWindow, setopenInputWindow] = useState(false);
   let [openInputWindowUser, setopenInputWindowUser] = useState(false);
   /////////////////// GET DATA FROM DB WHERE USER ////////////////////
+  useEffect(() => {
+    refetch();
+  });
   const {
     isLoading,
     error,

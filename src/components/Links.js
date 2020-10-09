@@ -3,7 +3,8 @@ import { useSpeechSynthesis } from "react-speech-kit";
 import sound from "../images/sound.png";
 import starblack from "../images/starblack.png";
 import stargold from "../images/stargold.png";
-
+import { useQuery, useMutation, queryCache } from "react-query";
+import API from "../Api.js";
 export default function Links({
   userName,
   logIn,
@@ -22,15 +23,23 @@ export default function Links({
     "https://migrateam.github.io/dashy/",
   ]);
   const [linksPersonalId, setlinksPersonalId] = useState([1]);
-  const [linksGeneralId, setlinksGeneralId] = useState([1]);
   const [linkToDelete, setlinkToDelete] = useState(1);
   const [starsPersonalLinks, setstarsPersonalLinks] = useState([1]);
-  const [starsGeneralLinks, setstarsGeneralLinks] = useState([1]);
-  let savedGeneralLink = linksGeneral;
+  const [appState, setAppState] = useState({
+    loading: null,
+    genLinks: null,
+  });
   let savedPersonalLink = linksPersonal;
   //console.log("role links" + whichUserId);
   useEffect(() => {
-    getuserlinksGeneral();
+    setAppState({ loading: true });
+    API.get(`userlinks/${whichClass}`).then((linksGen) => {
+      const allGenLinks = linksGen.data;
+      setAppState({ loading: false, genLinks: allGenLinks });
+    });
+  }, [setAppState]);
+  console.log(appState.genLinks);
+  useEffect(() => {
     getuserlinksPersonal();
     setswitcher(0);
     //  var timerID = setInterval(() => tick(), 1000);
@@ -49,28 +58,6 @@ export default function Links({
   //   setswitcher(1);
   // }
 
-  /////////    GET GENERAL LINKS     ///////////
-  async function getuserlinksGeneral() {
-    let endpoint = "https://dashybackend.herokuapp.com/userlinks/".concat(
-      whichClass
-    );
-    await fetch(endpoint)
-      .then((response) => response.json())
-      .then((data) => {
-        const arrToDescription = data.map(function (daten) {
-          return daten.description;
-        });
-        setlinksGeneral(arrToDescription);
-        const arrToLinkId = data.map(function (daten) {
-          return daten.id;
-        });
-        setlinksGeneralId(arrToLinkId);
-        const arrToStars = data.map(function (daten) {
-          return daten.stars;
-        });
-        setstarsGeneralLinks(arrToStars);
-      });
-  }
   /////////    GET PERSONAL LINKS     ///////////
   async function getuserlinksPersonal() {
     let endpoint = "https://dashybackend.herokuapp.com/userpersonallinks/".concat(
@@ -190,10 +177,14 @@ export default function Links({
   return (
     <div className="tabcontent">
       <div className="infoWindow">
-        <span>
-          You have {linksGeneral.length} general links and{" "}
-          {linksPersonal.length} personal links
-        </span>
+        {appState.loading === false ? (
+          <span>
+            You have {linksPersonal.length} personal links and{" "}
+            {appState.genLinks.length} general links
+          </span>
+        ) : (
+          <div>Fetching data...</div>
+        )}
       </div>
       <div id="links" className="twoColumns">
         <div className="halfContainer">
@@ -221,93 +212,82 @@ export default function Links({
           </div>
 
           <div className="linksContainer">
-            {savedGeneralLink.map((link, index) => {
-              return (
-                <div className="rowHW" key={"divRHW" + index}>
-                  <div className="recordings" key={"divG" + index}>
-                    <div style={{ paddingLeft: "5px" }}>
-                      <img
-                        src={"https://www.google.com/s2/favicons?domain=".concat(
-                          link
-                        )}
-                        alt="icon"
-                      ></img>
-                      <a
-                        className="recordinglinks"
-                        href={link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        key={index}
-                      >
-                        {`${link.substring(0, 40)}...`}
-                      </a>
-                    </div>
-                    <div className="infoContLinks">
-                      {whichRole === "Instructor" && (
-                        <span
-                          className="circle"
-                          onClick={() =>
-                            deleteGeneralLink(linksGeneralId[index])
-                          }
+            {appState.loading === false &&
+              appState.genLinks.map((data, index) => {
+                return (
+                  <div className="rowHW" key={"divRHW" + index}>
+                    <div className="recordings" key={"divG" + index}>
+                      <div style={{ paddingLeft: "5px" }}>
+                        <img
+                          src={"https://www.google.com/s2/favicons?domain=".concat(
+                            data.description
+                          )}
+                          alt="icon"
+                        ></img>
+                        <a
+                          className="recordinglinks"
+                          href={data.description}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          key={index}
                         >
-                          DEL
-                        </span>
-                      )}
-                      <span className="circle">{index + 1}</span>
-                      <div>
-                        <img
-                          className="starSymbols"
-                          src={
-                            starsGeneralLinks[index] > 0 ? stargold : starblack
-                          }
-                          alt="star"
-                          onClick={(e) => changestars(1, linksGeneralId[index])}
-                        />
+                          {`${data.description.substring(0, 40)}...`}
+                        </a>
+                      </div>
+                      <div className="infoContLinks">
+                        {whichRole === "Instructor" && (
+                          <span
+                            className="circle"
+                            onClick={() => deleteGeneralLink(data.id[index])}
+                          >
+                            DEL
+                          </span>
+                        )}
+                        <span className="circle">{index + 1}</span>
+                        <div>
+                          <img
+                            className="starSymbols"
+                            src={data.stars[index] > 0 ? stargold : starblack}
+                            alt="star"
+                            onClick={(e) => changestars(1, data.id[index])}
+                          />
 
+                          <img
+                            className="starSymbols"
+                            src={data.stars[index] > 1 ? stargold : starblack}
+                            alt="star"
+                            onClick={(e) => changestars(2, data.id[index])}
+                          />
+                          <img
+                            className="starSymbols"
+                            src={data.stars[index] > 2 ? stargold : starblack}
+                            alt="star"
+                            onClick={(e) => changestars(3, data.id[index])}
+                          />
+                          <img
+                            className="starSymbols"
+                            src={data.stars[index] > 3 ? stargold : starblack}
+                            alt="star"
+                            onClick={(e) => changestars(4, data.id[index])}
+                          />
+                          <img
+                            className="starSymbols"
+                            src={data.stars[index] > 4 ? stargold : starblack}
+                            alt="star"
+                            onClick={(e) => changestars(5, data.id[index])}
+                          />
+                        </div>
                         <img
-                          className="starSymbols"
-                          src={
-                            starsGeneralLinks[index] > 1 ? stargold : starblack
-                          }
-                          alt="star"
-                          onClick={(e) => changestars(2, linksGeneralId[index])}
-                        />
-                        <img
-                          className="starSymbols"
-                          src={
-                            starsGeneralLinks[index] > 2 ? stargold : starblack
-                          }
-                          alt="star"
-                          onClick={(e) => changestars(3, linksGeneralId[index])}
-                        />
-                        <img
-                          className="starSymbols"
-                          src={
-                            starsGeneralLinks[index] > 3 ? stargold : starblack
-                          }
-                          alt="star"
-                          onClick={(e) => changestars(4, linksGeneralId[index])}
-                        />
-                        <img
-                          className="starSymbols"
-                          src={
-                            starsGeneralLinks[index] > 4 ? stargold : starblack
-                          }
-                          alt="star"
-                          onClick={(e) => changestars(5, linksGeneralId[index])}
+                          className="linkSymbols"
+                          src={sound}
+                          alt="speaker"
+                          onClick={(e) => soundloud(data.description)}
                         />
                       </div>
-                      <img
-                        className="linkSymbols"
-                        src={sound}
-                        alt="speaker"
-                        onClick={(e) => soundloud(link)}
-                      />
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
         </div>
         <div className="halfContainer">
