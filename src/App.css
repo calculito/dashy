@@ -599,6 +599,12 @@ h4 {
   justify-content: space-around;
   align-items: center;
 }
+.infoContButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
 .circle {
   align-items: center;
   display: flex;
@@ -892,6 +898,7 @@ h4 {
     font-size: 12px;
     left: 75vw;
     margin: 4px;
+    height: max-content;
   }
   .infoWindowChat {
     font-size: 12px;
@@ -907,6 +914,9 @@ h4 {
   }
 }
 @media only screen and (max-width: 600px) {
+  .infoContLinks {
+    display: none;
+  }
   .invisibleMobile {
     display: none;
   }

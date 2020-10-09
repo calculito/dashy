@@ -135,7 +135,7 @@ export default function Footer() {
         <div className="invisibleMobile">
           made with love and sweat by Jose + Thiago + Ion 2020
         </div>
-        <div className="infoContLinks">
+        <div className="infoContButtons">
           <button
             className="buttonHW"
             style={{ height: "22px" }}
