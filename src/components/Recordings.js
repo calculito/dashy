@@ -1,19 +1,16 @@
-import React, { useState, useEffect, Suspense, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery, useMutation, queryCache } from "react-query";
-import API from "../Api.js";
+import { API } from "./Impex";
+
 export default function Recordings({ userName, whichClass, whichRole }) {
   const [newRecordingsLink, setnewRecordingsLink] = useState("");
   const [newRecordingsDescription, setnewRecordingsDescription] = useState("");
   const [newRecordingsKeyword, setnewRecordingsKeyword] = useState("");
 
   //////////////  GET RECORDINGS /////////////
-  const {
-    isLoading,
-    error,
-    data,
-    isFetching,
-    refetch,
-  } = useQuery("fetchRecordings", () => API.get(`userrecordings/${userName}`));
+  const { isLoading, error, data, refetch } = useQuery("fetchRecordings", () =>
+    API.get(`userrecordings/${userName}`)
+  );
   /////////    POST RECORDING AS ADMIN    ///////////
   async function insertnewRecording(evt) {
     evt.preventDefault();

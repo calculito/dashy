@@ -1,12 +1,15 @@
 import React from "react";
-import bookhtml from "../images/bookhtml.png";
-import bookjavascript1 from "../images/bookjavascript1.png";
-import bookjavascript2 from "../images/bookjavascript2.png";
-import bookjavascript3 from "../images/bookjavascript3.png";
-import bookreact from "../images/bookreact.png";
-import booknode from "../images/booknode.png";
-import bookall from "../images/bookall.png";
-import addbook from "../images/addbook.png";
+import {
+  bookhtml,
+  bookjavascript1,
+  bookjavascript2,
+  bookjavascript3,
+  bookreact,
+  booknode,
+  bookall,
+  addbook,
+} from "./Impex.js";
+
 export default function Book() {
   function openRequestedPopup(link) {
     window.open(link, "_blank", "noopener, noreferrer");

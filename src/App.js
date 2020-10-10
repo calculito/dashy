@@ -1,12 +1,14 @@
 import React, { useState, useRef } from "react";
-import Header from "./components/Header";
-import Tabs from "./components/Tabs";
-import Footer from "./components/Footer";
-import MainContainer from "./components/MainContainer";
-import { useQuery, useMutation, queryCache } from "react-query";
-import API from "./Api.js";
-import "./App.css";
-import Graffiti from "./images/graffiti.svg";
+import { useQuery } from "react-query";
+import {
+  Header,
+  Tabs,
+  Footer,
+  MainContainer,
+  API,
+  CSS,
+  Graffiti,
+} from "./components/Impex.js";
 
 export default function App() {
   const [logIn, setlogIn] = useState(0);
@@ -18,67 +20,58 @@ export default function App() {
   const [whichRole, setwhichRole] = useState("");
   const [whichContainer, setwhichContainer] = useState(0);
   const [whichPassword, setwhichPassword] = useState("");
+  const [whichPasswordDB, setwhichPasswordDB] = useState("");
   const [passwordUserWrong, setpasswordUserWrong] = useState(0);
 
   /////////////////////  NO USEEFFECT ANYMORE NEEDED //////////////////////
   const logInCheck = () => {
     logIn === 0 ? setlogIn(2) : setlogIn(0);
-
-    logIn === 2 ? setblur(1) : setblur(0);
     logIn === 1 && setwhichContainer(0);
     logIn === 1 && window.location.reload();
-    //getuser();
-    getuser2();
+    getuser();
   };
   ////////////////  CANCEL BUTTON IN FORM ///////////////
-  const logIn2 = () => {
-    logIn === 0 ? setlogIn(2) : setlogIn(0);
-    logIn === 2 && setwhichContainer(0);
-    setpasswordUserWrong(0);
-  };
-  ////////////////  INIT BY FORM ///////////////
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-    whichUser !== whichPassword ? wrongPassword() : goodPassword();
-  };
-  //////////////  GET USER TO CHECK IF IN DB AXIOS /////////////
-  const { isLoading, error, data, isFetching, refetch } = useQuery(
-    "fetchData",
-    () => API.get()
-  );
-
-  function getuser2() {
-    !isLoading && setuser(JSON.stringify({ data }));
-  }
-
-  //////////////// WRONG PASSWORD HANDLE ///////////////
-  const wrongPassword = () => {
+  const cancel = () => {
+    setlogIn(0);
     setwhichUser("");
+    setwhichContainer(0);
+    setpasswordUserWrong(0);
+    setblur(0);
+    setwhichClass("");
+    setwhichRole("");
     setwhichPassword("");
-    setpasswordUserWrong(1);
-    setlogIn(2);
-    setblur(1);
+    setwhichUserId("");
   };
-  ////////////////  GOOD PASSWORD ///////////////
-  const goodPassword = () => {
-    user.includes(whichUser) && logIn === 2 ? setlogIn(1) : noUser();
-    user.includes(whichUser) && logIn === 1 && setwhichContainer(0);
-    user.includes(whichUser) && getClass();
+  console.log(logIn, blur);
+  ////////////////  INIT BY FORM ///////////////
+  const checkUser = (evt) => {
+    evt.preventDefault();
+    user.includes(whichUser) && logIn === 2 ? setlogIn(3) : noUser();
+    user.includes(whichUser) && getAllData();
   };
   ////////////////  NO USER FOUND IN DB  ///////////////
   const noUser = () => {
     setwhichUser("");
-    setwhichPassword("");
     setlogIn(2);
     setpasswordUserWrong(2);
-    setblur(1);
   };
-  /////////////////// GET DATA FROM DB WHERE USER ////////////////////
-  async function getClass() {
-    await fetch("https://dashybackend.herokuapp.com/alld")
-      .then((response) => {
-        return response.json();
-      })
+
+  const checkPassword = (evt) => {
+    evt.preventDefault();
+
+    whichPassword !== whichPasswordDB ? wrongPassword() : goodPassword();
+  };
+  //////////////  GET USER TO CHECK IF IN DB AXIOS /////////////
+  const { isLoading, data } = useQuery("fetchData", () => API.get());
+
+  const getuser = () => {
+    !isLoading && setuser(JSON.stringify({ data }));
+  };
+  ///////////////    GET PASSWORD< CLASS< ROLE< ID<     /////////////
+  async function getAllData() {
+    let endpoint = "https://dashybackend.herokuapp.com/alld/";
+    await fetch(endpoint)
+      .then((response) => response.json())
       .then((data) => {
         setwhichClass(
           data[data.findIndex((element) => element.name === whichUser)].class_id
@@ -90,8 +83,22 @@ export default function App() {
         setwhichUserId(
           data[data.findIndex((element) => element.name === whichUser)].id
         );
+        setwhichPasswordDB(
+          data[data.findIndex((element) => element.name === whichUser)]
+            .user_password
+        );
       });
   }
+  //////////////// WRONG PASSWORD HANDLE ///////////////
+  const wrongPassword = () => {
+    setwhichPassword("");
+    setpasswordUserWrong(1);
+    setlogIn(3);
+  };
+  ////////////////  GOOD PASSWORD ///////////////
+  const goodPassword = () => {
+    setlogIn(1);
+  };
 
   ////////////// SET FOCUS ON FORM /////////////
   const useFocus = () => {
@@ -111,14 +118,9 @@ export default function App() {
   const setWindow = (indexContainer) => {
     setwhichContainer(indexContainer);
   };
-  //////////// CHECK BLUR /////////////
-  const checkBlur = () => {
-    blur === 0 ? setblur(1) : setblur(0);
-  };
+
   console.log(
-    blur +
-      ".." +
-      logIn +
+    logIn +
       ".." +
       whichUser +
       ".." +
@@ -134,7 +136,7 @@ export default function App() {
       {logIn === 2 && (
         <div className="outPopUp">
           {" "}
-          <form className="form-container" onSubmit={handleSubmit}>
+          <form className="form-container" onSubmit={checkUser}>
             <label>
               Username:
               <input
@@ -148,9 +150,43 @@ export default function App() {
                 required
               />
             </label>
+            <input
+              type="submit"
+              value="Submit"
+              className="btn"
+              onClick={setInputFocus}
+            />
+            <div className="cancelAndForgotLogIn">
+              <input
+                type="button"
+                value="Close"
+                className=" cancel"
+                onClick={(e) => cancel()}
+              />
+              <input
+                type="button"
+                style={{ color: "red" }}
+                value={passwordUserWrong === 2 ? "Forgot username?" : undefined}
+                className="cancel"
+                onClick={(e) =>
+                  window.open(
+                    "mailto:admin@migracode.barcelona?subject=I forgot my username"
+                  )
+                }
+              />
+            </div>
+          </form>
+        </div>
+      )}{" "}
+      {logIn === 3 && (
+        <div className="outPopUp">
+          {" "}
+          <form className="form-container" onSubmit={checkPassword}>
             <label>
               Password:
               <input
+                autoFocus
+                ref={inputRef}
                 type="text"
                 placeholder="Enter Password"
                 autoComplete="on"
@@ -170,20 +206,18 @@ export default function App() {
                 type="button"
                 value="Close"
                 className=" cancel"
-                onClick={logIn2}
+                onClick={(e) => cancel()}
               />
               <input
                 type="button"
                 style={{ color: "red" }}
-                value={
-                  passwordUserWrong === 0
-                    ? ""
-                    : passwordUserWrong === 1
-                    ? "Forgot password?"
-                    : "No username matched"
-                }
+                value={passwordUserWrong === 1 ? "Forgot password?" : undefined}
                 className="cancel"
-                onClick={logIn2}
+                onClick={(e) =>
+                  window.open(
+                    "mailto:admin@migracode.barcelona?subject=I forgot my password"
+                  )
+                }
               />
             </div>
           </form>
@@ -195,7 +229,7 @@ export default function App() {
           <img className="bgimg" src={Graffiti} alt="graffiti" />
         </div>
       ) : (
-        <div className={blur === 1 || logIn === 2 ? "allblur" : "all"}>
+        <div className={logIn === 3 || logIn === 2 ? "allblur" : "all"}>
           <Header
             onHeaderClick={logInCheck}
             logIn={logIn}
@@ -218,7 +252,6 @@ export default function App() {
             whichClass={whichClass}
             whichRole={whichRole}
             whichUserId={whichUserId}
-            blur={checkBlur}
           />
           <Footer />
         </div>

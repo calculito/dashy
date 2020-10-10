@@ -1,8 +1,5 @@
 import React from "react";
-import slacklogo from "../images/slacklogo.png";
-import trellologo from "../images/trellologo.png";
-import githublogo from "../images/githublogo.jpg";
-import herokulogo from "../images/herokulogo.png";
+import { slacklogo, trellologo, githublogo, herokulogo } from "./Impex";
 
 export default function Tools() {
   function openRequestedPopup(link) {

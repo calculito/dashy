@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useQuery, useMutation, queryCache } from "react-query";
-import API from "../Api.js";
+import { useQuery } from "react-query";
+import { API } from "./Impex.js";
 
 export default function Admin({ logIn }) {
   let [newClass, setnewClass] = useState("");

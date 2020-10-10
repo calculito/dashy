@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -6,7 +6,7 @@ import listPlugin from "@fullcalendar/list";
 import interaction from "@fullcalendar/interaction";
 import esLocale from "@fullcalendar/core/locales/es";
 import { useQuery, useMutation, queryCache } from "react-query";
-import API from "../Api.js";
+import { API } from "./Impex.js";
 
 export default function Calendar({ whichClass, whichRole }) {
   const [openInputWindow, setopenInputWindow] = useState(false);
@@ -50,11 +50,11 @@ export default function Calendar({ whichClass, whichRole }) {
     setopenInputWindow(false);
   }
 
-  function cancelInsert() {
+  const cancelInsert = () => {
     settitleNewAppointment("");
     setdateNewAppointment("");
     setopenInputWindow(false);
-  }
+  };
 
   return (
     <div className="tabcontent">

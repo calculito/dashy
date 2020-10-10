@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import sound from "../images/sound.png";
 import { useSpeechSynthesis } from "react-speech-kit";
-import hammerwhite from "../images/hammerwhite.png";
-import hammercolor from "../images/hammercolor.png";
+import { sound, hammerwhite, hammercolor } from "./Impex";
 
 export default function Homeworks({
   userName,
@@ -10,7 +8,6 @@ export default function Homeworks({
   whichRole,
   whichClass,
   whichUserId,
-  blur,
 }) {
   const { speak } = useSpeechSynthesis();
   const [switcher, setswitcher] = useState("");
@@ -44,7 +41,7 @@ export default function Homeworks({
       data: [{ name: "Ion", finished: "yes", linkhwfinished: "test" }],
     },
   ]); //reduced array
-  const [Date, setDate] = useState(false);
+
   const [openCheckWindow, setopenCheckWindow] = useState(false);
   const [openInputWindow, setopenInputWindow] = useState(false);
   const [openInputWindowAfter, setopenInputWindowAfter] = useState(false);
@@ -67,6 +64,7 @@ export default function Homeworks({
   //  function tick() {
   //   setswitcher(1);
   // }
+
   ///////////////    GET FINISHED HOMEWORKS FOR STUDENTS     /////////////
   async function getuserhomeworksStudentYes() {
     let endpoint = "https://dashybackend.herokuapp.com/userhomeworksSYES/".concat(
@@ -198,7 +196,6 @@ export default function Homeworks({
       }
     );
     setopenInputWindow(e);
-    blur = 1;
   }
   ///////////////    INSERT LINK TO HOMEWORK IF (NO LINK)       /////////////
   function changestatusafter(e) {

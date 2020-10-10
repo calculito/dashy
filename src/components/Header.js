@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import logo from "../images/migracode-logo.png";
-import login from "../images/login.png";
-import { useQuery, useMutation, queryCache } from "react-query";
-import API from "../Api.js";
+import { useQuery } from "react-query";
+import { logo, login, API } from "./Impex.js";
 export default function Header({
   onHeaderClick,
   logIn,

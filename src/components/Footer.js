@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSpeechSynthesis } from "react-speech-kit";
-import sound from "../images/sound.png";
+import { sound } from "./Impex";
 
 export default function Footer() {
   const { speak } = useSpeechSynthesis();

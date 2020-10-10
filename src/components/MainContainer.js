@@ -1,12 +1,14 @@
 import React from "react";
-import Tools from "./Tools";
-import Chat from "./Chat";
-import Book from "./Book";
-import Homeworks from "./Homeworks";
-import Recordings from "./Recordings";
-import Calendar from "./Calendar";
-import Links from "./Links";
-import Admin from "./Admin";
+import {
+  Tools,
+  Chat,
+  Book,
+  Homeworks,
+  Recordings,
+  Calendar,
+  Links,
+  Admin,
+} from "./Impex";
 
 export default function MainContainer({
   index,
@@ -15,7 +17,6 @@ export default function MainContainer({
   whichClass,
   whichRole,
   whichUserId,
-  blur,
 }) {
   return (
     <div
@@ -33,7 +34,6 @@ export default function MainContainer({
               whichRole={whichRole}
               whichClass={whichClass}
               whichUserId={whichUserId}
-              blur={blur}
             />
           ),
           3: (

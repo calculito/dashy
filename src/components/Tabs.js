@@ -1,12 +1,14 @@
 import React from "react";
-import CalendarIcon from "../images/calendar.png";
-import SyllabusIcon from "../images/syllabus.png";
-import RecordingsIcon from "../images/recordings.png";
-import HomeworksIcon from "../images/homeworks.png";
-import ChatIcon from "../images/chat.png";
-import ToolsIcon from "../images/slacky.png";
-import LinksIcon from "../images/links.png";
-import AdminIcon from "../images/admin.png";
+import {
+  CalendarIcon,
+  SyllabusIcon,
+  RecordingsIcon,
+  HomeworksIcon,
+  ChatIcon,
+  ToolsIcon,
+  LinksIcon,
+  AdminIcon,
+} from "./Impex";
 
 export default function Tabs({ onTabsClick, logIn, index, whichRole }) {
   const tabnames = [

@@ -1,10 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useSpeechSynthesis } from "react-speech-kit";
-import sound from "../images/sound.png";
-import starblack from "../images/starblack.png";
-import stargold from "../images/stargold.png";
-import { useQuery, useMutation, queryCache } from "react-query";
-import API from "../Api.js";
+import { sound, starblack, stargold } from "./Impex";
+import axios from "axios";
 export default function Links({
   userName,
   logIn,
@@ -12,74 +9,40 @@ export default function Links({
   whichRole,
   whichUserId,
 }) {
-  let [switcher, setswitcher] = useState("0");
   const { speak } = useSpeechSynthesis();
   const [linksInsertFieldG, setlinksInsertFieldG] = useState("");
   const [linksInsertFieldP, setlinksInsertFieldP] = useState("");
-  const [linksGeneral, setlinksGeneral] = useState([
-    "https://migrateam.github.io/dashy/",
-  ]);
-  const [linksPersonal, setlinksPersonal] = useState([
-    "https://migrateam.github.io/dashy/",
-  ]);
-  const [linksPersonalId, setlinksPersonalId] = useState([1]);
   const [linkToDelete, setlinkToDelete] = useState(1);
-  const [starsPersonalLinks, setstarsPersonalLinks] = useState([1]);
   const [appState, setAppState] = useState({
     loading: null,
     genLinks: null,
+    persLinks: null,
   });
-  let savedPersonalLink = linksPersonal;
-  //console.log("role links" + whichUserId);
+
   useEffect(() => {
-    setAppState({ loading: true });
-    API.get(`userlinks/${whichClass}`).then((linksGen) => {
-      const allGenLinks = linksGen.data;
-      setAppState({ loading: false, genLinks: allGenLinks });
-    });
-  }, [setAppState]);
-  console.log(appState.genLinks);
-  useEffect(() => {
-    getuserlinksPersonal();
-    setswitcher(0);
-    //  var timerID = setInterval(() => tick(), 1000);
-    //   return function cleanup() {
-    //     clearInterval(timerID);
-    //   };
+    axios
+      .all([
+        axios.get(`https://dashybackend.herokuapp.com/userlinks/${whichClass}`),
+        axios.get(
+          `https://dashybackend.herokuapp.com/userpersonallinks/${userName}`
+        ),
+      ])
+      .then((response) => {
+        const allGenLinks = response[0].data;
+        const allPersLinks = response[1].data;
+        setAppState({
+          loading: false,
+          genLinks: allGenLinks,
+          persLinks: allPersLinks,
+        });
+      });
   }, [
-    logIn,
+    setAppState,
     linkToDelete,
-    switcher,
     whichClass,
     linksInsertFieldP,
     linksInsertFieldG,
   ]);
-  // function tick() {
-  //   setswitcher(1);
-  // }
-
-  /////////    GET PERSONAL LINKS     ///////////
-  async function getuserlinksPersonal() {
-    let endpoint = "https://dashybackend.herokuapp.com/userpersonallinks/".concat(
-      userName
-    );
-    await fetch(endpoint)
-      .then((response) => response.json())
-      .then((data) => {
-        const arrToDescription = data.map(function (daten) {
-          return daten.description;
-        });
-        setlinksPersonal(arrToDescription);
-        const arrToLinkId = data.map(function (daten) {
-          return daten.id;
-        });
-        setlinksPersonalId(arrToLinkId);
-        const arrToStars = data.map(function (daten) {
-          return daten.stars;
-        });
-        setstarsPersonalLinks(arrToStars);
-      });
-  }
 
   /////////    POST PERSONAL LINKS     ///////////
   async function insertPersonalLink(evt) {
@@ -137,6 +100,7 @@ export default function Links({
     });
     setlinkToDelete("");
   }
+
   ///////////////    CHANGE STARS PERSONAL LINKS       /////////////
   async function changestarspers(e, id) {
     setlinkToDelete(e);
@@ -149,11 +113,11 @@ export default function Links({
         headers: { "Content-Type": "application/json" },
       }
     );
-    setswitcher(1);
     setlinkToDelete("");
   }
   ///////////////    CHANGE STARS GENERAL LINKS       /////////////
   async function changestars(e, id) {
+    console.log(e, id);
     setlinkToDelete(e);
     let data = { link: e };
     await fetch(
@@ -164,7 +128,6 @@ export default function Links({
         headers: { "Content-Type": "application/json" },
       }
     );
-    setswitcher(1);
     setlinkToDelete("");
   }
   ///////////  SOUND READ LOUD  /////////////
@@ -179,7 +142,7 @@ export default function Links({
       <div className="infoWindow">
         {appState.loading === false ? (
           <span>
-            You have {linksPersonal.length} personal links and{" "}
+            You have {appState.persLinks.length} personal links and{" "}
             {appState.genLinks.length} general links
           </span>
         ) : (
@@ -238,7 +201,7 @@ export default function Links({
                         {whichRole === "Instructor" && (
                           <span
                             className="circle"
-                            onClick={() => deleteGeneralLink(data.id[index])}
+                            onClick={() => deleteGeneralLink(data.id)}
                           >
                             DEL
                           </span>
@@ -247,34 +210,34 @@ export default function Links({
                         <div>
                           <img
                             className="starSymbols"
-                            src={data.stars[index] > 0 ? stargold : starblack}
+                            src={data.stars > 0 ? stargold : starblack}
                             alt="star"
-                            onClick={(e) => changestars(1, data.id[index])}
+                            onClick={(e) => changestars(1, data.id)}
                           />
 
                           <img
                             className="starSymbols"
-                            src={data.stars[index] > 1 ? stargold : starblack}
+                            src={data.stars > 1 ? stargold : starblack}
                             alt="star"
-                            onClick={(e) => changestars(2, data.id[index])}
+                            onClick={(e) => changestars(2, data.id)}
                           />
                           <img
                             className="starSymbols"
-                            src={data.stars[index] > 2 ? stargold : starblack}
+                            src={data.stars > 2 ? stargold : starblack}
                             alt="star"
-                            onClick={(e) => changestars(3, data.id[index])}
+                            onClick={(e) => changestars(3, data.id)}
                           />
                           <img
                             className="starSymbols"
-                            src={data.stars[index] > 3 ? stargold : starblack}
+                            src={data.stars > 3 ? stargold : starblack}
                             alt="star"
-                            onClick={(e) => changestars(4, data.id[index])}
+                            onClick={(e) => changestars(4, data.id)}
                           />
                           <img
                             className="starSymbols"
-                            src={data.stars[index] > 4 ? stargold : starblack}
+                            src={data.stars > 4 ? stargold : starblack}
                             alt="star"
-                            onClick={(e) => changestars(5, data.id[index])}
+                            onClick={(e) => changestars(5, data.id)}
                           />
                         </div>
                         <img
@@ -312,100 +275,79 @@ export default function Links({
             </form>
           </div>
           <div className="linksContainer">
-            {savedPersonalLink.map((link, index) => {
-              return (
-                <div className="rowHW" key={"divRHW" + index}>
-                  <div className="recordings" key={"divP" + index}>
-                    <div style={{ paddingLeft: "5px" }}>
-                      <img
-                        src={"https://www.google.com/s2/favicons?domain=".concat(
-                          link
-                        )}
-                        alt="icon"
-                      ></img>
-                      <a
-                        className="recordinglinks"
-                        href={link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        key={index}
-                      >
-                        {`${link.substring(0, 40)}...`}
-                      </a>
-                    </div>
-                    <div className="infoContLinks">
-                      <span
-                        className="circle"
-                        onClick={(e) =>
-                          deletePersonalLink(linksPersonalId[index])
-                        }
-                      >
-                        DEL
-                      </span>
+            {appState.loading === false &&
+              appState.persLinks.map((data, index) => {
+                return (
+                  <div className="rowHW" key={"divRHW" + index}>
+                    <div className="recordings" key={"divP" + index}>
+                      <div style={{ paddingLeft: "5px" }}>
+                        <img
+                          src={"https://www.google.com/s2/favicons?domain=".concat(
+                            data.description
+                          )}
+                          alt="icon"
+                        ></img>
+                        <a
+                          className="recordinglinks"
+                          href={data.description}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          key={index}
+                        >
+                          {`${data.description.substring(0, 40)}...`}
+                        </a>
+                      </div>
+                      <div className="infoContLinks">
+                        <span
+                          className="circle"
+                          onClick={(e) => deletePersonalLink(data.id)}
+                        >
+                          DEL
+                        </span>
 
-                      <div>
+                        <div>
+                          <img
+                            className="starSymbols"
+                            src={data.stars > 0 ? stargold : starblack}
+                            alt="star"
+                            onClick={(e) => changestarspers(1, data.id)}
+                          />
+                          <img
+                            className="starSymbols"
+                            src={data.stars > 1 ? stargold : starblack}
+                            alt="star"
+                            onClick={(e) => changestarspers(2, data.id)}
+                          />
+                          <img
+                            className="starSymbols"
+                            src={data.stars > 2 ? stargold : starblack}
+                            alt="star"
+                            onClick={(e) => changestarspers(3, data.id)}
+                          />
+                          <img
+                            className="starSymbols"
+                            src={data.stars > 3 ? stargold : starblack}
+                            alt="star"
+                            onClick={(e) => changestarspers(4, data.id)}
+                          />
+                          <img
+                            className="starSymbols"
+                            src={data.stars > 4 ? stargold : starblack}
+                            alt="star"
+                            onClick={(e) => changestarspers(5, data.id)}
+                          />
+                        </div>
                         <img
-                          className="starSymbols"
-                          src={
-                            starsPersonalLinks[index] > 0 ? stargold : starblack
-                          }
-                          alt="star"
-                          onClick={(e) =>
-                            changestarspers(1, linksPersonalId[index])
-                          }
-                        />
-                        <img
-                          className="starSymbols"
-                          src={
-                            starsPersonalLinks[index] > 1 ? stargold : starblack
-                          }
-                          alt="star"
-                          onClick={(e) =>
-                            changestarspers(2, linksPersonalId[index])
-                          }
-                        />
-                        <img
-                          className="starSymbols"
-                          src={
-                            starsPersonalLinks[index] > 2 ? stargold : starblack
-                          }
-                          alt="star"
-                          onClick={(e) =>
-                            changestarspers(3, linksPersonalId[index])
-                          }
-                        />
-                        <img
-                          className="starSymbols"
-                          src={
-                            starsPersonalLinks[index] > 3 ? stargold : starblack
-                          }
-                          alt="star"
-                          onClick={(e) =>
-                            changestarspers(4, linksPersonalId[index])
-                          }
-                        />
-                        <img
-                          className="starSymbols"
-                          src={
-                            starsPersonalLinks[index] > 4 ? stargold : starblack
-                          }
-                          alt="star"
-                          onClick={(e) =>
-                            changestarspers(5, linksPersonalId[index])
-                          }
+                          className="linkSymbols"
+                          src={sound}
+                          alt="speaker"
+                          onClick={(e) => soundloud(data.description)}
                         />
                       </div>
-                      <img
-                        className="linkSymbols"
-                        src={sound}
-                        alt="speaker"
-                        onClick={(e) => soundloud(link)}
-                      />
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
         </div>
       </div>

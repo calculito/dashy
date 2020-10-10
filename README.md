@@ -37,15 +37,18 @@ Database:
 Changelog:
 2020-10-03 transfer to calculito
 2020-10-07 tabs clean, books clean
+2020-10-10 import central IMPEX.js
+2020-10-10 real password, two steps authentification
 
 ToDo
-ADMIN: create password in database
+App: useQuery
+ADMIN: create password in database, useQuery for post
 Calendar: add appointment time correcting
 Chat: background white, maybe inframe, click on MUTE
 Footer: clean
 Header: clean
 Homeworks: clean code, useQuery
-Links: clean code, useQuery
+Links: clean
 Recordings: clean
 Tabs: clean
 Tools: clean
