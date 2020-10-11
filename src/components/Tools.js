@@ -1,12 +1,18 @@
 import React from "react";
-import { slacklogo, trellologo, githublogo, herokulogo } from "./Impex";
+import {
+  slacklogo,
+  trellologo,
+  githublogo,
+  herokulogo,
+  videochat,
+} from "./Impex";
 
 export default function Tools() {
   function openRequestedPopup(link) {
     window.open(link, "_blank", "noopener, noreferrer");
   }
   return (
-    <div className="tabcontent">
+    <div>
       <div className="contLogoTools">
         <img
           className="logoTools"
@@ -28,8 +34,7 @@ export default function Tools() {
             )
           }
         />
-      </div>
-      <div className="contLogoTools">
+
         <img
           className="logoTools"
           src={githublogo}
@@ -42,6 +47,14 @@ export default function Tools() {
           alt="heroku"
           onClick={(e) =>
             openRequestedPopup("https://dashboard.heroku.com/apps")
+          }
+        />
+        <img
+          className="logoTools"
+          src={videochat}
+          alt="videochat"
+          onClick={(e) =>
+            openRequestedPopup("https://secvidchat.herokuapp.com/")
           }
         />
       </div>

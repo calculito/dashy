@@ -86,7 +86,7 @@ body {
   object-fit: cover;
 }
 .maincontainer {
-  height: calc(100% - 150px);
+  height: calc(100% - 140px);
   overflow: auto;
   background-color: var(--background-infow-color);
 }
@@ -121,7 +121,7 @@ button:hover {
   justify-content: space-around;
 }
 .tabname {
-  width: 16%;
+  width: 22%;
   border-left: 1px solid var(--background-page-color);
   opacity: 0.8;
   padding: 5px 5px 5px 5px;
@@ -136,7 +136,7 @@ button:hover {
   transform: skew(0deg);
 }
 .tabnameactive {
-  width: 16%;
+  width: 22%;
   align-items: center;
   transform: skew(0deg);
   padding: 5px 5px 5px 5px;
@@ -206,6 +206,17 @@ img {
   color: var(--font-light-color);
   -webkit-filter: var(--webkit-filter);
   filter: var(--filter);
+  margin-left: 35px;
+  min-width: 20vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.loginlogo {
+  object-fit: scale-down;
+  font-size: 9px;
+  display: flex;
   cursor: pointer;
 }
 .fc-daygrid-event-dot {
@@ -244,11 +255,11 @@ img {
   align-items: center;
 }
 .logoTools {
-  height: 16vw;
-  width: 16vw;
-  border-radius: 15px;
-  margin: 15px 10px 0px 10px;
-  border: 2px solid white;
+  height: 3.3vw;
+  width: 3.3vw;
+  border-radius: 10px;
+  margin: 0px 5px 0px 5px;
+  border: 1px solid white;
   cursor: pointer;
   object-fit: cover;
 }
@@ -267,7 +278,7 @@ img {
   animation-iteration-count: infinite;
 }
 .logoTools:hover {
-  animation: shake 0.5s;
+  animation: shake 0.9s;
   animation-iteration-count: infinite;
 }
 .greeting img:hover {
@@ -310,7 +321,7 @@ img {
   }
 }
 .contLogoTools {
-  margin: 15px 10px 0px 10px;
+  margin: 1px 1px 1px 1px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -599,7 +610,7 @@ h4 {
   justify-content: space-around;
   align-items: center;
 }
-.infoContButtons{
+.infoContButtons {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -802,6 +813,11 @@ h4 {
   .clearfix {
     overflow: auto;
   }
+  .rowHWPosAbs {
+    overflow: auto;
+    float: right;
+    width: 100%;
+  }
   .logoBooks {
     width: 14vw;
     height: 18vw;
@@ -813,12 +829,9 @@ h4 {
     padding: 5px;
   }
   .logoTools {
-    height: 18vw;
-    width: 18vw;
-    border-radius: 15px;
-    margin: 20px 20px 0px 20px;
-    border: 2px solid white;
-    object-fit: cover;
+    height: 5vw;
+    width: 5vw;
+    border-radius: 5px;
   }
   .fc-event-title {
     font-size: 12px !important;
@@ -833,10 +846,8 @@ h4 {
     justify-content: space-around;
     align-items: flex-start;
   }
-  .rowHWPosAbs {
-    display: none;
-  }
-  .greeting {
+
+  .greeting img {
     object-fit: scale-down;
     font-size: 9px;
     display: flex;
@@ -892,7 +903,7 @@ h4 {
     font-size: 14px !important;
   }
   .recordings button {
-    font-size: 14px;
+    font-size: 12px;
   }
   .buttonHW {
     font-size: 12px;
@@ -914,6 +925,13 @@ h4 {
   }
 }
 @media only screen and (max-width: 600px) {
+  .buttonHW1 {
+    font-size: 12px;
+    margin-left: 5px;
+  }
+  .rowHWPosAbs {
+    display: none;
+  }
   .infoContLinks {
     display: none;
   }
@@ -930,12 +948,7 @@ h4 {
     padding: 5px;
   }
   .logoTools {
-    height: 28vw;
-    width: 28vw;
-    border-radius: 10px;
-    margin: 20px 20px 0px 20px;
-    border: 1px solid white;
-    object-fit: cover;
+    display: flex;
   }
   .fc-event-title {
     font-size: 10px !important;

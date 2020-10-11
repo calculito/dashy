@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  Tools,
-  Chat,
-  Book,
-  Homeworks,
-  Recordings,
-  Calendar,
-  Links,
-  Admin,
-} from "./Impex";
+import { Book, Homeworks, Recordings, Calendar, Links, Admin } from "./Impex";
 
 export default function MainContainer({
   index,
@@ -26,8 +17,7 @@ export default function MainContainer({
       {
         {
           0: <Book />,
-          1: <Tools />,
-          2: (
+          1: (
             <Homeworks
               userName={userName}
               logIn={logIn}
@@ -36,7 +26,7 @@ export default function MainContainer({
               whichUserId={whichUserId}
             />
           ),
-          3: (
+          2: (
             <Links
               userName={userName}
               logIn={logIn}
@@ -45,7 +35,7 @@ export default function MainContainer({
               whichUserId={whichUserId}
             />
           ),
-          4: (
+          3: (
             <Recordings
               userName={userName}
               logIn={logIn}
@@ -53,7 +43,7 @@ export default function MainContainer({
               whichRole={whichRole}
             />
           ),
-          5: (
+          4: (
             <Calendar
               userName={userName}
               logIn={logIn}
@@ -61,8 +51,7 @@ export default function MainContainer({
               whichRole={whichRole}
             />
           ),
-          6: <Chat />,
-          7: <Admin />,
+          5: <Admin />,
         }[index]
       }
     </div>

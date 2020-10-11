@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
-import { logo, login, API } from "./Impex.js";
+import { logo, login, API, Tools } from "./Impex.js";
+
 export default function Header({
   onHeaderClick,
   logIn,
@@ -59,12 +60,12 @@ export default function Header({
     <div className="header" key={whichUserHeader}>
       {logIn === 1 ? (
         <div className="greeting">
-          <button className="buttonHW" key="2">
+          <span className="buttonHW1" key="2">
             {whichUserHeader}
-          </button>
-          <button className="buttonHW" key="3">
+          </span>
+          <span className="buttonHW1" key="3">
             {whichRole}
-          </button>
+          </span>
           {whichRole !== "Student" ? (
             <button
               className="buttonHW"
@@ -75,17 +76,17 @@ export default function Header({
               <span className="tooltiptext">Change your class</span>
             </button>
           ) : (
-            <button className="buttonHW" key="4">
+            <span className="buttonHW1" key="4">
               {userClassName}
-            </button>
+            </span>
           )}
         </div>
       ) : (
         <>.</>
       )}
-
+      {logIn === 1 && window.innerWidth > 600 ? <Tools /> : undefined}
       <img
-        className="greeting"
+        className="loginlogo"
         src={logIn === 1 ? logo : login}
         alt="logo"
         onClick={onHeaderClick}

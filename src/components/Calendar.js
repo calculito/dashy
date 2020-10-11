@@ -22,8 +22,6 @@ export default function Calendar({ whichClass, whichRole }) {
     API.get(`usercalendar/${whichClass}`)
   );
 
-  console.log(whichClass, data, isLoading);
-
   //////////////  PREPARE DATA FOR WORK WITH IT ////////////////
   const dataprep =
     !isLoading &&

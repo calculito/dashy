@@ -40,3 +40,4 @@ export { default as slacklogo } from "../images/slacklogo.png";
 export { default as trellologo } from "../images/trellologo.png";
 export { default as githublogo } from "../images/githublogo.jpg";
 export { default as herokulogo } from "../images/herokulogo.png";
+export { default as videochat } from "../images/videochat.png";
