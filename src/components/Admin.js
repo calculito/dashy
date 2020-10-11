@@ -11,13 +11,9 @@ export default function Admin({ logIn }) {
   useEffect(() => {
     refetch();
   });
-  const {
-    isLoading,
-    error,
-    data,
-    isFetching,
-    refetch,
-  } = useQuery("fetchAllData", () => API.get(`alld`));
+  const { isLoading, data, refetch } = useQuery("fetchAllData", () =>
+    API.get(`alld`)
+  );
   //////////////  PREPARE DATA FOR WORK WITH IT ////////////////
   const dataAll =
     !isLoading &&

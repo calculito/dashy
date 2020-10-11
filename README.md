@@ -39,7 +39,7 @@ Changelog:
 2020-10-07 tabs clean, books clean
 2020-10-10 import central IMPEX.js
 2020-10-10 real password, two steps authentification
-2020-10-11 password visible in admin, tools in header
+2020-10-11 password visible in admin, tools in header, changed colors page, hworks with axios get
 
 ToDo
 App: useQuery

@@ -646,7 +646,7 @@ h4 {
   opacity: 0.6;
   font-size: 14px;
 }
-.circleIcons:hover {
+.circleIcons:active {
   background-color: var(--font-whitesmoke);
   color: white;
 }

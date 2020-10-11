@@ -28,12 +28,10 @@ export default function Links({
         ),
       ])
       .then((response) => {
-        const allGenLinks = response[0].data;
-        const allPersLinks = response[1].data;
         setAppState({
           loading: false,
-          genLinks: allGenLinks,
-          persLinks: allPersLinks,
+          genLinks: response[0].data,
+          persLinks: response[1].data,
         });
       });
   }, [

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSpeechSynthesis } from "react-speech-kit";
 import { sound, hammerwhite, hammercolor } from "./Impex";
+import axios from "axios";
 
 export default function Homeworks({
   userName,
@@ -11,26 +12,14 @@ export default function Homeworks({
 }) {
   const { speak } = useSpeechSynthesis();
   const [switcher, setswitcher] = useState("");
-  const [hammer, sethammer] = useState([1]);
-  const [studHwValidation, setstudHwValidation] = useState(["no"]);
   const [homeworkHammerInst, sethomeworkHammerInst] = useState([
     { id: 1, avg: "3" },
   ]);
   const [numberOfYes, setnumberOfYes] = useState("");
   const [homeworkToCheckId, sethomeworkToCheckId] = useState("");
-  const [hwOptional, sethwOptional] = useState("");
-  const [hwOptionalUn, sethwOptionalUn] = useState("");
   const [homeworkInsertField, sethomeworkInsertField] = useState("");
-  const [homeworkDescriptionSYes, sethomeworkDescriptionSYes] = useState([
-    "homework finished",
-  ]);
-  const [homeworkDescriptionSNo, sethomeworkDescriptionSNo] = useState([
-    "homework unfinished",
-  ]);
   const [linkToMyHomework, setlinkToMyHomework] = useState("");
-  const [homeworkFinishedId, sethomeworkFinishedId] = useState("");
   const [thishomeworkFinishedId, setthishomeworkFinishedId] = useState("");
-  const [linkToMyHomeworkCircle, setlinkToMyHomeworkCircle] = useState("");
   const [homeworkUnfinishedIdArray, sethomeworkUnfinishedIdArray] = useState(
     ""
   );
@@ -42,92 +31,49 @@ export default function Homeworks({
     },
   ]); //reduced array
 
+  const [appState, setAppState] = useState({
+    loading: null,
+    finishedHW: null,
+    unfinishedHW: null,
+    homeworkHammerInst: null,
+  });
   const [openCheckWindow, setopenCheckWindow] = useState(false);
   const [openInputWindow, setopenInputWindow] = useState(false);
   const [openInputWindowAfter, setopenInputWindowAfter] = useState(false);
   useEffect(() => {
-    getuserhomeworksStudentYes();
-    getuserhomeworksStudentNo();
     getuserhomeworksALL();
     setswitcher("");
-    //var timerID = setInterval(() => tick(), 1000);
-    //return function cleanup() {
-    //   clearInterval(timerID);
-    // };
   }, [logIn, switcher, whichClass]);
 
   useEffect(() => {
-    getuserhomeworksStudentNo();
-    getuserhomeworksStudentYes();
-  }, [openInputWindow]);
-
-  //  function tick() {
-  //   setswitcher(1);
-  // }
-
-  ///////////////    GET FINISHED HOMEWORKS FOR STUDENTS     /////////////
-  async function getuserhomeworksStudentYes() {
-    let endpoint = "https://dashybackend.herokuapp.com/userhomeworksSYES/".concat(
-      userName
-    );
-    await fetch(endpoint)
-      .then((response) => response.json())
-      .then((data) => {
-        const arrToDescription = data.map(function (daten) {
-          return daten.link;
+    ///////////////    GET FINISHED HOMEWORKS FOR STUDENTS     /////////////
+    axios
+      .all([
+        axios.get(
+          `https://dashybackend.herokuapp.com/userhomeworksSYES/${userName}`
+        ),
+        axios.get(
+          `https://dashybackend.herokuapp.com/userhomeworksSNO/${userName}`
+        ),
+        axios.get(`https://dashybackend.herokuapp.com/userhomeworksALLHammer`),
+      ])
+      .then((response) => {
+        setAppState({
+          loading: false,
+          finishedHW: response[0].data,
+          unfinishedHW: response[1].data,
+          homeworkHammerInst: response[2].data,
         });
-        sethomeworkDescriptionSYes(arrToDescription);
-        const arrToLinkToMyHomeworkCircle = data.map(function (daten) {
-          return daten.linkhwfinished;
-        });
-        setlinkToMyHomeworkCircle(arrToLinkToMyHomeworkCircle);
-        const arrToOptional = data.map(function (daten) {
-          return daten.optional;
-        });
-        sethwOptional(arrToOptional);
-        const arrTohomeworkFInishedId = data.map(function (daten) {
-          return daten.id;
-        });
-        sethomeworkFinishedId(arrTohomeworkFInishedId);
-        const arrToHammer = data.map(function (daten) {
-          return daten.hammer;
-        });
-        sethammer(arrToHammer);
-        const arrToValidation = data.map(function (daten) {
-          return daten.validation;
-        });
-        setstudHwValidation(arrToValidation);
       });
-    let numberOfYes = 0;
-    const arrToPointsValidation = studHwValidation.map(function (daten) {
-      if (daten === "yes") {
-        numberOfYes++;
-      }
-      setnumberOfYes(numberOfYes);
-    });
-  }
-  ///////////////    GET UNFINISHED HOMEWORKS FOR STUDENTS     /////////////
-  async function getuserhomeworksStudentNo() {
-    let endpoint = "https://dashybackend.herokuapp.com/userhomeworksSNO/".concat(
-      userName
-    );
-    await fetch(endpoint)
-      .then((response) => response.json())
-      .then((data) => {
-        const arrToDescription = data.map(function (daten) {
-          return daten.link;
-        });
-        sethomeworkDescriptionSNo(arrToDescription);
-        const arrToId = data.map(function (daten) {
-          return daten.id;
-        });
-        sethomeworkUnfinishedIdArray(arrToId);
-        const arrToOptionalUn = data.map(function (daten) {
-          return daten.optional;
-        });
-        sethwOptionalUn(arrToOptionalUn);
+    appState.loading &&
+      appState.finishedHW.map(function (daten) {
+        if (daten.validation === "yes") {
+          numberOfYes++;
+        }
+        setnumberOfYes(numberOfYes);
       });
-  }
+  }, [setAppState, switcher, openInputWindow]);
+
   ///////////////    GET HOMEWORKS FOR INSTRUCTORS       /////////////
   async function getuserhomeworksALL() {
     let endpoint = "https://dashybackend.herokuapp.com/userhomeworksALL/".concat(
@@ -162,24 +108,15 @@ export default function Homeworks({
         }, []);
         sethomeworkDescriptionALLR(homeworkDescriptionALLReq);
       });
-
-    ///////// fetch hammer //////////
-    let endpointhammer =
-      "https://dashybackend.herokuapp.com/userhomeworksALLHammer";
-    await fetch(endpointhammer)
-      .then((response) => response.json())
-      .then((data) => {
-        sethomeworkHammerInst(data);
-      });
   }
-
+  console.log(appState.homeworkHammerInst);
   const HammerShowInstructor = (props) => {
     let id = props.id;
-    var hammernr = homeworkHammerInst.map((data) => {
-      if (data.id === id) {
-        return data.avg;
-      }
+    console.log(id);
+    var hammernr = appState.homeworkHammerInst.map((data) => {
+      return data.id === id && data.avg;
     });
+    console.log(hammernr);
     return <div className="hammercontainer">{hammernr}</div>;
   };
   ///////////////    CHANGE STATUS TO FINISHED        /////////////
@@ -199,7 +136,7 @@ export default function Homeworks({
   }
   ///////////////    INSERT LINK TO HOMEWORK IF (NO LINK)       /////////////
   function changestatusafter(e) {
-    setthishomeworkFinishedId(homeworkFinishedId[e]);
+    setthishomeworkFinishedId(e);
     setopenInputWindowAfter(e);
     // setswitcher("1");
   }
@@ -287,8 +224,6 @@ export default function Homeworks({
     setswitcher("1");
   }
   ////////////////  PREPARE ARRAYS FOR GETTING DATA FROM DATABASE  //////////////
-  let finishedHomeworks = homeworkDescriptionSYes;
-  let unfinishedHomeworks = homeworkDescriptionSNo;
   let allHomeworks = homeworkDescriptionALLR;
   function soundloud(toread) {
     speak({
@@ -356,17 +291,18 @@ export default function Homeworks({
   return (
     <div className="tabcontent">
       <div className="infoWindow">
-        {whichRole !== "Student"
-          ? "Your class has " + homeworkDescriptionALLR.length + " homeworks"
-          : "You have " +
-            homeworkDescriptionSYes.length +
-            " finished homeworks and " +
-            homeworkDescriptionSNo.length +
-            " unfinished homeworks and you achieved " +
-            (homeworkDescriptionSYes.length * 5 + numberOfYes * 3) +
-            " points from max. " +
-            (homeworkDescriptionSYes.length + homeworkDescriptionSNo.length) *
-              8}
+        {appState.loading === false
+          ? whichRole !== "Student"
+            ? "Your class has " + homeworkDescriptionALLR.length + " homeworks"
+            : "You have " +
+              appState.finishedHW.length +
+              " finished homework(s) and " +
+              appState.unfinishedHW.length +
+              " unfinished homework(s) and you achieved " +
+              (appState.finishedHW.length * 5 + numberOfYes * 3) +
+              " points from max. " +
+              (appState.finishedHW.length + appState.unfinishedHW.length) * 8
+          : undefined}
       </div>
 
       {openInputWindow !== false && (
@@ -407,181 +343,175 @@ export default function Homeworks({
         <div className="twoColumns">
           <div className="halfContainer">
             <h4>Finished homeworks</h4>
-            {finishedHomeworks.map((link, index) => {
-              return (
-                <div className="rowHW" key={"divRHW" + index}>
-                  <div className="recordings" key={"divG" + index}>
-                    <a
-                      className="recordinglinks"
-                      href={link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      key={index}
-                    >
-                      {`${link.substring(0, 30)}...`}
-                    </a>
-
-                    <div className="infoContLinks">
-                      <div className="hammercontainer">
-                        <img
-                          className="linkSymbols"
-                          src={hammer[index] > 0 ? hammercolor : hammerwhite}
-                          alt="hammer"
-                          onClick={(e) =>
-                            changehammer(1, homeworkFinishedId[index])
-                          }
-                        />
-                        <img
-                          className="linkSymbols"
-                          src={hammer[index] > 1 ? hammercolor : hammerwhite}
-                          alt="hammer"
-                          onClick={(e) =>
-                            changehammer(2, homeworkFinishedId[index])
-                          }
-                        />
-                        <img
-                          className="linkSymbols"
-                          src={hammer[index] > 2 ? hammercolor : hammerwhite}
-                          alt="hammer"
-                          onClick={(e) =>
-                            changehammer(3, homeworkFinishedId[index])
-                          }
-                        />
-                        <img
-                          className="linkSymbols"
-                          src={hammer[index] > 3 ? hammercolor : hammerwhite}
-                          alt="hammer"
-                          onClick={(e) =>
-                            changehammer(4, homeworkFinishedId[index])
-                          }
-                        />
-                        <img
-                          className="linkSymbols"
-                          src={hammer[index] > 4 ? hammercolor : hammerwhite}
-                          alt="hammer"
-                          onClick={(e) =>
-                            changehammer(5, homeworkFinishedId[index])
-                          }
-                        />
-                      </div>
-                      <button
-                        onClick={(e) =>
-                          studHwValidation[index] === "no"
-                            ? homeworkEvaluationReset(homeworkFinishedId[index])
-                            : undefined
-                        }
-                        style={{
-                          backgroundColor:
-                            studHwValidation[index] === "yes"
-                              ? "green"
-                              : studHwValidation[index] === "no"
-                              ? "red"
-                              : "white",
-                        }}
-                        className="circle"
-                      >
-                        V
-                      </button>
-                      {linkToMyHomeworkCircle[index] === null ? (
-                        <button
-                          onClick={(e) => changestatusafter(index)}
-                          className="circle"
-                          href=""
+            {appState.loading === false
+              ? appState.finishedHW.map((data, index) => {
+                  return (
+                    <div className="rowHW" key={"divRHW" + index}>
+                      <div className="recordings" key={"divG" + index}>
+                        <a
+                          className="recordinglinks"
+                          href={data.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          key={index}
                         >
-                          no link
-                        </button>
-                      ) : (
-                        <>
-                          <a
-                            className="circle"
-                            href={linkToMyHomeworkCircle[index]}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            link ok
-                          </a>
+                          {`${data.link.substring(0, 30)}...`}
+                        </a>
 
+                        <div className="infoContLinks">
+                          <div className="hammercontainer">
+                            <img
+                              className="linkSymbols"
+                              src={data.hammer > 0 ? hammercolor : hammerwhite}
+                              alt="hammer"
+                              onClick={(e) => changehammer(1, data.id)}
+                            />
+                            <img
+                              className="linkSymbols"
+                              src={data.hammer > 1 ? hammercolor : hammerwhite}
+                              alt="hammer"
+                              onClick={(e) => changehammer(2, data.id)}
+                            />
+                            <img
+                              className="linkSymbols"
+                              src={data.hammer > 2 ? hammercolor : hammerwhite}
+                              alt="hammer"
+                              onClick={(e) => changehammer(3, data.id)}
+                            />
+                            <img
+                              className="linkSymbols"
+                              src={data.hammer > 3 ? hammercolor : hammerwhite}
+                              alt="hammer"
+                              onClick={(e) => changehammer(4, data.id)}
+                            />
+                            <img
+                              className="linkSymbols"
+                              src={data.hammer > 4 ? hammercolor : hammerwhite}
+                              alt="hammer"
+                              onClick={(e) => changehammer(5, data.id)}
+                            />
+                          </div>
                           <button
-                            onClick={(e) => changestatusafter(index)}
+                            onClick={(e) =>
+                              data.validation === "no"
+                                ? homeworkEvaluationReset(data.id)
+                                : undefined
+                            }
+                            style={{
+                              backgroundColor:
+                                data.validation === "yes"
+                                  ? "green"
+                                  : data.validation === "no"
+                                  ? "red"
+                                  : "white",
+                            }}
                             className="circle"
-                            href=""
                           >
-                            change link
+                            V
                           </button>
-                        </>
-                      )}
-                      <span
-                        className="circle"
-                        style={{
-                          backgroundColor:
-                            hwOptional[index] === "yes" && "green",
-                          color: "white",
-                          fontSize: "12px",
-                          cursor: "default",
-                        }}
-                      >
-                        OPT
-                      </span>
+                          {data.linkhwfinished === null ? (
+                            <button
+                              onClick={(e) => changestatusafter(data.id)}
+                              className="circle"
+                              href=""
+                            >
+                              no link
+                            </button>
+                          ) : (
+                            <>
+                              <a
+                                className="circle"
+                                href={data.linkhwfinished}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                link ok
+                              </a>
 
-                      <img
-                        className="linkSymbols"
-                        src={sound}
-                        alt="speaker"
-                        onClick={(e) => soundloud(link)}
-                      />
+                              <button
+                                onClick={(e) => changestatusafter(index)}
+                                className="circle"
+                                href=""
+                              >
+                                change link
+                              </button>
+                            </>
+                          )}
+                          <span
+                            className="circle"
+                            style={{
+                              backgroundColor:
+                                data.optional === "yes" && "green",
+                              color: "white",
+                              fontSize: "12px",
+                              cursor: "default",
+                            }}
+                          >
+                            OPT
+                          </span>
+
+                          <img
+                            className="linkSymbols"
+                            src={sound}
+                            alt="speaker"
+                            onClick={(e) => soundloud(data.link)}
+                          />
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              );
-            })}
+                  );
+                })
+              : undefined}
           </div>
           <div className="halfContainer">
             <h4>Unfinished homeworks</h4>
-            {unfinishedHomeworks.map((link, index) => {
-              return (
-                <div className="rowHW" key={"divRHWu" + index}>
-                  <div className="recordings" key={"divP" + index}>
-                    <a
-                      className="recordinglinks"
-                      href={link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      key={index}
-                    >
-                      {`${link.substring(0, 30)}...`}
-                    </a>
-                    <div className="infoContLinks">
-                      <button
-                        className="buttonHW"
-                        key={index}
-                        onClick={(e) => changestatus(index)}
-                      >
-                        Finished?
-                      </button>
-                      <span
-                        className="circle"
-                        style={{
-                          backgroundColor:
-                            hwOptionalUn[index] === "yes" && "green",
-                          color: "white",
-                          fontSize: "12px",
-                          cursor: "default",
-                        }}
-                      >
-                        OPT
-                      </span>
+            {appState.loading === false
+              ? appState.unfinishedHW.map((data, index) => {
+                  return (
+                    <div className="rowHW" key={"divRHWu" + index}>
+                      <div className="recordings" key={"divP" + index}>
+                        <a
+                          className="recordinglinks"
+                          href={data.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          key={index}
+                        >
+                          {`${data.link.substring(0, 30)}...`}
+                        </a>
+                        <div className="infoContLinks">
+                          <button
+                            className="buttonHW"
+                            key={index}
+                            onClick={(e) => changestatus(index)}
+                          >
+                            Finished?
+                          </button>
+                          <span
+                            className="circle"
+                            style={{
+                              backgroundColor:
+                                data.optional === "yes" && "green",
+                              color: "white",
+                              fontSize: "12px",
+                              cursor: "default",
+                            }}
+                          >
+                            OPT
+                          </span>
 
-                      <img
-                        className="linkSymbols"
-                        src={sound}
-                        alt="speaker"
-                        onClick={(e) => soundloud(link)}
-                      />
+                          <img
+                            className="linkSymbols"
+                            src={sound}
+                            alt="speaker"
+                            onClick={(e) => soundloud(data.link)}
+                          />
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              );
-            })}
+                  );
+                })
+              : undefined}
           </div>
         </div>
       ) : (
@@ -655,7 +585,9 @@ export default function Homeworks({
                           {alldata.link}
                         </a>
                         <div className="circle">
-                          <HammerShowInstructor id={alldata.id} />
+                          {appState.loading === false && (
+                            <HammerShowInstructor id={alldata.id} />
+                          )}
                         </div>
                       </div>
                       <div className="rowHWPosAbs" key={"divRHWStatus" + index}>

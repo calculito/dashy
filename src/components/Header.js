@@ -13,7 +13,7 @@ export default function Header({
 }) {
   const [userClassName, setuserClassName] = useState(false);
   const [openInputWindow, setopenInputWindow] = useState(false);
-  const ref = React.useRef();
+
   /////////////////   USEEFFECTS   ///////////////
   useEffect(() => {
     logIn === 1 && getclassNameFromDB();
@@ -36,10 +36,7 @@ export default function Header({
       });
   }
   //////////////  GET ALL CLASS  AXIOS /////////////
-  const { isLoading, error, data, isFetching, refetch } = useQuery(
-    "getClass",
-    () => API.get(`class/`)
-  );
+  const { isLoading, data } = useQuery("getClass", () => API.get(`class/`));
   const classes = !isLoading && data.data;
 
   //////////////////  CHANGE CLASS ///////////////////

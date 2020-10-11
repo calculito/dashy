@@ -5,7 +5,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import interaction from "@fullcalendar/interaction";
 import esLocale from "@fullcalendar/core/locales/es";
-import { useQuery, useMutation, queryCache } from "react-query";
+import { useQuery } from "react-query";
 import { API } from "./Impex.js";
 
 export default function Calendar({ whichClass, whichRole }) {
@@ -18,18 +18,19 @@ export default function Calendar({ whichClass, whichRole }) {
   };
   /////////    GET ALL APOINTMENTS  AXIOS  ///////////
 
-  const { isLoading, error, data } = useQuery("getuserAppointments", () =>
+  const { isLoading, data } = useQuery("getuserAppointments", () =>
     API.get(`usercalendar/${whichClass}`)
   );
 
   //////////////  PREPARE DATA FOR WORK WITH IT ////////////////
-  const dataprep =
+  let events =
     !isLoading &&
     data.data.forEach(function (obj) {
       obj.date = obj.tdate;
       //delete obj.tdate;
     });
-  const events = !isLoading && data.data;
+  events = !isLoading && data.data;
+
   /////////    POST NEW APOINTMENT   ///////////
   async function insertAppointment(evt) {
     setdateNewAppointment(dateNewAppointment.concat(":00Z"));
