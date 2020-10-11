@@ -207,7 +207,7 @@ img {
   -webkit-filter: var(--webkit-filter);
   filter: var(--filter);
   margin-left: 35px;
-  min-width: 20vw;
+  width: 20vw;
   display: flex;
   flex-direction: row;
   justify-content: space-around;

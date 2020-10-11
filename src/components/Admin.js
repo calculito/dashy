@@ -26,6 +26,7 @@ export default function Admin({ logIn }) {
       const value = {
         name: d.name,
         role: d.user_role,
+        password: d.user_password,
       };
       if (!found) {
         acc.push({
@@ -100,6 +101,7 @@ export default function Admin({ logIn }) {
                     <tr key={index}>
                       <td key={data.name + index + "1"}>{data.name}</td>
                       <td key={data.role + index + "2"}>{data.role}</td>
+                      <td key={"p" + index + "2"}>{data.password}</td>
                     </tr>
                   </tbody>
                 ))}

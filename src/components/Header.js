@@ -85,12 +85,14 @@ export default function Header({
         <>.</>
       )}
       {logIn === 1 && window.innerWidth > 600 ? <Tools /> : undefined}
-      <img
-        className="loginlogo"
-        src={logIn === 1 ? logo : login}
-        alt="logo"
-        onClick={onHeaderClick}
-      />
+      <div className="greeting">
+        <img
+          className="loginlogo"
+          src={logIn === 1 ? logo : login}
+          alt="logo"
+          onClick={onHeaderClick}
+        />
+      </div>
       {openInputWindow !== false &&
         (isLoading ? (
           <div>C'mon database, wake up ...</div>
