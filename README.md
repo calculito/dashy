@@ -39,12 +39,13 @@ Changelog:
 2020-10-07 tabs clean, books clean
 2020-10-10 import central IMPEX.js
 2020-10-10 real password, two steps authentification
+2020-10-11 password visible in admin, tools in header
 
 ToDo
 App: useQuery
 ADMIN: create password in database, useQuery for post
 Calendar: add appointment time correcting
-Chat: background white, maybe inframe, click on MUTE
+Chat: clean
 Footer: clean
 Header: clean
 Homeworks: clean code, useQuery
