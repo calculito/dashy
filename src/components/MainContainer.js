@@ -12,7 +12,14 @@ export default function MainContainer({
   return (
     <div
       className="maincontainer"
-      style={{ height: logIn === 0 ? "calc(100% - 102px)" : undefined }}
+      style={{
+        height:
+          logIn === 1
+            ? window.innerWidth < 601
+              ? "calc(100% - 159px)"
+              : "calc(100% - 140px)"
+            : "calc(100% - 86px)",
+      }}
     >
       {
         {
