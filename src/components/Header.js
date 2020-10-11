@@ -60,12 +60,14 @@ export default function Header({
     <div className="header" key={whichUserHeader}>
       {logIn === 1 ? (
         <div className="greeting">
-          <span className="buttonHW1" key="2">
-            {whichUserHeader}
-          </span>
-          <span className="buttonHW1" key="3">
-            {whichRole}
-          </span>
+          <div className="headerNR">
+            <span className="buttonHW1" key="2">
+              {whichUserHeader}
+            </span>
+            <span className="buttonHW1" key="3">
+              {whichRole}
+            </span>
+          </div>
           {whichRole !== "Student" ? (
             <button
               className="buttonHW"
@@ -84,7 +86,7 @@ export default function Header({
       ) : (
         <>.</>
       )}
-      {logIn === 1 && window.innerWidth > 600 ? <Tools /> : undefined}
+      {logIn === 1 ? <Tools /> : undefined}
       <div className="greeting">
         <img
           className="loginlogo"

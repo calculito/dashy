@@ -8,33 +8,30 @@ html,
   --shade-infow-color: #548ba1;
   --shade-light-color: rgba(255, 255, 255, 1);
   --shade-dark-color: rgba(33, 71, 83, 0.3);
-  --background-tabn-color: #e0eef7;
   --font-infow-color: #214753;
   --font-tabnI-color: #286b7b;
   --font-light-color: #548ba1;
   --font-white: white;
   --font-whitesmoke: #cbe3ee;
 }
-:root {
+.root {
   --background-page-color: #ecede3;
   --background-infow-color: #d5d5ca;
   --shade-infow-color: rgba(213, 213, 202, 0.85);
   --shade-light-color: rgba(255, 255, 255, 1);
   --shade-dark-color: rgba(0, 0, 0, 0.3);
-  --background-tabn-color: #b0afa5;
   --font-infow-color: darkslategray;
   --font-tabnI-color: #352f31;
   --font-light-color: darkgrey;
   --font-white: white;
   --font-whitesmoke: whitesmoke;
 }
-.root {
+:root {
   --background-page-color: #f7f9fb;
   --background-infow-color: #527ccc;
-  --shade-infow-color: rgba(rgba(171, 196, 207, 0.85));
+  --shade-infow-color: rgba(171, 196, 207, 0.85);
   --shade-light-color: #5085a5;
   --shade-dark-color: #8fc1e3;
-  --background-tabn-color: #d6dee0;
   --font-infow-color: #070707;
   --font-tabnI-color: #4b76b8;
   --font-light-color: #000000;
@@ -47,7 +44,6 @@ html,
   --shade-infow-color: rgba(51, 51, 51, 0.85);
   --shade-light-color: rgb(0, 0, 0);
   --shade-dark-color: rgba(255, 255, 255, 0.3);
-  --background-tabn-color: #6e6e6e;
   --font-infow-color: rgb(199, 199, 199);
   --font-tabnI-color: #d6d6d6;
   --font-light-color: rgb(121, 121, 121);
@@ -58,7 +54,7 @@ html,
 }
 body {
   padding: 0;
-  margin: 0;
+  margin: 0px 10px 0px 10px;
   border: 0;
   display: flex;
   flex-direction: column;
@@ -113,6 +109,11 @@ button:hover {
   display: flex;
   justify-content: space-between;
 }
+.headerNR {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
 .menu {
   margin-top: 5px;
   width: 100%;
@@ -126,14 +127,21 @@ button:hover {
   opacity: 0.8;
   padding: 5px 5px 5px 5px;
   color: var(--font-tabnI-color);
-  background-color: var(--background-tabn-color);
+  background-color: var(--shade-infow-color);
   cursor: pointer;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   font-size: 1em;
-  transform: skew(0deg);
+  opacity: 1.7;
+}
+.tabname:first-child {
+  border-top-left-radius: 15px;
+  border-left: 1px solid var(--background-page-color);
+}
+.tabname:last-child {
+  border-top-right-radius: 15px;
 }
 .tabnameactive {
   width: 22%;
@@ -206,11 +214,11 @@ img {
   color: var(--font-light-color);
   -webkit-filter: var(--webkit-filter);
   filter: var(--filter);
-  margin-left: 35px;
-  width: 20vw;
+  margin-left: 5px;
+  width: 15vw;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 .loginlogo {
@@ -235,7 +243,7 @@ img {
   height: 65vh !important;
 }
 .fc-daygrid-day-number {
-  color: var(--font-light-color);
+  color: whitesmoke;
 }
 .fc {
   height: 75vh !important;
@@ -255,10 +263,10 @@ img {
   align-items: center;
 }
 .logoTools {
-  height: 3.3vw;
-  width: 3.3vw;
+  height: 40px;
+  width: 40px;
   border-radius: 10px;
-  margin: 0px 5px 0px 5px;
+  margin: 0px 15px 0px 15px;
   border: 1px solid white;
   cursor: pointer;
   object-fit: cover;
@@ -321,7 +329,7 @@ img {
   }
 }
 .contLogoTools {
-  margin: 1px 1px 1px 1px;
+  margin: 5px 1px 1px 1px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -670,13 +678,13 @@ h4 {
   align-items: center;
   min-width: 100%;
   padding: 5px 0px 5px 0px;
-  background-color: var(--background-tabn-color);
+  background-color: var(--background-page-color);
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
 }
 .recordings:hover {
   background-color: var(--font-white);
-  color: var(--font-whitesmoke);
+  color: var(--font-white);
 }
 .recordinglinks {
   text-decoration: none;
@@ -828,11 +836,7 @@ h4 {
     object-fit: contain;
     padding: 5px;
   }
-  .logoTools {
-    height: 5vw;
-    width: 5vw;
-    border-radius: 5px;
-  }
+
   .fc-event-title {
     font-size: 12px !important;
   }
@@ -926,10 +930,12 @@ h4 {
 }
 @media only screen and (max-width: 600px) {
   .logoTools {
-    height: 6vw;
-    width: 6vw;
-    border-radius: 5px;
+    height: 30px;
+    width: 30px;
+    border-radius: 7px;
+    margin: 0px 3px 0px 3px;
   }
+
   .buttonHW1 {
     font-size: 12px;
     margin-left: 5px;

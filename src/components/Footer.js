@@ -13,7 +13,6 @@ export default function Footer() {
     "--shade-infow-color",
     "--shade-light-color",
     "--shade-dark-color",
-    "--background-tabn-color",
     "--font-infow-color",
     "--font-tabnI-color",
     "--font-light-color",
@@ -23,12 +22,11 @@ export default function Footer() {
     "--filter",
   ];
   let blue = [
-    "#cbe3ee",
     "#96c4d8",
+    "#cbe3ee",
     "#548ba1",
     "rgba(255, 255, 255, 1)",
     "rgba(33, 71, 83, 0.3)",
-    "#e0eef7",
     "#214753",
     "#286b7b",
     "#548ba1",
@@ -38,12 +36,11 @@ export default function Footer() {
     "invert(0)",
   ];
   let coffee = [
-    "#d5d5ca",
     "#b0afa5",
+    "#d5d5ca",
     "rgba(213, 213, 202, 0.85)",
     "rgba(255, 255, 255, 1)",
     "rgba(0, 0, 0, 0.3)",
-    "#ecede3",
     "darkslategray",
     "#352f31",
     "#ecede3",
@@ -58,7 +55,6 @@ export default function Footer() {
     "rgba(51, 51, 51, 0.85)",
     "rgba(255, 255, 255, 0.3)",
     "rgb(0, 0, 0)",
-    "#6e6e6e",
     "rgb(199, 199, 199)",
     "#d6d6d6",
     "rgb(121, 121, 121)",

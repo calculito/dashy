@@ -240,7 +240,6 @@ export default function App() {
             whichClass={whichClass}
             onClick={newClass}
           />
-          {logIn === 1 && window.innerWidth < 601 && <Tools />}
           <Tabs
             onTabsClick={setWindow}
             logIn={logIn}

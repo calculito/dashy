@@ -19,7 +19,7 @@ export default function Recordings({ userName, whichClass, whichRole }) {
 
   useEffect(() => {
     refetch();
-  });
+  }, []);
 
   const [mutateRecordings] = useMutation(
     () =>
