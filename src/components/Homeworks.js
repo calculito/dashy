@@ -56,6 +56,7 @@ export default function Homeworks({
         const count2 = response[0].data.forEach(function (daten) {
           return daten.validation === "yes" && count++;
         });
+
         setAppState({
           loading: false,
           finishedHW: response[0].data,
@@ -65,6 +66,7 @@ export default function Homeworks({
         });
       });
   }, [setAppState, switcher, openInputWindow]);
+  console.log(appState.homeworkDescriptionALLR);
   ///////////////    GET HOMEWORKS FOR INSTRUCTORS       /////////////
   async function getuserhomeworksALL() {
     let endpoint = "https://dashybackend.herokuapp.com/userhomeworksALL/".concat(

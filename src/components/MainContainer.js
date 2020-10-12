@@ -16,9 +16,9 @@ export default function MainContainer({
         height:
           logIn === 1
             ? window.innerWidth < 601
-              ? "calc(100% - 159px)"
-              : "calc(100% - 140px)"
-            : "calc(100% - 86px)",
+              ? "calc(100% - 139px)"
+              : "calc(100% - 122px)"
+            : "calc(100% - 95px)",
       }}
     >
       {
