@@ -61,8 +61,8 @@ export default function Header({
             <span className="buttonHW1" key="2">
               {whichUserHeader}
             </span>
-            <span className="buttonHW1" key="3">
-              {whichRole}
+            <span className="circleNonClick" key="3">
+              {whichRole.substring(0, 1)}
             </span>
           </div>
           {whichRole !== "Student" ? (
@@ -103,11 +103,7 @@ export default function Header({
                 key={"divRHW" + i}
                 onClick={() => onClick((whichClass = classes[i].id))}
               >
-                <div
-                  style={{ marginTop: "3px" }}
-                  key={"d" + i}
-                  onClick={(e) => changeClass(i)}
-                >
+                <div key={"d" + i} onClick={(e) => changeClass(i)}>
                   <button className="recordinglinks" key={i}>
                     {data.class_name}
                   </button>

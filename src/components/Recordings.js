@@ -97,12 +97,9 @@ export default function Recordings({ userName, whichClass, whichRole }) {
                       {data.title}
                     </a>
                     <span
-                      className="circle"
-                      style={{
-                        backgroundColor: "gray",
-                        color: "white",
-                        fontSize: "12px",
-                      }}
+                      className={
+                        whichRole === "Admin" ? "circle" : "circleNonClick"
+                      }
                     >
                       {data.keyword}
                     </span>

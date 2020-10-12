@@ -10,19 +10,13 @@ export default function Homeworks({
   whichClass,
   whichUserId,
 }) {
+  let count = 0;
   const { speak } = useSpeechSynthesis();
   const [switcher, setswitcher] = useState("");
-  const [homeworkHammerInst, sethomeworkHammerInst] = useState([
-    { id: 1, avg: "3" },
-  ]);
-  const [numberOfYes, setnumberOfYes] = useState("");
   const [homeworkToCheckId, sethomeworkToCheckId] = useState("");
   const [homeworkInsertField, sethomeworkInsertField] = useState("");
   const [linkToMyHomework, setlinkToMyHomework] = useState("");
   const [thishomeworkFinishedId, setthishomeworkFinishedId] = useState("");
-  const [homeworkUnfinishedIdArray, sethomeworkUnfinishedIdArray] = useState(
-    ""
-  );
   const [homeworkUnfinishedId, sethomeworkUnfinishedId] = useState("");
   const [homeworkDescriptionALLR, sethomeworkDescriptionALLR] = useState([
     {
@@ -36,6 +30,7 @@ export default function Homeworks({
     finishedHW: null,
     unfinishedHW: null,
     homeworkHammerInst: null,
+    numberValidation: 0,
   });
   const [openCheckWindow, setopenCheckWindow] = useState(false);
   const [openInputWindow, setopenInputWindow] = useState(false);
@@ -58,22 +53,18 @@ export default function Homeworks({
         axios.get(`https://dashybackend.herokuapp.com/userhomeworksALLHammer`),
       ])
       .then((response) => {
+        const count2 = response[0].data.forEach(function (daten) {
+          return daten.validation === "yes" && count++;
+        });
         setAppState({
           loading: false,
           finishedHW: response[0].data,
           unfinishedHW: response[1].data,
           homeworkHammerInst: response[2].data,
+          numberValidation: count,
         });
       });
-    appState.loading &&
-      appState.finishedHW.map(function (daten) {
-        if (daten.validation === "yes") {
-          numberOfYes++;
-        }
-        setnumberOfYes(numberOfYes);
-      });
   }, [setAppState, switcher, openInputWindow]);
-
   ///////////////    GET HOMEWORKS FOR INSTRUCTORS       /////////////
   async function getuserhomeworksALL() {
     let endpoint = "https://dashybackend.herokuapp.com/userhomeworksALL/".concat(
@@ -109,7 +100,7 @@ export default function Homeworks({
         sethomeworkDescriptionALLR(homeworkDescriptionALLReq);
       });
   }
-  console.log(appState.homeworkHammerInst);
+
   const HammerShowInstructor = (props) => {
     let id = props.id;
     console.log(id);
@@ -122,10 +113,8 @@ export default function Homeworks({
   ///////////////    CHANGE STATUS TO FINISHED        /////////////
   async function changestatus(e) {
     const data = { userId: whichUserId };
-    let homeworkId = homeworkUnfinishedIdArray[e];
-    sethomeworkUnfinishedId(homeworkId);
     await fetch(
-      "https://dashybackend.herokuapp.com/homeworkfinished/".concat(homeworkId),
+      "https://dashybackend.herokuapp.com/homeworkfinished/".concat(e),
       {
         method: "POST",
         body: JSON.stringify(data),
@@ -299,7 +288,7 @@ export default function Homeworks({
               " finished homework(s) and " +
               appState.unfinishedHW.length +
               " unfinished homework(s) and you achieved " +
-              (appState.finishedHW.length * 5 + numberOfYes * 3) +
+              (appState.finishedHW.length * 5 + appState.numberValidation * 3) +
               " points from max. " +
               (appState.finishedHW.length + appState.unfinishedHW.length) * 8
           : undefined}
@@ -405,7 +394,11 @@ export default function Homeworks({
                                   ? "red"
                                   : "white",
                             }}
-                            className="circle"
+                            className={
+                              data.validation === "yes"
+                                ? "circleNonClick"
+                                : "circle"
+                            }
                           >
                             V
                           </button>
@@ -483,7 +476,7 @@ export default function Homeworks({
                           <button
                             className="buttonHW"
                             key={index}
-                            onClick={(e) => changestatus(index)}
+                            onClick={(e) => changestatus(data.id)}
                           >
                             Finished?
                           </button>
@@ -611,16 +604,7 @@ export default function Homeworks({
                           >
                             {data.name}
                             {data.hammer > 0 ? (
-                              <div
-                                className="circle"
-                                style={{
-                                  margin: "0",
-                                  backgroundColor:
-                                    "var(--background-page-color)",
-                                }}
-                              >
-                                {data.hammer}
-                              </div>
+                              <div className="circle">{data.hammer}</div>
                             ) : undefined}
                           </button>
                         ))}

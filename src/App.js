@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import { useQuery } from "react-query";
 import {
   Header,
-  Tools,
   Tabs,
   Footer,
   MainContainer,

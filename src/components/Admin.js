@@ -71,23 +71,25 @@ export default function Admin({ logIn }) {
         dataAll.map((firstdata, index) => {
           return (
             <div key={index}>
-              <button
-                className="buttonHW"
-                onClick={(e) => setopenInputWindow(true)}
-              >
-                Add a class
-              </button>
               <table id="customers" key={firstdata.class_name + index}>
                 <thead>
                   <tr>
                     <th key={index + index + "0"}>{firstdata.class_name}</th>
-                    <th key={index + "button"}>
+                    <th key={index + "buttonAddUser"}>
                       {" "}
                       <button
                         className="buttonHW"
                         onClick={(e) => setopenInputWindowUser(true)}
                       >
                         Add an user
+                      </button>
+                    </th>
+                    <th key={index + "buttonAddClass"}>
+                      <button
+                        className="buttonHW"
+                        onClick={(e) => setopenInputWindow(true)}
+                      >
+                        Add a class
                       </button>
                     </th>
                   </tr>

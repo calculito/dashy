@@ -10,7 +10,7 @@ export default function Chat(i) {
   }
   return (
     <div className="tabcontent" onClick={openRequestedPopup}>
-      <div className="contLinks" style={{ justifyContent: "center" }}>
+      <div className="contLinks">
         <div className="infoWindowChat">
           <ul>
             <li>Click here to open a new tab. </li>

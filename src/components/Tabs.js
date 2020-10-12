@@ -44,9 +44,7 @@ export default function Tabs({ onTabsClick, logIn, index, whichRole }) {
                     alt={tabicons[i]}
                   />
                 </div>
-                <div className="noblackfont" key={"text" + i}>
-                  {data}
-                </div>
+                <div key={"text" + i}>{data}</div>
               </div>
             )
           )}

@@ -178,7 +178,7 @@ export default function Links({
                 return (
                   <div className="rowHW" key={"divRHW" + index}>
                     <div className="recordings" key={"divG" + index}>
-                      <div style={{ paddingLeft: "5px" }}>
+                      <div>
                         <img
                           src={"https://www.google.com/s2/favicons?domain=".concat(
                             data.description
@@ -192,11 +192,13 @@ export default function Links({
                           rel="noopener noreferrer"
                           key={index}
                         >
-                          {`${data.description.substring(0, 40)}...`}
+                          {window.innerHeight < 1000
+                            ? `${data.description.substring(0, 30)}...`
+                            : `${data.description.substring(0, 50)}...`}
                         </a>
                       </div>
                       <div className="infoContLinks">
-                        {whichRole === "Instructor" && (
+                        {whichRole !== "Student" && (
                           <span
                             className="circle"
                             onClick={() => deleteGeneralLink(data.id)}
@@ -204,7 +206,7 @@ export default function Links({
                             DEL
                           </span>
                         )}
-                        <span className="circle">{index + 1}</span>
+                        <span className="circleNonClick">{index + 1}</span>
                         <div>
                           <img
                             className="starSymbols"
@@ -278,7 +280,7 @@ export default function Links({
                 return (
                   <div className="rowHW" key={"divRHW" + index}>
                     <div className="recordings" key={"divP" + index}>
-                      <div style={{ paddingLeft: "5px" }}>
+                      <div>
                         <img
                           src={"https://www.google.com/s2/favicons?domain=".concat(
                             data.description
@@ -292,7 +294,9 @@ export default function Links({
                           rel="noopener noreferrer"
                           key={index}
                         >
-                          {`${data.description.substring(0, 40)}...`}
+                          {window.innerHeight < 1000
+                            ? `${data.description.substring(0, 30)}...`
+                            : `${data.description.substring(0, 50)}...`}
                         </a>
                       </div>
                       <div className="infoContLinks">

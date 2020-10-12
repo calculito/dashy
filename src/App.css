@@ -2,53 +2,31 @@ html,
 #root {
   height: 100%;
 }
-.root {
-  --background-page-color: #cbe3ee;
-  --background-infow-color: #96c4d8;
-  --shade-infow-color: #548ba1;
-  --shade-light-color: rgba(255, 255, 255, 1);
-  --shade-dark-color: rgba(33, 71, 83, 0.3);
-  --font-infow-color: #214753;
-  --font-tabnI-color: #286b7b;
-  --font-light-color: #548ba1;
-  --font-white: white;
-  --font-whitesmoke: #cbe3ee;
-}
-.root {
-  --background-page-color: #ecede3;
-  --background-infow-color: #d5d5ca;
-  --shade-infow-color: rgba(213, 213, 202, 0.85);
-  --shade-light-color: rgba(255, 255, 255, 1);
-  --shade-dark-color: rgba(0, 0, 0, 0.3);
-  --font-infow-color: darkslategray;
-  --font-tabnI-color: #352f31;
-  --font-light-color: darkgrey;
-  --font-white: white;
-  --font-whitesmoke: whitesmoke;
-}
 :root {
-  --background-page-color: #f7f9fb;
-  --background-infow-color: #527ccc;
-  --shade-infow-color: rgba(171, 196, 207, 0.85);
-  --shade-light-color: #5085a5;
-  --shade-dark-color: #8fc1e3;
-  --font-infow-color: #070707;
-  --font-tabnI-color: #4b76b8;
-  --font-light-color: #000000;
-  --font-white: #abb8cf;
-  --font-whitesmoke: rgb(255, 255, 255);
+  --background-page-color: #96c4d8;
+  --background-tabA-color: #cbe3ee;
+  --background-tabN-color: #548ba1;
+  --font-dark-color: #214753;
+  --font-2light-color: white;
+  --webkit-filter: invert(0);
+  --filter: invert(0);
 }
 .root {
-  --background-page-color: #161616;
-  --background-infow-color: #4b4b4b;
-  --shade-infow-color: rgba(51, 51, 51, 0.85);
-  --shade-light-color: rgb(0, 0, 0);
-  --shade-dark-color: rgba(255, 255, 255, 0.3);
-  --font-infow-color: rgb(199, 199, 199);
-  --font-tabnI-color: #d6d6d6;
-  --font-light-color: rgb(121, 121, 121);
-  --font-white: rgb(0, 0, 0);
-  --font-whitesmoke: rgb(70, 70, 70);
+  --background-page-color: #e9cba7;
+  --background-tabA-color: #eee2c6;
+  --background-tabN-color: #daad86;
+  --font-dark-color: #66462f;
+  --font-2light-color: white;
+  --webkit-filter: invert(0);
+  --filter: invert(0);
+}
+
+.root {
+  --background-page-color: #2e2e2e;
+  --background-tabA-color: #4b4b4b;
+  --background-tabN-color: #5c5c5c;
+  --font-dark-color: rgb(199, 199, 199);
+  --font-2light-color: rgb(0, 0, 0);
   --webkit-filter: invert(1);
   --filter: invert(1);
 }
@@ -62,7 +40,6 @@ body {
   height: 100%;
   overflow: auto;
   background-color: var(--background-page-color);
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='10px' width='10px'><text x='13' y='23' fill='white' font-size='50'>MIGRACODE</text></svg>");
 }
 
 .all {
@@ -84,10 +61,10 @@ body {
 .maincontainer {
   height: calc(100% - 140px);
   overflow: auto;
-  background-color: var(--background-infow-color);
+  background-color: var(--background-tabA-color);
 }
 .tabcontent {
-  background-color: var(--background-infow-color);
+  background-color: var(--background-tabA-color);
   text-align: center;
 }
 .tabcontent95 {
@@ -100,7 +77,7 @@ button {
   font-size: 18px;
 }
 button:hover {
-  background-color: var(--font-white);
+  background-color: var(--font-2light-color);
   cursor: pointer;
 }
 .header {
@@ -112,7 +89,8 @@ button:hover {
 .headerNR {
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
 }
 .menu {
   margin-top: 5px;
@@ -126,8 +104,8 @@ button:hover {
   border-left: 1px solid var(--background-page-color);
   opacity: 0.8;
   padding: 5px 5px 5px 5px;
-  color: var(--font-tabnI-color);
-  background-color: var(--shade-infow-color);
+  color: var(--background-tabA-color);
+  background-color: var(--background-tabN-color);
   cursor: pointer;
   display: flex;
   flex-direction: row;
@@ -148,61 +126,48 @@ button:hover {
   align-items: center;
   transform: skew(0deg);
   padding: 5px 5px 5px 5px;
-  color: var(--font-infow-color);
+  color: var(--font-dark-color);
   border-left: 1px solid var(--background-page-color);
-  background-color: var(--background-infow-color);
+  background-color: var(--background-tabA-color);
   border-top-right-radius: 15px;
-
   cursor: pointer;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 .noblackfont {
-  color: var(--font-tabnI-color);
+  color: var(--font-dark-color);
   font-weight: bold;
 }
-.buttonHW:hover .tooltiptext {
-  visibility: visible;
-}
-.buttonHW .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  padding: 10px 0;
-  border-radius: 6px;
-  position: absolute;
-  z-index: 1;
-  top: 5px;
-  left: 190px;
-}
+
 #customers {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
+  margin-right: 1px;
 }
 
 #customers td,
 #customers th {
-  border: 1px solid #ddd;
+  border: 1px solid var(--background-page-color);
   padding: 8px;
 }
 
 #customers tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: var(--background-page-color);
 }
-
+#customers tr {
+  color: var(--font-dark-color);
+}
 #customers tr:hover {
-  background-color: #ddd;
+  background-color: var(--background-page-color);
 }
 
 #customers th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #4caf50;
+  background-color: var(--background-page-color);
   color: white;
 }
 img {
@@ -211,16 +176,17 @@ img {
   max-height: 100%;
 }
 .greeting {
-  color: var(--font-light-color);
+  color: var(--background-tabA-color);
   -webkit-filter: var(--webkit-filter);
   filter: var(--filter);
   margin-left: 5px;
-  width: 15vw;
+  width: 20vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
 .loginlogo {
   object-fit: scale-down;
   font-size: 9px;
@@ -228,13 +194,29 @@ img {
   cursor: pointer;
 }
 .fc-daygrid-event-dot {
-  border: 4px solid var(--shade-light-color);
+  border: 4px solid var(--font-dark-color);
 }
 .fc-toolbar {
   padding-top: 20px !important;
 }
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: var(--background-tabN-color);
+}
+.fc .fc-daygrid {
+  border: 1px solid var(--background-tabN-color);
+}
+.fc .fc-daygrid .fc-daygrid-day {
+  border: 1px solid var(--background-tabN-color);
+}
 .fc-toolbar-title {
-  color: var(--font-light-color) !important;
+  color: var(--font-dark-color) !important;
+}
+.fc-theme-standard td,
+.fc-theme-standard th {
+  border: 1px solid var(--background-tabN-color);
+}
+.fc-col-header-cell-cushion {
+  color: var(--font-dark-color) !important;
 }
 .fc-scrollgrid-sync-table {
   height: 59vh !important;
@@ -243,18 +225,18 @@ img {
   height: 65vh !important;
 }
 .fc-daygrid-day-number {
-  color: whitesmoke;
+  color: var(--font-dark-color);
 }
 .fc {
   height: 75vh !important;
 }
 .fc-event-title {
   font-size: 14px !important;
-  color: var(--shade-light-color);
+  color: var(--font-dark-color);
 }
 .fc-event-time {
   font-size: 10px !important;
-  color: var(--shade-light-color);
+  color: var(--font-dark-color);
 }
 .contentLinks {
   display: flex;
@@ -355,7 +337,7 @@ img {
   filter: blur(0px) !important;
 }
 .outPopUpCalendar {
-  border: 1px solid var(--shade-infow-color);
+  border: 1px solid var(--background-tabN-color);
   font: 400 13.3333px Arial;
   background-color: var(--background-page-color);
   position: fixed;
@@ -369,7 +351,7 @@ img {
   border-radius: 15px;
 }
 .outPopUpHomeworkCheck {
-  border: 1px solid var(--shade-infow-color);
+  border: 1px solid var(--background-tabN-color);
   font: 400 13.3333px Arial;
   background-color: var(--background-page-color);
   position: fixed;
@@ -421,8 +403,8 @@ img {
   background-color: var(--background-page-color);
 }
 .open-button {
-  background-color: var(--shade-infow-color);
-  color: var(--font-white);
+  background-color: var(--background-tabN-color);
+  color: var(--font-2light-color);
   padding: 16px 20px;
   border: none;
   cursor: pointer;
@@ -447,41 +429,41 @@ img {
 .form-container {
   max-width: 400px;
   padding: 10px;
-  background-color: var(--font-white);
+  background-color: var(--background-tabA-color);
   border: 2px solid gray;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: var(--font-white);
+  color: var(--font-2light-color);
 }
 
 /* Full-width input fields */
 .form-container input[type="text"],
 .form-container input[type="password"] {
-  color: var(--font-tabnI-color);
+  color: var(--background-tabA-color);
   width: 90%;
   padding: 15px;
   margin: 5px 0 22px 0;
   border: none;
-  background-color: var(--shade-infow-color);
+  background-color: var(--background-tabN-color);
 }
 label {
-  color: var(--font-light-color);
+  color: var(--font-dark-color);
 }
 /* When the inputs get focus, do something */
 .form-container input[type="text"]:focus,
 .form-container input[type="password"]:focus {
-  background-color: var(--background-infow-color);
+  background-color: var(--background-tabN-color);
   outline: none;
 }
 
 /* Set a style for the submit/login button */
 .form-container .btn {
   border-radius: 10px;
-  background-color: var(--font-tabnI-color);
-  color: var(--font-white);
+  background-color: var(--font-dark-color);
+  color: var(--font-2light-color);
   padding: 16px 20px;
   border: none;
   cursor: pointer;
@@ -493,8 +475,8 @@ label {
 /* Add a whitesmoke background color to the cancel button */
 .form-container .cancel {
   border: none;
-  color: var(--font-tabnI-color);
-  background-color: var(--font-white);
+  color: var(--font-dark-color);
+  background-color: var(--background-tabA-color);
   cursor: pointer;
 }
 .cancelAndForgot {
@@ -537,14 +519,14 @@ label {
 }
 h4 {
   text-align: center;
-  color: var(--font-infow-color);
+  color: var(--font-dark-color);
   margin-top: 10px;
   padding-left: 40px;
   margin: 20px 20px 0px 20px; /*top right bottom left*/
 }
 .inputLinks {
   display: block;
-  color: var(--font-tabnI-color);
+  color: var(--font-dark-color);
   border: none;
   border-top-left-radius: 8px;
   padding-left: 20px;
@@ -555,18 +537,18 @@ h4 {
 }
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: var(--background-page-color);
+  color: var(--font-dark-color);
   opacity: 1; /* Firefox */
 }
 
 :-ms-input-placeholder {
   /* Internet Explorer 10-11 */
-  color: var(--font-tabnI-color);
+  color: var(--font-dark-color);
 }
 
 ::-ms-input-placeholder {
   /* Microsoft Edge */
-  color: var(--font-tabnI-color);
+  color: var(--font-dark-color);
 }
 .twoColumns {
   display: flex;
@@ -575,11 +557,11 @@ h4 {
   align-items: flex-start;
 }
 .iconsRefferer {
-  background-color: var(--background-infow-color);
+  background-color: var(--background-tabA-color);
   font: Arial;
   font-size: 10px;
   text-decoration: none;
-  color: var(--font-infow-color);
+  color: var(--font-dark-color);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -593,7 +575,7 @@ h4 {
   font: Arial;
   font-size: 10px;
   text-decoration: none;
-  color: var(--font-light-color);
+  color: var(--background-tabA-color);
 }
 .icons {
   width: 24px;
@@ -628,26 +610,39 @@ h4 {
   align-items: center;
   display: flex;
   padding: 1px 5px 1px 5px;
-  margin: 0px 10px 0px 0px;
+  margin: 0px 5px 0px 5px;
   border-radius: 30px/30px;
-  color: var(--font-infow-color);
-  background-color: var(--background-infow-color);
-  border: 1px solid var(--shade-dark-color);
+  color: var(--font-dark-color);
+  background-color: var(--background-tabA-color);
+  border: 1px solid var(--font-dark-color);
   opacity: 0.6;
   font-size: 12px;
+}
+.circleNonClick {
+  align-items: center;
+  display: flex;
+  padding: 1px 5px 1px 5px;
+  margin: 0px 5px 0px 5px;
+  border-radius: 30px/30px;
+  color: var(--font-dark-color);
+  background-color: var(--background-tabA-color);
+  border: 1px solid var(--font-dark-color);
+  opacity: 0.6;
+  font-size: 12px;
+  cursor: default;
 }
 .circleIcons {
   padding: 6px;
   margin: 0px;
   border-radius: 10px/12px;
-  color: var(--font-infow-color);
+  color: var(--font-dark-color);
   background-color: white;
-  border: 1px solid var(--shade-dark-color);
+  border: 1px solid var(--font-dark-color);
   opacity: 0.6;
   font-size: 14px;
 }
 .circleIcons:active {
-  background-color: var(--font-whitesmoke);
+  background-color: var(--font-2light-color);
   color: white;
 }
 .circle:hover {
@@ -683,12 +678,12 @@ h4 {
   border-bottom-right-radius: 15px;
 }
 .recordings:hover {
-  background-color: var(--font-white);
-  color: var(--font-white);
+  background-color: var(--background-tabN-color);
+  color: var(--font-2light-color);
 }
 .recordinglinks {
   text-decoration: none;
-  color: var(--font-infow-color);
+  color: var(--font-dark-color);
   font-size: 16px;
   margin: 5px;
   cursor: pointer;
@@ -696,7 +691,7 @@ h4 {
 }
 .recordings a:hover {
   text-decoration: none;
-  color: var(--font-tabnI-color);
+  color: var(--font-dark-color);
 
   cursor: pointer;
 }
@@ -707,8 +702,8 @@ h4 {
   text-align: center;
   font-size: 14px;
   font-weight: bold;
-  color: var(--font-infow-color);
-  background-color: var(--background-infow-color);
+  color: var(--font-dark-color);
+  background-color: var(--background-tabA-color);
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
 }
@@ -718,8 +713,8 @@ h4 {
   padding: 5px;
 
   font-size: 18px;
-  background-color: var(--font-white);
-  color: var(--font-infow-color);
+  background-color: var(--font-2light-color);
+  color: var(--font-dark-color);
   border-radius: 15px;
   border: 2px solid gray;
 }
@@ -738,28 +733,43 @@ h4 {
 }
 .buttonHW {
   font-size: 12px;
-  color: var(--font-infow-color);
+  color: var(--font-dark-color);
   border: 0px;
   border-radius: 4px;
-  background-color: var(--font-whitesmoke);
-  -webkit-box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
-    -2px -2px 1px 0px var(--shade-light-color);
-  -moz-box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
-    -2px -2px 1px 0px var(--shade-light-color);
-  box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
-    -2px -2px 1px 0px var(--shade-light-color);
+  background-color: var(--background-tabA-color);
+  cursor: pointer;
+}
+.buttonHW:hover {
+  background-color: var(--background-tabN-color);
+  color: var(--background-tabA-color);
+}
+.buttonHW:hover .tooltiptext {
+  visibility: visible;
+}
+.buttonHW .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  top: 5px;
+  left: 190px;
 }
 .buttonHWNames {
   font-size: 12px;
   border: 0px;
   border-radius: 4px;
-  color: var(--font-white);
-  -webkit-box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
-    -2px -2px 1px 0px var(--shade-light-color);
-  -moz-box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
-    -2px -2px 1px 0px var(--shade-light-color);
-  box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
-    -2px -2px 1px 0px var(--shade-light-color);
+  color: var(--font-2light-color);
+  -webkit-box-shadow: 1px 2px 3px 0px var(--font-dark-color),
+    -2px -2px 1px 0px var(--background-tabA-color);
+  -moz-box-shadow: 1px 2px 3px 0px var(--font-dark-color),
+    -2px -2px 1px 0px var(--background-tabA-color);
+  box-shadow: 1px 2px 3px 0px var(--font-dark-color),
+    -2px -2px 1px 0px var(--background-tabA-color);
   cursor: pointer;
 }
 .buttonHWNamesA {
@@ -773,12 +783,12 @@ h4 {
   border: 0px;
   border-radius: 4px;
   color: black;
-  -webkit-box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
-    -2px -2px 1px 0px var(--shade-light-color);
-  -moz-box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
-    -2px -2px 1px 0px var(--shade-light-color);
-  box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
-    -2px -2px 1px 0px var(--shade-light-color);
+  -webkit-box-shadow: 1px 2px 3px 0px var(--font-dark-color),
+    -2px -2px 1px 0px var(--background-tabA-color);
+  -moz-box-shadow: 1px 2px 3px 0px var(--font-dark-color),
+    -2px -2px 1px 0px var(--background-tabA-color);
+  box-shadow: 1px 2px 3px 0px var(--font-dark-color),
+    -2px -2px 1px 0px var(--background-tabA-color);
   cursor: pointer;
   opacity: 0.8;
 }
@@ -788,35 +798,27 @@ h4 {
   margin: 1px 3px 1px 3px;
   border: 0px;
   border-radius: 4px;
-  -webkit-box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
-    -2px -2px 1px 0px var(--shade-light-color);
-  -moz-box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
-    -2px -2px 1px 0px var(--shade-light-color);
-  box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
-    -2px -2px 1px 0px var(--shade-light-color);
+  -webkit-box-shadow: 1px 2px 3px 0px var(--font-dark-color),
+    -2px -2px 1px 0px var(--background-tabA-color);
+  -moz-box-shadow: 1px 2px 3px 0px var(--font-dark-color),
+    -2px -2px 1px 0px var(--background-tabA-color);
+  box-shadow: 1px 2px 3px 0px var(--font-dark-color),
+    -2px -2px 1px 0px var(--background-tabA-color);
   cursor: pointer;
   opacity: 1;
 }
 .buttonHWL {
   border: 0px;
   margin: 0px;
-  color: var(--font-light-color);
-  -webkit-box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
-    -2px -2px 1px 0px var(--shade-light-color);
-  -moz-box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
-    -2px -2px 1px 0px var(--shade-light-color);
-  box-shadow: 1px 2px 3px 0px var(--shade-dark-color),
-    -2px -2px 1px 0px var(--shade-light-color);
+  color: var(--background-tabA-color);
+  -webkit-box-shadow: 1px 2px 3px 0px var(--font-dark-color),
+    -2px -2px 1px 0px var(--background-tabA-color);
+  -moz-box-shadow: 1px 2px 3px 0px var(--font-dark-color),
+    -2px -2px 1px 0px var(--background-tabA-color);
+  box-shadow: 1px 2px 3px 0px var(--font-dark-color),
+    -2px -2px 1px 0px var(--background-tabA-color);
 }
-.buttonHW:hover {
-  cursor: pointer;
-  -webkit-box-shadow: 1px 2px 3px 0px var(--shade-light-color),
-    -2px -2px 1px 0px var(--shade-dark-color);
-  -moz-box-shadow: 1px 2px 3px 0px var(--shade-light-color),
-    -2px -2px 1px 0px var(--shade-dark-color);
-  box-shadow: 1px 2px 3px 0px var(--shade-light-color),
-    -2px -2px 1px 0px var(--shade-dark-color);
-}
+
 @media only screen and (max-width: 1030px) {
   .clearfix {
     overflow: auto;
@@ -973,17 +975,9 @@ h4 {
     font-size: 16px;
   }
   .tabname {
-    font-size: 1px;
-    min-width: 5vw;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
-    padding: 4px;
+    font-size: 0px;
   }
   .tabnameactive {
-    font-size: 1px;
-    min-width: 5vw;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
-    padding: 4px;
+    font-size: 0px;
   }
 }
