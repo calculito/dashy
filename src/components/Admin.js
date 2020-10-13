@@ -64,84 +64,117 @@ export default function Admin({ logIn }) {
     setnewUser("");
   }
   return (
-    <div className="menu">
+    <div className="flex-container">
       {isLoading ? (
         <div>C'mon database, wake up ...</div>
       ) : (
         dataAll.map((firstdata, index) => {
           return (
-            <div key={index}>
-              <table id="customers" key={firstdata.class_name + index}>
-                <thead>
-                  <tr>
-                    <th key={index + index + "0"}>{firstdata.class_name}</th>
-                    <th key={index + "buttonAddUser"}>
-                      {" "}
-                      <button
-                        className="buttonHW"
-                        onClick={(e) => setopenInputWindowUser(true)}
-                      >
-                        Add an user
-                      </button>
-                    </th>
-                    <th key={index + "buttonAddClass"}>
-                      <button
-                        className="buttonHW"
-                        onClick={(e) => setopenInputWindow(true)}
-                      >
-                        Add a class
-                      </button>
-                    </th>
-                  </tr>
-                </thead>
+            <div className="flex-table" key={index}>
+              <div
+                className="table-container"
+                role="table"
+                aria-label="Classes"
+                key={firstdata.class_name + index}
+              >
+                <div className="flex-header" role="rowgroup">
+                  <div
+                    className="flex-cell"
+                    role="columnheader"
+                    key={index + index + "0"}
+                  >
+                    {firstdata.class_name}
+                  </div>
+                  <div
+                    className="flex-cell"
+                    role="columnheader"
+                    key={index + "buttonAddUser"}
+                  >
+                    {" "}
+                    <button
+                      className="buttonHW"
+                      onClick={(e) => setopenInputWindowUser(true)}
+                    >
+                      Add an user
+                    </button>
+                  </div>
+                  <div
+                    className="flex-cell"
+                    role="columnheader"
+                    key={index + "buttonAddClass"}
+                  >
+                    <button
+                      className="buttonHW"
+                      onClick={(e) => setopenInputWindow(true)}
+                    >
+                      Add a class
+                    </button>
+                  </div>
+                </div>
                 {firstdata.data.map((data, index) => (
-                  <tbody key={index}>
-                    <tr key={index}>
-                      <td key={data.name + index + "1"}>{data.name}</td>
-                      <td key={data.role + index + "2"}>{data.role}</td>
-                      <td key={"p" + index + "2"}>{data.password}</td>
-                    </tr>
-                  </tbody>
+                  <div className="flex-row" role="rowgroup" key={"rg" + index}>
+                    <div
+                      className="flex-cell"
+                      role="cell"
+                      key={data.name + index + "1"}
+                    >
+                      {data.name}
+                    </div>
+                    <div
+                      className="flex-cell"
+                      role="cell"
+                      key={data.role + index + "2"}
+                    >
+                      {data.role}
+                    </div>
+                    <div
+                      className="flex-cell"
+                      role="cell"
+                      key={"p" + index + "2"}
+                    >
+                      {data.password}
+                    </div>
+                  </div>
                 ))}
-              </table>{" "}
-              {openInputWindow !== false && (
-                <div className="outPopUp">
-                  <form className="form-container" onSubmit={savenewClass}>
-                    <label>
-                      Name of the new class:
-                      <input
-                        autoFocus
-                        type="text"
-                        placeholder="Enter the name of the new class"
-                        value={newClass}
-                        onChange={(e) => setnewClass(e.target.value)}
-                      />
-                    </label>
-                    <input type="submit" value="Submit" className="btn" />
-                  </form>
-                </div>
-              )}
-              {openInputWindowUser !== false && (
-                <div className="outPopUp">
-                  <form className="form-container" onSubmit={savenewUser}>
-                    <label>
-                      Name of the new user:
-                      <input
-                        autoFocus
-                        type="text"
-                        placeholder="Enter the name of the new user"
-                        value={newUser}
-                        onChange={(e) => setnewUser(e.target.value)}
-                      />
-                    </label>
-                    <input type="submit" value="Submit" className="btn" />
-                  </form>
-                </div>
-              )}
+                {openInputWindow !== false && (
+                  <div className="outPopUp">
+                    <form className="form-container" onSubmit={savenewClass}>
+                      <label>
+                        Name of the new class:
+                        <input
+                          autoFocus
+                          type="text"
+                          placeholder="Enter the name of the new class"
+                          value={newClass}
+                          onChange={(e) => setnewClass(e.target.value)}
+                        />
+                      </label>
+                      <input type="submit" value="Submit" className="btn" />
+                    </form>
+                  </div>
+                )}
+                {openInputWindowUser !== false && (
+                  <div className="outPopUp">
+                    <form className="form-container" onSubmit={savenewUser}>
+                      <label>
+                        Name of the new user:
+                        <input
+                          autoFocus
+                          type="text"
+                          placeholder="Enter the name of the new user"
+                          value={newUser}
+                          onChange={(e) => setnewUser(e.target.value)}
+                        />
+                      </label>
+                      <input type="submit" value="Submit" className="btn" />
+                    </form>
+                  </div>
+                )}
+              </div>
             </div>
           );
         })
       )}
-    </div>
+    </div> //menu
   );
 }

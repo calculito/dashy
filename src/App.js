@@ -224,10 +224,7 @@ export default function App() {
         </div>
       )}{" "}
       {isLoading ? (
-        <div>
-          C'mon database, wake up ...{" "}
-          <img className="bgimg" src={Graffiti} alt="graffiti" />
-        </div>
+        <div>C'mon database, wake up ... </div>
       ) : (
         <div className={logIn === 3 || logIn === 2 ? "allblur" : "all"}>
           <Header
