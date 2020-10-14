@@ -98,13 +98,14 @@ button:hover {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  background-color: var(--background-tabA-color);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
 .tabname {
-  border-left: 1px solid var(--background-page-color);
   opacity: 0.8;
   padding: 5px 5px 5px 5px;
-  color: var(--background-tabA-color);
-  background-color: var(--background-tabN-color);
+  color: var(--background-tabN-color);
   cursor: pointer;
   display: flex;
   flex-direction: row;
@@ -115,7 +116,7 @@ button:hover {
 }
 .tabname:first-child {
   border-top-left-radius: 15px;
-  border-left: 1px solid var(--background-page-color);
+  padding-left: 3px;
 }
 .tabname:last-child {
   border-top-right-radius: 15px;
@@ -124,9 +125,8 @@ button:hover {
   align-items: center;
   transform: skew(0deg);
   padding: 5px 5px 5px 5px;
-  color: var(--font-dark-color);
-  border-left: 1px solid var(--background-page-color);
-  background-color: var(--background-tabA-color);
+  color: var(--font-light-color);
+  background-color: var(--background-tabN-color);
   cursor: pointer;
   display: flex;
   flex-direction: row;

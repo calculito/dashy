@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useSpeechSynthesis } from "react-speech-kit";
 import { sound, hammerwhite, hammercolor } from "./Impex";
 import axios from "axios";
+import { useQuery, useMutation, queryCache } from "react-query";
+import { API } from "./Impex";
 
 export default function Homeworks({
   userName,
@@ -214,6 +216,7 @@ export default function Homeworks({
     );
     setswitcher("1");
   }
+
   ////////////////  PREPARE ARRAYS FOR GETTING DATA FROM DATABASE  //////////////
   let allHomeworks = homeworkDescriptionALLR;
   function soundloud(toread) {
