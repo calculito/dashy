@@ -5,7 +5,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import interaction from "@fullcalendar/interaction";
 import esLocale from "@fullcalendar/core/locales/es";
-import { useQuery } from "react-query";
+import { useQuery, useMutation, queryCache } from "react-query";
 import { API } from "./Impex.js";
 
 export default function Calendar({ whichClass, whichRole }) {
@@ -30,17 +30,25 @@ export default function Calendar({ whichClass, whichRole }) {
   events = !isLoading && data.data;
 
   /////////    POST NEW APOINTMENT   ///////////
-
-  function insertAppointment(evt) {
+  async function insertAppointment(evt) {
     evt.preventDefault();
-    API.post(`/postappointment/${whichClass}`, {
-      title: titleNewAppointment,
-      date: dateNewAppointment.concat(" +02"),
-    });
-    settitleNewAppointment("");
-    setdateNewAppointment("");
-    setopenInputWindow(false);
+    postAppointment();
   }
+  const [postAppointment] = useMutation(
+    () =>
+      API.post(`/postappointment/${whichClass}`, {
+        title: titleNewAppointment,
+        date: dateNewAppointment.concat(" +02"),
+      }),
+    {
+      onSuccess: () => {
+        queryCache.invalidateQueries("getuserAppointments");
+        settitleNewAppointment("");
+        setdateNewAppointment("");
+        setopenInputWindow(false);
+      },
+    }
+  );
 
   const cancelInsert = () => {
     settitleNewAppointment("");
@@ -52,7 +60,7 @@ export default function Calendar({ whichClass, whichRole }) {
     <div className="tabcontent">
       {openInputWindow !== false ? (
         <div className="outPopUpCalendar">
-          <form className="header">
+          <form className="calendarForm">
             <input
               type="text"
               placeholder="Titel"
