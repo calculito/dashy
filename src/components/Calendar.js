@@ -12,7 +12,6 @@ export default function Calendar({ whichClass, whichRole }) {
   const [openInputWindow, setopenInputWindow] = useState(false);
   const [titleNewAppointment, settitleNewAppointment] = useState("");
   const [dateNewAppointment, setdateNewAppointment] = useState("");
-
   const handleDateClick = (arg) => {
     whichRole === "Admin" && setopenInputWindow(1);
   };
@@ -27,23 +26,17 @@ export default function Calendar({ whichClass, whichRole }) {
     !isLoading &&
     data.data.forEach(function (obj) {
       obj.date = obj.tdate;
-      //delete obj.tdate;
     });
   events = !isLoading && data.data;
 
   /////////    POST NEW APOINTMENT   ///////////
-  async function insertAppointment(evt) {
-    setdateNewAppointment(dateNewAppointment.concat(":00Z"));
+
+  function insertAppointment(evt) {
     evt.preventDefault();
-    const data = { title: titleNewAppointment, date: dateNewAppointment };
-    await fetch(
-      "https://dashybackend.herokuapp.com/postappointment/".concat(whichClass),
-      {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    API.post(`/postappointment/${whichClass}`, {
+      title: titleNewAppointment,
+      date: dateNewAppointment.concat(" +02"),
+    });
     settitleNewAppointment("");
     setdateNewAppointment("");
     setopenInputWindow(false);
@@ -64,7 +57,9 @@ export default function Calendar({ whichClass, whichRole }) {
               type="text"
               placeholder="Titel"
               value={titleNewAppointment}
-              onChange={(e) => settitleNewAppointment(e.target.value)}
+              onChange={(e) => {
+                settitleNewAppointment(e.target.value);
+              }}
               required
             />
             <input

@@ -89,7 +89,7 @@ button:hover {
 .headerNR {
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 .menu {
@@ -205,7 +205,10 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
+}
+.greeting:first-of-type {
+  align-items: flex-start;
 }
 
 .loginlogo {
