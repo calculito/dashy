@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useQuery } from "react-query";
 import { logo, login, API, Tools } from "./Impex.js";
-
+import axios from "axios";
 export default function Header({
   onHeaderClick,
   logIn,
@@ -13,35 +12,33 @@ export default function Header({
 }) {
   const [userClassName, setuserClassName] = useState(false);
   const [openInputWindow, setopenInputWindow] = useState(false);
-
+  const [appState, setAppState] = useState({
+    loading: null,
+    genLinks: null,
+    classes: null,
+  });
   /////////////////   USEEFFECTS   ///////////////
   useEffect(() => {
-    logIn === 1 && getclassNameFromDB();
+    logIn === 1 &&
+      axios
+        .all([API.get(`userclassname/${whichUserId}`), API.get(`class/`)])
+        .then((response) => {
+          setuserClassName(response[0].data[0].class_name);
+          setAppState({
+            loading: false,
+            classes: response[1].data,
+          });
+        });
+    //logIn === 1 && getclassNameFromDB();
     // var timerID = setInterval(() => tick(), 1000);
     // return function cleanup() {
     //   clearInterval(timerID);
     // };
   }, [logIn, userClassName, whichClass, openInputWindow]);
 
-  /////////////////   GET USER CLASS NAME   ///////////////
-
-  async function getclassNameFromDB() {
-    await fetch("https://dashybackend.herokuapp.com/userclassname")
-      .then((response) => response.json())
-      .then((data) => {
-        setuserClassName(
-          data[data.findIndex((element) => element.name === whichUserHeader)]
-            .class_name
-        );
-      });
-  }
-  //////////////  GET ALL CLASS  AXIOS /////////////
-  const { isLoading, data } = useQuery("getClass", () => API.get(`class/`));
-  const classes = !isLoading && data.data;
-
   //////////////////  CHANGE CLASS ///////////////////
   async function changeClass(i) {
-    let data = { classId: classes[i].id };
+    let data = { classId: appState.classes[i].id };
     await fetch(
       "https://dashybackend.herokuapp.com/switchclass/".concat(whichUserId),
       {
@@ -52,7 +49,6 @@ export default function Header({
     );
     setopenInputWindow(false);
   }
-
   return (
     <div className="header" key={whichUserHeader}>
       {logIn === 1 ? (
@@ -93,15 +89,15 @@ export default function Header({
         />
       </div>
       {openInputWindow !== false &&
-        (isLoading ? (
+        (appState.loading !== false ? (
           <div>C'mon database, wake up ...</div>
         ) : (
           <div className="outPopUpVariabel">
-            {classes.map((data, i) => (
+            {appState.classes.map((data, i) => (
               <div
                 className="recordingslinks"
                 key={"divRHW" + i}
-                onClick={() => onClick((whichClass = classes[i].id))}
+                onClick={() => onClick((whichClass = appState.classes[i].id))}
               >
                 <div key={"d" + i} onClick={(e) => changeClass(i)}>
                   <button className="recordinglinks" key={i}>

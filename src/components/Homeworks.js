@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useSpeechSynthesis } from "react-speech-kit";
 import { sound, hammerwhite, hammercolor } from "./Impex";
 import axios from "axios";
-import { useQuery, useMutation, queryCache } from "react-query";
 import { API } from "./Impex";
 
 export default function Homeworks({
@@ -37,22 +36,19 @@ export default function Homeworks({
   const [openCheckWindow, setopenCheckWindow] = useState(false);
   const [openInputWindow, setopenInputWindow] = useState(false);
   const [openInputWindowAfter, setopenInputWindowAfter] = useState(false);
-  useEffect(() => {
-    getuserhomeworksALL();
-    setswitcher("");
-  }, [logIn, switcher, whichClass]);
+  // useEffect(() => {
+  //   getuserhomeworksALL();
+  //   setswitcher("");
+  // }, [logIn, switcher, whichClass]);
 
   useEffect(() => {
     ///////////////    GET FINISHED HOMEWORKS FOR STUDENTS     /////////////
     axios
       .all([
-        axios.get(
-          `https://dashybackend.herokuapp.com/userhomeworksSYES/${userName}`
-        ),
-        axios.get(
-          `https://dashybackend.herokuapp.com/userhomeworksSNO/${userName}`
-        ),
-        axios.get(`https://dashybackend.herokuapp.com/userhomeworksALLHammer`),
+        API.get(`userhomeworksSYES/${userName}`),
+        API.get(`userhomeworksSNO/${userName}`),
+        API.get(`userhomeworksALLHammer`),
+        API.get(`userhomeworksALL/${whichClass}`),
       ])
       .then((response) => {
         const count2 = response[0].data.forEach(function (daten) {
@@ -66,18 +62,8 @@ export default function Homeworks({
           homeworkHammerInst: response[2].data,
           numberValidation: count,
         });
-      });
-  }, [setAppState, switcher, openInputWindow]);
-  console.log(appState.homeworkDescriptionALLR);
-  ///////////////    GET HOMEWORKS FOR INSTRUCTORS       /////////////
-  async function getuserhomeworksALL() {
-    let endpoint = "https://dashybackend.herokuapp.com/userhomeworksALL/".concat(
-      whichClass
-    );
-    await fetch(endpoint)
-      .then((response) => response.json())
-      .then((data) => {
-        const homeworkDescriptionALLReq = data.reduce((acc, d) => {
+
+        const homeworkDescriptionALLReq = response[3].data.reduce((acc, d) => {
           const found = acc.find((a) => a.link === d.link);
           const value = {
             name: d.name,
@@ -103,15 +89,13 @@ export default function Homeworks({
         }, []);
         sethomeworkDescriptionALLR(homeworkDescriptionALLReq);
       });
-  }
+  }, [setAppState, switcher, whichClass, openInputWindow]);
 
   const HammerShowInstructor = (props) => {
     let id = props.id;
-    console.log(id);
     var hammernr = appState.homeworkHammerInst.map((data) => {
       return data.id === id && data.avg;
     });
-    console.log(hammernr);
     return <div className="hammercontainer">{hammernr}</div>;
   };
   ///////////////    CHANGE STATUS TO FINISHED        /////////////

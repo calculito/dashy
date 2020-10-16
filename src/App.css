@@ -120,13 +120,7 @@ button:hover {
   font-size: 1em;
   opacity: 1.7;
 }
-.tabname:first-child {
-  border-top-left-radius: 15px;
-  padding-left: 3px;
-}
-.tabname:last-child {
-  border-top-right-radius: 15px;
-}
+
 .tabnameactive {
   align-items: center;
   transform: skew(0deg);
@@ -137,6 +131,7 @@ button:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  border-bottom: 2px solid var(--background-tabN-color);
 }
 .noblackfont {
   color: var(--font-dark-color);
@@ -211,10 +206,10 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
-}
-.greeting:first-of-type {
   align-items: flex-start;
+}
+.greeting:last-of-type {
+  align-items: flex-end;
 }
 
 .loginlogo {
@@ -282,6 +277,8 @@ img {
   border: 1px solid white;
   cursor: pointer;
   object-fit: cover;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease-in-out;
 }
 .logoBooks {
   width: 12vw;
@@ -292,18 +289,33 @@ img {
   cursor: pointer;
   object-fit: contain;
   padding: 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease-in-out;
 }
 .logoBooks:hover {
-  animation: shake 1.3s;
-  animation-iteration-count: infinite;
+  -webkit-transform: scaleX(0.75);
+  transform: scaleX(0.75);
+  -webkit-box-shadow: 29px 7px 17px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 29px 7px 17px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 29px 7px 17px -8px rgba(0, 0, 0, 0.75);
+}
+.tabname:hover {
+  border-bottom: 2px solid white;
 }
 .logoTools:hover {
-  animation: shake 0.9s;
-  animation-iteration-count: infinite;
+  -webkit-transform: scaleX(0.75);
+  transform: scaleX(0.75);
+  -webkit-box-shadow: 29px 7px 17px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 29px 7px 17px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 29px 7px 17px -8px rgba(0, 0, 0, 0.75);
 }
 .greeting img:hover {
-  animation: shake 1.8s;
-  animation-iteration-count: infinite;
+  transition: 0.1s;
+  -webkit-transform: scaleX(0.8);
+  transform: scaleX(0.8);
+  -webkit-box-shadow: 29px 7px 17px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 29px 7px 17px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 29px 7px 17px -8px rgba(0, 0, 0, 0.75);
 }
 @keyframes shake {
   0% {
@@ -427,7 +439,7 @@ img {
   height: auto;
   z-index: 15;
   top: 25px;
-  left: 120px;
+  left: 80px;
   border: 2px solid var(--background-page-color);
   border-radius: 4px;
   padding: 5px;
@@ -778,7 +790,7 @@ h4 {
   position: absolute;
   z-index: 1;
   top: 5px;
-  left: 190px;
+  left: 80px;
 }
 .buttonHWNames {
   font-size: 12px;
@@ -882,15 +894,11 @@ h4 {
   .tabname {
     font-size: 12px;
     min-width: 5vw;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
     padding: 4px;
   }
   .tabnameactive {
     font-size: 12px;
     min-width: 5vw;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
     padding: 4px;
   }
   .menu {
@@ -999,6 +1007,13 @@ h4 {
     margin: 0px 10px 20px 10px;
     max-height: 100%;
     font-size: 16px;
+  }
+  .tabname:first-child {
+    border-top-left-radius: 15px;
+    padding-left: 3px;
+  }
+  .tabname:last-child {
+    border-top-right-radius: 15px;
   }
   .tabname {
     font-size: 0px;

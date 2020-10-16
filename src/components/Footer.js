@@ -44,7 +44,7 @@ export default function Footer() {
     "invert(1)",
   ];
 
-  function changeColor() {
+  useEffect(() => {
     varName.map((data, index) => {
       colorSet === "blue" &&
         document.documentElement.style.setProperty(data, blue[index]);
@@ -53,10 +53,6 @@ export default function Footer() {
       colorSet === "gray" &&
         document.documentElement.style.setProperty(data, gray[index]);
     });
-  }
-
-  useEffect(() => {
-    changeColor();
   }, [colorSet]);
   ///////////  SOUND READ LOUD  /////////////
   function soundloud() {

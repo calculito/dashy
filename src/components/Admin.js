@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useQuery } from "react-query";
 import { API } from "./Impex.js";
+import { useQuery, useMutation, queryCache } from "react-query";
 
 export default function Admin({ logIn }) {
   let [newClass, setnewClass] = useState("");
@@ -38,20 +38,24 @@ export default function Admin({ logIn }) {
   /////////    CREATE NEW CLASS AS ADMIN   ///////////
   async function savenewClass(evt) {
     evt.preventDefault();
-
-    let endpoint = "https://dashybackend.herokuapp.com/setnewclass/".concat(
-      newClass
-    );
-    await fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-    });
-    setopenInputWindow(false);
-    setnewClass("");
+    saveanewClass();
+    setnewUser("Instructor");
+    savenewUser();
   }
+  const [saveanewClass] = useMutation(
+    () => API.post(`/setnewclass/${newClass}`),
+    {
+      onSuccess: () => {
+        queryCache.invalidateQueries("fetchAllData");
+        setopenInputWindow(false);
+        setnewClass("");
+      },
+    }
+  );
+
   /////////    CREATE NEW USER AS ADMIN   ///////////
   async function savenewUser(evt) {
-    evt.preventDefault();
+    evt && evt.preventDefault();
 
     let endpoint = "https://dashybackend.herokuapp.com/setnewuser/".concat(
       newUser

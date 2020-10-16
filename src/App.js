@@ -6,14 +6,11 @@ import {
   Footer,
   MainContainer,
   API,
-  CSS,
-  Graffiti,
 } from "./components/Impex.js";
 
 export default function App() {
   const [logIn, setlogIn] = useState(0);
   const [user, setuser] = useState("");
-  const [blur, setblur] = useState(0);
   const [whichClass, setwhichClass] = useState("");
   const [whichUser, setwhichUser] = useState("");
   const [whichUserId, setwhichUserId] = useState("");
@@ -36,13 +33,12 @@ export default function App() {
     setwhichUser("");
     setwhichContainer(0);
     setpasswordUserWrong(0);
-    setblur(0);
     setwhichClass("");
     setwhichRole("");
     setwhichPassword("");
     setwhichUserId("");
   };
-  console.log(logIn, blur);
+
   ////////////////  INIT BY FORM ///////////////
   const checkUser = (evt) => {
     evt.preventDefault();
