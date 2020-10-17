@@ -4,7 +4,7 @@ import { sound, hammerwhite, hammercolor } from "./Impex";
 import axios from "axios";
 import { API } from "./Impex";
 
-export default function Homeworks({
+function Homeworks({
   userName,
   logIn,
   whichRole,
@@ -621,3 +621,4 @@ export default function Homeworks({
     </div>
   );
 }
+export default React.memo(Homeworks)

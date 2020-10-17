@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSpeechSynthesis } from "react-speech-kit";
 import { sound } from "./Impex";
 
-export default function Footer() {
+function Footer() {
   const { speak } = useSpeechSynthesis();
   const [openInputWindow, setopenInputWindow] = useState(false);
   const [textToRead, settextToRead] = useState("");
@@ -146,3 +146,4 @@ export default function Footer() {
     </div>
   );
 }
+export default React.memo(Footer);

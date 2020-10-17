@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { API } from "./Impex.js";
 import { useQuery, useMutation, queryCache } from "react-query";
 
-export default function Admin({ logIn }) {
+function Admin({ logIn }) {
   let [newClass, setnewClass] = useState("");
   let [newUser, setnewUser] = useState("");
   let [openInputWindow, setopenInputWindow] = useState(false);
@@ -182,3 +182,4 @@ export default function Admin({ logIn }) {
     </div> //menu
   );
 }
+export default React.memo(Admin);

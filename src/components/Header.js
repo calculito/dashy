@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { logo, login, API, Tools } from "./Impex.js";
 import axios from "axios";
-export default function Header({
+function Header({
   onHeaderClick,
   logIn,
   whichUserHeader,
@@ -111,3 +111,4 @@ export default function Header({
     </div>
   );
 }
+export default React.memo(Header);

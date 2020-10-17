@@ -8,7 +8,7 @@ import esLocale from "@fullcalendar/core/locales/es";
 import { useQuery, useMutation, queryCache } from "react-query";
 import { API } from "./Impex.js";
 
-export default function Calendar({ whichClass, whichRole }) {
+function Calendar({ whichClass, whichRole }) {
   const [openInputWindow, setopenInputWindow] = useState(false);
   const [titleNewAppointment, settitleNewAppointment] = useState("");
   const [dateNewAppointment, setdateNewAppointment] = useState("");
@@ -108,3 +108,4 @@ export default function Calendar({ whichClass, whichRole }) {
     </div>
   );
 }
+export default React.memo(Calendar);

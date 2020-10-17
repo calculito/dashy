@@ -1,7 +1,7 @@
 import React from "react";
 import { Book, Homeworks, Recordings, Calendar, Links, Admin } from "./Impex";
 
-export default function MainContainer({
+function MainContainer({
   index,
   userName,
   logIn,
@@ -64,3 +64,4 @@ export default function MainContainer({
     </div>
   );
 }
+export default React.memo(MainContainer);

@@ -8,7 +8,7 @@ import {
   AdminIcon,
 } from "./Impex";
 
-export default function Tabs({ onTabsClick, logIn, index, whichRole }) {
+function Tabs({ onTabsClick, logIn, index, whichRole }) {
   const tabnames = [
     "Syllabus",
     "Homeworks",
@@ -53,3 +53,4 @@ export default function Tabs({ onTabsClick, logIn, index, whichRole }) {
     </div>
   );
 }
+export default React.memo(Tabs);

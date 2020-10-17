@@ -8,7 +8,7 @@ import {
   API,
 } from "./components/Impex.js";
 
-export default function App() {
+function App() {
   const [logIn, setlogIn] = useState(0);
   const [user, setuser] = useState("");
   const [whichClass, setwhichClass] = useState("");
@@ -253,3 +253,4 @@ export default function App() {
     </>
   );
 }
+export default React.memo(App);

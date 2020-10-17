@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useQuery, useMutation, queryCache } from "react-query";
 import { API } from "./Impex";
 
-export default function Recordings({ userName, whichClass, whichRole }) {
+function Recordings({ userName, whichClass, whichRole }) {
   const [newRecordingsLink, setnewRecordingsLink] = useState("");
   const [newRecordingsDescription, setnewRecordingsDescription] = useState("");
   const [newRecordingsKeyword, setnewRecordingsKeyword] = useState("");
@@ -111,3 +111,4 @@ export default function Recordings({ userName, whichClass, whichRole }) {
     </div>
   );
 }
+export default React.memo(Recordings);

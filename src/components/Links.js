@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSpeechSynthesis } from "react-speech-kit";
 import { sound, starblack, stargold } from "./Impex";
 import axios from "axios";
-export default function Links({
+function Links({
   userName,
   logIn,
   whichClass,
@@ -56,7 +56,7 @@ export default function Links({
         headers: { "Content-Type": "application/json" },
       }
     );
-    console.log(response.data);
+
     setlinksInsertFieldP("");
   }
 
@@ -356,3 +356,4 @@ export default function Links({
     </div>
   );
 }
+export default React.memo(Links)

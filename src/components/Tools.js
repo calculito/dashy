@@ -7,7 +7,7 @@ import {
   videochat,
 } from "./Impex";
 
-export default function Tools() {
+function Tools() {
   const logos = {
     0: slacklogo,
     1: trellologo,
@@ -41,4 +41,4 @@ export default function Tools() {
     </div>
   );
 }
-//
+export default React.memo(Tools);

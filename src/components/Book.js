@@ -10,7 +10,7 @@ import {
   addbook,
 } from "./Impex.js";
 
-export default function Book() {
+function Book() {
   function openRequestedPopup(link) {
     window.open(link, "_blank", "noopener, noreferrer");
   }
@@ -50,3 +50,4 @@ export default function Book() {
     </div>
   );
 }
+export default React.memo(Book);
