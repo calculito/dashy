@@ -3,14 +3,9 @@ import { useSpeechSynthesis } from "react-speech-kit";
 import { sound, hammerwhite, hammercolor } from "./Impex";
 import axios from "axios";
 import { API } from "./Impex";
+import Swal from "sweetalert2";
 
-function Homeworks({
-  userName,
-  logIn,
-  whichRole,
-  whichClass,
-  whichUserId,
-}) {
+function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
   let count = 0;
   const { speak } = useSpeechSynthesis();
   const [switcher, setswitcher] = useState("");
@@ -42,6 +37,7 @@ function Homeworks({
   // }, [logIn, switcher, whichClass]);
 
   useEffect(() => {
+    setswitcher("");
     ///////////////    GET FINISHED HOMEWORKS FOR STUDENTS     /////////////
     axios
       .all([
@@ -115,7 +111,7 @@ function Homeworks({
   function changestatusafter(e) {
     setthishomeworkFinishedId(e);
     setopenInputWindowAfter(e);
-    // setswitcher("1");
+    setswitcher("1");
   }
   async function saveLinkToHomeworkAfter(evt) {
     evt.preventDefault();
@@ -138,9 +134,8 @@ function Homeworks({
   async function changeOptional(index) {
     let hwId = homeworkDescriptionALLR[index].id;
     let hwOpt = homeworkDescriptionALLR[index].optional;
-    {
-      hwOpt === "yes" ? (hwOpt = "no") : (hwOpt = "yes");
-    }
+    hwOpt === "yes" ? (hwOpt = "no") : (hwOpt = "yes");
+
     const data = { optional: hwOpt };
     await fetch(
       "https://dashybackend.herokuapp.com/homeworkoptional/".concat(hwId),
@@ -214,7 +209,12 @@ function Homeworks({
     setopenCheckWindow(true);
     link !== null
       ? window.open(link, "_blank", "noopener, noreferrer")
-      : alert("No link available");
+      : Swal.fire({
+          title: "Sorry!",
+          text: "No link available",
+          icon: "error",
+          confirmButtonText: "that's not cool but ok...",
+        });
   }
   function homeworkOk(evt) {
     evt.preventDefault();
@@ -621,4 +621,4 @@ function Homeworks({
     </div>
   );
 }
-export default React.memo(Homeworks)
+export default React.memo(Homeworks);

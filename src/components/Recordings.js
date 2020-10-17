@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery, useMutation, queryCache } from "react-query";
 import { API } from "./Impex";
 
-function Recordings({ userName, whichClass, whichRole }) {
+export default function Recordings({ userName, whichClass, whichRole }) {
   const [newRecordingsLink, setnewRecordingsLink] = useState("");
   const [newRecordingsDescription, setnewRecordingsDescription] = useState("");
   const [newRecordingsKeyword, setnewRecordingsKeyword] = useState("");
+  useEffect(() => {
+    refetch();
+  });
 
   //////////////  GET RECORDINGS /////////////
-  const { isLoading, error, data } = useQuery("fetchRecordings", () =>
+  const { isLoading, error, data, refetch } = useQuery("fetchRecordings", () =>
     API.get(`userrecordings/${userName}`)
   );
   /////////    POST RECORDING AS ADMIN    ///////////
@@ -39,7 +42,7 @@ function Recordings({ userName, whichClass, whichRole }) {
         <div>Retrieving data from database...</div>
       ) : (
         <div className="infoWindow">
-          You have {data.data.length} recordings of your classes
+          You have {data.data.length} recordings of this class
           {error && <div>Something went wrong ...</div>}
         </div>
       )}
@@ -111,4 +114,3 @@ function Recordings({ userName, whichClass, whichRole }) {
     </div>
   );
 }
-export default React.memo(Recordings);

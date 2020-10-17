@@ -36,12 +36,17 @@ body {
   border: 0;
   display: flex;
   flex-direction: column;
-  font-family: "Arial", sans-serif;
+  font-family: "Chilanka", cursive;
   height: 100%;
   overflow: auto;
   background-color: var(--background-page-color);
 }
-
+.form-container {
+  border-width: 6px 8px 6px 10px;
+  border: 3px dotted;
+  border-radius: 95% 4% 92% 5%/4% 95% 6% 95%;
+  transform: rotate(0.5deg);
+}
 .all {
   width: 100%;
   height: 100%;
@@ -62,6 +67,9 @@ body {
   height: calc(100% - 140px);
   overflow: auto;
   background-color: var(--background-tabA-color);
+  border-width: 3px 4px 3px 5px;
+  border-radius: 95% 1% 92% 1.5%/2% 95% 2% 95%;
+  transform: rotate(0.31deg);
 }
 .tabcontent {
   background-color: var(--background-tabA-color);
@@ -75,6 +83,7 @@ button {
   margin: 5px;
   background-color: var(--background-page-color);
   font-size: 18px;
+  font-family: "Chilanka", cursive;
 }
 button:hover {
   background-color: var(--font-2light-color);
@@ -105,8 +114,9 @@ button:hover {
   flex-direction: row;
   justify-content: flex-start;
   background-color: var(--background-tabA-color);
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
+  border-width: 3px 4px 3px 5px;
+  border-radius: 95% 1% 92% 1.5%/2% 95% 2% 95%;
+  transform: rotate(0.31deg);
 }
 .tabname {
   opacity: 0.8;
@@ -119,8 +129,17 @@ button:hover {
   align-items: center;
   font-size: 1em;
   opacity: 1.7;
+  border-width: 3px 4px 3px 5px;
+  border-radius: 95% 4% 92% 5%/4% 95% 6% 95%;
+  transform: rotate(1.5deg);
 }
-
+.tabname:hover {
+  border-bottom: 2px solid var(--background-tabN-color);
+  padding-bottom: 3px;
+  border-radius: 5px;
+  box-shadow: 0 1px 0 #000;
+  transition: padding 0.1s, box-shadow 0.1s, top 0.1s;
+}
 .tabnameactive {
   align-items: center;
   transform: skew(0deg);
@@ -132,6 +151,9 @@ button:hover {
   flex-direction: row;
   justify-content: space-between;
   border-bottom: 2px solid var(--background-tabN-color);
+  border-width: 3px 4px 3px 5px;
+  border-radius: 95% 4% 92% 5%/4% 95% 6% 95%;
+  transform: rotate(-1deg);
 }
 .noblackfont {
   color: var(--font-dark-color);
@@ -277,12 +299,13 @@ img {
   border: 1px solid white;
   cursor: pointer;
   object-fit: cover;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
   transition: box-shadow 0.3s ease-in-out;
+  box-shadow: 20px 38px 34px -26px hsla(0, 0%, 0%, 0.2);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
 }
 .logoBooks {
-  width: 12vw;
-  height: 16vw;
+  width: 10vw;
+  height: 14vw;
   border-radius: 15px;
   margin: 15px 10px 0px 10px;
   background-color: aliceblue;
@@ -291,6 +314,9 @@ img {
   padding: 5px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
   transition: box-shadow 0.3s ease-in-out;
+  border-width: 3px 4px 3px 5px;
+  border-radius: 99% 4% 99% 5%/4% 95% 3% 95%;
+  transform: rotate(1deg);
 }
 .logoBooks:hover {
   -webkit-transform: scaleX(0.75);
@@ -299,23 +325,26 @@ img {
   -moz-box-shadow: 29px 7px 17px -8px rgba(0, 0, 0, 0.75);
   box-shadow: 29px 7px 17px -8px rgba(0, 0, 0, 0.75);
 }
-.tabname:hover {
-  border-bottom: 2px solid var(--background-tabN-color);
+.swal2-modal {
+  border-width: 3px 4px 3px 5px !important;
+  border-radius: 99% 4% 99% 5%/4% 95% 3% 95% !important;
+  transform: rotate(1deg) !important;
 }
 .logoTools:hover {
-  -webkit-transform: scaleX(0.75);
-  transform: scaleX(0.75);
-  -webkit-box-shadow: 29px 7px 17px -8px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 29px 7px 17px -8px rgba(0, 0, 0, 0.75);
-  box-shadow: 29px 7px 17px -8px rgba(0, 0, 0, 0.75);
+  -webkit-transform: scaleX(0.9);
+  transform: scaleX(0.9);
+  -webkit-box-shadow: 29px 7px 17px -3px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 29px 7px 17px -3px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 7px 17px -3px rgba(0, 0, 0, 0.75);
 }
 .greeting img:hover {
   transition: 0.1s;
-  -webkit-transform: scaleX(0.8);
-  transform: scaleX(0.8);
   -webkit-box-shadow: 29px 7px 17px -8px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 29px 7px 17px -8px rgba(0, 0, 0, 0.75);
   box-shadow: 29px 7px 17px -8px rgba(0, 0, 0, 0.75);
+  border-width: 3px 4px 3px 5px;
+  border-radius: 99% 4% 94% 5%/4% 95% 3% 95%;
+  transform: rotate(1deg);
 }
 @keyframes shake {
   0% {
@@ -377,6 +406,7 @@ img {
   -o-filter: blur(0px) !important;
   -ms-filter: blur(0px) !important;
   filter: blur(0px) !important;
+  opacity: 0.9;
 }
 .outPopUpCalendar {
   border: 1px solid var(--background-tabN-color);
@@ -480,17 +510,27 @@ img {
   justify-content: center;
   align-items: center;
   color: var(--font-2light-color);
+  border-width: 6px 8px 6px 10px;
+  border: 3px dotted var(--background-tabN-color);
+  border-radius: 95% 4% 92% 5%/4% 95% 6% 95%;
+  transform: rotate(0.5deg);
 }
 
 /* Full-width input fields */
 .form-container input[type="text"],
 .form-container input[type="password"] {
   color: var(--background-tabA-color);
+  font-size: 20px;
   width: 90%;
-  padding: 15px;
+  padding: 5px 5px 5px 15px;
   margin: 5px 0 22px 0;
   border: none;
   background-color: var(--background-tabN-color);
+  font-family: "Chilanka", cursive;
+  border-width: 6px 8px 6px 10px;
+  border: 3px dotted var(--font-dark-color);
+  border-radius: 90% 4% 92% 3%/7% 95% 6% 93%;
+  transform: rotate(-0.5deg);
 }
 label {
   color: var(--font-dark-color);
@@ -513,6 +553,11 @@ label {
   width: 50%;
   margin-bottom: 10px;
   opacity: 0.8;
+  font-family: "Chilanka", cursive;
+  border-width: 6px 8px 6px 10px;
+  border: 3px dotted var(--background-tabN-color);
+  border-radius: 95% 4% 92% 5%/4% 95% 6% 95%;
+  transform: rotate(0.5deg);
 }
 
 /* Add a whitesmoke background color to the cancel button */
@@ -521,6 +566,7 @@ label {
   color: var(--font-dark-color);
   background-color: var(--background-tabA-color);
   cursor: pointer;
+  font-family: "Chilanka", cursive;
 }
 .cancelAndForgot {
   width: 100%;
@@ -577,6 +623,7 @@ h4 {
   height: 35px;
   font-size: 16px;
   background-color: var(--background-page-color);
+  font-family: "Chilanka", cursive;
 }
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -709,10 +756,17 @@ h4 {
   background-color: var(--background-page-color);
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
+  border-width: 3px 4px 3px 5px;
+  border-radius: 95% 1% 92% 1%/2% 97% 1% 96%;
+  transform: rotate(0.31deg);
 }
+
 .recordings:hover {
   background-color: var(--background-tabN-color);
   color: var(--font-2light-color);
+  border-width: 2px 3px 2px 4px;
+  border-radius: 95% 1% 92% 1.5%/2% 97% 1% 98%;
+  transform: rotate(0.31deg);
 }
 .recordinglinks {
   text-decoration: none;
@@ -771,10 +825,15 @@ h4 {
   border-radius: 4px;
   background-color: var(--background-tabA-color);
   cursor: pointer;
+  border-width: 6px 8px 6px 10px;
+  border: 2px dotted var(--background-tabN-color);
+  border-radius: 95% 4% 92% 5%/4% 95% 6% 95%;
+  transform: rotate(0.5deg);
 }
 .buttonHW:hover {
   background-color: var(--background-tabN-color);
   color: var(--background-tabA-color);
+  border: 1px dotted var(--background-tabA-color);
 }
 .buttonHW:hover .tooltiptext {
   visibility: visible;
@@ -782,15 +841,19 @@ h4 {
 .buttonHW .tooltiptext {
   visibility: hidden;
   width: 120px;
-  background-color: black;
-  color: #fff;
+  background-color: var(--background-tabN-color);
+  color: var(--background-tabA-color);
   text-align: center;
   padding: 10px 0;
   border-radius: 6px;
   position: absolute;
   z-index: 1;
-  top: 5px;
-  left: 80px;
+  top: -6px;
+  left: 50px;
+  border-width: 6px 8px 6px 10px;
+  border: 2px dotted var(--font-dark-color);
+  border-radius: 95% 4% 92% 5%/4% 95% 6% 95%;
+  transform: rotate(0.5deg);
 }
 .buttonHWNames {
   font-size: 12px;
@@ -1041,5 +1104,13 @@ h4 {
   .circleIcons:active {
     background-color: var(--font-2light-color);
     color: white;
+  }
+  .maincontainer {
+    height: calc(100% - 140px);
+    overflow: auto;
+    background-color: var(--background-tabA-color);
+    border-width: 3px 4px 3px 5px;
+    border-radius: 95% 1% 92% 1.5%/2% 97% 1% 98%;
+    transform: rotate(0.31deg);
   }
 }

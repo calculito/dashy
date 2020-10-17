@@ -26,6 +26,7 @@
     "react-scripts": "3.4.3",
     "react-speech-kit": "^3.0.1",
     "serve": "^11.3.2",
+    "sweetalert2": "^10.6.1",
     "typescript": "^3.9.7"
   },
   "scripts": {

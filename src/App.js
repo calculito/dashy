@@ -7,6 +7,7 @@ import {
   MainContainer,
   API,
 } from "./components/Impex.js";
+import Swal from "sweetalert2";
 
 function App() {
   const [logIn, setlogIn] = useState(0);
@@ -94,6 +95,12 @@ function App() {
   ////////////////  GOOD PASSWORD ///////////////
   const goodPassword = () => {
     setlogIn(1);
+    Swal.fire({
+      title: "Perfect!",
+      text: "You managed to log in",
+      icon: "success",
+      confirmButtonText: "Cool",
+    });
   };
 
   ////////////// SET FOCUS ON FORM /////////////
@@ -156,7 +163,7 @@ function App() {
               <input
                 type="button"
                 value="Close"
-                className=" cancel"
+                className="cancel"
                 onClick={(e) => cancel()}
               />
               <input
