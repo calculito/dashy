@@ -11,6 +11,7 @@ export { default as Calendar } from "./Calendar";
 export { default as Links } from "./Links";
 export { default as Admin } from "./Admin";
 export { default as API } from "../Api.js";
+export { default as NewRecording } from "./NewRecording";
 export { default as Graffiti } from "../images/graffiti.svg";
 export { default as bookhtml } from "../images/bookhtml.png";
 export { default as bookjavascript1 } from "../images/bookjavascript1.png";

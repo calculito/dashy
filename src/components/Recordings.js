@@ -1,118 +1,73 @@
-import React, { useState, useEffect } from "react";
-import { useQuery, useMutation, queryCache } from "react-query";
-import { API } from "./Impex";
+import React, { useEffect } from "react";
+import { useQuery, queryCache } from "react-query";
+import { API, NewRecording } from "./Impex";
 
 export default function Recordings({ userName, whichClass, whichRole }) {
-  const [newRecordingsLink, setnewRecordingsLink] = useState("");
-  const [newRecordingsDescription, setnewRecordingsDescription] = useState("");
-  const [newRecordingsKeyword, setnewRecordingsKeyword] = useState("");
-  useEffect(() => {
-    console.log(whichClass, isLoading);
-    queryCache.invalidateQueries("fetchRecordings");
-    refetch();
-  }, [whichClass]);
   //////////////  GET RECORDINGS /////////////
+  const fetchRecordings = async () => {
+    const { data } = await API.get(`userrecordings/${userName}`);
+    return data;
+  };
 
-  const { isLoading, error, data, refetch } = useQuery("fetchRecordings", () =>
-    API.get(`userrecordings/${userName}`)
-  );
-
-  /////////    POST RECORDING AS ADMIN    ///////////
-  async function insertnewRecording(evt) {
-    evt.preventDefault();
-    mutateRecordings();
-  }
-  const [mutateRecordings] = useMutation(
-    () =>
-      API.post(`/postrecording/${whichClass}`, {
-        link: newRecordingsLink,
-        title: newRecordingsDescription,
-        keyword: newRecordingsKeyword,
-      }),
+  const { data: data1query, status: status1query } = useQuery(
+    //assign names to data, status in order to do multiple queries!!
+    "recordings",
+    fetchRecordings,
     {
-      onSuccess: () => {
-        queryCache.invalidateQueries("fetchRecordings");
-        setnewRecordingsLink("");
-        setnewRecordingsKeyword("");
-        setnewRecordingsDescription("");
-      },
+      staleTime: 5000,
+      cacheTime: 10,
     }
   );
 
+  useEffect(() => {
+    console.log(whichClass);
+    queryCache.invalidateQueries("recordings");
+  }, [whichClass]);
+
+  const RecordingsOverview = (recordings) => {
+    return recordings.map((recording, i) => {
+      return (
+        <div className="rowHW" key={"divRHW" + i}>
+          <div className="recordings" key={"d" + i}>
+            <a
+              className="recordinglinks"
+              target="_blank"
+              rel="noopener noreferrer"
+              href={recording.link}
+              key={"b" + i}
+            >
+              {recording.title}
+            </a>
+            <span
+              className={whichRole === "Admin" ? "circle" : "circleNonClick"}
+            >
+              {recording.keyword}
+            </span>
+          </div>
+        </div>
+      );
+    });
+  };
+
   return (
     <div className="tabcontent">
-      {isLoading ? (
+      {status1query !== "success" ? (
         <div>Retrieving data from database...</div>
       ) : (
         <div className="infoWindow">
-          You have {data.data.length} recordings of this class
-          {error && <div>Something went wrong ...</div>}
+          You have {data1query.length} recordings of this class
+          {status1query === "error" && <div>Something went wrong ...</div>}
         </div>
       )}
       <div className="halfContainer">
         {whichRole === "Admin" ? (
-          <form className="cancelAndForgot">
-            <input
-              className="inputLinks"
-              type="text"
-              placeholder="New recording link"
-              value={newRecordingsLink}
-              onChange={(e) => setnewRecordingsLink(e.target.value)}
-              required
-            />
-            <input
-              className="inputLinks"
-              type="text"
-              placeholder="Title"
-              value={newRecordingsDescription}
-              onChange={(e) => setnewRecordingsDescription(e.target.value)}
-              required
-            />
-            <input
-              className="inputLinks"
-              type="text"
-              placeholder="Keyword"
-              style={{ width: "20%" }}
-              value={newRecordingsKeyword}
-              onChange={(e) => setnewRecordingsKeyword(e.target.value)}
-              required
-            />
-            <button
-              className="buttonHW"
-              onClick={
-                newRecordingsLink !== "" ? insertnewRecording : undefined
-              }
-            >
-              ⇚ Insert a new recording
-            </button>
-          </form>
+          <NewRecording whichClass={whichClass} />
         ) : undefined}
-        <div className="linksContainer">
-          {isLoading
-            ? undefined
-            : data.data.map((data, i) => (
-                <div className="rowHW" key={"divRHW" + i}>
-                  <div className="recordings" key={"d" + i}>
-                    <a
-                      className="recordinglinks"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href={data.link}
-                      key={"b" + i}
-                    >
-                      {data.title}
-                    </a>
-                    <span
-                      className={
-                        whichRole === "Admin" ? "circle" : "circleNonClick"
-                      }
-                    >
-                      {data.keyword}
-                    </span>
-                  </div>
-                </div>
-              ))}
-        </div>
+        {status1query === "loading" ? (
+          <div>Loading...</div>
+        ) : (
+          <div className="linksContainer">{RecordingsOverview(data1query)}</div>
+        )}
       </div>
     </div>
   );

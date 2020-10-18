@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSpeechSynthesis } from "react-speech-kit";
-import { sound, starblack, stargold } from "./Impex";
+import { sound, starblack, stargold, API } from "./Impex";
 import axios from "axios";
-function Links({
-  userName,
-  logIn,
-  whichClass,
-  whichRole,
-  whichUserId,
-}) {
+import { useMutation } from "react-query";
+function Links({ userName, whichClass, whichRole, whichUserId }) {
   const { speak } = useSpeechSynthesis();
   const [linksInsertFieldG, setlinksInsertFieldG] = useState("");
   const [linksInsertFieldP, setlinksInsertFieldP] = useState("");
@@ -43,89 +38,54 @@ function Links({
   ]);
 
   /////////    POST PERSONAL LINKS     ///////////
-  async function insertPersonalLink(evt) {
-    evt.preventDefault();
-    const data = { link: linksInsertFieldP };
-    const response = await fetch(
-      "https://dashybackend.herokuapp.com/postpersonallink/".concat(
-        whichUserId
-      ),
-      {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-
-    setlinksInsertFieldP("");
-  }
-
+  const [newPersonalLink] = useMutation(
+    () =>
+      API.post(`/postpersonallink/${whichUserId}`, {
+        link: linksInsertFieldP,
+      }),
+    {
+      onSuccess: () => {
+        setlinksInsertFieldP("");
+      },
+    }
+  );
   /////////    POST GENERAL LINKS     ///////////
-  async function insertGeneralLink(evt) {
-    evt.preventDefault();
-    const data = { link: linksInsertFieldG };
-    let endpoint = "https://dashybackend.herokuapp.com/postgenerallink/".concat(
-      whichClass
-    );
-    await fetch(endpoint, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
-    });
-    setlinksInsertFieldG("");
-  }
+  const [newGeneralLink] = useMutation(
+    () =>
+      API.post(`/postgenerallink/${whichClass}`, {
+        link: linksInsertFieldG,
+      }),
+    {
+      onSuccess: () => {
+        setlinksInsertFieldG("");
+      },
+    }
+  );
+
   /////////    DELETE GENERAL LINKS     ///////////
-  async function deleteGeneralLink(linktodelete) {
-    setlinkToDelete(linktodelete);
-    const data = { link: linktodelete };
-    //navigator.clipboard.writeText(linktodelete);
-    await fetch("https://dashybackend.herokuapp.com/deletegenlink/", {
-      method: "DELETE",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
-    });
+  async function deleteGeneralLink(id) {
+    setlinkToDelete(id);
+    await API.delete(`/deletegenlink/${id}`);
     setlinkToDelete("");
   }
+
   /////////    DELETE PERSONAL LINKS     ///////////
-  async function deletePersonalLink(linktodelete) {
-    setlinkToDelete(linktodelete);
-    let data = { link: linktodelete };
-    //navigator.clipboard.writeText(linktodelete);
-    await fetch("https://dashybackend.herokuapp.com/deletepersonallink/", {
-      method: "DELETE",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
-    });
+  async function deletePersonalLink(id) {
+    setlinkToDelete(id);
+    await API.delete(`/deletepersonallink/${id}`);
     setlinkToDelete("");
   }
 
   ///////////////    CHANGE STARS PERSONAL LINKS       /////////////
   async function changestarspers(e, id) {
     setlinkToDelete(e);
-    let data = { link: e };
-    await fetch(
-      "https://dashybackend.herokuapp.com/personallinkstars/".concat(id),
-      {
-        method: "PUT",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    await API.put(`/personallinkstars/${id}`, { link: e });
     setlinkToDelete("");
   }
   ///////////////    CHANGE STARS GENERAL LINKS       /////////////
   async function changestars(e, id) {
-    console.log(e, id);
     setlinkToDelete(e);
-    let data = { link: e };
-    await fetch(
-      "https://dashybackend.herokuapp.com/generallinkstars/".concat(id),
-      {
-        method: "PUT",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    await API.put(`/generallinkstars/${id}`, { link: e });
     setlinkToDelete("");
   }
   ///////////  SOUND READ LOUD  /////////////
@@ -150,7 +110,13 @@ function Links({
       <div id="links" className="twoColumns">
         <div className="halfContainer">
           <div className="contLinks">
-            <form className="cancelAndForgot">
+            <form
+              className="cancelAndForgot"
+              onSubmit={(e) => {
+                e.preventDefault();
+                newGeneralLink();
+              }}
+            >
               <input
                 className="inputLinks"
                 type="text"
@@ -160,12 +126,7 @@ function Links({
                 required
               />
               {whichRole !== "Student" && (
-                <button
-                  className="buttonHW"
-                  onClick={
-                    linksInsertFieldG !== "" ? insertGeneralLink : undefined
-                  }
-                >
+                <button className="buttonHW" type="submit">
                   ⇚ Insert a general link
                 </button>
               )}
@@ -212,32 +173,32 @@ function Links({
                             className="starSymbols"
                             src={data.stars > 0 ? stargold : starblack}
                             alt="star"
-                            onClick={(e) => changestars(1, data.id)}
+                            onClick={() => changestars(1, data.id)}
                           />
 
                           <img
                             className="starSymbols"
                             src={data.stars > 1 ? stargold : starblack}
                             alt="star"
-                            onClick={(e) => changestars(2, data.id)}
+                            onClick={() => changestars(2, data.id)}
                           />
                           <img
                             className="starSymbols"
                             src={data.stars > 2 ? stargold : starblack}
                             alt="star"
-                            onClick={(e) => changestars(3, data.id)}
+                            onClick={() => changestars(3, data.id)}
                           />
                           <img
                             className="starSymbols"
                             src={data.stars > 3 ? stargold : starblack}
                             alt="star"
-                            onClick={(e) => changestars(4, data.id)}
+                            onClick={() => changestars(4, data.id)}
                           />
                           <img
                             className="starSymbols"
                             src={data.stars > 4 ? stargold : starblack}
                             alt="star"
-                            onClick={(e) => changestars(5, data.id)}
+                            onClick={() => changestars(5, data.id)}
                           />
                         </div>
                         <img
@@ -255,7 +216,13 @@ function Links({
         </div>
         <div className="halfContainer">
           <div className="contLinks">
-            <form className="cancelAndForgot">
+            <form
+              className="cancelAndForgot"
+              onSubmit={(e) => {
+                e.preventDefault();
+                newPersonalLink();
+              }}
+            >
               <input
                 className="inputLinks"
                 type="text"
@@ -264,12 +231,7 @@ function Links({
                 onChange={(e) => setlinksInsertFieldP(e.target.value)}
                 required
               />
-              <button
-                className="buttonHW"
-                onClick={
-                  linksInsertFieldP !== "" ? insertPersonalLink : undefined
-                }
-              >
+              <button className="buttonHW" type="submit">
                 ⇚ Insert a personal link
               </button>
             </form>
@@ -356,4 +318,4 @@ function Links({
     </div>
   );
 }
-export default React.memo(Links)
+export default React.memo(Links);

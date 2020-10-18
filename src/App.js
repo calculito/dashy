@@ -8,7 +8,6 @@ import {
   API,
 } from "./components/Impex.js";
 import Swal from "sweetalert2";
-import axios from "axios";
 
 function App() {
   const [logIn, setlogIn] = useState(0);
@@ -56,7 +55,6 @@ function App() {
 
   const checkPassword = (evt) => {
     evt.preventDefault();
-
     whichPassword !== whichPasswordDB ? wrongPassword() : goodPassword();
   };
   //////////////  GET USER TO CHECK IF IN DB AXIOS /////////////
@@ -67,27 +65,11 @@ function App() {
   };
   ///////////////    GET PASSWORD< CLASS< ROLE< ID<     /////////////
   async function getAllData() {
-    axios.all([API.get(`alld/`)]).then((response) => {
-      setwhichClass(
-        response[0].data[
-          response[0].data.findIndex((element) => element.name === whichUser)
-        ].class_id
-      );
-      setwhichRole(
-        response[0].data[
-          response[0].data.findIndex((element) => element.name === whichUser)
-        ].user_role
-      );
-      setwhichUserId(
-        response[0].data[
-          response[0].data.findIndex((element) => element.name === whichUser)
-        ].id
-      );
-      setwhichPasswordDB(
-        response[0].data[
-          response[0].data.findIndex((element) => element.name === whichUser)
-        ].user_password
-      );
+    API.get(`alld/${whichUser}`).then((response) => {
+      setwhichClass(response.data[0].class_id);
+      setwhichRole(response.data[0].user_role);
+      setwhichUserId(response.data[0].id);
+      setwhichPasswordDB(response.data[0].user_password);
     });
   }
 

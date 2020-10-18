@@ -1,18 +1,19 @@
 import React from "react";
-import Iframe from "react-iframe";
-
-export default function Bookall() {
-  return (
-    <div className="tabcontent95">
-      <Iframe
-        url="https://migracode-barcelona.github.io/syllabus/others/lesson0.html"
-        width="99%"
-        height="98%"
-        id="myId"
-        className="myClassname"
-        display="initial"
-        position="relative"
-      />
-    </div>
-  );
+import { useQuery } from "react-query";
+function Pokemon() {
+const [name, setName] = useState("");
+const [mutateCreate, { error, reset }] = useMutation(text => axios.post('/api/data', { text }),
+{ onSuccess: () => { setName('')
+}, });
+return ( <div>
+<form onSubmit={e=>{ e.preventDefault() mutateCreate(name)
+}}>
+{error && <h5 onClick={() => reset()}>{error}</h5>} <input
+type="text"
+value={name}
+onChange={(e) => setName(e.target.value)}
+/>
+<br />
+<button type="submit">Create Pokemon</button> </form>
+</div> );
 }

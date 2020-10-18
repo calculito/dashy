@@ -12,7 +12,7 @@ function Admin({ logIn }) {
     refetch();
   });
   const { isLoading, data, refetch } = useQuery("fetchAllData", () =>
-    API.get(`alld`)
+    API.get(`alldata`)
   );
   //////////////  PREPARE DATA FOR WORK WITH IT ////////////////
   const dataAll =
