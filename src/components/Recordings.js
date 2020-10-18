@@ -7,13 +7,16 @@ export default function Recordings({ userName, whichClass, whichRole }) {
   const [newRecordingsDescription, setnewRecordingsDescription] = useState("");
   const [newRecordingsKeyword, setnewRecordingsKeyword] = useState("");
   useEffect(() => {
+    console.log(whichClass, isLoading);
+    queryCache.invalidateQueries("fetchRecordings");
     refetch();
-  });
-
+  }, [whichClass]);
   //////////////  GET RECORDINGS /////////////
+
   const { isLoading, error, data, refetch } = useQuery("fetchRecordings", () =>
     API.get(`userrecordings/${userName}`)
   );
+
   /////////    POST RECORDING AS ADMIN    ///////////
   async function insertnewRecording(evt) {
     evt.preventDefault();

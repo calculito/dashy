@@ -40,6 +40,7 @@ body {
   height: 100%;
   overflow: auto;
   background-color: var(--background-page-color);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='39px' width='345px'><text x='1' y='20' fill='white' font-size='25' opacity='0.05'>MIGRACODE</text><text x='165' y='20' fill='white' font-size='25' opacity='0.05'>BARCELONA</text><text x='30' y='39' fill='white' font-size='25' opacity='0.03'>BARCELONA</text><text x='196' y='39' fill='white' font-size='25' opacity='0.03'>MMXX</text></svg>");
 }
 .form-container {
   border-width: 6px 8px 6px 10px;
@@ -114,8 +115,8 @@ button:hover {
   flex-direction: row;
   justify-content: flex-start;
   background-color: var(--background-tabA-color);
-  border-width: 3px 4px 3px 5px;
-  border-radius: 95% 1% 92% 1.5%/2% 95% 2% 95%;
+  border-width: 6px 8px 6px 10px;
+  border-radius: 95% 1% 92% 0.5%/2% 95% 2% 92%;
   transform: rotate(0.31deg);
 }
 .tabname {
@@ -230,6 +231,11 @@ img {
   justify-content: center;
   align-items: flex-start;
 }
+.greeting img {
+  border: 2px dotted var(--background-tabA-color);
+  transition: box-shadow 0.3s ease-in-out;
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+}
 .greeting:last-of-type {
   align-items: flex-end;
 }
@@ -240,8 +246,23 @@ img {
   display: flex;
   cursor: pointer;
 }
+.fc {
+  height: 78vh !important;
+}
+.fc-scrollgrid-sync-table {
+  height: 65vh !important;
+}
+.fc-daygrid {
+  height: 70vh !important;
+}
+.fc-day {
+  border-width: 2px 3px 2px 1px !important;
+  border-radius: 92% 3% 92% 5%/2% 95% 2% 95% !important;
+  transform: rotate(1deg) !important;
+  border: 1px dotted var(--background-tabN-color);
+}
 .fc-daygrid-event-dot {
-  border: 4px solid var(--font-dark-color);
+  border: 1px dotted var(--font-dark-color);
 }
 .fc-toolbar {
   padding-top: 20px !important;
@@ -250,33 +271,36 @@ img {
   background-color: var(--background-tabN-color);
 }
 .fc .fc-daygrid {
-  border: 1px solid var(--background-tabN-color);
+  border: 1px dotted var(--background-tabN-color);
 }
 .fc .fc-daygrid .fc-daygrid-day {
-  border: 1px solid var(--background-tabN-color);
+  border: 1px dotted var(--background-tabN-color);
 }
 .fc-toolbar-title {
   color: var(--font-dark-color) !important;
 }
 .fc-theme-standard td,
 .fc-theme-standard th {
-  border: 1px solid var(--background-tabN-color);
+  border: 1px dotted var(--background-tabN-color);
+  color: var(--font-dark-color) !important;
 }
 .fc-col-header-cell-cushion {
   color: var(--font-dark-color) !important;
 }
-.fc-scrollgrid-sync-table {
-  height: 59vh !important;
+.fc-button:hover {
+  border: 2px dotted var(--background-tabN-color);
+  transition: box-shadow 0.3s ease-in-out;
+  box-shadow: 20px 38px 34px -26px hsla(0, 0%, 0%, 0.2);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  background-color: var(--background-page-color);
 }
-.fc-daygrid {
-  height: 65vh !important;
-}
+
 .fc-daygrid-day-number {
   color: var(--font-dark-color);
 }
-.fc {
-  height: 75vh !important;
-}
+
 .fc-event-title {
   font-size: 14px !important;
   color: var(--font-dark-color);
@@ -296,12 +320,24 @@ img {
   width: 40px;
   border-radius: 10px;
   margin: 0px 15px 0px 15px;
-  border: 1px solid white;
   cursor: pointer;
   object-fit: cover;
+  border: 2px dotted var(--background-tabN-color);
   transition: box-shadow 0.3s ease-in-out;
   box-shadow: 20px 38px 34px -26px hsla(0, 0%, 0%, 0.2);
   border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  background-color: var(--background-page-color);
+}
+.logoTools:hover {
+  -webkit-filter: grayscale(10%);
+  filter: grayscale(10%);
+  border-bottom: 3px solid var(--background-tabN-color);
+  padding-bottom: 1px;
+  border-radius: 5px;
+  box-shadow: 0 1px 1px #000;
+  transition: padding 0.1s, box-shadow 0.1s, top 0.1s, filter 0.1s;
 }
 .logoBooks {
   width: 10vw;
@@ -312,31 +348,28 @@ img {
   cursor: pointer;
   object-fit: contain;
   padding: 5px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 2px var(--background-page-color);
   transition: box-shadow 0.3s ease-in-out;
   border-width: 3px 4px 3px 5px;
   border-radius: 99% 4% 99% 5%/4% 95% 3% 95%;
   transform: rotate(1deg);
+  border: solid var(--background-tabN-color);
+  border-color: var(--background-tabN-color);
 }
 .logoBooks:hover {
   -webkit-transform: scaleX(0.75);
   transform: scaleX(0.75);
-  -webkit-box-shadow: 29px 7px 17px -8px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 29px 7px 17px -8px rgba(0, 0, 0, 0.75);
-  box-shadow: 29px 7px 17px -8px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 29px 7px 17px -8px var(--background-page-color);
+  -moz-box-shadow: 29px 7px 17px -8px var(--background-page-color);
+  box-shadow: 29px 7px 17px -8px var(--background-page-color);
 }
 .swal2-modal {
   border-width: 3px 4px 3px 5px !important;
   border-radius: 99% 4% 99% 5%/4% 95% 3% 95% !important;
   transform: rotate(1deg) !important;
+  opacity: 0.9;
 }
-.logoTools:hover {
-  -webkit-transform: scaleX(0.9);
-  transform: scaleX(0.9);
-  -webkit-box-shadow: 29px 7px 17px -3px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 29px 7px 17px -3px rgba(0, 0, 0, 0.75);
-  box-shadow: 10px 7px 17px -3px rgba(0, 0, 0, 0.75);
-}
+
 .greeting img:hover {
   transition: 0.1s;
   -webkit-box-shadow: 29px 7px 17px -8px rgba(0, 0, 0, 0.75);
@@ -344,7 +377,11 @@ img {
   box-shadow: 29px 7px 17px -8px rgba(0, 0, 0, 0.75);
   border-width: 3px 4px 3px 5px;
   border-radius: 99% 4% 94% 5%/4% 95% 3% 95%;
-  transform: rotate(1deg);
+  transform: rotate(1.4deg);
+  padding-bottom: 2px;
+  border-radius: 5px;
+  box-shadow: 0 1px 0 #000;
+  transition: padding 0.1s, box-shadow 0.1s, top 0.1s, filter 0.1s;
 }
 @keyframes shake {
   0% {
@@ -521,8 +558,9 @@ img {
 .form-container input[type="password"] {
   color: var(--background-tabA-color);
   font-size: 20px;
+  font-weight: bold;
   width: 90%;
-  padding: 5px 5px 5px 15px;
+  padding: 15px 5px 5px 15px;
   margin: 5px 0 22px 0;
   border: none;
   background-color: var(--background-tabN-color);
@@ -575,6 +613,11 @@ label {
   justify-content: space-between;
   background-color: var(--background-page-color);
   border-bottom-right-radius: 15px;
+  border-width: 2px 3px 2px 1px;
+  border-radius: 95% 1% 92% 1%/2% 97% 1% 96%;
+  transform: rotate(0.31deg);
+  border: solid var(--background-tabN-color);
+  border-color: var(--background-tabN-color);
 }
 .cancelAndForgotLogIn {
   width: 100%;
@@ -594,7 +637,11 @@ label {
   opacity: 1;
   cursor: pointer;
 }
-
+.buttonHW1 {
+  font-size: 20px;
+  margin-left: 5px;
+  font-weight: bold;
+}
 .contLinks {
   display: flex;
   flex-direction: row;
@@ -614,9 +661,10 @@ h4 {
   margin: 20px 20px 0px 20px; /*top right bottom left*/
 }
 .inputLinks {
+  border: 0px;
   display: block;
   color: var(--font-dark-color);
-  border: none;
+
   border-top-left-radius: 8px;
   padding-left: 20px;
   width: 60%;
@@ -624,6 +672,9 @@ h4 {
   font-size: 16px;
   background-color: var(--background-page-color);
   font-family: "Chilanka", cursive;
+}
+.inputLinks:active {
+  border: none;
 }
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -746,6 +797,22 @@ h4 {
 .linkSymbols:hover {
   opacity: 1;
 }
+.rowHW {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 2px;
+  min-width: 99%;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.rowHWPosAbs {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 5px;
+}
 .recordings {
   display: flex;
   flex-direction: row;
@@ -754,19 +821,21 @@ h4 {
   min-width: 100%;
   padding: 5px 0px 5px 0px;
   background-color: var(--background-page-color);
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
   border-width: 3px 4px 3px 5px;
   border-radius: 95% 1% 92% 1%/2% 97% 1% 96%;
   transform: rotate(0.31deg);
+  border: solid var(--background-tabN-color);
+  border-color: var(--background-tabN-color);
 }
 
 .recordings:hover {
   background-color: var(--background-tabN-color);
   color: var(--font-2light-color);
-  border-width: 2px 3px 2px 4px;
+  border-width: 6px 8px 6px 9px;
   border-radius: 95% 1% 92% 1.5%/2% 97% 1% 98%;
   transform: rotate(0.31deg);
+  border: solid var(--background-page-color);
+  border-color: var(--background-page-color);
 }
 .recordinglinks {
   text-decoration: none;
@@ -778,46 +847,25 @@ h4 {
 }
 .recordings a:hover {
   text-decoration: none;
-  color: var(--font-dark-color);
-
+  color: var(--font-2light-color);
   cursor: pointer;
 }
 .infoWindow {
   display: flex;
   justify-content: center;
-  padding: 5px;
+  padding: 10px;
   text-align: center;
   font-size: 14px;
   font-weight: bold;
-  color: var(--font-dark-color);
-  background-color: var(--background-tabA-color);
+  color: var(--font-2light-color);
+  background-color: var(--background-tabN-color);
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
+  border-width: 6px 8px 6px 10px;
+  border-radius: 95% 1% 92% 0.5%/2% 95% 2% 92%;
+  transform: rotate(0.31deg);
 }
-.infoWindowChat {
-  margin: 50px;
-  cursor: pointer;
-  padding: 5px;
 
-  font-size: 18px;
-  background-color: var(--font-2light-color);
-  color: var(--font-dark-color);
-  border-radius: 15px;
-  border: 2px solid gray;
-}
-.rowHW {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 2px;
-  min-width: 99%;
-}
-.rowHWPosAbs {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  margin-top: 5px;
-}
 .buttonHW {
   font-size: 12px;
   color: var(--font-dark-color);
@@ -994,6 +1042,7 @@ h4 {
   .fc-daygrid {
     height: 65vh !important;
   }
+
   .fc {
     height: 75vh !important;
   }
@@ -1038,6 +1087,7 @@ h4 {
   .buttonHW1 {
     font-size: 12px;
     margin-left: 5px;
+    font-weight: bold;
   }
   .rowHWPosAbs {
     display: none;
@@ -1060,10 +1110,13 @@ h4 {
   .logoTools {
     display: flex;
   }
+
   .fc-event-title {
     font-size: 10px !important;
   }
-
+  .fc-toolbar {
+    margin: 1px !important;
+  }
   .halfContainer {
     width: 94%;
     border-radius: 2px;

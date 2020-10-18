@@ -8,6 +8,7 @@ import {
   API,
 } from "./components/Impex.js";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 function App() {
   const [logIn, setlogIn] = useState(0);
@@ -66,26 +67,30 @@ function App() {
   };
   ///////////////    GET PASSWORD< CLASS< ROLE< ID<     /////////////
   async function getAllData() {
-    let endpoint = "https://dashybackend.herokuapp.com/alld/";
-    await fetch(endpoint)
-      .then((response) => response.json())
-      .then((data) => {
-        setwhichClass(
-          data[data.findIndex((element) => element.name === whichUser)].class_id
-        );
-        setwhichRole(
-          data[data.findIndex((element) => element.name === whichUser)]
-            .user_role
-        );
-        setwhichUserId(
-          data[data.findIndex((element) => element.name === whichUser)].id
-        );
-        setwhichPasswordDB(
-          data[data.findIndex((element) => element.name === whichUser)]
-            .user_password
-        );
-      });
+    axios.all([API.get(`alld/`)]).then((response) => {
+      setwhichClass(
+        response[0].data[
+          response[0].data.findIndex((element) => element.name === whichUser)
+        ].class_id
+      );
+      setwhichRole(
+        response[0].data[
+          response[0].data.findIndex((element) => element.name === whichUser)
+        ].user_role
+      );
+      setwhichUserId(
+        response[0].data[
+          response[0].data.findIndex((element) => element.name === whichUser)
+        ].id
+      );
+      setwhichPasswordDB(
+        response[0].data[
+          response[0].data.findIndex((element) => element.name === whichUser)
+        ].user_password
+      );
+    });
   }
+
   //////////////// WRONG PASSWORD HANDLE ///////////////
   const wrongPassword = () => {
     setwhichPassword("");
@@ -114,9 +119,9 @@ function App() {
   const [inputRef, setInputFocus] = useFocus();
 
   /////////////  CHANGING THE CLASS IF INSTRUCTOR CHANGES   /////////
-  function newClass(classIdNew) {
+  const newClass = (classIdNew) => {
     setwhichClass(classIdNew);
-  }
+  };
   //////////// SET WINDOW /////////////
   const setWindow = (indexContainer) => {
     setwhichContainer(indexContainer);
