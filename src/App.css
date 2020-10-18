@@ -247,7 +247,7 @@ img {
   cursor: pointer;
 }
 .fc {
-  height: 78vh !important;
+  height: 73vh !important;
 }
 .fc-scrollgrid-sync-table {
   height: 65vh !important;
@@ -975,12 +975,6 @@ h4 {
   .logoBooks {
     width: 14vw;
     height: 18vw;
-    border-radius: 12px;
-    margin: 3vw 3vw 0px 3vw;
-    background-color: aliceblue;
-    cursor: pointer;
-    object-fit: contain;
-    padding: 5px;
   }
 
   .fc-event-title {
@@ -1043,9 +1037,6 @@ h4 {
     height: 65vh !important;
   }
 
-  .fc {
-    height: 75vh !important;
-  }
   .fc-toolbar-title {
     font-size: 14px !important;
   }
@@ -1099,24 +1090,23 @@ h4 {
     display: none;
   }
   .logoBooks {
-    width: 23vw;
-    height: 30vw;
-    border-radius: 8px;
-    margin: 2vw 2vw 0px 2vw;
-    background-color: aliceblue;
-    object-fit: contain;
-    padding: 5px;
+    width: 20vw;
+    height: 27vw;
   }
   .logoTools {
     display: flex;
   }
-
+  .fc-view-harness {
+    height: 74vh;
+  }
   .fc-event-title {
     font-size: 10px !important;
   }
   .fc-toolbar {
     margin: 1px !important;
+    padding-top: 2px !important;
   }
+
   .halfContainer {
     width: 94%;
     border-radius: 2px;
