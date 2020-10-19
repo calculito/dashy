@@ -18,7 +18,7 @@ export default function Recordings({ userName, whichClass, whichRole }) {
       cacheTime: 10,
     }
   );
-
+  console.log("render...");
   useEffect(() => {
     console.log(whichClass);
     queryCache.invalidateQueries("recordings");

@@ -25,6 +25,7 @@ function Tabs({ onTabsClick, logIn, index, whichRole }) {
     4: CalendarIcon,
     5: AdminIcon,
   };
+  console.log("render...");
   return (
     <div className="menu">
       {logIn === 1 && (

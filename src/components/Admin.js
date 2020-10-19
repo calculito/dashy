@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import { API } from "./Impex.js";
 import { useQuery, useMutation, queryCache } from "react-query";
 
-function Admin({ logIn }) {
+function Admin() {
   let [newClass, setnewClass] = useState("");
   let [newUser, setnewUser] = useState("");
   let [openInputWindow, setopenInputWindow] = useState(false);
   let [openInputWindowUser, setopenInputWindowUser] = useState(false);
   /////////////////// GET DATA FROM DB WHERE USER ////////////////////
-  useEffect(() => {
-    refetch();
-  });
+  console.log("render...");
+
   const { isLoading, data, refetch } = useQuery("fetchAllData", () =>
     API.get(`alldata`)
   );
+  console.log("render...");
   //////////////  PREPARE DATA FOR WORK WITH IT ////////////////
   const dataAll =
     !isLoading &&
@@ -33,10 +33,12 @@ function Admin({ logIn }) {
         found.data.push(value);
         // found.data.push(d.id);
       }
+      console.log("render...");
       return acc;
     }, []);
   /////////    CREATE NEW CLASS AS ADMIN   ///////////
   async function savenewClass(evt) {
+    console.log("render...");
     evt.preventDefault();
     saveanewClass();
     setnewUser("Instructor");
@@ -49,6 +51,7 @@ function Admin({ logIn }) {
         queryCache.invalidateQueries("fetchAllData");
         setopenInputWindow(false);
         setnewClass("");
+        console.log("render...");
       },
     }
   );
@@ -67,6 +70,7 @@ function Admin({ logIn }) {
     setopenInputWindowUser(false);
     setnewUser("");
   }
+  console.log("render...");
   return (
     <div className="flex-container">
       {isLoading ? (

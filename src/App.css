@@ -42,6 +42,7 @@ body {
   background-color: var(--background-page-color);
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='39px' width='345px'><text x='1' y='20' fill='white' font-size='25' opacity='0.05'>MIGRACODE</text><text x='165' y='20' fill='white' font-size='25' opacity='0.05'>BARCELONA</text><text x='30' y='39' fill='white' font-size='25' opacity='0.03'>BARCELONA</text><text x='196' y='39' fill='white' font-size='25' opacity='0.03'>MMXX</text></svg>");
 }
+
 .form-container {
   border-width: 6px 8px 6px 10px;
   border: 3px dotted;
@@ -735,18 +736,14 @@ h4 {
   max-height: 100%;
   font-size: 16px;
 }
-.infoContLinks {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-}
+.infoContLinks,
 .infoContButtons {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
 }
+
 .circle {
   align-items: center;
   display: flex;

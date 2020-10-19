@@ -9,6 +9,7 @@ function MainContainer({
   whichRole,
   whichUserId,
 }) {
+  console.log("render...");
   return (
     <div
       className="maincontainer"

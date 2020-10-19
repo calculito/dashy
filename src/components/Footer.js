@@ -43,7 +43,7 @@ function Footer() {
     "invert(1)",
     "invert(1)",
   ];
-
+  console.log("render...");
   useEffect(() => {
     varName.map((data, index) => {
       colorSet === "blue" &&

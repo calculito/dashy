@@ -13,7 +13,7 @@ function Links({ userName, whichClass, whichRole, whichUserId }) {
     genLinks: null,
     persLinks: null,
   });
-
+  console.log("render...");
   useEffect(() => {
     axios
       .all([
@@ -95,6 +95,37 @@ function Links({ userName, whichClass, whichRole, whichUserId }) {
     });
   }
 
+  function StarsGen(data) {
+    let starsall = [];
+    for (let i = 0; i < 5; i++) {
+      starsall.push(
+        <img
+          className="starSymbols"
+          src={data.stars > i ? stargold : starblack}
+          alt="star"
+          key={i}
+          onClick={() => changestars(i + 1, data.id)}
+        />
+      );
+    }
+    return starsall;
+  }
+  function StarsPers(data) {
+    let starsall = [];
+    for (let i = 0; i < 5; i++) {
+      starsall.push(
+        <img
+          className="starSymbols"
+          src={data.stars > i ? stargold : starblack}
+          alt="star"
+          key={i}
+          onClick={() => changestarspers(i + 1, data.id)}
+        />
+      );
+    }
+    return starsall;
+  }
+
   return (
     <div className="tabcontent">
       <div className="infoWindow">
@@ -169,37 +200,7 @@ function Links({ userName, whichClass, whichRole, whichUserId }) {
                         )}
                         <span className="circleNonClick">{index + 1}</span>
                         <div>
-                          <img
-                            className="starSymbols"
-                            src={data.stars > 0 ? stargold : starblack}
-                            alt="star"
-                            onClick={() => changestars(1, data.id)}
-                          />
-
-                          <img
-                            className="starSymbols"
-                            src={data.stars > 1 ? stargold : starblack}
-                            alt="star"
-                            onClick={() => changestars(2, data.id)}
-                          />
-                          <img
-                            className="starSymbols"
-                            src={data.stars > 2 ? stargold : starblack}
-                            alt="star"
-                            onClick={() => changestars(3, data.id)}
-                          />
-                          <img
-                            className="starSymbols"
-                            src={data.stars > 3 ? stargold : starblack}
-                            alt="star"
-                            onClick={() => changestars(4, data.id)}
-                          />
-                          <img
-                            className="starSymbols"
-                            src={data.stars > 4 ? stargold : starblack}
-                            alt="star"
-                            onClick={() => changestars(5, data.id)}
-                          />
+                          <StarsGen stars={data.stars} id={data.id} />
                         </div>
                         <img
                           className="linkSymbols"
@@ -270,36 +271,7 @@ function Links({ userName, whichClass, whichRole, whichUserId }) {
                         </span>
 
                         <div>
-                          <img
-                            className="starSymbols"
-                            src={data.stars > 0 ? stargold : starblack}
-                            alt="star"
-                            onClick={(e) => changestarspers(1, data.id)}
-                          />
-                          <img
-                            className="starSymbols"
-                            src={data.stars > 1 ? stargold : starblack}
-                            alt="star"
-                            onClick={(e) => changestarspers(2, data.id)}
-                          />
-                          <img
-                            className="starSymbols"
-                            src={data.stars > 2 ? stargold : starblack}
-                            alt="star"
-                            onClick={(e) => changestarspers(3, data.id)}
-                          />
-                          <img
-                            className="starSymbols"
-                            src={data.stars > 3 ? stargold : starblack}
-                            alt="star"
-                            onClick={(e) => changestarspers(4, data.id)}
-                          />
-                          <img
-                            className="starSymbols"
-                            src={data.stars > 4 ? stargold : starblack}
-                            alt="star"
-                            onClick={(e) => changestarspers(5, data.id)}
-                          />
+                          <StarsPers stars={data.stars} id={data.id} />
                         </div>
                         <img
                           className="linkSymbols"

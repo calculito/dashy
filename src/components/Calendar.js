@@ -15,6 +15,7 @@ function Calendar({ whichClass, whichRole }) {
   const handleDateClick = (arg) => {
     whichRole === "Admin" && setopenInputWindow(1);
   };
+  console.log("render...");
   /////////    GET ALL APOINTMENTS  AXIOS  ///////////
 
   const { isLoading, data } = useQuery("getuserAppointments", () =>

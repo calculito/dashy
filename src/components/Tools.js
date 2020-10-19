@@ -25,6 +25,7 @@ function Tools() {
   function openRequestedPopup(link) {
     window.open(link, "_blank", "noopener, noreferrer");
   }
+  console.log("render...");
   return (
     <div>
       <div className="contLogoTools">

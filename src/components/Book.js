@@ -11,6 +11,7 @@ import {
 } from "./Impex.js";
 
 function Book() {
+  console.log("render...");
   function openRequestedPopup(link) {
     window.open(link, "_blank", "noopener, noreferrer");
   }

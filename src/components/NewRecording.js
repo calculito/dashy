@@ -6,7 +6,7 @@ export default function NewRecording({ whichClass }) {
   const [newRecordingsLink, setnewRecordingsLink] = useState("");
   const [newRecordingsDescription, setnewRecordingsDescription] = useState("");
   const [newRecordingsKeyword, setnewRecordingsKeyword] = useState("");
-
+  console.log("render...");
   /////////    POST RECORDING AS ADMIN    ///////////
   async function insertnewRecording(evt) {
     evt.preventDefault();
