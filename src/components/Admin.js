@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { API } from "./Impex.js";
 import { useQuery, useMutation, queryCache } from "react-query";
 
 function Admin() {
   let [newClass, setnewClass] = useState("");
   let [newUser, setnewUser] = useState("");
+  let [newPwd, setnewPwd] = useState("");
   let [openInputWindow, setopenInputWindow] = useState(false);
   let [openInputWindowUser, setopenInputWindowUser] = useState(false);
   /////////////////// GET DATA FROM DB WHERE USER ////////////////////
-  console.log("render...");
 
   const { isLoading, data, refetch } = useQuery("fetchAllData", () =>
     API.get(`alldata`)
   );
-  console.log("render...");
+
   //////////////  PREPARE DATA FOR WORK WITH IT ////////////////
   const dataAll =
     !isLoading &&
@@ -33,12 +33,11 @@ function Admin() {
         found.data.push(value);
         // found.data.push(d.id);
       }
-      console.log("render...");
+
       return acc;
     }, []);
   /////////    CREATE NEW CLASS AS ADMIN   ///////////
   async function savenewClass(evt) {
-    console.log("render...");
     evt.preventDefault();
     saveanewClass();
     setnewUser("Instructor");
@@ -60,17 +59,44 @@ function Admin() {
   async function savenewUser(evt) {
     evt && evt.preventDefault();
 
-    let endpoint = "https://dashybackend.herokuapp.com/setnewuser/".concat(
-      newUser
-    );
-    await fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-    });
-    setopenInputWindowUser(false);
-    setnewUser("");
+    let characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!.-_0123456789";
+    let passwordLength = 6;
+    const getRandomInteger = (min, max) => {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
+    console.log(getRandomInteger);
+    const passwordCharacters = () => {
+      let password = "";
+      if (characters.length) {
+        for (let i = 0; i < passwordLength; i++) {
+          console.log(password);
+          password += characters[getRandomInteger(0, characters.length - 1)];
+        }
+        characters = "";
+        passwordLength = 0;
+        return password;
+      }
+    };
+    const pwd = passwordCharacters();
+    setnewPwd(pwd);
+    console.log(pwd);
+    newStudent();
   }
-  console.log("render...");
+  const [newStudent] = useMutation(
+    () =>
+      API.post(`/setnewuser/${newUser}`, {
+        parol: newPwd,
+      }),
+    {
+      onSuccess: () => {
+        setopenInputWindowUser(false);
+        setnewPwd("");
+        setnewUser("");
+        refetch();
+      },
+    }
+  );
   return (
     <div className="flex-container">
       {isLoading ? (
