@@ -97,6 +97,13 @@ function Admin() {
       },
     }
   );
+  const openWindowUser = () => {
+    setopenInputWindowUser(true);
+  };
+
+  const openWindowClass = () => {
+    setopenInputWindow(true);
+  };
   return (
     <div className="flex-container">
       {isLoading ? (
@@ -125,10 +132,7 @@ function Admin() {
                     key={index + "buttonAddUser"}
                   >
                     {" "}
-                    <button
-                      className="buttonHW"
-                      onClick={(e) => setopenInputWindowUser(true)}
-                    >
+                    <button className="buttonHW" onClick={openWindowUser}>
                       Add an user
                     </button>
                   </div>
@@ -137,10 +141,7 @@ function Admin() {
                     role="columnheader"
                     key={index + "buttonAddClass"}
                   >
-                    <button
-                      className="buttonHW"
-                      onClick={(e) => setopenInputWindow(true)}
-                    >
+                    <button className="buttonHW" onClick={openWindowClass}>
                       Add a class
                     </button>
                   </div>

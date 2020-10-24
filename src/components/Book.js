@@ -11,10 +11,9 @@ import {
 } from "./Impex.js";
 
 function Book() {
-  console.log("render...");
-  function openRequestedPopup(link) {
+  const openRequestedPopup = (link) => {
     window.open(link, "_blank", "noopener, noreferrer");
-  }
+  };
   const booklinks = [
     "https://migracode-barcelona.github.io/syllabus/html-css/",
     "https://migracode-barcelona.github.io/syllabus/js-core/",
@@ -35,6 +34,7 @@ function Book() {
     6: bookall,
     7: addbook,
   };
+
   return (
     <div className="tabcontent">
       <div className="contLogoBooks">
@@ -44,7 +44,7 @@ function Book() {
             className="logoBooks"
             src={bookcovers[i]}
             alt={bookcovers[i]}
-            onClick={(e) => openRequestedPopup({ data })}
+            onClick={() => openRequestedPopup(data)}
           />
         ))}
       </div>
