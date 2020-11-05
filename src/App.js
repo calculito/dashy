@@ -243,3 +243,4 @@ function App() {
   );
 }
 export default React.memo(App);
+//React Suspense allows you to suspend components rendering until a condition is met. While waiting, a fallback component is rendered.
