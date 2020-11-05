@@ -15,7 +15,6 @@ export { default as ChangeColor } from "./ChangeColor";
 export { default as NewRecording } from "./NewRecording";
 export { default as API } from "../Api.js";
 
-export { default as Graffiti } from "../images/graffiti.svg";
 export { default as bookhtml } from "../images/bookhtml.png";
 export { default as bookjavascript1 } from "../images/bookjavascript1.png";
 export { default as bookjavascript2 } from "../images/bookjavascript2.png";

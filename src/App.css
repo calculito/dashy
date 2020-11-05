@@ -3,8 +3,9 @@ html,
   height: 100%;
 }
 @font-face {
-  font-family: 'Chilanka';
-  src: local('Chilanka'), url(./fonts/Chilanka-Regular.ttf) format('truetype');
+  font-family: "Chilanka";
+  src: local("Chilanka"), url(./fonts/Chilanka-Regular.ttf) format("truetype");
+  font-display: swap; /* The easiest way to avoid showing invisible text while custom fonts load is to temporarily show a system font. By including font-display: swap in your @font-face style, you can avoid FOIT in most modern browsers:*/
 }
 :root {
   --background-page-color: #96c4d8;

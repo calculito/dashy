@@ -1,12 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, lazy } from "react";
 import { useQuery } from "react-query";
-import {
-  Header,
-  Tabs,
-  Footer,
-  MainContainer,
-  API,
-} from "./components/Impex.js";
+import { Header, Tabs, Footer, API } from "./components/Impex.js";
 import Swal from "sweetalert2";
 
 function App() {
@@ -20,7 +14,7 @@ function App() {
   const [whichPassword, setwhichPassword] = useState("");
   const [whichPasswordDB, setwhichPasswordDB] = useState("");
   const [passwordUserWrong, setpasswordUserWrong] = useState(0);
-
+  const MainContainer = lazy(() => import("./components/MainContainer")); //The React.lazy method makes it easy to code-split a React application on a component level using dynamic imports. Don't forget to import it from react too :)
   /////////////////////  NO USEEFFECT ANYMORE NEEDED //////////////////////
   const logInCheck = () => {
     logIn === 0 ? setlogIn(2) : setlogIn(0);
