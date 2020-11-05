@@ -1,4 +1,4 @@
-import React, { useState, useRef, lazy } from "react";
+import React, { useState, useRef, lazy, Suspense } from "react";
 import { useQuery } from "react-query";
 import { Header, Tabs, Footer, API } from "./components/Impex.js";
 import Swal from "sweetalert2";
@@ -226,15 +226,16 @@ function App() {
             index={whichContainer}
             whichRole={whichRole}
           />
-
-          <MainContainer
-            logIn={logIn}
-            index={whichContainer}
-            userName={whichUser}
-            whichClass={whichClass}
-            whichRole={whichRole}
-            whichUserId={whichUserId}
-          />
+          <Suspense fallback={<div>Loading... </div>}>
+            <MainContainer
+              logIn={logIn}
+              index={whichContainer}
+              userName={whichUser}
+              whichClass={whichClass}
+              whichRole={whichRole}
+              whichUserId={whichUserId}
+            />
+          </Suspense>
           <Footer />
         </div>
       )}
