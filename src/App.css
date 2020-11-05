@@ -2,6 +2,10 @@ html,
 #root {
   height: 100%;
 }
+@font-face {
+  font-family: 'Chilanka';
+  src: local('Chilanka'), url(./fonts/Chilanka-Regular.ttf) format('truetype');
+}
 :root {
   --background-page-color: #96c4d8;
   --background-tabA-color: #cbe3ee;
