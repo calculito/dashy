@@ -487,8 +487,8 @@ img {
   justify-content: space-evenly;
 }
 .outPopUpText {
-  top: -40vw;
-  left: -50vh;
+  top: -30vw;
+  left: -60vh;
   transform: translate(-50%, -50%);
   z-index: 1000;
   font: 400 13.3333px Arial;

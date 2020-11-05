@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { sound, ReadTextWindow } from "./Impex";
+import { ReadTextWindow } from "./Impex";
 
 function ChangeColor() {
-  const [openInputWindow, setopenInputWindow] = useState(false);
   const [colorSet, setcolorSet] = useState("blue");
   let varName = [
     "--background-page-color",
@@ -40,7 +39,7 @@ function ChangeColor() {
     "invert(1)",
     "invert(1)",
   ];
-  console.log("render...");
+
   useEffect(() => {
     varName.map((data, index) => {
       colorSet === "blue" &&
@@ -51,16 +50,9 @@ function ChangeColor() {
         document.documentElement.style.setProperty(data, gray[index]);
     });
   }, [colorSet]);
-  const changeWindowStatus = () => {
-    setopenInputWindow(false);
-  };
   return (
     <div className="infoContButtons">
-      <button
-        className="buttonHW"
-        style={{ height: "22px" }}
-        onClick={(e) => setcolorSet("blue")}
-      >
+      <button className="buttonHW" style={{ height: "22px" }}>
         <ReadTextWindow />
       </button>
       <button
