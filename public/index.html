@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta name="DASHY" content="DASHY for migracode Barcelona" />
-    <script src="//cdn.iframe.ly/embed.js" async></script>
-    <link href="./style.css" rel="stylesheet" />
+    <link rel="preload" href="%PUBLIC_URL%/style.css" as="style" />
+    <link rel="preload" href="//cdn.iframe.ly/embed.js" as="script" />
 
+    <link rel="stylesheet" href="%PUBLIC_URL%/style.css" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -44,5 +45,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script src="//cdn.iframe.ly/embed.js" async></script>
   </body>
 </html>
