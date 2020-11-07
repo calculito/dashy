@@ -47,6 +47,9 @@ function Links({ userName, whichClass, whichRole, whichUserId }) {
       onSuccess: () => {
         setlinksInsertFieldP("");
       },
+      onError: () => {
+        alert("Please check the link, you already have this one!");
+      },
     }
   );
   /////////    POST GENERAL LINKS     ///////////

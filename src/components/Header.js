@@ -17,7 +17,6 @@ function Header({
     genLinks: null,
     classes: null,
   });
-  console.log("render...");
   /////////////////   USEEFFECTS   ///////////////
   useEffect(() => {
     logIn === 1 &&

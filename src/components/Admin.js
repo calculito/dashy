@@ -6,6 +6,7 @@ function Admin() {
   let [newClass, setnewClass] = useState("");
   let [newUser, setnewUser] = useState("");
   let [newPwd, setnewPwd] = useState("");
+  let [class4newuser, setclass4newuser] = useState("");
   let [openInputWindow, setopenInputWindow] = useState(false);
   let [openInputWindowUser, setopenInputWindowUser] = useState(false);
   /////////////////// GET DATA FROM DB WHERE USER ////////////////////
@@ -23,6 +24,7 @@ function Admin() {
         name: d.name,
         role: d.user_role,
         password: d.user_password,
+        class_id: d.class_id,
       };
       if (!found) {
         acc.push({
@@ -36,6 +38,7 @@ function Admin() {
 
       return acc;
     }, []);
+
   /////////    CREATE NEW CLASS AS ADMIN   ///////////
   async function savenewClass(evt) {
     evt.preventDefault();
@@ -65,12 +68,11 @@ function Admin() {
     const getRandomInteger = (min, max) => {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     };
-    console.log(getRandomInteger);
+
     const passwordCharacters = () => {
       let password = "";
       if (characters.length) {
         for (let i = 0; i < passwordLength; i++) {
-          console.log(password);
           password += characters[getRandomInteger(0, characters.length - 1)];
         }
         characters = "";
@@ -87,17 +89,23 @@ function Admin() {
     () =>
       API.post(`/setnewuser/${newUser}`, {
         parol: newPwd,
+        classID: class4newuser,
       }),
     {
       onSuccess: () => {
         setopenInputWindowUser(false);
         setnewPwd("");
         setnewUser("");
+        setclass4newuser("");
         refetch();
+      },
+      onError: () => {
+        alert("Please check the name, this name already exists");
       },
     }
   );
-  const openWindowUser = () => {
+  const openWindowUser = (id) => {
+    setclass4newuser(id);
     setopenInputWindowUser(true);
   };
 
@@ -132,7 +140,10 @@ function Admin() {
                     key={index + "buttonAddUser"}
                   >
                     {" "}
-                    <button className="buttonHW" onClick={openWindowUser}>
+                    <button
+                      className="buttonHW"
+                      onClick={() => openWindowUser(firstdata.data[0].class_id)}
+                    >
                       Add an user
                     </button>
                   </div>
