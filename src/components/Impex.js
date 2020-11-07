@@ -25,7 +25,6 @@ export { default as bookall } from "../images/bookall.png";
 export { default as addbook } from "../images/addbook.png";
 export { default as logo } from "../images/migracode-logo.png";
 export { default as login } from "../images/login.png";
-export { default as CSS } from "../App.css";
 export { default as sound } from "../images/sound.png";
 export { default as hammerwhite } from "../images/hammerwhite.png";
 export { default as hammercolor } from "../images/hammercolor.png";

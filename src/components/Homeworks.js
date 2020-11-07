@@ -35,7 +35,6 @@ function Homeworks({ userName, logIn, whichRole, whichClass, whichUserId }) {
   //   getuserhomeworksALL();
   //   setswitcher("");
   // }, [logIn, switcher, whichClass]);
-  console.log("render...");
   useEffect(() => {
     setswitcher("");
     ///////////////    GET FINISHED HOMEWORKS FOR STUDENTS     /////////////

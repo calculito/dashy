@@ -13,7 +13,6 @@ function Links({ userName, whichClass, whichRole, whichUserId }) {
     genLinks: null,
     persLinks: null,
   });
-  console.log("render...");
   useEffect(() => {
     axios
       .all([
