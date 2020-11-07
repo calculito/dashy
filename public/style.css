@@ -31,3 +31,8 @@
     transform: scale(1);
   }
 }
+@font-face {
+  font-family: "Chilanka";
+  src: local("Chilanka"), url(./fonts/Chilanka-Regular.ttf) format("truetype");
+  font-display: swap;
+}
