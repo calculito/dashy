@@ -1,13 +1,22 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+//import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "./fonts/Chilanka-Regular.ttf";
-
+const App = lazy(() => import("./App"));
+console.log("render...");
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Suspense
+      fallback={
+        <div className="full-page-loader">
+          <img width="200" src="./logo192.png" alt="logo" />
+        </div>
+      }
+    >
+      <App />
+    </Suspense>
   </React.StrictMode>,
   document.getElementById("root")
 );

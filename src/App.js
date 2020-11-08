@@ -15,15 +15,24 @@ function App() {
   const [whichPasswordDB, setwhichPasswordDB] = useState("");
   const [passwordUserWrong, setpasswordUserWrong] = useState(0);
   const MainContainer = lazy(() => import("./components/MainContainer")); //The React.lazy method makes it easy to code-split a React application on a component level using dynamic imports. Don't forget to import it from react too :)
-  /////////////////////  NO USEEFFECT ANYMORE NEEDED //////////////////////
+  //console.log(logIn + ".." + whichUser + ".." + whichClass + ".." + whichUserId + ".." + whichRole + ".." + user + ".." + whichContainer + ".." + whichPassword + ".." + whichPasswordDB + ".." + passwordUserWrong);
+
+  //////////////  GET USER TO CHECK IF IN DB AXIOS /////////////
+  const { isLoading, data } = useQuery("fetchData", () => API.get());
   const logInCheck = () => {
+    console.log("render...");
     logIn === 0 ? setlogIn(2) : setlogIn(0);
     logIn === 1 && setwhichContainer(0);
     logIn === 1 && window.location.reload();
-    getuser();
+    Getuser();
+  };
+  const Getuser = () => {
+    console.log("render...");
+    !isLoading && setuser(JSON.stringify({ data }));
   };
   ////////////////  CANCEL BUTTON IN FORM ///////////////
   const cancel = () => {
+    console.log("render...");
     setlogIn(0);
     setwhichUser("");
     setwhichContainer(0);
@@ -36,29 +45,29 @@ function App() {
 
   ////////////////  INIT BY FORM ///////////////
   const checkUser = (evt) => {
+    console.log("render...");
     evt.preventDefault();
     user.includes(whichUser) && logIn === 2 ? setlogIn(3) : noUser();
     user.includes(whichUser) && getAllData();
   };
+
   ////////////////  NO USER FOUND IN DB  ///////////////
   const noUser = () => {
+    console.log("render...");
     setwhichUser("");
     setlogIn(2);
     setpasswordUserWrong(2);
   };
 
   const checkPassword = (evt) => {
+    console.log("render...");
     evt.preventDefault();
     whichPassword !== whichPasswordDB ? wrongPassword() : goodPassword();
   };
-  //////////////  GET USER TO CHECK IF IN DB AXIOS /////////////
-  const { isLoading, data } = useQuery("fetchData", () => API.get());
 
-  const getuser = () => {
-    !isLoading && setuser(JSON.stringify({ data }));
-  };
   ///////////////    GET PASSWORD< CLASS< ROLE< ID<     /////////////
   async function getAllData() {
+    console.log("render...");
     API.get(`alld/${whichUser}`).then((response) => {
       setwhichClass(response.data[0].class_id);
       setwhichRole(response.data[0].user_role);
@@ -69,12 +78,14 @@ function App() {
 
   //////////////// WRONG PASSWORD HANDLE ///////////////
   const wrongPassword = () => {
+    console.log("render...");
     setwhichPassword("");
     setpasswordUserWrong(1);
     setlogIn(3);
   };
   ////////////////  GOOD PASSWORD ///////////////
   const goodPassword = () => {
+    console.log("render...");
     setlogIn(1);
     Swal.fire({
       title: "Perfect!",
@@ -86,6 +97,7 @@ function App() {
 
   ////////////// SET FOCUS ON FORM /////////////
   const useFocus = () => {
+    console.log("render...");
     const htmlElRef = useRef(null);
     const setFocus = () => {
       htmlElRef.current && htmlElRef.current.focus();
@@ -96,24 +108,14 @@ function App() {
 
   /////////////  CHANGING THE CLASS IF INSTRUCTOR CHANGES   /////////
   const newClass = (classIdNew) => {
+    console.log("render...");
     setwhichClass(classIdNew);
   };
   //////////// SET WINDOW /////////////
   const setWindow = (indexContainer) => {
+    console.log("render...");
     setwhichContainer(indexContainer);
   };
-
-  console.log(
-    logIn +
-      ".." +
-      whichUser +
-      ".." +
-      whichClass +
-      ".." +
-      whichUserId +
-      ".." +
-      whichRole
-  );
 
   return (
     <>
@@ -208,7 +210,9 @@ function App() {
         </div>
       )}{" "}
       {isLoading ? (
-        <div>C'mon database, wake up ... </div>
+        <div className="full-page-loader">
+          <img width="200" src="./logo192.png" alt="logo" />
+        </div>
       ) : (
         <div className={logIn === 3 || logIn === 2 ? "allblur" : "all"}>
           <Header
@@ -226,7 +230,13 @@ function App() {
             index={whichContainer}
             whichRole={whichRole}
           />
-          <Suspense fallback={<div>Loading... </div>}>
+          <Suspense
+            fallback={
+              <div className="full-page-loader">
+                <img width="200" src="./logo192.png" alt="logo" />
+              </div>
+            }
+          >
             <MainContainer
               logIn={logIn}
               index={whichContainer}
