@@ -5,7 +5,6 @@ import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import "./fonts/Chilanka-Regular.ttf";
 const App = lazy(() => import("./App"));
-console.log("render...");
 ReactDOM.render(
   <React.StrictMode>
     <Suspense

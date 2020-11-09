@@ -8,12 +8,12 @@ function MainContainer({
   whichRole,
   whichUserId,
 }) {
-  const Homeworks = lazy(() => import("./Homeworks"));
+  const Homeworks = lazy(() => logIn > 0 && import("./Homeworks"));
   const Book = lazy(() => import("./Book"));
-  const Recordings = lazy(() => import("./Recordings"));
-  const Calendar = lazy(() => import("./Calendar"));
-  const Links = lazy(() => import("./Links"));
-  const Admin = lazy(() => import("./Admin"));
+  const Recordings = lazy(() => logIn > 0 && import("./Recordings"));
+  const Calendar = lazy(() => logIn > 0 && import("./Calendar"));
+  const Links = lazy(() => logIn > 0 && import("./Links"));
+  const Admin = lazy(() => logIn > 0 && import("./Admin"));
   //The React.lazy method makes it easy to code-split a React application on a component level using dynamic imports. Don't forget to import it from react too :)
   return (
     <div
