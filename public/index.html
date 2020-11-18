@@ -22,10 +22,25 @@
       type="font/ttf"
       crossorigin
     />
+    <script type="module">
+      // This is the "Offline copy of pages" service worker
 
+      // Add this below content to your HTML page inside a <script type="module">tag, or add the js file to your page at the very top to register service worker
+      // If you get an error about not being able to import, double check that you have type="module" on your  tag
+
+      /*
+ This code uses the pwa-update web component https://github.com/pwa-builder/pwa-update to register your service worker,
+ tell the user when there is an update available and let the user know when your PWA is ready to use offline.
+*/
+
+      import "https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate";
+
+      const el = document.createElement("pwa-update");
+      document.body.appendChild(el);
+    </script>
     <meta http-equiv="Cache-control" content="public" />
     <link rel="stylesheet" href="%PUBLIC_URL%/style.css" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
