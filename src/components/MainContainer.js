@@ -1,6 +1,6 @@
 import React, { lazy } from "react";
-
-function MainContainer({
+import { flexibleCompare } from "@fullcalendar/react";
+export default function MainContainer({
   index,
   userName,
   logIn,
@@ -29,7 +29,7 @@ function MainContainer({
     >
       {
         {
-          0: <Book />,
+          0: <Book display={"column"} />,
           1: (
             <Homeworks
               userName={userName}
@@ -70,4 +70,4 @@ function MainContainer({
     </div>
   );
 }
-export default React.memo(MainContainer);
+//React.memo(MainContainer);

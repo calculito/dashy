@@ -18,6 +18,9 @@ function App() {
   //console.log(logIn + ".." + whichUser + ".." + whichClass + ".." + whichUserId + ".." + whichRole + ".." + user + ".." + whichContainer + ".." + whichPassword + ".." + whichPasswordDB + ".." + passwordUserWrong);
 
   //////////////  GET USER TO CHECK IF IN DB AXIOS /////////////
+  //login status 0 means not logged in, window to log in not active
+  //login status 1 means logged in, window to log in not active
+  //login status 2 means log in pending, window to log in active
   const { isLoading, data } = useQuery("fetchData", () => API.get());
   const logInCheck = () => {
     console.log("render...");

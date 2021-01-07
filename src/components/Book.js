@@ -10,7 +10,8 @@ import {
   addbook,
 } from "./Impex.js";
 
-function Book() {
+function Book({ display }) {
+  console.log(display);
   const openRequestedPopup = (link) => {
     window.open(link, "_blank", "noopener, noreferrer");
   };
@@ -36,7 +37,7 @@ function Book() {
   };
 
   return (
-    <div className="tabcontent">
+    <div className={display === "column" ? "tabcontent" : "tabcontent2"}>
       <div className="contLogoBooks">
         {booklinks.map((data, i) => (
           <img
